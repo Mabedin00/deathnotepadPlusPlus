@@ -8,11 +8,12 @@ var config = {
             debug: false
         }
     },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
+    scene: [Scene0, Scene1]
+    // scene: {
+    //     preload: preload,
+    //     create: create,
+    //     update: update
+    // }
 };
 
 var tick = 0;
