@@ -1,11 +1,10 @@
 var config = {
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 682,
+    height: 506,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
             debug: false
         }
     },
@@ -16,13 +15,8 @@ var config = {
     }
 };
 
-var player;
-var stars;
-var bombs;
-var platforms;
-var cursors;
-var score = 0;
-var gameOver = false;
-var scoreText;
+var tick = 0;
+var bloons;
+var goal;
 
 var game = new Phaser.Game(config);

@@ -1,54 +1,42 @@
 function update () {
-    if (gameOver) {
-        return;
-    }
+    bloons.children.iterate(function (bloon) {
+      move_bloon(bloon)
+    });
 
-    if (cursors.left.isDown) {
-        player.setVelocityX(-160);
-        player.anims.play('left', true);
-    }
-    else if (cursors.right.isDown) {
-        player.setVelocityX(160);
-        player.anims.play('right', true);
-    }
-    else {
-        player.setVelocityX(0);
-        player.anims.play('turn');
-    }
-
-    if (cursors.up.isDown && player.body.touching.down)  {
-        player.setVelocityY(-330);
+    tick++;
+    if (tick == 60) {
+      tick = 0;
+      create_bloon();
     }
 }
 
-function collectStar (player, star) {
-    star.disableBody(true, true);
+function create_bloon() {
+  bloon = bloons.create(620, 0, 'red_bloon').setScale(.02);
 
-    //  Add and update the score
-    score += 10;
-    scoreText.setText('Score: ' + score);
+  bloon.progress = 0;
+  bloon.xlist = [620, 620, 500, 500, 80, 80, 166, 171, 249, 249, 334, 334, 414, 414, 516, 516, 620, 620, 319, 319, -30]
+  bloon.ylist = [000, 148, 148, 88, 88, 248, 248, 184, 184, 254, 254, 185, 185, 335, 335, 236, 236, 400, 400, 340, 340]
 
-    if (stars.countActive(true) === 0) {
-        //  A new batch of stars to collect
-        stars.children.iterate(function (child) {
-            child.enableBody(true, child.x, 0, true, true);
-        });
-
-        var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-        var bomb = bombs.create(x, 16, 'bomb');
-        bomb.setBounce(1);
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-        bomb.allowGravity = false;
-    }
+  bloon.increment = 1 / (bloon.xlist.length - 1)
 }
 
-function hitBomb (player, bomb) {
-    this.physics.pause();
+function move_bloon(bloon) {
+  if (bloon.progress >= 1) return;
 
-    player.setTint(0xff0000);
-    player.anims.play('turn');
+  bloon.current_node = Math.floor(bloon.progress / bloon.increment)
 
-    gameOver = true;
+  distance = Phaser.Math.Distance.Between(bloon.xlist[bloon.current_node],
+                                          bloon.ylist[bloon.current_node],
+                                          bloon.xlist[bloon.current_node+1],
+                                          bloon.ylist[bloon.current_node+1]);
+
+  bloon.progress += .1/distance;
+
+  bloon.x = Phaser.Math.Interpolation.Linear(bloon.xlist, bloon.progress);
+  bloon.y = Phaser.Math.Interpolation.Linear(bloon.ylist, bloon.progress);
+
+}
+
+function bloon_end(goal, bloon) {
+  bloon.destroy();
 }
