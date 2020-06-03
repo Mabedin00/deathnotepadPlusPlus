@@ -21,5 +21,6 @@ var bloons;
 var goal;
 var towers;
 var dart_placed;
-console.log(ocean_road)
+var scene;
+
 var game = new Phaser.Game(config);

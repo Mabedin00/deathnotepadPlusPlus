@@ -4,7 +4,9 @@ class Scene1 extends Phaser.Scene {
   }
 
   init(data) {
+    // sets the correct map
     this.map = data.map;
+    // adds path for bloons to follow based on the map
     this.coords = mapdata[data.map];
   }
 
@@ -16,19 +18,28 @@ class Scene1 extends Phaser.Scene {
   }
 
   create () {
+    scene = this;
+    // background image
     this.add.image(343, 253, 'ocean_road');
     goal = this.physics.add.sprite(-40, 340, 'ocean_road').setScale(.1);
     bloons = this.physics.add.group();
-    towers = this.physics.add.group();
-    this.create_tower();
     this.physics.add.overlap(goal, bloons, this.bloon_end, null, this);
+
+    towers = this.physics.add.group();
+
+    scene.create_tower();
+
   }
 
   update () {
       bloons.children.iterate(function (bloon) {
         bloon.move();
       });
+      towers.children.iterate(function (tower) {
+        if (tower.being_dragged) tower.drag();
+      });
 
+      // create new bloons
       tick++;
       if (tick == 60) {
         tick = 0;
@@ -40,9 +51,8 @@ class Scene1 extends Phaser.Scene {
       var bloon = new Bloon(this, 620, 0);
   }
 
-  create_tower(){
+  create_tower() {
       var tower = new Tower(this, 712, 50)
-
   }
 
 
