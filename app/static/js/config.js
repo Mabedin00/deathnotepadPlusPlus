@@ -1,6 +1,6 @@
 var config = {
     type: Phaser.AUTO,
-    width: 682,
+    width: 882,
     height: 506,
     physics: {
         default: 'arcade',
@@ -19,5 +19,7 @@ var config = {
 var tick = 0;
 var bloons;
 var goal;
-
+var towers;
+var dart_placed;
+console.log(ocean_road)
 var game = new Phaser.Game(config);

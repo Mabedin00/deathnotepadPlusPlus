@@ -11,13 +11,16 @@ class Scene1 extends Phaser.Scene {
   preload () {
       this.load.image('ocean_road', 'static/images/' + this.map + '.png');
       this.load.image('red_bloon', 'static/images/Red_Bloon1.png');
+      this.load.image('dart_monkey', 'static/images/dart_monkey.png');
+
   }
 
   create () {
     this.add.image(343, 253, 'ocean_road');
     goal = this.physics.add.sprite(-40, 340, 'ocean_road').setScale(.1);
     bloons = this.physics.add.group();
-
+    towers = this.physics.add.group();
+    this.create_tower();
     this.physics.add.overlap(goal, bloons, this.bloon_end, null, this);
   }
 
@@ -34,8 +37,14 @@ class Scene1 extends Phaser.Scene {
   }
 
   create_bloon() {
-    var bloon = new Bloon(this, 620, 0);
+      var bloon = new Bloon(this, 620, 0);
   }
+
+  create_tower(){
+      var tower = new Tower(this, 712, 50)
+
+  }
+
 
   bloon_end(goal, bloon) {
     bloon.destroy();
