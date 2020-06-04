@@ -25,7 +25,8 @@ class Scene1 extends Phaser.Scene {
     this.level = 1;
     this.lives = 5;
     this.money = 500;
-    this.bloons_deployed = [0]
+    this.bloons_deployed = [0,0]
+    this.all_bloons_deployed = false;
 
     this.add.image(343, 253, 'ocean_road');
     level_text = this.add.text(700, 350, 'Level: ' + this.level, { font: '24px Arial' });
@@ -67,19 +68,22 @@ class Scene1 extends Phaser.Scene {
           return;
       }
       // TODO: allow user to start next level on their terms
-      if (this.bloons_deployed[0] == level_data[this.level].bloons[0]) {
 
-          this.money += (100 + this.level*2);
-          this.level++;
-          this.bloons_deployed = [0]
-          // if user has reached last level
-          if (level_data[this.level] == undefined) {
-              this.add.text(143, 253, 'You Win!', { font: '64px Arial' });
-              game_won = true;
-              return;
+      if ( JSON.stringify(this.bloons_deployed)==JSON.stringify(level_data[this.level].bloons)) {
+          this.all_bloons_deployed = true;
+          if (!bloons.getLength()){
+              this.money += (100 + this.level*2);
+              this.level++;
+              this.bloons_deployed = [0, 0]
+              this.all_bloons_deployed = false;
+              // if user has reached last level
+              if (level_data[this.level] == undefined ) {
+                  this.add.text(143, 253, 'You Win!', { font: '64px Arial' });
+                  game_won = true;
+                  return;
+              }
           }
       }
-      console.log(this.level)
 
       bloons.children.iterate(function (bloon) {
         bloon.move();
@@ -97,15 +101,29 @@ class Scene1 extends Phaser.Scene {
       // create new bloons
 
       tick += level_data[this.level].tick;
-      if (tick >= 100) {
+      console.log(tick, this.all_bloons_deployed)
+      if (tick >= 100 && !this.all_bloons_deployed) {
         tick = 0;
-        this.bloons_deployed[0] += 1;
-        this.create_bloon();
+
+        var counter = 0;
+        var idx = counter % this.bloons_deployed.length;
+        console.log(idx + "d")
+        if (this.bloons_deployed[idx] == level_data[this.level].bloons[idx]) {
+            counter++;
+            continue;
+        }
+        this.create_bloon(idx)
+        this.bloons_deployed[idx] += 1
+        counter++
+
+
       }
   }
 
-  create_bloon() {
-      new Bloon();
+  create_bloon(id) {
+      if (id == 0) new Red_Bloon();
+      else if (id == 1) new Blue_Bloon();
+
   }
 
   create_tower() {

@@ -1,21 +1,11 @@
 class Bloon extends Phaser.GameObjects.Sprite {
 
-    constructor() {
+    constructor(bloon_type, x = scene.coords.xlist[0], y = scene.coords.ylist[0] ) {
 
-        let start_x = scene.coords.xlist[0];
-        let start_y = scene.coords.ylist[0];
-
-        super(scene, start_x, start_y, "red_bloon");
+        super(scene, x, y, bloon_type);
         scene.add.existing(this);
         scene.physics.world.enableBody(this, 0);
         bloons.add(this);
-
-        this.setScale(.02);
-
-        this.speed = 1;
-        this.health = 1;
-        this.value = 1;
-
         this.progress = 0;
         this.xlist = scene.coords.xlist;
         this.ylist = scene.coords.ylist;
@@ -40,12 +30,11 @@ class Bloon extends Phaser.GameObjects.Sprite {
       this.y = Phaser.Math.Interpolation.Linear(this.ylist, this.progress);
 
     }
-
     static take_damage(dart, bloon) {
         bloon.health -= dart.damage;
         if (bloon.health <= 0) {
             scene.money += bloon.value;
-            bloon.destroy();
+            bloon.transform();
             // let destroy_animation = this.physics.add.sprite(bloon.x, bloon.y, 'pop').setScale(.25);
             // destroy_animation.anims.play('bloon_pop');
             // destroy_animation.once('animationcomplete', () => {
@@ -54,6 +43,14 @@ class Bloon extends Phaser.GameObjects.Sprite {
         }
         dart.destroy()
     }
+
+
+
+    transform(){
+
+    }
+
+
 
     static bloon_end(goal, bloon) {
         scene.lives -= bloon.health;
