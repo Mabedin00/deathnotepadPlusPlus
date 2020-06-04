@@ -1,14 +1,13 @@
 class Red_Bloon extends Bloon {
 
-    constructor(x = scene.coords.xlist[0], y = scene.coords.ylist[0]) {
+    constructor(progress) {
 
-        super("red_bloon",x,y);
+        super("red_bloon",progress);
 
         this.speed = .1;
         this.health = 1;
+        this.damage = 1;
         this.value = 1;
-
-
     }
 
 

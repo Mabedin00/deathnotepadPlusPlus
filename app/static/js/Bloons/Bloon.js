@@ -1,12 +1,12 @@
 class Bloon extends Phaser.GameObjects.Sprite {
 
-    constructor(bloon_type, x = scene.coords.xlist[0], y = scene.coords.ylist[0] ) {
-
-        super(scene, x, y, bloon_type);
+    constructor(bloon_type, progress) {
+        // bloon will be teleported to correct location by its progress number
+        super(scene, -50, -50, bloon_type);
         scene.add.existing(this);
         scene.physics.world.enableBody(this, 0);
         bloons.add(this);
-        this.progress = 0;
+        this.progress = progress;
         this.xlist = scene.coords.xlist;
         this.ylist = scene.coords.ylist;
 
@@ -44,16 +44,12 @@ class Bloon extends Phaser.GameObjects.Sprite {
         dart.destroy()
     }
 
-
-
     transform(){
 
     }
 
-
-
     static bloon_end(goal, bloon) {
-        scene.lives -= bloon.health;
+        scene.lives -= bloon.damage;
         bloon.destroy();
     }
 }

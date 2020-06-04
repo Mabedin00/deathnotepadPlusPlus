@@ -13,6 +13,8 @@ class Scene1 extends Phaser.Scene {
   preload () {
       this.load.image('ocean_road', 'static/images/' + this.map + '.png');
       this.load.image('red_bloon', 'static/images/red_bloon.png');
+      this.load.image('blue_bloon', 'static/images/blue_bloon.png');
+
       this.load.image('dart_monkey', 'static/images/dart_monkey.png');
       this.load.image('dart', 'static/images/dart.png');
       this.load.image('circle', 'static/images/circle.png');
@@ -22,6 +24,8 @@ class Scene1 extends Phaser.Scene {
 
   create () {
     scene = this;
+    this.counter = 0;
+
     this.level = 1;
     this.lives = 5;
     this.money = 500;
@@ -68,10 +72,12 @@ class Scene1 extends Phaser.Scene {
           return;
       }
       // TODO: allow user to start next level on their terms
-
-      if ( JSON.stringify(this.bloons_deployed)==JSON.stringify(level_data[this.level].bloons)) {
+      console.log('bloons deployed: ' + JSON.stringify(this.bloons_deployed))
+      console.log('num supposed to deploy: ' + JSON.stringify(level_data[this.level].bloons))
+      if (JSON.stringify(this.bloons_deployed) == JSON.stringify(level_data[this.level].bloons)) {
           this.all_bloons_deployed = true;
           if (!bloons.getLength()){
+              this.counter = 0
               this.money += (100 + this.level*2);
               this.level++;
               this.bloons_deployed = [0, 0]
@@ -99,30 +105,30 @@ class Scene1 extends Phaser.Scene {
       });
 
       // create new bloons
-
       tick += level_data[this.level].tick;
-      console.log(tick, this.all_bloons_deployed)
+
       if (tick >= 100 && !this.all_bloons_deployed) {
-        tick = 0;
+          tick = 0;
 
-        var counter = 0;
-        var idx = counter % this.bloons_deployed.length;
-        console.log(idx + "d")
-        if (this.bloons_deployed[idx] == level_data[this.level].bloons[idx]) {
-            counter++;
-            continue;
-        }
-        this.create_bloon(idx)
-        this.bloons_deployed[idx] += 1
-        counter++
-
-
+          var idx = this.counter % this.bloons_deployed.length;
+          idx = this.return_valid_idx(idx);
+          this.create_bloon(idx);
+          this.bloons_deployed[idx] += 1
+          this.counter++;
       }
   }
 
+  return_valid_idx(idx) {
+      if (level_data[this.level].bloons[idx] == this.bloons_deployed[idx]) {
+          if (idx == this.bloons_deployed.length - 1) return this.return_valid_idx(0);
+          return this.return_valid_idx(idx + 1);
+      }
+      return idx;
+  }
+
   create_bloon(id) {
-      if (id == 0) new Red_Bloon();
-      else if (id == 1) new Blue_Bloon();
+      if (id == 0)      new Red_Bloon (0);
+      else if (id == 1) new Blue_Bloon(0);
 
   }
 
