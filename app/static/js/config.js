@@ -9,18 +9,19 @@ var config = {
         }
     },
     scene: [Scene0, Scene1]
-    // scene: {
-    //     preload: preload,
-    //     create: create,
-    //     update: update
-    // }
 };
 
 var tick = 0;
 var bloons;
 var goal;
 var towers;
-var dart_placed;
+var darts;
 var scene;
+var lives_text;
+var money_text;
+var level_text;
+var game_won = false;
+
+const LAND = 2;
 
 var game = new Phaser.Game(config);
