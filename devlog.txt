@@ -5,3 +5,10 @@ Mohidul Abedin, Brian Moses -- 2020-06-01 15:00
 Mohidul Abedin, Brian Moses -- 2020-06-02 15:00
     - added bloons that move
     - beginning of towers
+
+Mohidul Abedin, Brian Moses -- 2020-06-03 15:00
+    - added tower placement
+    - added darts tracking bloons
+    - added dart-bloon collision
+    - added levels, money, lives
+    - added game_over text for win or lose
