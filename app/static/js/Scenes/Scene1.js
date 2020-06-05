@@ -11,7 +11,8 @@ class Scene1 extends Phaser.Scene {
   }
 
   preload () {
-      this.load.image('ocean_road', 'static/images/maps/' + this.map + '.png');
+      this.load.image('map', 'static/images/maps/' + this.map + '.png');
+      console.log(this.map)
 
       this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
       this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
@@ -33,7 +34,7 @@ class Scene1 extends Phaser.Scene {
     this.bloons_deployed = [0,0]
     this.all_bloons_deployed = false;
 
-    this.add.image(343, 253, 'ocean_road');
+    this.add.image(343, 253, 'map');
     level_text = this.add.text(700, 350, 'Level: ' + this.level, { font: '24px Arial' });
     lives_text = this.add.text(700, 400, 'Lives: ' + this.lives, { font: '24px Arial' });
     money_text = this.add.text(700, 450, 'Money: ' + this.money, { font: '24px Arial' });
@@ -42,7 +43,7 @@ class Scene1 extends Phaser.Scene {
     let goal_x = this.coords.xlist[this.coords.xlist.length - 1];
     let goal_y = this.coords.ylist[this.coords.ylist.length - 1];
 
-    goal = this.physics.add.sprite(goal_x, goal_y, 'ocean_road').setScale(.1);
+    goal = this.physics.add.sprite(goal_x, goal_y, 'map').setScale(.1);
 
     bloons = this.physics.add.group();
     towers = this.physics.add.group();
