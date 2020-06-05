@@ -15,19 +15,19 @@ class Bloon extends Phaser.GameObjects.Sprite {
     }
 
     move() {
-      if (this.progress >= 1) return;
+        if (this.progress >= 1) return;
 
-      this.current_node = Math.floor(this.progress / this.increment)
+        this.current_node = Math.floor(this.progress / this.increment)
 
-      var distance = Phaser.Math.Distance.Between(this.xlist[this.current_node],
+        var distance = Phaser.Math.Distance.Between(this.xlist[this.current_node],
                                                   this.ylist[this.current_node],
                                                   this.xlist[this.current_node+1],
                                                   this.ylist[this.current_node+1]);
 
-      this.progress += this.speed/distance;
+        this.progress += this.speed/distance;
 
-      this.x = Phaser.Math.Interpolation.Linear(this.xlist, this.progress);
-      this.y = Phaser.Math.Interpolation.Linear(this.ylist, this.progress);
+        this.x = Phaser.Math.Interpolation.Linear(this.xlist, this.progress);
+        this.y = Phaser.Math.Interpolation.Linear(this.ylist, this.progress);
     }
 
     transform() {
