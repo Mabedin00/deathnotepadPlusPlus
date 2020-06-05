@@ -11,15 +11,16 @@ class Scene1 extends Phaser.Scene {
   }
 
   preload () {
-      this.load.image('ocean_road', 'static/images/' + this.map + '.png');
-      this.load.image('red_bloon', 'static/images/red_bloon.png');
-      this.load.image('blue_bloon', 'static/images/blue_bloon.png');
+      this.load.image('ocean_road', 'static/images/maps/' + this.map + '.png');
 
-      this.load.image('dart_monkey', 'static/images/dart_monkey.png');
-      this.load.image('dart', 'static/images/dart.png');
-      this.load.image('circle', 'static/images/circle.png');
-      // this.load.spritesheet('pop', 'static/images/red_bloon_pop.png', {frameWidth: 64, frameHeight: 116});
+      this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
+      this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
 
+      this.load.image('dart_monkey', 'static/images/towers/dart_monkey.png');
+      this.load.image('monkey_buccaneer', 'static/images/towers/buccaneer.png');
+
+      this.load.image('dart', 'static/images/projectiles/dart.png');
+      this.load.image('bomb', 'static/images/projectiles/bomb.png');
   }
 
   create () {
@@ -47,16 +48,10 @@ class Scene1 extends Phaser.Scene {
     towers = this.physics.add.group();
     darts = this.physics.add.group();
 
-    this.physics.add.overlap(darts, bloons, Bloon.take_damage, null, this);
+    this.physics.add.overlap(darts, bloons, Dart.inflict_damage, null, this);
     this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
 
-    // this.anims.create({
-    //     key: 'bloon_pop',
-    //     frames: this.anims.generateFrameNumbers('pop', {start: 0, end: 4}),
-    //     frameRate: 10,
-    // })
-
-    scene.create_tower();
+    scene.create_towers();
   }
 
   update () {
@@ -71,9 +66,6 @@ class Scene1 extends Phaser.Scene {
           this.end_game();
           return;
       }
-      // TODO: allow user to start next level on their terms
-      console.log('bloons deployed: ' + JSON.stringify(this.bloons_deployed))
-      console.log('num supposed to deploy: ' + JSON.stringify(level_data[this.level].bloons))
       if (JSON.stringify(this.bloons_deployed) == JSON.stringify(level_data[this.level].bloons)) {
           this.all_bloons_deployed = true;
           if (!bloons.getLength()){
@@ -132,12 +124,12 @@ class Scene1 extends Phaser.Scene {
 
   }
 
-  create_tower() {
-      new Tower(712, 50);
+  create_towers() {
+      new Dart_Monkey();
+      new Monkey_Buccaneer();
   }
 
   end_game() {
-      // TODO: add giant cows
       this.add.text(143, 253, 'You Lose!', { font: '64px Arial' });
   }
 }

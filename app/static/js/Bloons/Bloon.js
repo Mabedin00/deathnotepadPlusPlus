@@ -28,23 +28,9 @@ class Bloon extends Phaser.GameObjects.Sprite {
 
       this.x = Phaser.Math.Interpolation.Linear(this.xlist, this.progress);
       this.y = Phaser.Math.Interpolation.Linear(this.ylist, this.progress);
-
-    }
-    static take_damage(dart, bloon) {
-        bloon.health -= dart.damage;
-        if (bloon.health <= 0) {
-            scene.money += bloon.value;
-            bloon.transform();
-            // let destroy_animation = this.physics.add.sprite(bloon.x, bloon.y, 'pop').setScale(.25);
-            // destroy_animation.anims.play('bloon_pop');
-            // destroy_animation.once('animationcomplete', () => {
-            //     destroy_animation.destroy();
-            // })
-        }
-        dart.destroy()
     }
 
-    transform(){
+    transform() {
 
     }
 

@@ -1,8 +1,7 @@
 class Dart extends Phaser.Physics.Arcade.Sprite {
 
-    constructor(x, y, range, target) {
-        // TODO: add dart targeting, movement, sprite
-        super(scene, x, y, "dart");
+    constructor(x, y, range, target, dart_type) {
+        super(scene, x, y, dart_type);
         scene.add.existing(this);
         darts.add(this);
 
@@ -15,5 +14,14 @@ class Dart extends Phaser.Physics.Arcade.Sprite {
         scene.physics.moveTo(this, target.x, target.y, this.speed)
 
         this.setScale(.5);
+    }
+
+    static inflict_damage(dart, bloon) {
+        bloon.health -= dart.damage;
+        if (bloon.health <= 0) {
+            scene.money += bloon.value;
+            bloon.transform();
+        }
+        dart.destroy()
     }
 }

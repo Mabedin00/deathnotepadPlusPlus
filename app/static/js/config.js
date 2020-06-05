@@ -22,6 +22,8 @@ var money_text;
 var level_text;
 var game_won = false;
 
+const PATH = 0;
+const WATER = 1;
 const LAND = 2;
 
 var game = new Phaser.Game(config);

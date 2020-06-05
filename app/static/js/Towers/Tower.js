@@ -1,16 +1,12 @@
 class Tower extends Phaser.GameObjects.Sprite {
 
-    constructor(x, y) {
+    constructor(tower_type, x, y) {
 
-        super(scene, x, y, "dart_monkey");
+        super(scene, x, y, tower_type);
         scene.add.existing(this);
         scene.physics.world.enableBody(this, 0);
         towers.add(this);
 
-        this.cost = 200;
-        this.max_charge = 60;
-        this.charge = this.max_charge;
-        this.range = 150;
         this.placed = false;
         this.being_dragged = false;
         this.setInteractive();
@@ -26,7 +22,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         let tile = ocean_road[mouseY][mouseX];
 
         // if user attempts to place on an invalid tile, don't do anything
-        if (this.being_dragged && tile != LAND) {
+        if (this.being_dragged && tile != this.domain) {
           return;
         }
         // if user does not have enough money, destroy currently selected monkey
@@ -44,7 +40,7 @@ class Tower extends Phaser.GameObjects.Sprite {
 
     place_tower(x, y) {
         scene.money -= this.cost;
-        scene.create_tower();
+        this.create_tower();
 
         let graphics = scene.add.graphics({ fillStyle: { color: 0xffffff , alpha: .2} });
         this.circle = new Phaser.Geom.Circle(x, y, this.range);
@@ -64,7 +60,6 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     fire() {
-        // invisible_circle.parent.targets.append(bloon)
         this.targets = this.return_valid_targets();
         // if there are no valid targets, stop fire function
         if (!this.targets.length) return;
