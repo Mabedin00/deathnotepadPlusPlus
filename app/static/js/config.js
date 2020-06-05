@@ -8,7 +8,7 @@ var config = {
             debug: false
         }
     },
-    scene: [Scene0, Scene1]
+    scene: [MapSelectionScene, GameScene]
 };
 
 var tick = 0;
@@ -20,7 +20,9 @@ var scene;
 var lives_text;
 var money_text;
 var level_text;
-var game_won = false;
+var game_over = false;
+
+var esc;
 
 const PATH = 0;
 const WATER = 1;

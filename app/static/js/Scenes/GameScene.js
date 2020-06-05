@@ -1,4 +1,4 @@
-class Scene1 extends Phaser.Scene {
+class GameScene extends Phaser.Scene {
   constructor() {
     super("game");
   }
@@ -12,7 +12,6 @@ class Scene1 extends Phaser.Scene {
 
   preload () {
       this.load.image('map', 'static/images/maps/' + this.map + '.png');
-      console.log(this.map)
 
       this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
       this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
@@ -24,26 +23,13 @@ class Scene1 extends Phaser.Scene {
       this.load.image('bomb', 'static/images/projectiles/bomb.png');
   }
 
+
   create () {
-    scene = this;
-    this.counter = 0;
-
-    this.level = 1;
-    this.lives = 5;
-    this.money = 500;
-    this.bloons_deployed = [0,0]
-    this.all_bloons_deployed = false;
-
+    this.create_key_bindings();
+    this.set_vars();
     this.add.image(343, 253, 'map');
-    level_text = this.add.text(700, 350, 'Level: ' + this.level, { font: '24px Arial' });
-    lives_text = this.add.text(700, 400, 'Lives: ' + this.lives, { font: '24px Arial' });
-    money_text = this.add.text(700, 450, 'Money: ' + this.money, { font: '24px Arial' });
-
-    // background image
-    let goal_x = this.coords.xlist[this.coords.xlist.length - 1];
-    let goal_y = this.coords.ylist[this.coords.ylist.length - 1];
-
-    goal = this.physics.add.sprite(goal_x, goal_y, 'map').setScale(.1);
+    this.add_text();
+    this.create_goal();
 
     bloons = this.physics.add.group();
     towers = this.physics.add.group();
@@ -55,30 +41,59 @@ class Scene1 extends Phaser.Scene {
     scene.create_towers();
   }
 
-  update () {
-      level_text.setText('Level: ' + scene.level);
-      lives_text.setText('Lives: ' + scene.lives);
-      money_text.setText('Money: ' + scene.money);
+  create_key_bindings() {
+      esc = this.input.keyboard.addKey('ESC');
+  }
 
-      if (game_won) {
-          return;
-      }
+  set_vars() {
+      scene = this;
+      this.paused = false;
+      this.esc_key_raised = false;
+      this.counter = 0;
+      this.level = 1;
+      this.lives = 5;
+      this.money = 500;
+      this.bloons_deployed = [0,0]
+      this.all_bloons_deployed = false;
+  }
+
+  add_text() {
+      level_text = this.add.text(700, 350, 'Level: ' + this.level, { font: '24px Arial' });
+      lives_text = this.add.text(700, 400, 'Lives: ' + this.lives, { font: '24px Arial' });
+      money_text = this.add.text(700, 450, 'Money: ' + this.money, { font: '24px Arial' });
+  }
+
+  create_goal() {
+      let goal_x = this.coords.xlist[this.coords.xlist.length - 1];
+      let goal_y = this.coords.ylist[this.coords.ylist.length - 1];
+      // is off-screen, so we can use any sprite we want
+      goal = this.physics.add.sprite(goal_x, goal_y, 'map').setScale(.1);
+  }
+
+  create_towers() {
+      new Dart_Monkey();
+      new Monkey_Buccaneer();
+  }
+
+
+  update () {
+      this.hotkeys();
+      if (this.paused) return;
+      this.update_text();
+      if (game_over) return;
+
       if (scene.lives <= 0) {
-          this.end_game();
+          this.lose_game();
           return;
       }
+      // checks if all bloons have been deployed
       if (JSON.stringify(this.bloons_deployed) == JSON.stringify(level_data[this.level].bloons)) {
           this.all_bloons_deployed = true;
-          if (!bloons.getLength()){
-              this.counter = 0
-              this.money += (100 + this.level*2);
-              this.level++;
-              this.bloons_deployed = [0, 0]
-              this.all_bloons_deployed = false;
+          if (!bloons.getLength()) {
+              this.next_level();
               // if user has reached last level
               if (level_data[this.level] == undefined ) {
-                  this.add.text(143, 253, 'You Win!', { font: '64px Arial' });
-                  game_won = true;
+                  this.win_game();
                   return;
               }
           }
@@ -98,6 +113,40 @@ class Scene1 extends Phaser.Scene {
       });
 
       // create new bloons
+      this.spawn_bloons();
+  }
+
+  hotkeys() {
+      if (esc.isDown) {
+          console.log('esc press')
+      }
+  }
+
+  update_text() {
+      level_text.setText('Level: ' + scene.level);
+      lives_text.setText('Lives: ' + scene.lives);
+      money_text.setText('Money: ' + scene.money);
+  }
+
+  lose_game() {
+      game_over = true;
+      this.add.text(143, 253, 'You Lose!', { font: '64px Arial' });
+  }
+
+  next_level() {
+      this.counter = 0
+      this.money += (100 + this.level*2);
+      this.level++;
+      this.bloons_deployed = [0, 0]
+      this.all_bloons_deployed = false;
+  }
+
+  win_game() {
+      this.add.text(143, 253, 'You Win!', { font: '64px Arial' });
+      game_over = true;
+  }
+
+  spawn_bloons() {
       tick += level_data[this.level].tick;
 
       if (tick >= 100 && !this.all_bloons_deployed) {
@@ -122,15 +171,5 @@ class Scene1 extends Phaser.Scene {
   create_bloon(id) {
       if (id == 0)      new Red_Bloon (0);
       else if (id == 1) new Blue_Bloon(0);
-
-  }
-
-  create_towers() {
-      new Dart_Monkey();
-      new Monkey_Buccaneer();
-  }
-
-  end_game() {
-      this.add.text(143, 253, 'You Lose!', { font: '64px Arial' });
   }
 }

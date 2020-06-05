@@ -1,4 +1,4 @@
-class Scene0 extends Phaser.Scene {
+class MapSelectionScene extends Phaser.Scene {
   constructor() {
     super("selection");
   }
