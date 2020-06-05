@@ -12,3 +12,7 @@ Mohidul Abedin, Brian Moses -- 2020-06-03 15:00
     - added dart-bloon collision
     - added levels, money, lives
     - added game_over text for win or lose
+
+Mohidul Abedin, Brian Moses -- 2020-06-03 22:00
+    - added multiple dart types
+    - added map selection screen
