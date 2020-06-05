@@ -27,9 +27,9 @@ class Tower extends Phaser.GameObjects.Sprite {
         }
         // if user does not have enough money, destroy currently selected monkey
         // and recreate in sidebar
-        if (this.being_dragged && scene.money < this.cost) {
+        if (this.being_dragged && (scene.money < this.cost)) {
             this.destroy();
-            scene.create_tower();
+            this.create_tower();
             return;
         }
         if (this.being_dragged) {
