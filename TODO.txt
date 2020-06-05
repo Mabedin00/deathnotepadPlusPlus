@@ -14,3 +14,4 @@
 
 - giant cows on win/loss
 - rename Scene0, Scene1
+- center the canvas
