@@ -13,6 +13,11 @@ class GameScene extends Phaser.Scene {
   preload () {
       this.load.image('map', 'static/images/maps/' + this.map + '.png');
 
+      this.load.image('popup', 'static/images/maps/popup.jpg')
+      this.load.image('resume', 'static/images/maps/resume_button.jpg')
+      this.load.image('retry', 'static/images/maps/retry_button.jpg')
+      this.load.image('main_menu', 'static/images/maps/main_menu_button.jpg')
+
       this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
       this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
 
@@ -24,109 +29,138 @@ class GameScene extends Phaser.Scene {
   }
 
 
-  create () {
-    this.create_key_bindings();
-    this.set_vars();
-    this.add.image(343, 253, 'map');
-    this.add_text();
-    this.create_goal();
+    create () {
+        this.set_vars();
+        this.create_key_bindings();
+        this.add.image(343, 253, 'map');
+        this.add_text();
+        this.create_goal();
 
-    bloons = this.physics.add.group();
-    towers = this.physics.add.group();
-    projectiles = this.physics.add.group();
+        bloons = this.physics.add.group();
+        towers = this.physics.add.group();
+        projectiles = this.physics.add.group();
 
-    this.physics.add.overlap(projectiles, bloons, Projectile.inflict_damage, null, this);
-    this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
+        this.physics.add.overlap(projectiles, bloons, Projectile.inflict_damage, null, this);
+        this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
 
-    scene.create_towers();
-  }
+        scene.create_towers();
+    }
 
-  create_key_bindings() {
-      esc = this.input.keyboard.addKey('ESC');
-  }
+    create_key_bindings() {
+        esc = this.input.keyboard.addKey('ESC');
+    }
 
-  set_vars() {
-      scene = this;
-      this.paused = false;
-      this.esc_key_raised = false;
-      this.counter = 0;
-      this.level = 1;
-      this.lives = 5;
-      this.money = 500;
-      this.bloons_deployed = [0,0]
-      this.all_bloons_deployed = false;
-  }
+    set_vars() {
+        scene = this;
+        this.paused = false;
+        this.esc_pressed = false;
+        this.counter = 0;
+        this.level = 1;
+        this.lives = 5;
+        this.money = 500;
+        this.bloons_deployed = [0,0]
+        this.all_bloons_deployed = false;
+    }
 
-  add_text() {
-      level_text = this.add.text(700, 350, 'Level: ' + this.level, { font: '24px Arial' });
-      lives_text = this.add.text(700, 400, 'Lives: ' + this.lives, { font: '24px Arial' });
-      money_text = this.add.text(700, 450, 'Money: ' + this.money, { font: '24px Arial' });
-  }
+    add_text() {
+        level_text = this.add.text(700, 350, 'Level: ' + this.level, { font: '24px Arial' });
+        lives_text = this.add.text(700, 400, 'Lives: ' + this.lives, { font: '24px Arial' });
+        money_text = this.add.text(700, 450, 'Money: ' + this.money, { font: '24px Arial' });
+    }
 
-  create_goal() {
-      let goal_x = this.coords.xlist[this.coords.xlist.length - 1];
-      let goal_y = this.coords.ylist[this.coords.ylist.length - 1];
-      // is off-screen, so we can use any sprite we want
-      goal = this.physics.add.sprite(goal_x, goal_y, 'map').setScale(.1);
-  }
+    create_goal() {
+        let goal_x = this.coords.xlist[this.coords.xlist.length - 1];
+        let goal_y = this.coords.ylist[this.coords.ylist.length - 1];
+        // is off-screen, so we can use any sprite we want
+        goal = this.physics.add.sprite(goal_x, goal_y, 'map').setScale(.1);
+    }
 
-  create_towers() {
-      new Dart_Monkey();
-      new Monkey_Buccaneer();
-  }
+    create_towers() {
+        new Dart_Monkey();
+        new Monkey_Buccaneer();
+    }
 
 
-  update () {
-      this.hotkeys();
-      if (this.paused) return;
-      this.update_text();
-      if (game_over) return;
+    update () {
+        this.hotkeys();
+        if (this.paused) return;
+        this.update_text();
+        if (game_over) return;
 
-      if (scene.lives <= 0) {
-          this.lose_game();
-          return;
-      }
-      // checks if all bloons have been deployed
-      if (JSON.stringify(this.bloons_deployed) == JSON.stringify(level_data[this.level].bloons)) {
-          this.all_bloons_deployed = true;
-          if (!bloons.getLength()) {
-              this.next_level();
-              // if user has reached last level
-              if (level_data[this.level] == undefined ) {
-                  this.win_game();
-                  return;
-              }
-          }
-      }
-
-      bloons.children.iterate(function (bloon) {
-        bloon.move();
-      });
-      towers.children.iterate(function (tower) {
-        if (tower.being_dragged) {
-            tower.drag();
+        if (scene.lives <= 0) {
+            this.lose_game();
+            return;
         }
-        if (tower.placed) {
-            tower.charge_tower();
-            tower.fire();
+        // checks if all bloons have been deployed
+        if (JSON.stringify(this.bloons_deployed) == JSON.stringify(level_data[this.level].bloons)) {
+            this.all_bloons_deployed = true;
+            if (!bloons.getLength()) {
+                this.next_level();
+                // if user has reached last level
+                if (level_data[this.level] == undefined ) {
+                    this.win_game();
+                    return;
+                }
+            }
         }
-      });
 
-      // create new bloons
-      this.spawn_bloons();
-  }
+        bloons.children.iterate(function (bloon) {
+            bloon.move();
+        });
+        towers.children.iterate(function (tower) {
+            if (tower.being_dragged) {
+                tower.drag();
+            }
+            if (tower.placed) {
+                tower.charge_tower();
+                tower.fire();
+            }
+        });
 
-  hotkeys() {
-      if (esc.isDown) {
-          console.log('esc press')
-      }
-  }
+        // create new bloons
+        this.spawn_bloons();
+    }
 
-  update_text() {
-      level_text.setText('Level: ' + scene.level);
-      lives_text.setText('Lives: ' + scene.lives);
-      money_text.setText('Money: ' + scene.money);
-  }
+    hotkeys() {
+        if (esc.isDown) {
+            this.esc_pressed = true;
+        }
+        if (this.esc_pressed && esc.isUp){
+            this.paused = !this.paused;
+            if(this.paused){
+                popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9);
+                resume = this.add.image(343, 203, 'resume');
+                resume.setInteractive();
+                resume.on('pointerdown', this.resume);
+                retry = this.add.image(343, 253, 'retry');
+                main_menu = this.add.image(343, 303, 'main_menu');
+
+            }
+            else if (popup != undefined){
+                popup.destroy();
+                retry.destroy();
+                main_menu.destroy();
+                resume.destroy();
+            }
+            this.esc_pressed = false;
+        }
+    }
+
+    resume(){
+        this.esc_pressed = false;
+        
+        this.paused = false;
+        popup.destroy();
+        retry.destroy();
+        main_menu.destroy();
+        resume.destroy();
+    }
+
+    update_text() {
+        level_text.setText('Level: ' + scene.level);
+        lives_text.setText('Lives: ' + scene.lives);
+        money_text.setText('Money: ' + scene.money);
+    }
 
   lose_game() {
       game_over = true;

@@ -23,6 +23,11 @@ var level_text;
 var game_over = false;
 
 var esc;
+var popup;
+var main_menu;
+var retry;
+var resume;
+
 
 const PATH = 0;
 const WATER = 1;
