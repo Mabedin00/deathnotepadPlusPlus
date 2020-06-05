@@ -1,17 +1,12 @@
-class Dart extends Phaser.Physics.Arcade.Sprite {
+class Projectile extends Phaser.Physics.Arcade.Sprite {
 
-    constructor(x, y, range, target, dart_type) {
+    constructor(x, y, target, speed, dart_type) {
         super(scene, x, y, dart_type);
         scene.add.existing(this);
-        darts.add(this);
-
-        this.damage = 1;
-        this.range = range;
-        this.target = target;
-        this.speed = 500;
+        projectiles.add(this);
 
         this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
-        scene.physics.moveTo(this, target.x, target.y, this.speed)
+        scene.physics.moveTo(this, target.x, target.y, speed)
 
         this.setScale(.5);
     }

@@ -15,7 +15,7 @@ var tick = 0;
 var bloons;
 var goal;
 var towers;
-var darts;
+var projectiles;
 var scene;
 var lives_text;
 var money_text;

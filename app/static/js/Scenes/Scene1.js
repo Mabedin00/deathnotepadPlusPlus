@@ -46,9 +46,9 @@ class Scene1 extends Phaser.Scene {
 
     bloons = this.physics.add.group();
     towers = this.physics.add.group();
-    darts = this.physics.add.group();
+    projectiles = this.physics.add.group();
 
-    this.physics.add.overlap(darts, bloons, Dart.inflict_damage, null, this);
+    this.physics.add.overlap(projectiles, bloons, Projectile.inflict_damage, null, this);
     this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
 
     scene.create_towers();

@@ -22,7 +22,7 @@ class Monkey_Buccaneer extends Tower {
             this.charge = 0;
             this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y);
 
-            new Dart(this.x, this.y, this.range, this.target, this.dart_type);
+            new Bomb(this.x, this.y, this.target);
         }
     }
 
