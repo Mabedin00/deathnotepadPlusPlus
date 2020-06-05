@@ -33,6 +33,25 @@ class GameScene extends Phaser.Scene {
         this.set_vars();
         this.create_key_bindings();
         this.add.image(343, 253, 'map');
+
+        this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(1);
+        this.popup.visible = false;
+
+        this.resume = this.add.image(343, 203, 'resume').setDepth(1);
+        this.resume.setInteractive();
+        this.resume.on('pointerdown', this.resume_game, this);
+        this.resume.visible = false;
+
+        this.retry = this.add.image(343, 253, 'retry').setDepth(1);
+        this.retry.setInteractive();
+        this.retry.on('pointerdown', this.restart_game);
+        this.retry.visible = false;
+
+        this.main_menu = this.add.image(343, 303, 'main_menu').setDepth(1);
+        this.main_menu.setInteractive();
+        this.main_menu.on('pointerdown', this.return_to_menu);
+        this.main_menu.visible = false;
+
         this.add_text();
         this.create_goal();
 
@@ -128,32 +147,39 @@ class GameScene extends Phaser.Scene {
         if (this.esc_pressed && esc.isUp){
             this.paused = !this.paused;
             if(this.paused){
-                popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9);
-                resume = this.add.image(343, 203, 'resume');
-                resume.setInteractive();
-                resume.on('pointerdown', this.resume);
-                retry = this.add.image(343, 253, 'retry');
-                main_menu = this.add.image(343, 303, 'main_menu');
-
+                this.pause_game();
             }
-            else if (popup != undefined){
-                popup.destroy();
-                retry.destroy();
-                main_menu.destroy();
-                resume.destroy();
+            else if (!this.paused){
+                this.resume_game();
             }
             this.esc_pressed = false;
         }
     }
 
-    resume(){
-        this.esc_pressed = false;
-        
+    pause_game(){
+        console.log(this.popup, this.resume, this.retry, this.main_menu)
+
+        this.popup.visible = true;
+        this.resume.visible = true;
+        this.retry.visible = true;
+        this.main_menu.visible = true;
+        this.paused = true;
+    }
+    resume_game(){
+        console.log(this.popup, this.resume, this.retry, this.main_menu)
+
+        this.resume.visible = false;
+        this.retry.visible = false;
+        this.popup.visible = false;
+        this.main_menu.visible = false;
         this.paused = false;
-        popup.destroy();
-        retry.destroy();
-        main_menu.destroy();
-        resume.destroy();
+    }
+
+    restart_game(){
+        console.log("restart");
+    }
+    return_to_menu(){
+        console.log("main menu");
     }
 
     update_text() {
