@@ -1,6 +1,7 @@
 
 - popup on win/lose
 - user starts level when they want
+- menu before map selection
 
 - circle appears as soon as tower selected
 - circle does not extend into tower zone
