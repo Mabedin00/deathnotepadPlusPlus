@@ -1,20 +1,16 @@
 
-1. another tower type
-
-2. another map
-
-3.
 - popup on win/lose
 - user starts level when they want
-- giant cows on win/loss
+
 - circle appears as soon as tower selected
 - circle does not extend into tower zone
 - circle only shows when hovering over/selecting tower
 - sell towers
 - user can deselect
-
-4.
-- instructions
 - upgrades
+
+- instructions
 - leader board
+
+- giant cows on win/loss
 - rename Scene0, Scene1

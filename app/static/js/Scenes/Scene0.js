@@ -24,8 +24,9 @@ class Scene0 extends Phaser.Scene {
       this.add.text(x - 75, y + 75, display_name, { font: '24px Arial' });
 
       map.setInteractive();
-      map.on('pointerdown', this.select_map, {scene: this, map: map});
+      map.on('pointerdown', this.select_map, {scene: this, map: map_name});
   }
+
   select_map() {
     this.scene.scene.start('game', {map: this.map});
   }
