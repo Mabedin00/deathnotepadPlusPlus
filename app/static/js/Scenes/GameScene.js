@@ -21,6 +21,10 @@ class GameScene extends Phaser.Scene {
 		this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
 		this.load.image('next_level', 'static/images/menus/next_level.jpg')
 
+		this.load.image('lives', 'static/images/menus/lives.png' );
+		this.load.image('money', 'static/images/menus/money.png' );
+
+
 		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
 		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
 
@@ -53,6 +57,7 @@ class GameScene extends Phaser.Scene {
 	set_vars() {
 		scene = this;
 		this.grace_period = true;
+		this.is_dragging = false;
 		this.game_over = false;
 		this.infinite_mode_enabled = false;
 		this.paused = false;
@@ -121,8 +126,10 @@ class GameScene extends Phaser.Scene {
 
 	add_text() {
 		level_text = this.add.text(710, 525, 'Level: ' + this.level, { font: '24px Arial' });
-		lives_text = this.add.text(845, 525, 'Lives: ' + this.lives, { font: '24px Arial' });
-		money_text = this.add.text(845, 565, 'Money: ' + this.money, { font: '24px Arial' });
+		lives_icon = this.add.image(845, 540, "lives").setScale(.05);
+		lives_text = this.add.text(875, 525, this.lives, { font: '24px Arial' });
+		money_icon = this.add.image(845, 578, "money").setScale(.05);
+		money_text = this.add.text(875, 565,  this.money, { font: '24px Arial' });
 		score_text = this.add.text(710, 565, 'Score: ' + this.score, { font: '24px Arial' });
 
 	}
@@ -144,6 +151,7 @@ class GameScene extends Phaser.Scene {
 	update () {
 		this.hotkeys();
 		// if game paused or between levels
+		this.update_text();
 		towers.children.iterate(function (tower) {
 			if (tower.being_dragged) {
 				tower.drag();
@@ -156,7 +164,6 @@ class GameScene extends Phaser.Scene {
 		if (this.paused) return;
 		if (this.grace_period) return;
 
-		this.update_text();
 		if (this.game_over) return;
 
 		if (scene.lives <= 0) {
@@ -237,8 +244,9 @@ class GameScene extends Phaser.Scene {
 
 	update_text() {
 		level_text.setText('Level: ' + scene.level);
-		lives_text.setText('Lives: ' + scene.lives);
-		money_text.setText('Money: ' + scene.money);
+		lives_text.setText(scene.lives);
+		score_text.setText('Score: ' + scene.score)
+		money_text.setText(scene.money);
 	}
 
 	lose_game() {

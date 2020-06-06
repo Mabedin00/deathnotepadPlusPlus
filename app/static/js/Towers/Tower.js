@@ -19,15 +19,21 @@ class Tower extends Phaser.GameObjects.Sprite {
         // 0: not valid, 1: valid for ocean, 2: valid for land
         let mouseX = Math.floor(scene.input.activePointer.x);
         let mouseY = Math.floor(scene.input.activePointer.y);
-        let tile = scene.tiles[mouseY][mouseX];
+        let tile;
+        if (scene.tiles[mouseY] == undefined){
+            tile = undefined
+        }
+        else{
+            tile = scene.tiles[mouseY][mouseX];
+        }
 
         // if user attempts to place on an invalid tile, don't do anything
-        if (this.being_dragged && tile != this.domain) {
+        if (this.being_dragged && tile != this.domain && tile != undefined) {
           return;
         }
         // if user does not have enough money, destroy currently selected monkey
         // and recreate in sidebar
-        if (this.being_dragged && (scene.money < this.cost)) {
+        if (this.being_dragged && (scene.money < this.cost  || tile == undefined)) {
             this.destroy();
             this.create_tower();
             return;

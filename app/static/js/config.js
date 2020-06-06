@@ -21,7 +21,9 @@ var towers;
 var projectiles;
 var scene;
 var lives_text;
+var lives_icon;
 var money_text;
+var money_icon;
 var level_text;
 var score_text;
 
