@@ -1,7 +1,10 @@
+let canvas = document.getElementById("game_canvas")
+
 var config = {
     type: Phaser.AUTO,
-    width: 882,
-    height: 506,
+    width: 982,
+    height: 600,
+    canvas: canvas,
     physics: {
         default: 'arcade',
         arcade: {
@@ -20,6 +23,7 @@ var scene;
 var lives_text;
 var money_text;
 var level_text;
+var score_text;
 
 var win_text;
 var win_desc;

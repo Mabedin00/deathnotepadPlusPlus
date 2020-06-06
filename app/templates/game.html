@@ -6,11 +6,20 @@
     <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
     <style type="text/css">
         body {
-            margin: 0;
+
+             background: url("static/images/wallpaper.jpg");
+             /* background-repeat: no-repeat;
+             background-size: auto; */
+             background-size: 1600px 800px;
+             background-color: #cccccc;
         }
     </style>
 </head>
 <body>
+
+<div style = "padding-top: 100px">
+    <center><canvas id="game_canvas" style="border:2px solid #000000"></canvas><center>
+</div>
 
 <script src = "static/js/Maps/floating_island.js"> </script>
 <script src = "static/js/Maps/ocean_road.js"> </script>
@@ -27,7 +36,6 @@
 <script src = "static/js/Projectiles/Projectile.js"> </script>
 <script src = "static/js/Projectiles/Dart.js"> </script>
 <script src = "static/js/Projectiles/Bomb.js"> </script>
-
 
 <script src = "static/js/Scenes/MapSelectionScene.js"> </script>
 <script src = "static/js/Scenes/GameScene.js"> </script>

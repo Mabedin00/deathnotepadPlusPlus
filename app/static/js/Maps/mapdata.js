@@ -19,12 +19,16 @@ var level_data = [
       'bloons': [0]
     },
     {
-      'tick': 5,
+      'tick': 1,
       'bloons': [5, 0]
     },
     {
       'tick': 1.5,
-      'bloons': [1, 1]
+      'bloons': [10, 0]
+    },
+    {
+      'tick': 2,
+      'bloons': [15, 5]
     },
     {
       'tick': 'algorithm',

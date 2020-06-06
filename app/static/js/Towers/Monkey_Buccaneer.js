@@ -2,7 +2,7 @@ class Monkey_Buccaneer extends Tower {
 
     constructor() {
 
-        super('monkey_buccaneer', 750, 150);
+        super('monkey_buccaneer', 750, 175);
 
         this.cost = 400;
         this.max_charge = 100;

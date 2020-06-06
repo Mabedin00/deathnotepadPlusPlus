@@ -11,8 +11,8 @@ class MapSelectionScene extends Phaser.Scene {
 
     }
     create () {
-        this.add.image(434, 253, 'background');
-        this.add.text(200, 20, 'Select a Map!', { font: '60px Arial' });
+        this.add.image(500, 253, 'background');
+        this.add.text(320, 20, 'Select a Map!', { font: '60px Arial'});
 
 
         this.place_map("ocean_road", "Ocean Road", 150, 150);

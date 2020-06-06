@@ -19,6 +19,7 @@ class GameScene extends Phaser.Scene {
 		this.load.image('resume', 'static/images/menus/resume_button.jpg')
 		this.load.image('retry', 'static/images/menus/retry_button.jpg')
 		this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
+		this.load.image('next_level', 'static/images/menus/next_level.jpg')
 
 		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
 		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
@@ -34,8 +35,51 @@ class GameScene extends Phaser.Scene {
 	create () {
 		this.set_vars();
 		this.create_key_bindings();
-		this.add.image(343, 253, 'map');
+		this.add_map();
+		this.create_buttons();
+		this.add_text();
+		this.create_goal();
 
+		bloons = this.physics.add.group();
+		towers = this.physics.add.group();
+		projectiles = this.physics.add.group();
+
+		this.physics.add.overlap(projectiles, bloons, Projectile.inflict_damage, null, this);
+		this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
+
+		this.create_towers();
+	}
+
+	set_vars() {
+		scene = this;
+		this.grace_period = true;
+		this.game_over = false;
+		this.infinite_mode_enabled = false;
+		this.paused = false;
+		this.esc_pressed = false;
+		this.counter = 0;
+		this.level = 0;
+		this.score = 0;
+		this.lives = 1;
+		this.money = 500;
+		this.bloons_deployed = [0,0]
+		this.all_bloons_deployed = false;
+	}
+
+	create_key_bindings() {
+		esc = this.input.keyboard.addKey('ESC');
+	}
+
+	add_map() {
+		this.add.image(500, 300, 'background').setTint(0x654321);
+		let graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: 1} });
+		let border = 10;
+		let rectangle = new Phaser.Geom.Rectangle(0, 0, 686 + border, 507 + border);
+		this.add.image(348, 258, 'map');
+		graphics.fillRectShape(rectangle);
+	}
+
+	create_buttons() {
 		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(1);
 		this.popup.visible = false;
 		// in future change to work with infinite mode
@@ -60,41 +104,27 @@ class GameScene extends Phaser.Scene {
 		this.main_menu.on('pointerdown', this.return_to_menu, this);
 		this.main_menu.visible = false;
 
-		this.add_text();
-		this.create_goal();
+		this.next_level = this.add.image(770, 479, 'next_level').setDepth(1).setScale(.6, 1);
+		this.next_level.setInteractive();
+		this.next_level.on('pointerdown', this.start_next_level, this);
 
-		bloons = this.physics.add.group();
-		towers = this.physics.add.group();
-		projectiles = this.physics.add.group();
+		let graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: .9} });
+		let border = 10;
+		let rectangle = new Phaser.Geom.Rectangle(
+			this.next_level.x - this.next_level.displayWidth/2  - border/2,
+			this.next_level.y - this.next_level.displayHeight/2 - border/2,
+			this.next_level.displayWidth  + border,
+			this.next_level.displayHeight + border);
+		graphics.fillRectShape(rectangle);
 
-		this.physics.add.overlap(projectiles, bloons, Projectile.inflict_damage, null, this);
-		this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
-
-		scene.create_towers();
-	}
-
-	create_key_bindings() {
-		esc = this.input.keyboard.addKey('ESC');
-	}
-
-	set_vars() {
-		scene = this;
-		this.game_over = false;
-		this.infinite_mode_enabled = false;
-		this.paused = false;
-		this.esc_pressed = false;
-		this.counter = 0;
-		this.level = 1;
-		this.lives = 1;
-		this.money = 500;
-		this.bloons_deployed = [0,0]
-		this.all_bloons_deployed = false;
 	}
 
 	add_text() {
-		level_text = this.add.text(700, 350, 'Level: ' + this.level, { font: '24px Arial' });
-		lives_text = this.add.text(700, 400, 'Lives: ' + this.lives, { font: '24px Arial' });
-		money_text = this.add.text(700, 450, 'Money: ' + this.money, { font: '24px Arial' });
+		level_text = this.add.text(710, 525, 'Level: ' + this.level, { font: '24px Arial' });
+		lives_text = this.add.text(845, 525, 'Lives: ' + this.lives, { font: '24px Arial' });
+		money_text = this.add.text(845, 565, 'Money: ' + this.money, { font: '24px Arial' });
+		score_text = this.add.text(710, 565, 'Score: ' + this.score, { font: '24px Arial' });
+
 	}
 
 	create_goal() {
@@ -113,7 +143,19 @@ class GameScene extends Phaser.Scene {
 
 	update () {
 		this.hotkeys();
+		// if game paused or between levels
+		towers.children.iterate(function (tower) {
+			if (tower.being_dragged) {
+				tower.drag();
+			}
+			if (tower.placed) {
+				tower.charge_tower();
+				tower.fire();
+			}
+		});
 		if (this.paused) return;
+		if (this.grace_period) return;
+
 		this.update_text();
 		if (this.game_over) return;
 
@@ -125,7 +167,7 @@ class GameScene extends Phaser.Scene {
 		if (JSON.stringify(this.bloons_deployed) == JSON.stringify(level_data[this.level].bloons)) {
 			this.all_bloons_deployed = true;
 			if (!bloons.getLength()) {
-				this.next_level();
+				this.inbetween_levels();
 				// if user has reached last level
 				if (level_data[this.level].tick == 'algorithm' && !this.infinite_mode_enabled) {
 					this.win_game();
@@ -137,18 +179,22 @@ class GameScene extends Phaser.Scene {
 		bloons.children.iterate(function (bloon) {
 			bloon.move();
 		});
-		towers.children.iterate(function (tower) {
-			if (tower.being_dragged) {
-				tower.drag();
-			}
-			if (tower.placed) {
-				tower.charge_tower();
-				tower.fire();
-			}
-		});
+
 
 		// create new bloons
 		this.spawn_bloons();
+	}
+
+	start_next_level() {
+		if (this.grace_period) {
+			tick = 80;
+			this.counter = 0
+			this.level++;
+			this.bloons_deployed = [0, 0]
+			this.all_bloons_deployed = false;
+			this.grace_period = false;
+			this.next_level.setTint(0xa9a9a9);
+		}
 	}
 
 	hotkeys() {
@@ -203,12 +249,10 @@ class GameScene extends Phaser.Scene {
 		this.main_menu.visible = true;
 	}
 
-	next_level() {
-		this.counter = 0
+	inbetween_levels() {
 		this.money += (100 + this.level*2);
-		this.level++;
-		this.bloons_deployed = [0, 0]
-		this.all_bloons_deployed = false;
+		this.next_level.clearTint();
+		this.grace_period = true;
 	}
 
 	win_game() {
