@@ -13,7 +13,7 @@ class GameScene extends Phaser.Scene {
 	}
 
 	preload () {
-		this.load.image('map', 'static/images/maps/' + this.map + '.png');
+		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
 
 		this.load.image('popup', 'static/images/menus/popup.jpg')
 		this.load.image('resume', 'static/images/menus/resume_button.jpg')
@@ -80,7 +80,7 @@ class GameScene extends Phaser.Scene {
 		let graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: 1} });
 		let border = 10;
 		let rectangle = new Phaser.Geom.Rectangle(0, 0, 686 + border, 507 + border);
-		this.add.image(348, 258, 'map');
+		this.add.image(348, 258, this.map);
 		graphics.fillRectShape(rectangle);
 	}
 
@@ -138,7 +138,7 @@ class GameScene extends Phaser.Scene {
 		let goal_x = this.coords.xlist[this.coords.xlist.length - 1];
 		let goal_y = this.coords.ylist[this.coords.ylist.length - 1];
 		// is off-screen, so we can use any sprite we want
-		goal = this.physics.add.sprite(goal_x, goal_y, 'map').setScale(.1);
+		goal = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.1);
 		goal.visible = false;
 	}
 
