@@ -8,6 +8,8 @@ class GameScene extends Phaser.Scene {
 		this.map = data.map;
 		// adds path for bloons to follow based on the map
 		this.coords = map_data[data.map];
+		console.log(this.coords)
+		this.coords_type = map_data[data.map].type;
 	}
 
 	preload () {

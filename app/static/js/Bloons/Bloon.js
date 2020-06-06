@@ -26,8 +26,10 @@ class Bloon extends Phaser.GameObjects.Sprite {
 
         this.progress += this.speed/distance;
 
-        this.x = Phaser.Math.Interpolation.Linear(this.xlist, this.progress);
-        this.y = Phaser.Math.Interpolation.Linear(this.ylist, this.progress);
+        if (scene.coords_type == 'linear') {
+            this.x = Phaser.Math.Interpolation.Linear(this.xlist, this.progress);
+            this.y = Phaser.Math.Interpolation.Linear(this.ylist, this.progress);
+        }
     }
 
     transform() {
