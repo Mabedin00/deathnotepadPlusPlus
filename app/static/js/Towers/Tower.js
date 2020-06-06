@@ -19,7 +19,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         // 0: not valid, 1: valid for ocean, 2: valid for land
         let mouseX = Math.floor(scene.input.activePointer.x);
         let mouseY = Math.floor(scene.input.activePointer.y);
-        let tile = ocean_road[mouseY][mouseX];
+        let tile = scene.tiles[mouseY][mouseX];
 
         // if user attempts to place on an invalid tile, don't do anything
         if (this.being_dragged && tile != this.domain) {

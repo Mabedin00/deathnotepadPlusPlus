@@ -2,7 +2,8 @@ import numpy as np
 from PIL import Image
 import json
 
-img = Image.open('static/images/ocean_road_placement.png')
+file = input('select a file to create, note code will break if file is not exact: ')
+img = Image.open('static/images/maps/' + file + '_placement.png')
 array = np.array(img)
 # print(array[0][620])      # (100, 200, 4)
 # output = json.dumps(array.tolist())
@@ -22,5 +23,7 @@ while(y < len(array)):
     y += 1
 # The output is in teh fromat (y,x)
 # print(output[200][400], output[400][200])
-with open("ocean_road.js", "w") as f:
+
+with open(file + ".js", "w") as f:
     f.write(str(output))
+print ("Segmentation Fault (Core Dumpted)\n")

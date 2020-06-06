@@ -1,7 +1,10 @@
+- MORE FOLDERS POG
 
-- popup on win/lose
 - user starts level when they want
 - menu before map selection
+
+- infinite mode
+- list of completed maps
 
 - circle appears as soon as tower selected
 - circle does not extend into tower zone
@@ -9,6 +12,8 @@
 - sell towers
 - user can deselect
 - upgrades
+
+- bomb explody
 
 - instructions
 - leader board

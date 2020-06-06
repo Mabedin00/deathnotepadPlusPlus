@@ -8,8 +8,8 @@ class GameScene extends Phaser.Scene {
 		this.map = data.map;
 		// adds path for bloons to follow based on the map
 		this.coords = map_data[data.map];
-		console.log(this.coords)
 		this.coords_type = map_data[data.map].type;
+		this.tiles = map_data[data.map].tiles;
 	}
 
 	preload () {
@@ -102,6 +102,7 @@ class GameScene extends Phaser.Scene {
 		let goal_y = this.coords.ylist[this.coords.ylist.length - 1];
 		// is off-screen, so we can use any sprite we want
 		goal = this.physics.add.sprite(goal_x, goal_y, 'map').setScale(.1);
+		goal.visible = false;
 	}
 
 	create_towers() {

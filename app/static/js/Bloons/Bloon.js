@@ -30,6 +30,10 @@ class Bloon extends Phaser.GameObjects.Sprite {
             this.x = Phaser.Math.Interpolation.Linear(this.xlist, this.progress);
             this.y = Phaser.Math.Interpolation.Linear(this.ylist, this.progress);
         }
+        if (scene.coords_type == 'catmull') {
+            this.x = Phaser.Math.Interpolation.CatmullRom(this.xlist, this.progress);
+            this.y = Phaser.Math.Interpolation.CatmullRom(this.ylist, this.progress);
+        }
     }
 
     transform() {
