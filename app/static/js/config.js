@@ -20,7 +20,9 @@ var scene;
 var lives_text;
 var money_text;
 var level_text;
-var game_over = false;
+
+var win_text;
+var win_desc;
 
 var esc;
 

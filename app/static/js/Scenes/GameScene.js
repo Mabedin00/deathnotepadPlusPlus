@@ -36,11 +36,17 @@ class GameScene extends Phaser.Scene {
 
 		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(1);
 		this.popup.visible = false;
-
+		// in future change to work with infinite mode
+		// needs new event listener
 		this.resume = this.add.image(343, 203, 'resume').setDepth(1);
 		this.resume.setInteractive();
 		this.resume.on('pointerdown', this.resume_game, this);
 		this.resume.visible = false;
+
+		this.infinite = this.add.image(343, 203, 'resume').setDepth(1);
+		this.infinite.setInteractive();
+		this.infinite.on('pointerdown', this.infinite_mode, this);
+		this.infinite.visible = false;
 
 		this.retry = this.add.image(343, 253, 'retry').setDepth(1);
 		this.retry.setInteractive();
@@ -71,11 +77,13 @@ class GameScene extends Phaser.Scene {
 
 	set_vars() {
 		scene = this;
+		this.game_over = false;
+		this.infinite_mode_enabled = false;
 		this.paused = false;
 		this.esc_pressed = false;
 		this.counter = 0;
 		this.level = 1;
-		this.lives = 5;
+		this.lives = 1;
 		this.money = 500;
 		this.bloons_deployed = [0,0]
 		this.all_bloons_deployed = false;
@@ -104,7 +112,7 @@ class GameScene extends Phaser.Scene {
 		this.hotkeys();
 		if (this.paused) return;
 		this.update_text();
-		if (game_over) return;
+		if (this.game_over) return;
 
 		if (scene.lives <= 0) {
 			this.lose_game();
@@ -116,7 +124,7 @@ class GameScene extends Phaser.Scene {
 			if (!bloons.getLength()) {
 				this.next_level();
 				// if user has reached last level
-				if (level_data[this.level] == undefined ) {
+				if (level_data[this.level].tick == 'algorithm' && !this.infinite_mode_enabled) {
 					this.win_game();
 					return;
 				}
@@ -156,14 +164,14 @@ class GameScene extends Phaser.Scene {
 		}
 	}
 
-	pause_game(){
+	pause_game() {
 		this.popup.visible = true;
 		this.resume.visible = true;
 		this.retry.visible = true;
 		this.main_menu.visible = true;
 		this.paused = true;
 	}
-	resume_game(){
+	resume_game() {
 		this.resume.visible = false;
 		this.retry.visible = false;
 		this.popup.visible = false;
@@ -171,12 +179,11 @@ class GameScene extends Phaser.Scene {
 		this.paused = false;
 	}
 
-	restart_game(){
+	restart_game() {
 		this.scene.restart();
 	}
-	return_to_menu(){
+	return_to_menu() {
 		this.scene.start('selection');
-
 	}
 
 	update_text() {
@@ -186,8 +193,11 @@ class GameScene extends Phaser.Scene {
 	}
 
 	lose_game() {
-		game_over = true;
-		this.add.text(143, 253, 'You Lose!', { font: '64px Arial' });
+		this.game_over = true;
+		this.add.text(200, 150, 'You Lose!', { font: '64px Arial' }).setDepth(2);
+		this.popup.visible = true;
+		this.retry.visible = true;
+		this.main_menu.visible = true;
 	}
 
 	next_level() {
@@ -199,8 +209,23 @@ class GameScene extends Phaser.Scene {
 	}
 
 	win_game() {
-		this.add.text(143, 253, 'You Win!', { font: '64px Arial' });
-		game_over = true;
+		this.game_over = true;
+		win_text = this.add.text(220, 120, 'You Win!', { font: '64px Arial' }).setDepth(2);
+		let win_msg = "\t\tThis map will be added to your list of completed maps.\n\
+					   "
+		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(2);
+		this.popup.visible = true;
+		this.infinite.visible = true;
+		this.retry.visible = true;
+		this.main_menu.visible = true;
+	}
+
+	infinite_mode() {
+		this.resume_game();
+		this.infinite.visible = false;
+		win_text.destroy();
+		win_desc.destroy();
+		this.game_over = false;
 	}
 
 	spawn_bloons() {
