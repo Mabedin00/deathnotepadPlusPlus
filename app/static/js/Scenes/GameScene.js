@@ -15,10 +15,10 @@ class GameScene extends Phaser.Scene {
 	preload () {
 		this.load.image('map', 'static/images/maps/' + this.map + '.png');
 
-		this.load.image('popup', 'static/images/maps/popup.jpg')
-		this.load.image('resume', 'static/images/maps/resume_button.jpg')
-		this.load.image('retry', 'static/images/maps/retry_button.jpg')
-		this.load.image('main_menu', 'static/images/maps/main_menu_button.jpg')
+		this.load.image('popup', 'static/images/menus/popup.jpg')
+		this.load.image('resume', 'static/images/menus/resume_button.jpg')
+		this.load.image('retry', 'static/images/menus/retry_button.jpg')
+		this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
 
 		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
 		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
