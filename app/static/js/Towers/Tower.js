@@ -15,6 +15,7 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     toggle_drag() {
+        if (!this.being_dragged && scene.is_dragging) return;
         // ocean_road contains 2d array of valid tiles for placement
         // 0: not valid, 1: valid for ocean, 2: valid for land
         let mouseX = Math.floor(scene.input.activePointer.x);
@@ -36,15 +37,20 @@ class Tower extends Phaser.GameObjects.Sprite {
         if (this.being_dragged && (scene.money < this.cost  || tile == undefined)) {
             this.destroy();
             this.create_tower();
+            scene.is_dragging = false;
             return;
         }
         if (this.being_dragged) {
             this.place_tower(mouseX, mouseY);
         }
         this.being_dragged = !this.being_dragged
+        if (this.being_dragged) {
+            scene.is_dragging = true;
+        }
     }
 
     place_tower(x, y) {
+        scene.is_dragging = false;
         scene.money -= this.cost;
         this.create_tower();
 
