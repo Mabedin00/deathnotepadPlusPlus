@@ -1,8 +1,11 @@
 import os
 from flask import Flask, render_template
-from models import db
+from flask_login import LoginManager
+from models import db, User
+from auth import auth
 
 app = Flask(__name__)
+app.register_blueprint(auth)
 app.secret_key = os.urandom(32)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./static/data/database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
@@ -11,8 +14,20 @@ db.init_app(app)
 #with app.app_context():
 #    db.create_all()
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'auth.login'
+login_manager.login_message = 'Log in to view this page.'
+login_manager.login_message_category = 'danger'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+
 @app.route('/')
-def hello_world():
+def root():
     return render_template("game.html")
 
 

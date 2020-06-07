@@ -10,6 +10,11 @@
 </head>
 <body>
 
+<div id="session" class="d-flex flex-row-reverse">
+    <a class="btn btn-primary mr-1" href="{{ url_for('auth.register') }}">Register</a>
+    <a class="btn btn-primary mr-1" href="{{ url_for('auth.login') }}">Log In</a>
+</div>
+
 <div style="padding-top: 100px">
     <canvas id="game_canvas"></canvas>
 </div>
