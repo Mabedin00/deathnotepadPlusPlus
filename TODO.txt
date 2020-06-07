@@ -29,6 +29,7 @@ bugs:
 - circle covers side
 - make it so you can't place towers directly on top of eachother by
 modifying ocean_data
+- towers go over popup (easy fix)
 
 optomizations:
 - precalculate interpolation

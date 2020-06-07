@@ -84,31 +84,31 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create_buttons() {
-		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(1);
+		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(3);
 		this.popup.visible = false;
 		// in future change to work with infinite mode
 		// needs new event listener
-		this.resume = this.add.image(343, 203, 'resume').setDepth(1);
+		this.resume = this.add.image(343, 203, 'resume').setDepth(3);
 		this.resume.setInteractive();
 		this.resume.on('pointerdown', this.resume_game, this);
 		this.resume.visible = false;
 
-		this.infinite = this.add.image(343, 203, 'resume').setDepth(1);
+		this.infinite = this.add.image(343, 203, 'resume').setDepth(3);
 		this.infinite.setInteractive();
 		this.infinite.on('pointerdown', this.infinite_mode, this);
 		this.infinite.visible = false;
 
-		this.retry = this.add.image(343, 253, 'retry').setDepth(1);
+		this.retry = this.add.image(343, 253, 'retry').setDepth(3);
 		this.retry.setInteractive();
 		this.retry.on('pointerdown', this.restart_game, this);
 		this.retry.visible = false;
 
-		this.main_menu = this.add.image(343, 303, 'main_menu').setDepth(1);
+		this.main_menu = this.add.image(343, 303, 'main_menu').setDepth(3);
 		this.main_menu.setInteractive();
 		this.main_menu.on('pointerdown', this.return_to_menu, this);
 		this.main_menu.visible = false;
 
-		this.next_level = this.add.image(770, 479, 'next_level').setDepth(1).setScale(.6, 1);
+		this.next_level = this.add.image(770, 479, 'next_level').setDepth(3).setScale(.6, 1);
 		this.next_level.setInteractive();
 		this.next_level.on('pointerdown', this.start_next_level, this);
 
