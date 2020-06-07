@@ -20,7 +20,6 @@
 
 bugs:
 - circle covers side
-- tower covers button
 - make it so you can't place towers directly on top of eachother by
 modifying ocean_data
 

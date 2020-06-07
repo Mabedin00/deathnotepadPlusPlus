@@ -11,7 +11,7 @@ var config = {
             debug: false
         }
     },
-    scene: [MapSelectionScene, GameScene]
+    scene: [HomeScene, MapSelectionScene, GameScene]
 };
 
 var tick = 0;
