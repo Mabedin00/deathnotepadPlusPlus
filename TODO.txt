@@ -21,7 +21,6 @@
 
 - instructions
 - leader board
-- popup animation for pause
 
 - giant cows on win/loss
 
@@ -30,7 +29,7 @@
 - homescreen anim: replace 5 w/ 7
 
 bugs:
-- fix faster speed on mpa 2
+- fix faster speed on map 2
 - circle covers side
 - make it so you can't place towers directly on top of eachother by
 modifying ocean_data
