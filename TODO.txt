@@ -29,11 +29,9 @@
 - homescreen anim: replace 5 w/ 7
 
 bugs:
-- fix faster speed on map 2
 - circle covers side
 - make it so you can't place towers directly on top of eachother by
 modifying ocean_data
-- towers go over popup (easy fix)
 
 optomizations:
 - precalculate interpolation

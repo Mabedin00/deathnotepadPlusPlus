@@ -34,7 +34,6 @@ class HomeScene extends Phaser.Scene {
 		console.log("settings");
 	}
 	play_function(){
-		console.log(this)
 		this.scene.start('selection');
 	}
 	achievements_function(){

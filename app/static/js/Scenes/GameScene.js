@@ -9,7 +9,7 @@ class GameScene extends Phaser.Scene {
 		// adds path for bloons to follow based on the map
 		this.coords = map_data[data.map];
 		this.coords_type = map_data[data.map].type;
-		this.tiles = map_data[data.map].tiles;
+		this.tiles = JSON.parse(JSON.stringify(map_data[data.map].tiles));
 	}
 
 	preload () {
@@ -64,7 +64,7 @@ class GameScene extends Phaser.Scene {
 		this.level = 0;
 		this.score = 0;
 		this.lives = 1;
-		this.money = 500;
+		this.money = 1000;
 		this.bloons_deployed = [0,0]
 		this.all_bloons_deployed = false;
 	}
@@ -325,5 +325,19 @@ class GameScene extends Phaser.Scene {
 	create_bloon(id) {
 		if (id == 0)      new Red_Bloon (0, 0);
 		else if (id == 1) new Blue_Bloon(0, 0);
+	}
+
+	prevent_tower_stacking(xcor, ycor, width, height) {
+		width  = Math.floor(width);
+		height = Math.floor(height);
+		let y = ycor - height
+		while(y < ycor + height && y < scene.tiles.length) {
+		    let x = xcor - width
+		    while (x < xcor + width && x < scene.tiles[y].length) {
+				scene.tiles[y][x] = PATH // make unable to place towers
+				x += 1
+			}
+		    y += 1
+		}
 	}
 }
