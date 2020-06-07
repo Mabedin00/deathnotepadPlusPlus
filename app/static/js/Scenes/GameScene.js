@@ -32,6 +32,16 @@ class GameScene extends Phaser.Scene {
 
 		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
 		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
+		this.load.image('green_bloon', 'static/images/bloons/green_bloon.png');
+		this.load.image('yellow_bloon', 'static/images/bloons/yellow_bloon.png');
+		this.load.image('pink_bloon', 'static/images/bloons/pink_bloon.png');
+		this.load.image('white_bloon', 'static/images/bloons/white_bloon.png');
+		this.load.image('black_bloon', 'static/images/bloons/black_bloon.png');
+		this.load.image('zebra_bloon', 'static/images/bloons/zebra_bloon.png');
+		this.load.image('rainbow_bloon', 'static/images/bloons/rainbow_bloon.png');
+		this.load.image('MOAB', 'static/images/bloons/MOAB.png');
+
+
 
 		this.load.image('dart_monkey', 'static/images/towers/dart_monkey.png');
 		this.load.image('monkey_buccaneer', 'static/images/towers/buccaneer.png');
@@ -68,9 +78,9 @@ class GameScene extends Phaser.Scene {
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
-		this.lives = 1;
+		this.lives = 15;
 		this.money = 1000;
-		this.bloons_deployed = [0,0]
+		this.bloons_deployed = [0,0,0,0,0]
 		this.all_bloons_deployed = false;
 	}
 
@@ -208,7 +218,7 @@ class GameScene extends Phaser.Scene {
 			tick = 80;
 			this.counter = 0
 			this.level++;
-			this.bloons_deployed = [0, 0]
+			this.bloons_deployed = [0,0,0,0,0]
 			this.all_bloons_deployed = false;
 			this.grace_period = false;
 			this.next_level.setTint(0xa9a9a9);
@@ -325,15 +335,20 @@ class GameScene extends Phaser.Scene {
 
 	return_valid_idx(idx) {
 		if (level_data[this.level].bloons[idx] == this.bloons_deployed[idx]) {
-		  if (idx == this.bloons_deployed.length - 1) return this.return_valid_idx(0);
-		  return this.return_valid_idx(idx + 1);
+		    if (idx == this.bloons_deployed.length - 1) return this.return_valid_idx(0);
+		    return this.return_valid_idx(idx + 1);
 	  }
 		return idx;
 	}
 
 	create_bloon(id) {
-		if (id == 0)      new Red_Bloon (0, 0);
+		if 		(id == 0) new Red_Bloon (0, 0);
 		else if (id == 1) new Blue_Bloon(0, 0);
+		else if (id == 2) new Green_Bloon(0, 0);
+		else if (id == 3) new Yellow_Bloon(0, 0);
+		else if (id == 4) new Pink_Bloon(0, 0);
+
+
 	}
 
 	prevent_tower_stacking(xcor, ycor, width, height) {
