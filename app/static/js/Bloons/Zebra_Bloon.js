@@ -2,9 +2,9 @@ class Zebra_Bloon extends Bloon {
 
     constructor(progress, health) {
 
-        super("zenra_bloon", progress);
+        super("zebra_bloon", progress);
 
-        this.speed = .6;
+        this.speed = .3;
         this.health = 2 + health;
         this.damage = 23;
         this.value = 1;

@@ -80,7 +80,7 @@ class GameScene extends Phaser.Scene {
 		this.score = 0;
 		this.lives = 15;
 		this.money = 1000;
-		this.bloons_deployed = [0,0,0,0,0]
+		this.bloons_deployed = [0,0,0,0,0,0,0,0]
 		this.all_bloons_deployed = false;
 	}
 
@@ -218,7 +218,7 @@ class GameScene extends Phaser.Scene {
 			tick = 80;
 			this.counter = 0
 			this.level++;
-			this.bloons_deployed = [0,0,0,0,0]
+			this.bloons_deployed = [0,0,0,0,0,0,0,0]
 			this.all_bloons_deployed = false;
 			this.grace_period = false;
 			this.next_level.setTint(0xa9a9a9);
@@ -347,6 +347,10 @@ class GameScene extends Phaser.Scene {
 		else if (id == 2) new Green_Bloon(0, 0);
 		else if (id == 3) new Yellow_Bloon(0, 0);
 		else if (id == 4) new Pink_Bloon(0, 0);
+		else if (id == 5) new White_Bloon(0, 0);
+		else if (id == 6) new Black_Bloon(0, 0);
+		else if (id == 7) new Zebra_Bloon(0, 0);
+
 
 
 	}
