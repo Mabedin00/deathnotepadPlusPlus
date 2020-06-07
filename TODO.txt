@@ -5,6 +5,10 @@
     - login
         - only necessary if you want to save score, not necessary to play
 
+- moduarlize create_button
+- ricccckroll
+
+
 - infinite mode
 - list of completed maps
 
@@ -26,6 +30,7 @@
 - homescreen anim: replace 5 w/ 7
 
 bugs:
+- fix faster speed on mpa 2
 - circle covers side
 - make it so you can't place towers directly on top of eachother by
 modifying ocean_data

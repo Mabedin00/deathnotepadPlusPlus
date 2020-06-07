@@ -10,8 +10,6 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('play', 'static/images/home/play_button.png');
 		this.load.image('achievements', 'static/images/home/achievements_button.png');
 		this.load.image('settings', 'static/images/home/settings_button.png');
-
-
 	}
 
 	create () {
@@ -21,14 +19,12 @@ class HomeScene extends Phaser.Scene {
 		this.place_buttons('play', 500, 540 , .9, this.play_function, this);
 		this.place_buttons('log_in', 600, 525, .7, this.log_in_function, this);
 		this.place_buttons('achievements', 700, 500, .7, this.achievements_function, this);
-
-
 	}
 
-	place_buttons(button_name, x, y, scale, button_function){
+	place_buttons(button_name, x, y, scale, button_function, scene){
 		let button = this.add.image(x, y, button_name).setScale(scale);
 		button.setInteractive();
-        button.on('pointerdown', button_function);
+        button.on('pointerdown', button_function, scene);
 	}
 	log_in_function(){
 		console.log("log in");
@@ -38,7 +34,8 @@ class HomeScene extends Phaser.Scene {
 		console.log("settings");
 	}
 	play_function(){
-		console.log("play");
+		console.log(this)
+		this.scene.start('selection');
 	}
 	achievements_function(){
 		console.log("achievements");
