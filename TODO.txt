@@ -1,4 +1,9 @@
 - menu before map selection
+    - play
+    - leaderboard
+    - instruction
+    - login
+        - only necessary if you want to save score, not necessary to play
 
 - infinite mode
 - list of completed maps
