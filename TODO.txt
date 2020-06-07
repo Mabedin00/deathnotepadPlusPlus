@@ -18,6 +18,8 @@
 
 - gives info on hover
 
+- homescreen anim: replace 5 w/ 7
+
 bugs:
 - circle covers side
 - make it so you can't place towers directly on top of eachother by
