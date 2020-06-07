@@ -15,11 +15,16 @@ class GameScene extends Phaser.Scene {
 	preload () {
 		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
 
+		this.load.image('border', 'static/images/maps/border.png');
+
+
 		this.load.image('popup', 'static/images/menus/popup.jpg')
 		this.load.image('resume', 'static/images/menus/resume_button.jpg')
 		this.load.image('retry', 'static/images/menus/retry_button.jpg')
 		this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
 		this.load.image('next_level', 'static/images/menus/next_level.jpg')
+
+		this.load.image('sidebar', 'static/images/maps/map_selection_sidebar.png')
 
 		this.load.image('lives', 'static/images/menus/lives.png' );
 		this.load.image('money', 'static/images/menus/money.png' );
@@ -74,16 +79,20 @@ class GameScene extends Phaser.Scene {
 	}
 
 	add_map() {
-		this.add.image(500, 300, 'background').setTint(0x654321);
-		let graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: 1} });
-		let border = 10;
-		let rectangle = new Phaser.Geom.Rectangle(0, 0, 686 + border, 507 + border);
-		this.add.image(348, 258, this.map);
+		let graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: 1} }).setDepth(2);
+		let rectangle = new Phaser.Geom.Rectangle(680, 0, 50, 500);
 		graphics.fillRectShape(rectangle);
+		graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: 1} }).setDepth(2);
+		rectangle = new Phaser.Geom.Rectangle(0, 493, 695, 50);
+		graphics.fillRectShape(rectangle);
+
+		this.add.image(338, 240, this.map);
+
+		this.add.image(492, 477, 'sidebar').setTint(0x654321).setDepth(2);
 	}
 
 	create_buttons() {
-		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(3);
+		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(1);
 		this.create_border(this.popup, 'black', .9, 2);
 		this.popup.graphics.setAlpha(0);
 		this.popup.visible = false;
@@ -127,12 +136,12 @@ class GameScene extends Phaser.Scene {
 	}
 
 	add_text() {
-		level_text = this.add.text(710, 525, 'Level: ' + this.level, { font: '24px Arial' });
-		lives_icon = this.add.image(845, 540, "lives").setScale(.05);
-		lives_text = this.add.text(875, 525, this.lives, { font: '24px Arial' });
-		money_icon = this.add.image(845, 578, "money").setScale(.05);
-		money_text = this.add.text(875, 565,  this.money, { font: '24px Arial' });
-		score_text = this.add.text(710, 565, 'Score: ' + this.score, { font: '24px Arial' });
+		level_text = this.add.text(710, 525, 'Level: ' + this.level, { font: '24px Arial' }).setDepth(2);
+		lives_icon = this.add.image(845, 540, "lives").setScale(.05).setDepth(2);
+		lives_text = this.add.text(875, 525, this.lives, { font: '24px Arial' }).setDepth(2);
+		money_icon = this.add.image(845, 578, "money").setScale(.05).setDepth(2);
+		money_text = this.add.text(875, 565,  this.money, { font: '24px Arial' }).setDepth(2);
+		score_text = this.add.text(710, 565, 'Score: ' + this.score, { font: '24px Arial' }).setDepth(2);
 
 	}
 
