@@ -1,4 +1,4 @@
-let canvas = document.getElementById("game_canvas")
+let canvas = document.getElementById("game_canvas");
 
 var config = {
     type: Phaser.AUTO,

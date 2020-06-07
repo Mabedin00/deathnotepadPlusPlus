@@ -9,7 +9,7 @@ class GameScene extends Phaser.Scene {
 		// adds path for bloons to follow based on the map
 		this.coords = map_data[data.map];
 		this.coords_type = map_data[data.map].type;
-		this.tiles = map_data[data.map].tiles;
+		this.tiles = JSON.parse(JSON.stringify(map_data[data.map].tiles));
 	}
 
 	preload () {
@@ -34,7 +34,6 @@ class GameScene extends Phaser.Scene {
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
 	}
-
 
 	create () {
 		this.set_vars();
@@ -65,7 +64,7 @@ class GameScene extends Phaser.Scene {
 		this.level = 0;
 		this.score = 0;
 		this.lives = 1;
-		this.money = 500;
+		this.money = 1000;
 		this.bloons_deployed = [0,0]
 		this.all_bloons_deployed = false;
 	}
@@ -85,8 +84,10 @@ class GameScene extends Phaser.Scene {
 
 	create_buttons() {
 		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(3);
+		this.create_border(this.popup, 'black', .9, 2);
+		this.popup.graphics.setAlpha(0);
 		this.popup.visible = false;
-		// in future change to work with infinite mode
+
 		// needs new event listener
 		this.resume = this.add.image(343, 203, 'resume').setDepth(3);
 		this.resume.setInteractive();
@@ -112,15 +113,17 @@ class GameScene extends Phaser.Scene {
 		this.next_level.setInteractive();
 		this.next_level.on('pointerdown', this.start_next_level, this);
 
-		let graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: .9} });
-		let border = 10;
-		let rectangle = new Phaser.Geom.Rectangle(
-			this.next_level.x - this.next_level.displayWidth/2  - border/2,
-			this.next_level.y - this.next_level.displayHeight/2 - border/2,
-			this.next_level.displayWidth  + border,
-			this.next_level.displayHeight + border);
-		graphics.fillRectShape(rectangle);
+		this.create_border(this.next_level, 'black', .9, 10);
+	}
 
+	create_border(element, color, alpha, border) {
+		element.graphics = this.add.graphics({ fillStyle: { color: color , alpha: alpha} });
+		let rectangle = new Phaser.Geom.Rectangle(
+			element.x - element.displayWidth/2  - border/2,
+			element.y - element.displayHeight/2 - border/2,
+			element.displayWidth  + border,
+			element.displayHeight + border);
+		element.graphics.fillRectShape(rectangle);
 	}
 
 	add_text() {
@@ -145,7 +148,6 @@ class GameScene extends Phaser.Scene {
 		new Dart_Monkey();
 		new Monkey_Buccaneer();
 	}
-
 
 	update () {
 		this.hotkeys();
@@ -222,15 +224,18 @@ class GameScene extends Phaser.Scene {
 
 	pause_game() {
 		this.popup.visible = true;
+		this.popup.graphics.setAlpha(1);
 		this.resume.visible = true;
 		this.retry.visible = true;
 		this.main_menu.visible = true;
 		this.paused = true;
 	}
+
 	resume_game() {
 		this.resume.visible = false;
 		this.retry.visible = false;
 		this.popup.visible = false;
+		this.popup.graphics.setAlpha(0);
 		this.main_menu.visible = false;
 		this.paused = false;
 	}
@@ -238,8 +243,9 @@ class GameScene extends Phaser.Scene {
 	restart_game() {
 		this.scene.restart();
 	}
+
 	return_to_menu() {
-		this.scene.start('selection');
+		this.scene.start('home');
 	}
 
 	update_text() {
@@ -253,12 +259,22 @@ class GameScene extends Phaser.Scene {
 		this.game_over = true;
 		this.add.text(200, 150, 'You Lose!', { font: '64px Arial' }).setDepth(2);
 		this.popup.visible = true;
+		this.popup.graphics.setAlpha(1);
 		this.retry.visible = true;
 		this.main_menu.visible = true;
+
+		fetch('/bagel', {
+			method: 'POST',
+			headers: {
+          'Content-Type': 'application/json'
+	        },
+			body: JSON.stringify({score: this.score, message: 'hi'})
+		});
 	}
 
 	inbetween_levels() {
 		this.money += (100 + this.level*2);
+		this.score += 20 + this.level*5;
 		this.next_level.clearTint();
 		this.grace_period = true;
 	}
@@ -270,6 +286,7 @@ class GameScene extends Phaser.Scene {
 					   "
 		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(2);
 		this.popup.visible = true;
+		this.popup.graphics.setAlpha(1);
 		this.infinite.visible = true;
 		this.retry.visible = true;
 		this.main_menu.visible = true;
@@ -308,5 +325,19 @@ class GameScene extends Phaser.Scene {
 	create_bloon(id) {
 		if (id == 0)      new Red_Bloon (0, 0);
 		else if (id == 1) new Blue_Bloon(0, 0);
+	}
+
+	prevent_tower_stacking(xcor, ycor, width, height) {
+		width  = Math.floor(width);
+		height = Math.floor(height);
+		let y = ycor - height
+		while(y < ycor + height && y < scene.tiles.length) {
+		    let x = xcor - width
+		    while (x < xcor + width && x < scene.tiles[y].length) {
+				scene.tiles[y][x] = PATH // make unable to place towers
+				x += 1
+			}
+		    y += 1
+		}
 	}
 }

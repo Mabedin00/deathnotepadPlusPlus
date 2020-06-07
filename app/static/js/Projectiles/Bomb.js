@@ -31,6 +31,7 @@ class Bomb extends Projectile {
         bloon.health -= Math.floor(damage);
         if (bloon.health <= 0) {
             scene.money += bloon.value;
+            scene.score += bloon.value;
             bloon.transform();
         }
         this.destroy();

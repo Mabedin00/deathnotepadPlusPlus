@@ -12,6 +12,7 @@ class Dart extends Projectile {
         bloon.health -= dart.damage;
         if (bloon.health <= 0) {
             scene.money += bloon.value;
+            scene.score += bloon.value;
             bloon.transform();
         }
         dart.destroy()

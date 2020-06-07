@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_login import LoginManager, current_user
 from models import db, User
 from auth import auth
@@ -30,6 +30,13 @@ def load_user(user_id):
 def root():
     return render_template("game.html")
 
+  
+@app.route('/bagel', methods=['POST'])
+def bagel():
+    data = request.get_json(force = True)
+    print (data['score'])
+    return 'nothing to see here';
+  
 
 if __name__ == "__main__":
     app.debug = True

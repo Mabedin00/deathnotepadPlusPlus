@@ -13,7 +13,6 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.being_dragged = false;
         this.setInteractive();
         this.on('pointerdown', this.toggle_drag, this);
-
     }
 
     toggle_drag() {
@@ -52,6 +51,8 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     place_tower(x, y) {
+        console.log(this)
+        scene.prevent_tower_stacking(x, y, this.width / 2, this.height / 2);
         scene.is_dragging = false;
         scene.money -= this.cost;
         this.create_tower();
