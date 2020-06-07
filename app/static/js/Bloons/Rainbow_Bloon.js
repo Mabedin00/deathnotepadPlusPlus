@@ -1,12 +1,12 @@
-class Pink_Bloon extends Bloon {
+class Rainbow_Bloon extends Bloon {
 
     constructor(progress, health) {
 
-        super("pink_bloon", progress);
+        super("rainbow_bloon", progress);
 
-        this.speed = .6;
+        this.speed = .35;
         this.health = 2 + health;
-        this.damage = 5;
+        this.damage = 47;
         this.value = 1;
 
         if (this.health <= 0) {
@@ -15,7 +15,8 @@ class Pink_Bloon extends Bloon {
     }
 
     transform() {
-        new Yellow_Bloon(this.progress, this.health);
+        new Zebra_Bloon(this.progress, this.health);
+        new Zebra_Bloon(this.progress, this.health);
         this.destroy();
     }
 
