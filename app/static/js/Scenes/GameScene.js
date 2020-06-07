@@ -48,7 +48,6 @@ class GameScene extends Phaser.Scene {
 		towers = this.physics.add.group();
 		projectiles = this.physics.add.group();
 
-		this.physics.add.overlap(projectiles, bloons, Projectile.inflict_damage, null, this);
 		this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
 
 		this.create_towers();
@@ -156,6 +155,8 @@ class GameScene extends Phaser.Scene {
 			if (tower.being_dragged) {
 				tower.drag();
 			}
+			// if game paused don't let towers fire
+			if (scene.paused || scene.game_over) return;
 			if (tower.placed) {
 				tower.charge_tower();
 				tower.fire();
@@ -163,7 +164,6 @@ class GameScene extends Phaser.Scene {
 		});
 		if (this.paused) return;
 		if (this.grace_period) return;
-
 		if (this.game_over) return;
 
 		if (scene.lives <= 0) {
@@ -306,7 +306,7 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create_bloon(id) {
-		if (id == 0)      new Red_Bloon (0);
-		else if (id == 1) new Blue_Bloon(0);
+		if (id == 0)      new Red_Bloon (0, 0);
+		else if (id == 1) new Blue_Bloon(0, 0);
 	}
 }

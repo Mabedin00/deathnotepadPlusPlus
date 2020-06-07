@@ -1,6 +1,3 @@
-- MORE FOLDERS POG
-
-- user starts level when they want
 - menu before map selection
 
 - infinite mode
@@ -13,8 +10,6 @@
 - user can deselect
 - upgrades
 
-- bomb explody
-
 - instructions
 - leader board
 - popup animation for pause
@@ -22,3 +17,14 @@
 - giant cows on win/loss
 - rename Scene0, Scene1
 - center the canvas
+
+- gives info on hover
+
+bugs:
+- circle covers side
+- tower covers button
+- make it so you can't place towers directly on top of eachother by
+modifying ocean_data
+
+optomizations:
+- precalculate interpolation

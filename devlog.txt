@@ -21,3 +21,9 @@ Mohidul Abedin, Brian Moses -- 2020-06-03 15:00
     - pause screen
     - retry, resume, main menu buttons
     - modularize stuff
+
+Mohidul Abedin, Brian Moses -- 2020-06-06 21:00
+    - added second map
+    - added blue bloon, monkey buccaneer
+    - various bugfixes
+    - beautified 

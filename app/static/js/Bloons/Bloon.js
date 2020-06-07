@@ -2,7 +2,9 @@ class Bloon extends Phaser.GameObjects.Sprite {
 
     constructor(bloon_type, progress) {
         // bloon will be teleported to correct location by its progress number
-        super(scene, -50, -50, bloon_type);
+        let x = Phaser.Math.Interpolation.Linear(scene.coords.xlist, progress);
+        let y = Phaser.Math.Interpolation.Linear(scene.coords.ylist, progress);
+        super(scene, x, y, bloon_type);
         scene.add.existing(this);
         scene.physics.world.enableBody(this, 0);
         bloons.add(this);

@@ -8,7 +8,7 @@ class Dart extends Projectile {
         this.setScale(.5);
     }
 
-    static inflict_damage(dart, bloon) {
+    inflict_damage(dart, bloon) {
         bloon.health -= dart.damage;
         if (bloon.health <= 0) {
             scene.money += bloon.value;
