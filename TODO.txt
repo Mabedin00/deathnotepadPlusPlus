@@ -15,8 +15,6 @@
 - popup animation for pause
 
 - giant cows on win/loss
-- rename Scene0, Scene1
-- center the canvas
 
 - gives info on hover
 
