@@ -27,6 +27,8 @@ while(y < len(array)):
 # The output is in teh fromat (y,x)
 # print(output[200][400], output[400][200])
 
-with open(file + ".js", "w") as f:
+with open('static/js/Maps/' + file + ".js", "w") as f:
+    f.write('var ' + file + ' = ')
     f.write(str(output))
-print ("Segmentation fault (core dumped)\n")
+# print ("Segmentation fault (core dumped)\n")
+print(".js file generated successfully")
