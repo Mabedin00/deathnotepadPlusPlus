@@ -49,6 +49,9 @@ class GameScene extends Phaser.Scene {
 
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
+		this.load.image('blizzard', 'static/images/projectiles/blizzard.png');
+		this.load.image('banana', 'static/images/projectiles/banana.png');
+
 	}
 
 	create () {
@@ -174,6 +177,7 @@ class GameScene extends Phaser.Scene {
 	}
 
 	update () {
+		// console.log(colliders)
 		this.hotkeys();
 		// if game paused or between levels
 		this.update_text();

@@ -4,8 +4,8 @@ class Tack_Shooter extends Tower {
 
         super('tack_shooter', 875, 50);
 
-        this.cost = 350;
-        this.max_charge = 75;
+        this.cost = 550;
+        this.max_charge = 85;
         this.charge = this.max_charge;
         this.range = 75;
         this.domain = LAND;

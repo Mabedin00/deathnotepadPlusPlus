@@ -2,6 +2,7 @@ new features:
 - new bloons
 - new towers
 - new maps
+- add immunities
 
 db/site-related:
 - leaderboard
@@ -19,6 +20,10 @@ tower-related:
 - upgrades
 - gives info on hover
 
+animations:
+- bloon popping
+- explosion
+
 other:
 - infinite mode
 - ricccckroll
@@ -28,6 +33,13 @@ bugs:
 - fix darts moving when paused
 - darts don't disappear at range
 - button outline gone
+- priority system broken
+- MOAB does not rotate
+- MOAB hits goal
+- invincibility bug
+- work out all depths
+
+- readd border
 
 optomizations:
 - precalculate interpolation

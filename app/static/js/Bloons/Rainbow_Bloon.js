@@ -16,7 +16,7 @@ class Rainbow_Bloon extends Bloon {
 
     transform() {
         new Zebra_Bloon(this.progress, this.health);
-        new Zebra_Bloon(this.progress, this.health);
+        new Zebra_Bloon(this.progress-.01, this.health);
         this.destroy();
     }
 

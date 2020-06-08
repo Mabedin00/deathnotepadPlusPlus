@@ -17,7 +17,7 @@ class White_Bloon extends Bloon {
 
     transform() {
         new Pink_Bloon(this.progress, this.health);
-        new Pink_Bloon(this.progress, this.health);
+        new Pink_Bloon(this.progress-.01, this.health);
         this.destroy();
     }
 

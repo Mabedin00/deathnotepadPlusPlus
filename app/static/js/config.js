@@ -27,6 +27,8 @@ var money_icon;
 var level_text;
 var score_text;
 
+var colliders = []
+
 var win_text;
 var win_desc;
 
