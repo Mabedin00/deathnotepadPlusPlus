@@ -9,9 +9,9 @@ class MapSelectionScene extends Phaser.Scene {
 
         this.load.image('ocean_road', 'static/images/maps/ocean_road.png');
         this.load.image('floating_island', 'static/images/maps/floating_island.png');
-        console.log(this.load.image('castlemania', 'static/images/maps/castlemania.png'));
+        this.load.image('castlemania', 'static/images/maps/castlemania.png');
         this.load.image('lightning_scar', 'static/images/maps/lightning_scar.png');
-        this.load.image('space_monkey', 'static/images/maps/space_monkey.png');
+        this.load.image('cubism', 'static/images/maps/cubism.png');
         this.load.image('scorched_earth', 'static/images/maps/scorched_earth.png');
     }
 
@@ -26,7 +26,7 @@ class MapSelectionScene extends Phaser.Scene {
         this.place_map("floating_island", "Floating Island", 450, 180);
         this.place_map("castlemania", "Castlemania", 750, 180);
         this.place_map("lightning_scar", "Lightning Scar", 150, 420);
-        this.place_map("space_monkey", "Space Monkey", 450, 420);
+        this.place_map("cubism", "Cubism", 450, 420);
         this.place_map("scorched_earth", "Scorched Earth", 750, 420);
     }
 

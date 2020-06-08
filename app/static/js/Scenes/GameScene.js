@@ -55,19 +55,16 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create () {
+		bloons = this.physics.add.group();
+		towers = this.physics.add.group();
+		projectiles = this.physics.add.group();
+
 		this.set_vars();
 		this.create_key_bindings();
 		this.add_map();
 		this.create_buttons();
 		this.add_text();
 		this.create_goal();
-
-		bloons = this.physics.add.group();
-		towers = this.physics.add.group();
-		projectiles = this.physics.add.group();
-
-		this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
-
 		this.create_towers();
 	}
 
@@ -165,6 +162,21 @@ class GameScene extends Phaser.Scene {
 		// is off-screen, so we can use any sprite we want
 		goal = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.1);
 		goal.visible = false;
+		this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
+		if (this.coords.num_paths == 2) {
+			goal_x = this.coords.xlist1[this.coords.xlist1.length - 1];
+			goal_y = this.coords.ylist1[this.coords.ylist1.length - 1];
+			goal1 = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.1);
+			goal1.visible = false;
+			this.physics.add.overlap(goal1, bloons, Bloon.bloon_end, null, this);
+		}
+		if (this.coords.num_paths == 3) {
+			goal_x = this.coords.xlist2[this.coords.xlist2.length - 1];
+			goal_y = this.coords.ylist2[this.coords.ylist2.length - 1];
+			goal2 = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.1);
+			goal2.visible = false;
+			this.physics.add.overlap(goal2, bloons, Bloon.bloon_end, null, this);
+		}
 	}
 
 	create_towers() {

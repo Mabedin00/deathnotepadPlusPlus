@@ -26,17 +26,17 @@ var map_data = {
     'tiles': lightning_scar,
     'type': 'linear',
     'num_paths': 2,
-    'xlist': [],
-    'ylist': [],
-    'xlist1': [],
-    'ylist1': [],
+    'xlist': [584, 317, 440, 324, 180, 292, 37],
+    'ylist': [0,   169, 174, 251, 344, 351, 506],
+    'xlist1': [584, 317, 440, 324, 562, 434, 634, 564],
+    'ylist1': [0,   169, 174, 251, 264, 400, 393, 505]
   },
-  'space_monkey': {
-    'tiles': space_monkey,
-    'type': 'catmull',
+  'cubism': {
+    'tiles': cubism,
+    'type': 'linear',
     'num_paths': 1,
-    'xlist': [],
-    'ylist': [],
+    'xlist': [
+    'ylist': [
   },
   'scorched_earth': {
     'tiles': scorched_earth,
