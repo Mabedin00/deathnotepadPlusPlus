@@ -1,8 +1,3 @@
-adding castle:
-- have two xlists and two ylists
-- bloons randomly get a list
-- bloons constructor needs to be passed which list (0 or 1) to prevent teleportation
-
 new features:
 - new bloons
 - new towers
@@ -20,6 +15,10 @@ db/site-related:
 tower-related:
 - circle appears as soon as tower selected
 - circle only shows when hovering over/selecting tower
+    - circle is created / destroyed just as tower is before placement (look in Tower.js)
+    - circle disappears when tower placed
+    - on hoverover: circle appears
+    - on hoverout: circle disappears
 - sell towers
 - (low priority) user can deselect with backspace
 - upgrades
@@ -30,6 +29,7 @@ animations:
 - explosion
 - sound
 - $25 when collect nanner
+- red outline when trying to place on invalid location
 
 other:
 - infinite mode
@@ -39,15 +39,20 @@ other:
 
 bugs:
 - fix darts moving when paused
+    - darts must store their target
+    - iterate through darts when paused, setVelocity(0, 0)
+    - iterate through darts when unpausing, restart setMove();
 - darts don't disappear at range
+    - darts are passed their range by target
+    - every tick they check if the distance between their start and their current position exceeds range
+        - if it does, self-destruct
 - button outline gone
-- priority system broken
+    - ???
 - MOAB does not rotate
-- MOAB hits goal
+    - caluclates this.rotation based on angle between their current point in interpolation of points
 - invincibility bug
+    - ??? doesn't exist. Really, I don't know what you're talking about. Never seen it.
 - work out all depths
-
-- readd border
 
 optomizations:
 - precalculate interpolation

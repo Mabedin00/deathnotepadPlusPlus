@@ -17,6 +17,8 @@ var config = {
 var tick = 0;
 var bloons;
 var goal;
+var goal1;
+var goal2;
 var towers;
 var projectiles;
 var scene;

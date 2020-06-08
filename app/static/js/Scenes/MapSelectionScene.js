@@ -11,8 +11,8 @@ class MapSelectionScene extends Phaser.Scene {
         this.load.image('floating_island', 'static/images/maps/floating_island.png');
         this.load.image('castlemania', 'static/images/maps/castlemania.png');
         this.load.image('lightning_scar', 'static/images/maps/lightning_scar.png');
-        this.load.image('space_monkey', 'static/images/maps/space_monkey.png');
-        this.load.image('infernal', 'static/images/maps/infernal.png');
+        this.load.image('cubism', 'static/images/maps/cubism.png');
+        this.load.image('scorched_earth', 'static/images/maps/scorched_earth.png');
     }
 
     create () {
@@ -26,23 +26,16 @@ class MapSelectionScene extends Phaser.Scene {
         this.place_map("floating_island", "Floating Island", 450, 180);
         this.place_map("castlemania", "Castlemania", 750, 180);
         this.place_map("lightning_scar", "Lightning Scar", 150, 420);
-        this.place_map("space_monkey", "Space Monkey", 450, 420);
-        this.place_map("infernal", "Donte's Inferno", 750, 420);
-
-
+        this.place_map("cubism", "Cubism", 450, 420);
+        this.place_map("scorched_earth", "Scorched Earth", 750, 420);
     }
 
     place_map(map_name, display_name, x, y) {
         let graphics = this.add.graphics({ fillStyle: { color: 0xffffff , alpha: .9} });
         let rectangle = new Phaser.Geom.Rectangle(x - 137.2/2 - 5, y - 101.4/2 - 5, 137.2 + 10, 101.4 + 10);
         graphics.fillRectShape(rectangle);
-        let map;
-        if (map_name == 'infernal') {
-            map = this.add.image(x, y, map_name).setScale(.17, .195);
-        }
-        else {
-            map = this.add.image(x, y, map_name).setScale(.2);
-        }
+        let map = this.add.image(x, y, map_name).setScale(.2);
+
         this.add.text(x - 75, y + 75, display_name, { font: '24px Arial' });
 
         map.setInteractive();

@@ -7,7 +7,7 @@ class Super_Monkey extends Tower {
         this.cost = 3500;
         this.max_charge = 3;
         this.charge = this.max_charge;
-        this.range = 500;
+        this.range = 300;
         this.domain = LAND;
         this.dart_type = 'dart'
     }
