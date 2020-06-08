@@ -37,6 +37,7 @@ class GameScene extends Phaser.Scene {
 		this.load.image('black_bloon', 'static/images/bloons/black_bloon.png');
 		this.load.image('zebra_bloon', 'static/images/bloons/zebra_bloon.png');
 		this.load.image('rainbow_bloon', 'static/images/bloons/rainbow_bloon.png');
+		this.load.image('ceramic_bloon', 'static/images/bloons/ceramic_bloon.png');
 		this.load.image('MOAB', 'static/images/bloons/MOAB.png');
 
 		this.load.image('dart_monkey', 'static/images/towers/dart_monkey.png');
@@ -78,9 +79,9 @@ class GameScene extends Phaser.Scene {
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
-		this.lives = 15;
+		this.lives = 999;
 		this.money = 69420;
-		this.bloons_deployed = [0,0,0,0,0,0,0,0]
+		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
 		this.all_bloons_deployed = false;
 	}
 
@@ -222,7 +223,7 @@ class GameScene extends Phaser.Scene {
 			tick = 80;
 			this.counter = 0
 			this.level++;
-			this.bloons_deployed = [0,0,0,0,0,0,0,0]
+			this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
 			this.all_bloons_deployed = false;
 			this.grace_period = false;
 			this.next_level.setTint(0xa9a9a9);
@@ -354,6 +355,10 @@ class GameScene extends Phaser.Scene {
 		else if (id == 5) new White_Bloon(0, 0);
 		else if (id == 6) new Black_Bloon(0, 0);
 		else if (id == 7) new Zebra_Bloon(0, 0);
+		else if (id == 8) new Rainbow_Bloon(0, 0);
+		else if (id == 9) new Ceramic_Bloon(0, 0);
+		else if (id == 10) new MOAB(0, 0);
+
 
 
 

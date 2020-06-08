@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
 <head>
@@ -69,3 +70,42 @@
 
 </body>
 </html>
+=======
+{% extends "base.html" %}
+
+{% block title %}Bloons Tower Defense 7{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" href="../static/css/game.css">
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center">
+        <canvas id="game_canvas"></canvas>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
+<script src="../static/js/Maps/floating_island.js"></script>
+<script src="../static/js/Maps/ocean_road.js"></script>
+<script src="../static/js/Maps/mapdata.js"></script>
+
+<script src="../static/js/Bloons/Bloon.js"></script>
+<script src="../static/js/Bloons/Red_Bloon.js"></script>
+<script src="../static/js/Bloons/Blue_Bloon.js"></script>
+
+<script src="../static/js/Towers/Tower.js"></script>
+<script src="../static/js/Towers/Dart_Monkey.js"></script>
+<script src="../static/js/Towers/Monkey_Buccaneer.js"></script>
+
+<script src="../static/js/Projectiles/Projectile.js"></script>
+<script src="../static/js/Projectiles/Dart.js"></script>
+<script src="../static/js/Projectiles/Bomb.js"></script>
+
+<script src="../static/js/Scenes/HomeScene.js"></script>
+<script src="../static/js/Scenes/MapSelectionScene.js"></script>
+<script src="../static/js/Scenes/GameScene.js"></script>
+<script src="../static/js/config.js"></script>
+{% endblock %}
+>>>>>>> 037b3c6fcdd66bc48ae3fc7f66a504ca316a2c8e
