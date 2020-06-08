@@ -28,6 +28,7 @@ tower-related:
 animations:
 - bloon popping
 - explosion
+- sound
 
 other:
 - infinite mode
