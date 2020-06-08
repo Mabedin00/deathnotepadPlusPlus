@@ -15,6 +15,10 @@ db/site-related:
 tower-related:
 - circle appears as soon as tower selected
 - circle only shows when hovering over/selecting tower
+    - circle is created / destroyed just as tower is before placement (look in Tower.js)
+    - circle disappears when tower placed
+    - on hoverover: circle appears
+    - on hoverout: circle disappears
 - sell towers
 - (low priority) user can deselect with backspace
 - upgrades

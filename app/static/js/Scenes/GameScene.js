@@ -136,7 +136,7 @@ class GameScene extends Phaser.Scene {
 		this.next_level.setInteractive();
 		this.next_level.on('pointerdown', this.start_next_level, this);
 
-		this.create_border(this.next_level, 'black', .9, 10);
+		this.create_border(this.next_level, 'black', .9, 4, 3);
 	}
 
 	create_border(element, color, alpha, border, depth) {
