@@ -1,7 +1,7 @@
 class Red_Bloon extends Bloon {
 
-    constructor(progress, health) {
-        super("red_bloon",progress);
+    constructor(progress, health, path) {
+        super("red_bloon",progress, path);
         this.speed = .1;
         this.health = 1 + health;
         this.damage = 1;

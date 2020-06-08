@@ -1,8 +1,8 @@
 class Ceramic_Bloon extends Bloon {
 
-    constructor(progress, health) {
+    constructor(progress, health, path) {
 
-        super("ceramic_bloon", progress);
+        super("ceramic_bloon", progress, path);
 
         this.speed = .4;
         this.health = 10 + health;
@@ -15,8 +15,8 @@ class Ceramic_Bloon extends Bloon {
     }
 
     transform() {
-        new Rainbow_Bloon(this.progress, this.health);
-        new Rainbow_Bloon(this.progress-.01, this.health);
+        new Rainbow_Bloon(this.progress, this.health, this.path);
+        new Rainbow_Bloon(this.progress-.01, this.health, this.path);
         this.destroy();
     }
 

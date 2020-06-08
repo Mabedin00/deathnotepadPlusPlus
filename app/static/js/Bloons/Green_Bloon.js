@@ -1,8 +1,8 @@
 class Green_Bloon extends Bloon {
 
-    constructor(progress, health) {
+    constructor(progress, health, path) {
 
-        super("green_bloon", progress);
+        super("green_bloon", progress, path);
 
         this.speed = .3;
         this.health = 1 + health;
@@ -15,7 +15,7 @@ class Green_Bloon extends Bloon {
     }
 
     transform() {
-        new Blue_Bloon(this.progress, this.health);
+        new Blue_Bloon(this.progress, this.health, this.path);
         this.destroy();
     }
 

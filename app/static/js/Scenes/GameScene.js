@@ -351,17 +351,17 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create_bloon(id) {
-		if 		(id == 0) new Red_Bloon (0, 0);
-		else if (id == 1) new Blue_Bloon(0, 0);
-		else if (id == 2) new Green_Bloon(0, 0);
-		else if (id == 3) new Yellow_Bloon(0, 0);
-		else if (id == 4) new Pink_Bloon(0, 0);
-		else if (id == 5) new White_Bloon(0, 0);
-		else if (id == 6) new Black_Bloon(0, 0);
-		else if (id == 7) new Zebra_Bloon(0, 0);
-		else if (id == 8) new Rainbow_Bloon(0, 0);
-		else if (id == 9) new Ceramic_Bloon(0, 0);
-		else if (id == 10) new MOAB(0, 0);
+		if 		(id == 0) new Red_Bloon (0, 0, -1);
+		else if (id == 1) new Blue_Bloon(0, 0, -1);
+		else if (id == 2) new Green_Bloon(0, 0, -1);
+		else if (id == 3) new Yellow_Bloon(0, 0, -1);
+		else if (id == 4) new Pink_Bloon(0, 0, -1);
+		else if (id == 5) new White_Bloon(0, 0, -1);
+		else if (id == 6) new Black_Bloon(0, 0, -1);
+		else if (id == 7) new Zebra_Bloon(0, 0, -1);
+		else if (id == 8) new Rainbow_Bloon(0, 0, -1);
+		else if (id == 9) new Ceramic_Bloon(0, 0, -1);
+		else if (id == 10) new MOAB(0, 0, -1);
 	}
 
 	prevent_tower_stacking(xcor, ycor, width, height) {
