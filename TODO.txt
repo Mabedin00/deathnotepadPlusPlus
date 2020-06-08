@@ -1,37 +1,31 @@
-- menu before map selection
-    - play
-    - leaderboard
-    - instruction
-    - login
-        - only necessary if you want to save score, not necessary to play
+new features:
+- new bloons
+- new towers
+- new maps
 
-- moduarlize create_button
-- ricccckroll
+db/site-related:
+- leaderboard
+- instructions
+- (potentially) completed maps
+- (potentially) settings
+- move login button
+- option to login upon death to save score
 
-
-- infinite mode
-- list of completed maps
-
+tower-related:
 - circle appears as soon as tower selected
-- circle does not extend into tower zone
 - circle only shows when hovering over/selecting tower
 - sell towers
-- user can deselect
+- (low priority) user can deselect with backspace
 - upgrades
-
-- instructions
-- leader board
-
-- giant cows on win/loss
-
 - gives info on hover
 
-- homescreen anim: replace 5 w/ 7
+other:
+- infinite mode
+- ricccckroll
+- giant cows on win/loss
 
 bugs:
-- circle covers side
-- make it so you can't place towers directly on top of eachother by
-modifying ocean_data
+- none
 
 optomizations:
 - precalculate interpolation

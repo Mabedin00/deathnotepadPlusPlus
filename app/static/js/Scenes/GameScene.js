@@ -103,7 +103,7 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create_buttons() {
-		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(1);
+		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(3);
 		this.create_border(this.popup, 'black', .9, 2);
 		this.popup.graphics.setAlpha(0);
 		this.popup.visible = false;
