@@ -107,7 +107,7 @@ class GameScene extends Phaser.Scene {
 
 	create_buttons() {
 		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(4);
-		this.create_border(this.popup, 'black', .9, 2);
+		this.create_border(this.popup, 'black', .9, 2, 3);
 		this.popup.graphics.setAlpha(0);
 		this.popup.visible = false;
 
@@ -139,14 +139,14 @@ class GameScene extends Phaser.Scene {
 		this.create_border(this.next_level, 'black', .9, 10);
 	}
 
-	create_border(element, color, alpha, border) {
+	create_border(element, color, alpha, border, depth) {
 		element.graphics = this.add.graphics({ fillStyle: { color: color , alpha: alpha} });
 		let rectangle = new Phaser.Geom.Rectangle(
 			element.x - element.displayWidth/2  - border/2,
 			element.y - element.displayHeight/2 - border/2,
 			element.displayWidth  + border,
 			element.displayHeight + border);
-		element.graphics.fillRectShape(rectangle);
+		element.graphics.fillRectShape(rectangle).setDepth(depth);
 	}
 
 	add_text() {
@@ -362,23 +362,18 @@ class GameScene extends Phaser.Scene {
 		else if (id == 8) new Rainbow_Bloon(0, 0);
 		else if (id == 9) new Ceramic_Bloon(0, 0);
 		else if (id == 10) new MOAB(0, 0);
-
-
-
-
 	}
 
 	prevent_tower_stacking(xcor, ycor, width, height) {
 		width  = Math.floor(width);
 		height = Math.floor(height);
-		let y = ycor - height
-		while(y < ycor + height && y < scene.tiles.length) {
-		    let x = xcor - width
-		    while (x < xcor + width && x < scene.tiles[y].length) {
-				scene.tiles[y][x] = PATH // make unable to place towers
-				x += 1
+
+		for (let y = ycor - height; y < ycor + height && y < scene.tiles.length; y++) {
+			if (y <= 0) y = 0;
+			for (let x = xcor - width; x < xcor + width && x < scene.tiles[y].length; x++) {
+				if (x <= 0) x = 0;
+				scene.tiles[y][x] = PATH;
 			}
-		    y += 1
 		}
 	}
 }
