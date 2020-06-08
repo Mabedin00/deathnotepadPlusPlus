@@ -1,8 +1,8 @@
 import os
 from flask import Flask, render_template, request
 from flask_login import LoginManager, current_user
-from models import db, User
-from auth import auth
+from app.models import db, User
+from app.auth import auth
 
 app = Flask(__name__)
 app.register_blueprint(auth)
