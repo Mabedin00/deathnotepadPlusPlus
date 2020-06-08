@@ -28,6 +28,7 @@ other:
 - infinite mode
 - ricccckroll
 - giant cows on win/loss
+- paused text
 
 bugs:
 - fix darts moving when paused
