@@ -1,3 +1,8 @@
+adding castle:
+- have two xlists and two ylists
+- bloons randomly get a list
+- bloons constructor needs to be passed which list (0 or 1) to prevent teleportation
+
 new features:
 - new bloons
 - new towers
