@@ -1,11 +1,11 @@
-class Dart extends Projectile {
+class Tack extends Projectile {
 
-    constructor(x, y, target) {
-        super(x, y,"dart");
+    constructor(x, y, angle) {
+        super(x, y, "dart");
 
         this.damage = 1;
-        this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
-        scene.physics.moveTo(this, target.x, target.y, 500)
+        this.setVelocity(650 * Math.cos(angle), 650 *Math.sin(angle))
+        this.rotation = angle;
 
         this.setScale(.5);
     }

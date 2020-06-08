@@ -25,7 +25,9 @@ other:
 - giant cows on win/loss
 
 bugs:
-- none
+- fix darts moving when paused
+- darts don't disappear at range
+- button outline gone
 
 optomizations:
 - precalculate interpolation

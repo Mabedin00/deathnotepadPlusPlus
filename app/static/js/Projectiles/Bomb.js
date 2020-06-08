@@ -1,10 +1,12 @@
 class Bomb extends Projectile {
 
     constructor(x, y, target) {
-        super(x, y, target, 200,"bomb");
+        super(x, y,"bomb");
 
         this.damage = 2;
         this.explosion_radius = 150;
+        this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
+        scene.physics.moveTo(this, target.x, target.y, 200)
 
         this.setScale(.5);
     }

@@ -17,7 +17,6 @@ class GameScene extends Phaser.Scene {
 
 		this.load.image('border', 'static/images/maps/border.png');
 
-
 		this.load.image('popup', 'static/images/menus/popup.jpg')
 		this.load.image('resume', 'static/images/menus/resume_button.jpg')
 		this.load.image('retry', 'static/images/menus/retry_button.jpg')
@@ -28,7 +27,6 @@ class GameScene extends Phaser.Scene {
 
 		this.load.image('lives', 'static/images/menus/lives.png' );
 		this.load.image('money', 'static/images/menus/money.png' );
-
 
 		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
 		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
@@ -41,10 +39,12 @@ class GameScene extends Phaser.Scene {
 		this.load.image('rainbow_bloon', 'static/images/bloons/rainbow_bloon.png');
 		this.load.image('MOAB', 'static/images/bloons/MOAB.png');
 
-
-
 		this.load.image('dart_monkey', 'static/images/towers/dart_monkey.png');
 		this.load.image('monkey_buccaneer', 'static/images/towers/buccaneer.png');
+		this.load.image('tack_shooter', 'static/images/towers/tack_shooter.png');
+		this.load.image('ice_monkey', 'static/images/towers/ice_monkey.png');
+		this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
+		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
 
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
@@ -79,7 +79,7 @@ class GameScene extends Phaser.Scene {
 		this.level = 0;
 		this.score = 0;
 		this.lives = 15;
-		this.money = 1000;
+		this.money = 69420;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0]
 		this.all_bloons_deployed = false;
 	}
@@ -166,6 +166,10 @@ class GameScene extends Phaser.Scene {
 	create_towers() {
 		new Dart_Monkey();
 		new Monkey_Buccaneer();
+		new Tack_Shooter();
+		new Ice_Monkey();
+		new Banana_Farm();
+		new Super_Monkey();
 	}
 
 	update () {
