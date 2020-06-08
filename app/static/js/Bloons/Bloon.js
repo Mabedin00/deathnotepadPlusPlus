@@ -9,8 +9,19 @@ class Bloon extends Phaser.GameObjects.Sprite {
         scene.physics.world.enableBody(this, 0);
         bloons.add(this);
         this.progress = progress;
-        this.xlist = scene.coords.xlist;
-        this.ylist = scene.coords.ylist;
+        let path_selected = Math.floor((Math.random() * scene.coords.num_paths));
+        if (path_selected == 0) {
+            this.xlist = scene.coords.xlist;
+            this.ylist = scene.coords.ylist;
+        }
+        else if (path_selected == 1) {
+            this.xlist = scene.coords.xlist1;
+            this.ylist = scene.coords.ylist1;
+        }
+        else if (path_selected == 2) {
+            this.xlist = scene.coords.xlist2;
+            this.ylist = scene.coords.ylist2;
+        }
 
         this.increment = 1 / (this.xlist.length - 1)
 

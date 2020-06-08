@@ -29,6 +29,7 @@ animations:
 - bloon popping
 - explosion
 - sound
+- $25 when collect nanner
 
 other:
 - infinite mode
