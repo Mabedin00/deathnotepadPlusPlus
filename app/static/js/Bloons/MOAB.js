@@ -1,8 +1,8 @@
 class MOAB extends Bloon {
 
-    constructor(progress, health) {
+    constructor(progress, health, path) {
 
-        super("MOAB", progress);
+        super("MOAB", progress, path);
 
         this.speed = .1;
         this.health = 140 + health;
@@ -16,10 +16,10 @@ class MOAB extends Bloon {
     }
 
     transform() {
-        new Ceramic_Bloon(this.progress, this.health);
-        new Ceramic_Bloon(this.progress-.01, this.health);
-        new Ceramic_Bloon(this.progress-.02, this.health);
-        new Ceramic_Bloon(this.progress-.03, this.health);
+        new Ceramic_Bloon(this.progress, this.health, this.path);
+        new Ceramic_Bloon(this.progress-.01, this.health, this.path);
+        new Ceramic_Bloon(this.progress-.02, this.health, this.path);
+        new Ceramic_Bloon(this.progress-.03, this.health, this.path);
 
         this.destroy();
     }
