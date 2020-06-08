@@ -51,7 +51,7 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     place_tower(x, y) {
-        console.log(this)
+        // console.log(this)
         scene.prevent_tower_stacking(x, y, this.width / 2, this.height / 2);
         scene.is_dragging = false;
         scene.money -= this.cost;
