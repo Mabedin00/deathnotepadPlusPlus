@@ -9,9 +9,9 @@ class MapSelectionScene extends Phaser.Scene {
 
         this.load.image('ocean_road', 'static/images/maps/ocean_road.png');
         this.load.image('floating_island', 'static/images/maps/floating_island.png');
-        this.load.image('castle', 'static/images/maps/castle.png');
+        this.load.image('castlemania', 'static/images/maps/castlemania.png');
         this.load.image('lightning_scar', 'static/images/maps/lightning_scar.png');
-        this.load.image('space_trucking', 'static/images/maps/space_trucking.webp');
+        this.load.image('space_monkey', 'static/images/maps/space_monkey.png');
         this.load.image('infernal', 'static/images/maps/infernal.png');
     }
 
@@ -24,9 +24,9 @@ class MapSelectionScene extends Phaser.Scene {
 
         this.place_map("ocean_road", "Ocean Road", 150, 180);
         this.place_map("floating_island", "Floating Island", 450, 180);
-        this.place_map("castle", "Castle", 750, 180);
+        this.place_map("castlemania", "Castlemania", 750, 180);
         this.place_map("lightning_scar", "Lightning Scar", 150, 420);
-        this.place_map("space_trucking", "Space Monkey", 450, 420);
+        this.place_map("space_monkey", "Space Monkey", 450, 420);
         this.place_map("infernal", "Donte's Inferno", 750, 420);
 
 
