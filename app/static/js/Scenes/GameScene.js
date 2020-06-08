@@ -186,7 +186,7 @@ class GameScene extends Phaser.Scene {
 				tower.drag();
 			}
 			// if game paused don't let towers fire
-			if (scene.paused || scene.game_over) return;
+			if (scene.paused || scene.game_over ||scene.grace_period) return;
 			if (tower.placed) {
 				tower.charge_tower();
 				tower.fire();
