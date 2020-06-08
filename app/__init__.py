@@ -41,7 +41,7 @@ def bagel():
     data = request.get_json(force = True)
     print (data['score'])
     return 'nothing to see here';
-  
+
 
 if __name__ == "__main__":
     app.debug = True

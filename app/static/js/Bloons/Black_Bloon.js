@@ -8,7 +8,7 @@ class Black_Bloon extends Bloon {
         this.health = 2 + health;
         this.damage = 11;
         this.value = 1;
-        this.exlosion_immunity = true;
+        // this.exlosion_immunity = true;
         if (this.health <= 0) {
             this.transform();
         }
@@ -16,7 +16,7 @@ class Black_Bloon extends Bloon {
 
     transform() {
         new Pink_Bloon(this.progress, this.health);
-        new Pink_Bloon(this.progress, this.health);
+        new Pink_Bloon(this.progress-.01, this.health);
         this.destroy();
     }
 

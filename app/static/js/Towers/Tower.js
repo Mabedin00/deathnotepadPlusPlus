@@ -93,7 +93,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         // returns the target that is farthest along the track
         let max = this.targets[0];
 
-        for (let target in this.targets) {
+        for (let target of this.targets) {
             if (target.progress > max.progress) {
                 max = target;
             }

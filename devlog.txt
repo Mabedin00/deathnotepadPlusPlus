@@ -26,4 +26,9 @@ Mohidul Abedin, Brian Moses -- 2020-06-06 21:00
     - added second map
     - added blue bloon, monkey buccaneer
     - various bugfixes
-    - beautified 
+    - beautified
+
+Mohidul Abedin, Brian Moses -- 2020-06-07 22:00
+    - added 6 new bloon types
+    - added 4 new tower types
+    - various bug "fixes"

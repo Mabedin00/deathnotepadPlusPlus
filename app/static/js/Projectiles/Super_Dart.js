@@ -1,13 +1,13 @@
-class Dart extends Projectile {
+class Super_Dart extends Projectile {
 
     constructor(x, y, target) {
         super(x, y,"dart");
 
         this.damage = 1;
         this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
-        scene.physics.moveTo(this, target.x, target.y, 500)
+        scene.physics.moveTo(this, target.x, target.y, 2000);
 
-        this.setScale(.5);
+        this.setScale(.35);
     }
 
     inflict_damage(dart, bloon) {

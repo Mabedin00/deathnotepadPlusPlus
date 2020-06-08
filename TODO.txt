@@ -1,7 +1,13 @@
+adding castle:
+- have two xlists and two ylists
+- bloons randomly get a list
+- bloons constructor needs to be passed which list (0 or 1) to prevent teleportation
+
 new features:
 - new bloons
 - new towers
 - new maps
+- add immunities
 
 db/site-related:
 - leaderboard
@@ -19,13 +25,28 @@ tower-related:
 - upgrades
 - gives info on hover
 
+animations:
+- bloon popping
+- explosion
+- sound
+
 other:
 - infinite mode
 - ricccckroll
 - giant cows on win/loss
+- paused text
 
 bugs:
-- none
+- fix darts moving when paused
+- darts don't disappear at range
+- button outline gone
+- priority system broken
+- MOAB does not rotate
+- MOAB hits goal
+- invincibility bug
+- work out all depths
+
+- readd border
 
 optomizations:
 - precalculate interpolation

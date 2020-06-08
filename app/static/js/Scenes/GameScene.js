@@ -17,7 +17,6 @@ class GameScene extends Phaser.Scene {
 
 		this.load.image('border', 'static/images/maps/border.png');
 
-
 		this.load.image('popup', 'static/images/menus/popup.jpg')
 		this.load.image('resume', 'static/images/menus/resume_button.jpg')
 		this.load.image('retry', 'static/images/menus/retry_button.jpg')
@@ -28,7 +27,6 @@ class GameScene extends Phaser.Scene {
 
 		this.load.image('lives', 'static/images/menus/lives.png' );
 		this.load.image('money', 'static/images/menus/money.png' );
-
 
 		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
 		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
@@ -42,13 +40,18 @@ class GameScene extends Phaser.Scene {
 		this.load.image('ceramic_bloon', 'static/images/bloons/ceramic_bloon.png');
 		this.load.image('MOAB', 'static/images/bloons/MOAB.png');
 
-
-
 		this.load.image('dart_monkey', 'static/images/towers/dart_monkey.png');
 		this.load.image('monkey_buccaneer', 'static/images/towers/buccaneer.png');
+		this.load.image('tack_shooter', 'static/images/towers/tack_shooter.png');
+		this.load.image('ice_monkey', 'static/images/towers/ice_monkey.png');
+		this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
+		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
 
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
+		this.load.image('blizzard', 'static/images/projectiles/blizzard.png');
+		this.load.image('banana', 'static/images/projectiles/banana.png');
+
 	}
 
 	create () {
@@ -80,7 +83,7 @@ class GameScene extends Phaser.Scene {
 		this.level = 0;
 		this.score = 0;
 		this.lives = 999;
-		this.money = 1000;
+		this.money = 69420;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
 		this.all_bloons_deployed = false;
 	}
@@ -103,33 +106,33 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create_buttons() {
-		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(3);
+		this.popup = this.add.image(343, 253, 'popup').setScale(.3).setAlpha(.9).setDepth(4);
 		this.create_border(this.popup, 'black', .9, 2);
 		this.popup.graphics.setAlpha(0);
 		this.popup.visible = false;
 
 		// needs new event listener
-		this.resume = this.add.image(343, 203, 'resume').setDepth(3);
+		this.resume = this.add.image(343, 203, 'resume').setDepth(4);
 		this.resume.setInteractive();
 		this.resume.on('pointerdown', this.resume_game, this);
 		this.resume.visible = false;
 
-		this.infinite = this.add.image(343, 203, 'resume').setDepth(3);
+		this.infinite = this.add.image(343, 203, 'resume').setDepth(4);
 		this.infinite.setInteractive();
 		this.infinite.on('pointerdown', this.infinite_mode, this);
 		this.infinite.visible = false;
 
-		this.retry = this.add.image(343, 253, 'retry').setDepth(3);
+		this.retry = this.add.image(343, 253, 'retry').setDepth(4);
 		this.retry.setInteractive();
 		this.retry.on('pointerdown', this.restart_game, this);
 		this.retry.visible = false;
 
-		this.main_menu = this.add.image(343, 303, 'main_menu').setDepth(3);
+		this.main_menu = this.add.image(343, 303, 'main_menu').setDepth(4);
 		this.main_menu.setInteractive();
 		this.main_menu.on('pointerdown', this.return_to_menu, this);
 		this.main_menu.visible = false;
 
-		this.next_level = this.add.image(770, 479, 'next_level').setDepth(3).setScale(.6, 1);
+		this.next_level = this.add.image(770, 479, 'next_level').setDepth(4).setScale(.6, 1);
 		this.next_level.setInteractive();
 		this.next_level.on('pointerdown', this.start_next_level, this);
 
@@ -167,9 +170,14 @@ class GameScene extends Phaser.Scene {
 	create_towers() {
 		new Dart_Monkey();
 		new Monkey_Buccaneer();
+		new Tack_Shooter();
+		new Ice_Monkey();
+		new Banana_Farm();
+		new Super_Monkey();
 	}
 
 	update () {
+		// console.log(colliders)
 		this.hotkeys();
 		// if game paused or between levels
 		this.update_text();
