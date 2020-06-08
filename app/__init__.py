@@ -30,7 +30,12 @@ def load_user(user_id):
 def root():
     return render_template("game.html")
 
-  
+
+@app.route('/test')
+def test():
+    return render_template('base.html')
+
+
 @app.route('/bagel', methods=['POST'])
 def bagel():
     data = request.get_json(force = True)
