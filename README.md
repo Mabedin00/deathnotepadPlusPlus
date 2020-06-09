@@ -20,7 +20,7 @@ Follow the instructions below to play the game locally or visit our site to save
 [video demo here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
 # Site
-Soon™
+[Soon™](http://157.245.214.96/)
 
 # Launch instructions
 We are assuming you have python3 and pip3 installed and working.
