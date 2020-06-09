@@ -29,12 +29,13 @@ var money_icon;
 var level_text;
 var score_text;
 
-var colliders = []
+var colliders = [];
 
 var win_text;
 var win_desc;
 
-var esc;
+var esc_key;
+var s_key;
 var x_key;
 
 

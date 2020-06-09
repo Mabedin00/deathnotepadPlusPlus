@@ -11,7 +11,6 @@ db/site-related:
 - option to login upon death to save score
 
 tower-related:
-- sell towers
 - upgrades
 - gives info on hover
 
@@ -34,6 +33,7 @@ bugs:
     - iterate through darts when paused, setVelocity(0, 0)
     - iterate through darts when unpausing, restart setMove();
 - get OUT OF TEST MODE
+- castlemania new image
 
 optomizations:
 - precalculate interpolation

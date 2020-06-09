@@ -38,6 +38,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         // and recreate in sidebar
         if (this.being_dragged && (scene.money < this.cost  || tile == undefined)) {
             this.destroy();
+            this.graphics.destroy();
             this.create_tower();
             scene.is_dragging = false;
             return;
@@ -69,12 +70,24 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     show_details(){
-        this.graphics.visible = true
+        if (scene.selected_tower != undefined) scene.selected_tower.unshow_details();
+        scene.selected_tower = this;
+        scene.tower_selected = true;
+        this.graphics.visible = true;
+
     }
 
     unshow_details(){
-        if (x_key.isDown){
-            this.graphics.visible = false
+        scene.tower_selected = false;
+        this.graphics.visible = false;
+
+    }
+
+    sell(){
+        if (s_key.isDown){
+            scene.tower_selected = false;
+            scene.money += Math.floor(this.cost / 2);
+            return this;
         }
     }
 

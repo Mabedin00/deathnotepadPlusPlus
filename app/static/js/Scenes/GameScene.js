@@ -75,7 +75,7 @@ class GameScene extends Phaser.Scene {
 		this.game_over = false;
 		this.infinite_mode_enabled = false;
 		this.paused = false;
-		this.esc_pressed = false;
+		this.esc_key_pressed = false;
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
@@ -83,11 +83,14 @@ class GameScene extends Phaser.Scene {
 		this.money = 69420;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
 		this.all_bloons_deployed = false;
+		this.tower_selected = false;
+		this.selected_tower;
 	}
 
 	create_key_bindings() {
-		esc = this.input.keyboard.addKey('ESC');
+		esc_key = this.input.keyboard.addKey('ESC');
 		x_key = this.input.keyboard.addKey('X');
+		s_key = this.input.keyboard.addKey('S');
 
 	}
 
@@ -203,11 +206,16 @@ class GameScene extends Phaser.Scene {
 		for (let destroyed_proj of destroyed_projs) {
 			if (destroyed_proj != undefined) destroyed_proj.destroy();
         }
+		let sold_towers = [];
 		towers.children.iterate(function (tower) {
 			if (tower.being_dragged) {
 				tower.drag();
 			}
-			if (tower.placed) tower.unshow_details();
+			if (tower.placed && tower.graphics.visible) {
+				if(x_key.isDown) tower.unshow_details();
+				sold_towers.push(tower.sell());
+
+			}
 			// if game paused don't let towers fire
 			if (scene.paused || scene.game_over ||scene.grace_period) return;
 			if (tower.placed) {
@@ -215,6 +223,13 @@ class GameScene extends Phaser.Scene {
 				tower.fire();
 			}
 		});
+		for (let sold_tower of sold_towers) {
+
+			if (sold_tower != undefined){
+				sold_tower.graphics.destroy();
+ 				sold_tower.destroy();
+		 	}
+		}
 		if (this.paused) return;
 		if (this.grace_period) return;
 		if (this.game_over) return;
@@ -260,10 +275,10 @@ class GameScene extends Phaser.Scene {
 	hotkeys() {
 
 
-		if (esc.isDown) {
-			this.esc_pressed = true;
+		if (esc_key.isDown) {
+			this.esc_key_pressed = true;
 		}
-		if (this.esc_pressed && esc.isUp){
+		if (this.esc_key_pressed && esc_key.isUp){
    			this.paused = !this.paused;
 			if(this.paused){
 				this.pause_game();
@@ -271,7 +286,7 @@ class GameScene extends Phaser.Scene {
 			else if (!this.paused){
 				this.resume_game();
 			}
-			this.esc_pressed = false;
+			this.esc_key_pressed = false;
 		}
 	}
 
