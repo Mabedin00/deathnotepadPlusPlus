@@ -65,7 +65,7 @@ class Bloon extends Phaser.GameObjects.Sprite {
                 this.progress += this.speed/(distance * 2);
             }
             else {
-                this.progress += this.speed/distance;
+                this.progress += this.speed/(distance*10);
             }
         }
 

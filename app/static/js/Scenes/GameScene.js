@@ -160,20 +160,20 @@ class GameScene extends Phaser.Scene {
 		let goal_x = this.coords.xlist[this.coords.xlist.length - 1];
 		let goal_y = this.coords.ylist[this.coords.ylist.length - 1];
 		// is off-screen, so we can use any sprite we want
-		goal = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.1);
+		goal = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.01);
 		goal.visible = false;
 		this.physics.add.overlap(goal, bloons, Bloon.bloon_end, null, this);
-		if (this.coords.num_paths == 2) {
+		if (this.coords.num_paths >= 2) {
 			goal_x = this.coords.xlist1[this.coords.xlist1.length - 1];
 			goal_y = this.coords.ylist1[this.coords.ylist1.length - 1];
-			goal1 = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.1);
+			goal1 = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.01);
 			goal1.visible = false;
 			this.physics.add.overlap(goal1, bloons, Bloon.bloon_end, null, this);
 		}
 		if (this.coords.num_paths == 3) {
 			goal_x = this.coords.xlist2[this.coords.xlist2.length - 1];
 			goal_y = this.coords.ylist2[this.coords.ylist2.length - 1];
-			goal2 = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.1);
+			goal2 = this.physics.add.sprite(goal_x, goal_y, this.map).setScale(.01);
 			goal2.visible = false;
 			this.physics.add.overlap(goal2, bloons, Bloon.bloon_end, null, this);
 		}

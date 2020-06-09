@@ -56,3 +56,5 @@ bugs:
 
 optomizations:
 - precalculate interpolation
+
+- (potentially) graphics final project
