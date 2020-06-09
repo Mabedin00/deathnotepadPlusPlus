@@ -35,6 +35,7 @@ var win_text;
 var win_desc;
 
 var esc;
+var x_key;
 
 
 const PATH = 0;

@@ -87,6 +87,8 @@ class GameScene extends Phaser.Scene {
 
 	create_key_bindings() {
 		esc = this.input.keyboard.addKey('ESC');
+		x_key = this.input.keyboard.addKey('X');
+
 	}
 
 	add_map() {
@@ -205,6 +207,7 @@ class GameScene extends Phaser.Scene {
 			if (tower.being_dragged) {
 				tower.drag();
 			}
+			if (tower.placed) tower.unshow_details();
 			// if game paused don't let towers fire
 			if (scene.paused || scene.game_over ||scene.grace_period) return;
 			if (tower.placed) {
@@ -255,6 +258,8 @@ class GameScene extends Phaser.Scene {
 	}
 
 	hotkeys() {
+
+
 		if (esc.isDown) {
 			this.esc_pressed = true;
 		}

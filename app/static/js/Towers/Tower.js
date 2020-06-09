@@ -16,7 +16,8 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     toggle_drag() {
-        if (!this.being_dragged && scene.is_dragging) return;
+        // prevents moving towers once its placed and dragging multiple towers
+        if (this.placed || (!this.being_dragged && scene.is_dragging) ) return;
         // ocean_road contains 2d array of valid tiles for placement
         // 0: not valid, 1: valid for ocean, 2: valid for land
         let mouseX = Math.floor(scene.input.activePointer.x);
@@ -46,28 +47,44 @@ class Tower extends Phaser.GameObjects.Sprite {
         }
         this.being_dragged = !this.being_dragged
         if (this.being_dragged) {
+            this.graphics = scene.add.graphics({ fillStyle: { color: 0xffffff , alpha: .2} });
+            this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
+            this.graphics.fillCircleShape(this.circle);
             scene.is_dragging = true;
         }
     }
 
     place_tower(x, y) {
         // console.log(this)
+        this.graphics.visible = false;
         scene.prevent_tower_stacking(x, y, this.width / 2, this.height / 2);
         scene.is_dragging = false;
         scene.money -= this.cost;
         this.create_tower();
+        this.on('pointerdown', this.show_details, this);
 
-        let graphics = scene.add.graphics({ fillStyle: { color: 0xffffff , alpha: .2} });
-        this.circle = new Phaser.Geom.Circle(x, y, this.range);
-        graphics.fillCircleShape(this.circle);
 
-        this.removeInteractive();
         this.placed = true;
+
+    }
+
+    show_details(){
+        this.graphics.visible = true
+    }
+
+    unshow_details(){
+        if (x_key.isDown){
+            this.graphics.visible = false
+        }
     }
 
     drag() {
         this.x = scene.input.activePointer.x;
         this.y = scene.input.activePointer.y;
+        this.graphics.destroy();
+        this.graphics = scene.add.graphics({ fillStyle: { color: 0xffffff , alpha: .2} });
+        this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
+        this.graphics.fillCircleShape(this.circle);
     }
 
     charge_tower() {
@@ -100,4 +117,6 @@ class Tower extends Phaser.GameObjects.Sprite {
         }
         return max;
     }
+
+
 }

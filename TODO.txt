@@ -11,14 +11,7 @@ db/site-related:
 - option to login upon death to save score
 
 tower-related:
-- circle appears as soon as tower selected
-- circle only shows when hovering over/selecting tower
-    - circle is created / destroyed just as tower is before placement (look in Tower.js)
-    - circle disappears when tower placed
-    - on hoverover: circle appears
-    - on hoverout: circle disappears
 - sell towers
-- (low priority) user can deselect with backspace
 - upgrades
 - gives info on hover
 
@@ -40,7 +33,7 @@ bugs:
     - darts must store their target
     - iterate through darts when paused, setVelocity(0, 0)
     - iterate through darts when unpausing, restart setMove();
-
+- get OUT OF TEST MODE
 
 optomizations:
 - precalculate interpolation
