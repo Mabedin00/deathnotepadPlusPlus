@@ -9,8 +9,8 @@ from dethpad.auth import auth
 app = Flask(__name__)
 app.register_blueprint(auth)
 app.secret_key = os.urandom(32)
-# DIR = os.path.dirname(__file__) or "."
-# DIR += "/"
+DIR = os.path.dirname(__file__) or "."
+DIR += "/"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./static/data/database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 
@@ -32,7 +32,7 @@ def load_user(user_id):
 
 @app.route('/')
 def root():
-    return render_template("game.html")
+    return render_template("game.html", dir = DIR)
 
 
 @app.route('/test')
