@@ -11,6 +11,6 @@ class Banana extends Projectile {
         this.setInteractive();
         this.on('pointerdown', function() {scene.money += this.value; this.destroy()}, this);
 
-        this.setScale(.5);
+        // this.setScale(.5);
     }
 }
