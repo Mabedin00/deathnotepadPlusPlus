@@ -1,8 +1,7 @@
 class Tack extends Projectile {
 
-    constructor(x, y, angle) {
-        super(x, y, "dart");
-
+    constructor(x, y, angle, range) {
+        super(x, y, "dart", range);
         this.damage = 1;
         this.setVelocity(650 * Math.cos(angle), 650 *Math.sin(angle))
         this.rotation = angle;

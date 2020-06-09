@@ -40,10 +40,7 @@ bugs:
     - darts must store their target
     - iterate through darts when paused, setVelocity(0, 0)
     - iterate through darts when unpausing, restart setMove();
-- darts don't disappear at range
-    - darts are passed their range by target
-    - every tick they check if the distance between their start and their current position exceeds range
-        - if it does, self-destruct
+
 
 optomizations:
 - precalculate interpolation

@@ -1,7 +1,7 @@
 class Bomb extends Projectile {
 
-    constructor(x, y, target) {
-        super(x, y,"bomb");
+    constructor(x, y, target, range) {
+        super(x, y,"bomb",range);
 
         this.damage = 2;
         this.explosion_radius = 150;

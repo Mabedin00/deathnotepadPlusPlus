@@ -1,7 +1,7 @@
 class Super_Dart extends Projectile {
 
-    constructor(x, y, target) {
-        super(x, y,"dart");
+    constructor(x, y, target, range) {
+        super(x, y,"dart", range);
 
         this.damage = 1;
         this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);

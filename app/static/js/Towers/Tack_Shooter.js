@@ -20,7 +20,7 @@ class Tack_Shooter extends Tower {
         if (this.charge >= this.max_charge) {
             this.charge = 0;
             for (let angle = 0; angle < 2*Math.PI; angle += Math.PI/4) {
-                new Tack(this.x, this.y, angle);
+                new Tack(this.x, this.y, angle, this.range);
             }
         }
     }

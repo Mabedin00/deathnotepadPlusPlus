@@ -21,7 +21,7 @@ class Super_Monkey extends Tower {
         if (this.charge >= this.max_charge) {
             this.charge = 0;
             this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y) + Math.PI / 2;
-            new Super_Dart(this.x, this.y, this.target);
+            new Super_Dart(this.x, this.y, this.target, this.range);
         }
     }
 

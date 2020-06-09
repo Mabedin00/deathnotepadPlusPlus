@@ -193,6 +193,14 @@ class GameScene extends Phaser.Scene {
 		this.hotkeys();
 		// if game paused or between levels
 		this.update_text();
+		let destroyed_projs = [];
+		projectiles.children.iterate(function (projectile){
+			destroyed_projs.push(projectile.check_range());
+
+		});
+		for (let destroyed_proj of destroyed_projs) {
+			if (destroyed_proj != undefined) destroyed_proj.destroy();
+        }
 		towers.children.iterate(function (tower) {
 			if (tower.being_dragged) {
 				tower.drag();
