@@ -349,10 +349,10 @@ class GameScene extends Phaser.Scene {
 
 	win_game() {
 		this.game_over = true;
-		win_text = this.add.text(220, 120, 'You Win!', { font: '64px Arial' }).setDepth(2);
+		win_text = this.add.text(220, 120, 'You Win!', { font: '64px Arial' }).setDepth(4);
 		let win_msg = "\t\tThis map will be added to your list of completed maps.\n\
 					   "
-		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(2);
+		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(4);
 		this.popup.visible = true;
 		this.popup.graphics.setAlpha(1);
 		this.infinite.visible = true;

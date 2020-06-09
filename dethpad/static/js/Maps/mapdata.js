@@ -67,8 +67,8 @@ var level_data = [
       'bloons': [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0]
     },
     {
-      'tick': 1.5,
-      'bloons': [10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      'tick': 'algorithm',
+      'bloons': ['algorithm']
     },
     {
       'tick': 2,
