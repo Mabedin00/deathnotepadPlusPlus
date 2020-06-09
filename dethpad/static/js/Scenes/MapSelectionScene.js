@@ -4,15 +4,15 @@ class MapSelectionScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('background', 'static/images/maps/map_selection.jpg');
-        this.load.image('back', 'static/images/home/back_button.png')
-
-        this.load.image('ocean_road', 'static/images/maps/ocean_road.png');
-        this.load.image('floating_island', 'static/images/maps/floating_island.png');
-        this.load.image('castlemania', 'static/images/maps/castlemania.png');
-        this.load.image('lightning_scar', 'static/images/maps/lightning_scar.png');
-        this.load.image('cubism', 'static/images/maps/cubism.png');
-        this.load.image('scorched_earth', 'static/images/maps/scorched_earth.png');
+        // this.load.image('background', 'static/images/maps/map_selection.jpg');
+        // this.load.image('back', 'static/images/home/back_button.png')
+        //
+        // this.load.image('ocean_road', 'static/images/maps/ocean_road.png');
+        // this.load.image('floating_island', 'static/images/maps/floating_island.png');
+        // this.load.image('castlemania', 'static/images/maps/castlemania.png');
+        // this.load.image('lightning_scar', 'static/images/maps/lightning_scar.png');
+        // this.load.image('cubism', 'static/images/maps/cubism.png');
+        // this.load.image('scorched_earth', 'static/images/maps/scorched_earth.png');
     }
 
     create () {

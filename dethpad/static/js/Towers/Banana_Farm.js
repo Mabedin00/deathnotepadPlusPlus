@@ -9,6 +9,7 @@ class Banana_Farm extends Tower {
         this.charge = this.max_charge;
         this.range = 0;
         this.domain = LAND;
+        this.setScale(.8)
     }
 
     fire() {

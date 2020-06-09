@@ -14,43 +14,43 @@ class GameScene extends Phaser.Scene {
 
 	preload () {
 		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
-
-		this.load.image('border', 'static/images/maps/border.png');
-
-		this.load.image('popup', 'static/images/menus/popup.jpg')
-		this.load.image('resume', 'static/images/menus/resume_button.jpg')
-		this.load.image('retry', 'static/images/menus/retry_button.jpg')
-		this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
-		this.load.image('next_level', 'static/images/menus/next_level.jpg')
-
-		this.load.image('sidebar', 'static/images/maps/map_selection_sidebar.png')
-
-		this.load.image('lives', 'static/images/menus/lives.png' );
-		this.load.image('money', 'static/images/menus/money.png' );
-
-		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
-		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
-		this.load.image('green_bloon', 'static/images/bloons/green_bloon.png');
-		this.load.image('yellow_bloon', 'static/images/bloons/yellow_bloon.png');
-		this.load.image('pink_bloon', 'static/images/bloons/pink_bloon.png');
-		this.load.image('white_bloon', 'static/images/bloons/white_bloon.png');
-		this.load.image('black_bloon', 'static/images/bloons/black_bloon.png');
-		this.load.image('zebra_bloon', 'static/images/bloons/zebra_bloon.png');
-		this.load.image('rainbow_bloon', 'static/images/bloons/rainbow_bloon.png');
-		this.load.image('ceramic_bloon', 'static/images/bloons/ceramic_bloon.png');
-		this.load.image('MOAB', 'static/images/bloons/MOAB.png');
-
-		this.load.image('dart_monkey', 'static/images/towers/dart_monkey.png');
-		this.load.image('monkey_buccaneer', 'static/images/towers/buccaneer.png');
-		this.load.image('tack_shooter', 'static/images/towers/tack_shooter.png');
-		this.load.image('ice_monkey', 'static/images/towers/ice_monkey.png');
-		this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
-		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
-
-		this.load.image('dart', 'static/images/projectiles/dart.png');
-		this.load.image('bomb', 'static/images/projectiles/bomb.png');
-		this.load.image('blizzard', 'static/images/projectiles/blizzard.png');
-		this.load.image('banana', 'static/images/projectiles/banana.png');
+		//
+		// this.load.image('border', 'static/images/maps/border.png');
+		//
+		// this.load.image('popup', 'static/images/menus/popup.jpg')
+		// this.load.image('resume', 'static/images/menus/resume_button.jpg')
+		// this.load.image('retry', 'static/images/menus/retry_button.jpg')
+		// this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
+		// this.load.image('next_level', 'static/images/menus/next_level.jpg')
+		//
+		// this.load.image('sidebar', 'static/images/maps/map_selection_sidebar.png')
+		//
+		// this.load.image('lives', 'static/images/menus/lives.png' );
+		// this.load.image('money', 'static/images/menus/money.png' );
+		//
+		// this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
+		// this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
+		// this.load.image('green_bloon', 'static/images/bloons/green_bloon.png');
+		// this.load.image('yellow_bloon', 'static/images/bloons/yellow_bloon.png');
+		// this.load.image('pink_bloon', 'static/images/bloons/pink_bloon.png');
+		// this.load.image('white_bloon', 'static/images/bloons/white_bloon.png');
+		// this.load.image('black_bloon', 'static/images/bloons/black_bloon.png');
+		// this.load.image('zebra_bloon', 'static/images/bloons/zebra_bloon.png');
+		// this.load.image('rainbow_bloon', 'static/images/bloons/rainbow_bloon.png');
+		// this.load.image('ceramic_bloon', 'static/images/bloons/ceramic_bloon.png');
+		// this.load.image('MOAB', 'static/images/bloons/MOAB.png');
+		//
+		// this.load.image('dart_monkey', 'static/images/towers/dart_monkey.png');
+		// this.load.image('monkey_buccaneer', 'static/images/towers/buccaneer.png');
+		// this.load.image('tack_shooter', 'static/images/towers/tack_shooter.png');
+		// this.load.image('ice_monkey', 'static/images/towers/ice_monkey.png');
+		// this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
+		// this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
+		//
+		// this.load.image('dart', 'static/images/projectiles/dart.png');
+		// this.load.image('bomb', 'static/images/projectiles/bomb.png');
+		// this.load.image('blizzard', 'static/images/projectiles/blizzard.png');
+		// this.load.image('banana', 'static/images/projectiles/banana.png');
 
 	}
 
@@ -244,7 +244,7 @@ class GameScene extends Phaser.Scene {
 			if (!bloons.getLength()) {
 				this.inbetween_levels();
 				// if user has reached last level
-				if (level_data[this.level].tick == 'algorithm' && !this.infinite_mode_enabled) {
+				if (level_data[this.level+1].tick == 'algorithm' && !this.infinite_mode_enabled) {
 					this.win_game();
 					return;
 				}
@@ -349,10 +349,10 @@ class GameScene extends Phaser.Scene {
 
 	win_game() {
 		this.game_over = true;
-		win_text = this.add.text(220, 120, 'You Win!', { font: '64px Arial' }).setDepth(2);
+		win_text = this.add.text(220, 120, 'You Win!', { font: '64px Arial' }).setDepth(4);
 		let win_msg = "\t\tThis map will be added to your list of completed maps.\n\
 					   "
-		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(2);
+		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(4);
 		this.popup.visible = true;
 		this.popup.graphics.setAlpha(1);
 		this.infinite.visible = true;
