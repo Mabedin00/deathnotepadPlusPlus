@@ -43,7 +43,6 @@ class Bloon extends Phaser.GameObjects.Sprite {
         // }
 
         this.increment = 1 / (this.xlist.length - 1)
-
     }
 
     move() {
@@ -57,6 +56,7 @@ class Bloon extends Phaser.GameObjects.Sprite {
                                                   this.ylist[this.current_node+1]);
 
         if (this.freeze_frames >= 0) this.freeze_frames--;
+        // if (scene.map == 'ocean_road')
         else {
             if (scene.map == 'ocean_road') {
                 this.progress += this.speed/distance;
@@ -64,6 +64,9 @@ class Bloon extends Phaser.GameObjects.Sprite {
             else if (scene.map == 'floating_island') {
                 this.progress += this.speed/(distance * 2);
             }
+            // else if (scene.map == 'cubism') {
+            //     this.progress += this.speed * 2/distance
+            // }
             else {
                 this.progress += this.speed/(distance*10);
             }

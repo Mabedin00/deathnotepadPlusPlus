@@ -10,6 +10,12 @@ class MOAB extends Bloon {
         this.value = 1;
         this.setScale(.7);
 
+        this.current_node = Math.floor(this.progress / this.increment)
+        this.rotation = Phaser.Math.Angle.Between(this.xlist[this.current_node],
+                                                    this.ylist[this.current_node],
+                                                    this.xlist[this.current_node+1],
+                                                    this.ylist[this.current_node+1]);
+
         if (this.health <= 0) {
             this.transform();
         }
@@ -17,9 +23,9 @@ class MOAB extends Bloon {
 
     transform() {
         new Ceramic_Bloon(this.progress, this.health, this.path);
-        new Ceramic_Bloon(this.progress-.01, this.health, this.path);
-        new Ceramic_Bloon(this.progress-.02, this.health, this.path);
-        new Ceramic_Bloon(this.progress-.03, this.health, this.path);
+        new Ceramic_Bloon(this.progress+.001, this.health, this.path);
+        new Ceramic_Bloon(this.progress+.002, this.health, this.path);
+        new Ceramic_Bloon(this.progress+.003, this.health, this.path);
 
         this.destroy();
     }
@@ -27,7 +33,6 @@ class MOAB extends Bloon {
         if (this.progress >= 1) return;
 
         this.current_node = Math.floor(this.progress / this.increment)
-
         var distance = Phaser.Math.Distance.Between(this.xlist[this.current_node],
                                                   this.ylist[this.current_node],
                                                   this.xlist[this.current_node+1],
@@ -36,7 +41,7 @@ class MOAB extends Bloon {
                                                     this.ylist[this.current_node],
                                                     this.xlist[this.current_node+1],
                                                     this.ylist[this.current_node+1]);
-        
+
 
         if (this.freeze_frames >= 0) this.freeze_frames--;
         else {

@@ -16,8 +16,7 @@ class Zebra_Bloon extends Bloon {
 
     transform() {
         new White_Bloon(this.progress, this.health, this.path);
-        // to make sure they're not stacked
-        new Black_Bloon(this.progress - .01, this.health, this.path);
+        new Black_Bloon(this.progress+.001, this.health, this.path);
         this.destroy();
     }
 

@@ -1,7 +1,5 @@
 new features:
-- new bloons
 - new towers
-- new maps
 - add immunities
 
 db/site-related:
@@ -46,15 +44,9 @@ bugs:
     - darts are passed their range by target
     - every tick they check if the distance between their start and their current position exceeds range
         - if it does, self-destruct
-- button outline gone
-    - ???
-- MOAB does not rotate
-    - caluclates this.rotation based on angle between their current point in interpolation of points
-- invincibility bug
-    - ??? doesn't exist. Really, I don't know what you're talking about. Never seen it.
-- work out all depths
 
 optomizations:
 - precalculate interpolation
+- precalculate speed factor
 
 - (potentially) graphics final project
