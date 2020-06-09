@@ -1,6 +1,8 @@
 import os
+
 from flask import Flask, render_template, request
 from flask_login import LoginManager, current_user
+
 from app.models import db, User
 from app.auth import auth
 

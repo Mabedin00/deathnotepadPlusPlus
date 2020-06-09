@@ -1,4 +1,9 @@
-import os, tempfile, shutil, pytest
+import os
+import tempfile
+import shutil
+
+import pytest
+
 from app import app, db
 
 
