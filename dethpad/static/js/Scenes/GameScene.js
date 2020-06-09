@@ -244,6 +244,8 @@ class GameScene extends Phaser.Scene {
 			if (!bloons.getLength()) {
 				this.inbetween_levels();
 				// if user has reached last level
+				console.log(level_data[this.level].tick)
+				console.log(this.infinite_mode_enabled)
 				if (level_data[this.level].tick == 'algorithm' && !this.infinite_mode_enabled) {
 					this.win_game();
 					return;
