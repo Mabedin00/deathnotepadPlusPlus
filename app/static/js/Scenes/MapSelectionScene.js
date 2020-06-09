@@ -23,10 +23,10 @@ class MapSelectionScene extends Phaser.Scene {
 		this.back.on('pointerdown', this.return_to_menu, this);
 
         this.place_map("ocean_road", "Ocean Road", 150, 180);
-        this.place_map("floating_island", "Floating Island", 450, 180);
-        this.place_map("castlemania", "Castlemania", 750, 180);
+        this.place_map("cubism", "Cubism", 450, 180);
+        this.place_map("floating_island", "Floating Island", 750, 180);
         this.place_map("lightning_scar", "Lightning Scar", 150, 420);
-        this.place_map("cubism", "Cubism", 450, 420);
+        this.place_map("castlemania", "Castlemania", 450, 420);
         this.place_map("scorched_earth", "Scorched Earth", 750, 420);
     }
 
