@@ -23,5 +23,42 @@ class MOAB extends Bloon {
 
         this.destroy();
     }
+    move() {
+        if (this.progress >= 1) return;
+
+        this.current_node = Math.floor(this.progress / this.increment)
+
+        var distance = Phaser.Math.Distance.Between(this.xlist[this.current_node],
+                                                  this.ylist[this.current_node],
+                                                  this.xlist[this.current_node+1],
+                                                  this.ylist[this.current_node+1]);
+        this.rotation = Phaser.Math.Angle.Between(this.xlist[this.current_node],
+                                                    this.ylist[this.current_node],
+                                                    this.xlist[this.current_node+1],
+                                                    this.ylist[this.current_node+1]);
+        
+
+        if (this.freeze_frames >= 0) this.freeze_frames--;
+        else {
+            if (scene.map == 'ocean_road') {
+                this.progress += this.speed/distance;
+            }
+            else if (scene.map == 'floating_island') {
+                this.progress += this.speed/(distance * 2);
+            }
+            else {
+                this.progress += this.speed/(distance*10);
+            }
+        }
+
+        if (scene.coords_type == 'linear') {
+            this.x = Phaser.Math.Interpolation.Linear(this.xlist, this.progress);
+            this.y = Phaser.Math.Interpolation.Linear(this.ylist, this.progress);
+        }
+        if (scene.coords_type == 'catmull') {
+            this.x = Phaser.Math.Interpolation.CatmullRom(this.xlist, this.progress);
+            this.y = Phaser.Math.Interpolation.CatmullRom(this.ylist, this.progress);
+        }
+    }
 
 }
