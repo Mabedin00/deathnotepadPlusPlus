@@ -30,18 +30,6 @@ class Bloon extends Phaser.GameObjects.Sprite {
         this.xlist = xlist;
         this.ylist = ylist;
         this.setScale(.9)
-        // if (this.path == 0) {
-        //     this.xlist = scene.coords.xlist;
-        //     this.ylist = scene.coords.ylist;
-        // }
-        // else if (this.path == 1) {
-        //     this.xlist = scene.coords.xlist1;
-        //     this.ylist = scene.coords.ylist1;
-        // }
-        // else if (this.path == 2) {
-        //     this.xlist = scene.coords.xlist2;
-        //     this.ylist = scene.coords.ylist2;
-        // }
 
         this.increment = 1 / (this.xlist.length - 1)
     }
@@ -57,9 +45,11 @@ class Bloon extends Phaser.GameObjects.Sprite {
                                                   this.ylist[this.current_node+1]);
 
 
-        if (this.freeze_frames >= 0) this.freeze_frames--;
+        if (this.freeze_frames >= 0) {
+            this.freeze_frames -= scene.fast_forward;
+        }
         else {
-            this.progress += this.speed * map_data[scene.map].speed_multiplier / distance;
+            this.progress += this.speed * map_data[scene.map].speed_multiplier * scene.fast_forward/ distance;
         }
 
         if (scene.coords_type == 'linear') {

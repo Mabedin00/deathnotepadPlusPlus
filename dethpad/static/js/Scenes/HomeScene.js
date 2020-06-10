@@ -18,6 +18,8 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('retry', 'static/images/menus/retry_button.jpg')
 		this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
 		this.load.image('next_level', 'static/images/menus/next_level.jpg')
+		this.load.image('fast_forward', 'static/images/menus/fast_forward.jpg')
+
 
 		this.load.image('sidebar', 'static/images/maps/map_selection_sidebar.png')
 

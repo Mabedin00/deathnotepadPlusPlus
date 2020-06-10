@@ -89,6 +89,7 @@ class GameScene extends Phaser.Scene {
 		this.score = 0;
 		this.lives = 150;
 		this.money = 500;
+		this.fast_forward = 1;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
 		this.all_bloons_deployed = false;
 		this.tower_selected = false;
@@ -145,8 +146,13 @@ class GameScene extends Phaser.Scene {
 		this.next_level = this.add.image(770, 479, 'next_level').setDepth(4).setScale(.6, 1);
 		this.next_level.setInteractive();
 		this.next_level.on('pointerdown', this.start_next_level, this);
-
 		this.create_border(this.next_level, 'black', .9, 4, 3);
+
+		this.fast_forward_button = this.add.image(900, 479, 'fast_forward').setDepth(4).setScale(.6, 1);
+		this.fast_forward_button.setInteractive();
+		this.fast_forward_button.on('pointerdown', this.toggle_fast_forward, this);
+		this.create_border(this.fast_forward_button, 'black', .9, 4, 3);
+
 	}
 
 	create_border(element, color, alpha, border, depth) {
@@ -161,10 +167,10 @@ class GameScene extends Phaser.Scene {
 
 	add_text() {
 		level_text = this.add.text(710, 525, 'Level: ' + this.level, { font: '24px Arial' }).setDepth(2);
-		lives_icon = this.add.image(845, 540, "lives").setScale(.05).setDepth(2);
-		lives_text = this.add.text(875, 525, this.lives, { font: '24px Arial' }).setDepth(2);
-		money_icon = this.add.image(845, 578, "money").setScale(.05).setDepth(2);
-		money_text = this.add.text(875, 565,  this.money, { font: '24px Arial' }).setDepth(2);
+		lives_icon = this.add.image(875, 540, "lives").setScale(.05).setDepth(2);
+		lives_text = this.add.text(905, 525, this.lives, { font: '24px Arial' }).setDepth(2);
+		money_icon = this.add.image(875, 578, "money").setScale(.05).setDepth(2);
+		money_text = this.add.text(905, 565,  this.money, { font: '24px Arial' }).setDepth(2);
 		score_text = this.add.text(710, 565, 'Score: ' + this.score, { font: '24px Arial' }).setDepth(2);
 
 	}
@@ -317,6 +323,7 @@ class GameScene extends Phaser.Scene {
 	}
 
 	restart_game() {
+		this.soundtrack.stop();
 		this.scene.restart();
 	}
 
@@ -386,9 +393,20 @@ class GameScene extends Phaser.Scene {
 		this.game_over = false;
 	}
 
-	spawn_bloons() {
-		tick += level_data[this.level].tick;
+	toggle_fast_forward() {
+		if (this.fast_forward == 1) {
+			this.fast_forward_button.setTint(0xffa500);
+			this.fast_forward = 3;
+		}
+		else if (this.fast_forward == 3) {
+			this.fast_forward_button.clearTint();
+			this.fast_forward = 1;
+		}
+	}
 
+	spawn_bloons() {
+		tick += (level_data[this.level].tick * scene.fast_forward);
+		console.log(tick, scene.fast_forward)
 		if (tick >= 40 && !this.all_bloons_deployed) {
 			tick = 0;
 
