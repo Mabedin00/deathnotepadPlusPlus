@@ -12,6 +12,9 @@ class User(db.Model, UserMixin):
     map0_scores = db.relationship('Map0', backref='user', lazy='dynamic')
     map1_scores = db.relationship('Map1', backref='user', lazy='dynamic')
     map2_scores = db.relationship('Map2', backref='user', lazy='dynamic')
+    map3_scores = db.relationship('Map3', backref='user', lazy='dynamic')
+    map4_scores = db.relationship('Map4', backref='user', lazy='dynamic')
+    map5_scores = db.relationship('Map5', backref='user', lazy='dynamic')
 
     def __init__(self, username, password):
         self.username = username
