@@ -11,7 +11,6 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('achievements', 'static/images/home/achievements_button.png');
 		this.load.image('settings', 'static/images/home/settings_button.png');
 
-
 		this.load.image('border', 'static/images/maps/border.png');
 
 		this.load.image('popup', 'static/images/menus/popup.jpg')
@@ -67,6 +66,19 @@ class HomeScene extends Phaser.Scene {
 		this.place_buttons('play', 500, 540 , .9, this.play_function, this);
 		this.place_buttons('log_in', 600, 525, .7, this.log_in_function, this);
 		this.place_buttons('achievements', 700, 500, .7, this.achievements_function, this);
+		this.instructions = [
+			"Your goal is to stop the bloons (balloons) from reaching the end of the course.",
+			"You can place towers by clicking on the tower you want and clicking them again on a placeable area.",
+			"But you must make sure you have enough money for the tower.",
+			"Money is gained 3 different ways: popping bloons, completing levels, and collecting bananas from banana farms placed down. ",
+			"Some other things you can do are upgrading your towers, selling your towers, and going to the next level right away with the start button.",
+			"Hotkeys:",
+			"X to deselect a tower",
+			"ESC to pause",
+			"S to sell selected tower",
+			"Once your lifepoints hit zero it's game over.",
+			"Good Luck!"
+		]
 	}
 
 	place_buttons(button_name, x, y, scale, button_function, scene){
@@ -87,7 +99,45 @@ class HomeScene extends Phaser.Scene {
 		window.location = '/leaderboard'
 	}
 	instructions_function(){
-		console.log("here instructions");
+		let some = this.add.image(500, 300, 'popup').setScale(.4);
+		// console.log(some.x - (some.width/2 * .4), some.y-(some.height/2 * .4))
+		// let graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: .5} }).setDepth(2);
+		// let rectangle = new Phaser.Geom.Rectangle(325, 150, 400, 300);
+		// graphics.fillRectShape(rectangle);
+		let down_btn = this.add.image(750, 450, 'play').setScale(.5).setInteractive();
+		let up_btn = this.add.image(750, 150, 'play').setScale(.5).setInteractive();
+		let back_btn = this.add.image(230, 142, 'back').setScale(.3).setInteractive();
+
+		down_btn.rotation += Math.PI/2;
+		up_btn.rotation -= Math.PI/2;
+
+		var graphics = this.add.graphics();
+	    graphics.fillStyle(0xffffff, 0);
+		graphics.fillRect(325, 150, 400, 300);
+		var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
+		var text = this.add.text(375, 150, this.instructions, { fontFamily: 'Arial', color: 'brown', wordWrap: { width: 310 } }).setFontSize(25);
+		text.setMask(mask);
+		var zone = this.add.zone(325, 150, 400, 300).setInteractive();
+		down_btn.on('pointerdown', function () {
+	        text.y -= 10;
+	        text.y = Phaser.Math.Clamp(text.y, -400, 300);
+		});
+		up_btn.on('pointerdown', function () {
+	        text.y += 10;
+	        text.y = Phaser.Math.Clamp(text.y, -400, 300);
+		});
+		back_btn.on('pointerdown', function () {
+			some.destroy();
+			down_btn.destroy();
+			up_btn.destroy();
+			mask.destroy();
+			text.destroy();
+			graphics.destroy();
+			zone.destroy();
+			back_btn.destroy();
+
+
+		});
 	}
     update() {
 
