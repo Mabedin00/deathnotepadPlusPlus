@@ -40,10 +40,14 @@ def test():
     return render_template('base.html')
 
 
-@app.route('/bagel', methods=['POST'])
-def bagel():
+@app.route('/score', methods=['POST'])
+def score():
     data = request.get_json(force = True)
     print (data['score'])
+    print (data['map'])
+    print (current_user)
+    print (current_user.get_id())
+
     return 'nothing to see here';
 
 

@@ -331,12 +331,12 @@ class GameScene extends Phaser.Scene {
 		this.retry.visible = true;
 		this.main_menu.visible = true;
 
-		fetch('/bagel', {
+		fetch('/score', {
 			method: 'POST',
 			headers: {
           'Content-Type': 'application/json'
 	        },
-			body: JSON.stringify({score: this.score, message: 'hi'})
+			body: JSON.stringify({score: this.score, map: this.map})
 		});
 	}
 
@@ -353,6 +353,15 @@ class GameScene extends Phaser.Scene {
 		let win_msg = "\t\tThis map will be added to your list of completed maps.\n\
 					   "
 		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(4);
+
+		fetch('/score', {
+			method: 'POST',
+			headers: {
+		  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({score: this.score, map: this.map})
+		});
+		
 		this.popup.visible = true;
 		this.popup.graphics.setAlpha(1);
 		this.infinite.visible = true;

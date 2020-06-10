@@ -64,7 +64,7 @@ var level_data = [
     },
     {
       'tick': 1,
-      'bloons': [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0]
+      'bloons': [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     {
       'tick': 'algorithm',
