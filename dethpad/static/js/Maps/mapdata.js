@@ -129,7 +129,10 @@ var level_data = [
       'tick': 2.7,
       'bloons': [0,0,40,8,0,0,0,0,0,0,0]
     },
-
+    {
+      'tick': 'algorithm',
+      'bloons': ['algorithm']
+    },
 
     // // 12 YELLOW REGROWTH
 ]
