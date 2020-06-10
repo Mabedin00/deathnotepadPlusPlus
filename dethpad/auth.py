@@ -37,7 +37,7 @@ def login():
         elif user.password != login_form.password.data:
             flash('Incorrect password!', 'danger')
         else:
-            login_user(user)
+            login_user(user, force = True, remember = True)
             flash('Logged in successfully!', 'success')
             return redirect(url_for('root'))
     elif request.method == 'POST':
