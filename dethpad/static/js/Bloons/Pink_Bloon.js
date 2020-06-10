@@ -14,6 +14,8 @@ class Pink_Bloon extends Bloon {
     }
 
     transform() {
+        scene.bloon_pop.play();
+        
         new Yellow_Bloon(this.progress, this.health, this.path);
         this.destroy();
     }

@@ -14,6 +14,8 @@ class GameScene extends Phaser.Scene {
 
 	preload () {
 		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
+		this.load.audio(this.map + '_audio', 'static/audio/' + this.map + '.mp3');
+
 		//
 		// this.load.image('border', 'static/images/maps/border.png');
 		//
@@ -70,6 +72,12 @@ class GameScene extends Phaser.Scene {
 
 	set_vars() {
 		scene = this;
+		this.soundtrack = this.sound.add(this.map + '_audio');
+		this.soundtrack.volume = .1
+		this.bloon_pop = this.sound.add('bloon_pop');
+		this.explosion = this.sound.add('explosion');
+		this.soundtrack.loop = true;
+		this.soundtrack.play()
 		this.grace_period = true;
 		this.is_dragging = false;
 		this.game_over = false;
@@ -79,8 +87,9 @@ class GameScene extends Phaser.Scene {
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
-		this.lives = 999;
-		this.money = 69420;
+		this.lives = 150;
+		this.money = 500;
+		this.fast_forward = 1;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
 		this.all_bloons_deployed = false;
 		this.tower_selected = false;
@@ -137,8 +146,13 @@ class GameScene extends Phaser.Scene {
 		this.next_level = this.add.image(770, 479, 'next_level').setDepth(4).setScale(.6, 1);
 		this.next_level.setInteractive();
 		this.next_level.on('pointerdown', this.start_next_level, this);
-
 		this.create_border(this.next_level, 'black', .9, 4, 3);
+
+		this.fast_forward_button = this.add.image(900, 479, 'fast_forward').setDepth(4).setScale(.6, 1);
+		this.fast_forward_button.setInteractive();
+		this.fast_forward_button.on('pointerdown', this.toggle_fast_forward, this);
+		this.create_border(this.fast_forward_button, 'black', .9, 4, 3);
+
 	}
 
 	create_border(element, color, alpha, border, depth) {
@@ -153,10 +167,10 @@ class GameScene extends Phaser.Scene {
 
 	add_text() {
 		level_text = this.add.text(710, 525, 'Level: ' + this.level, { font: '24px Arial' }).setDepth(2);
-		lives_icon = this.add.image(845, 540, "lives").setScale(.05).setDepth(2);
-		lives_text = this.add.text(875, 525, this.lives, { font: '24px Arial' }).setDepth(2);
-		money_icon = this.add.image(845, 578, "money").setScale(.05).setDepth(2);
-		money_text = this.add.text(875, 565,  this.money, { font: '24px Arial' }).setDepth(2);
+		lives_icon = this.add.image(875, 540, "lives").setScale(.05).setDepth(2);
+		lives_text = this.add.text(905, 525, this.lives, { font: '24px Arial' }).setDepth(2);
+		money_icon = this.add.image(875, 578, "money").setScale(.05).setDepth(2);
+		money_text = this.add.text(905, 565,  this.money, { font: '24px Arial' }).setDepth(2);
 		score_text = this.add.text(710, 565, 'Score: ' + this.score, { font: '24px Arial' }).setDepth(2);
 
 	}
@@ -309,10 +323,12 @@ class GameScene extends Phaser.Scene {
 	}
 
 	restart_game() {
+		this.soundtrack.stop();
 		this.scene.restart();
 	}
 
 	return_to_menu() {
+		this.soundtrack.stop();
 		this.scene.start('home');
 	}
 
@@ -331,12 +347,12 @@ class GameScene extends Phaser.Scene {
 		this.retry.visible = true;
 		this.main_menu.visible = true;
 
-		fetch('/bagel', {
+		fetch('/score', {
 			method: 'POST',
 			headers: {
-          'Content-Type': 'application/json'
-	        },
-			body: JSON.stringify({score: this.score, message: 'hi'})
+		  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({score: this.score, map: this.map, id: id})
 		});
 	}
 
@@ -353,6 +369,15 @@ class GameScene extends Phaser.Scene {
 		let win_msg = "\t\tThis map will be added to your list of completed maps.\n\
 					   "
 		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(4);
+
+		fetch('/score', {
+			method: 'POST',
+			headers: {
+		  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({score: this.score, map: this.map, id: id})
+		});
+
 		this.popup.visible = true;
 		this.popup.graphics.setAlpha(1);
 		this.infinite.visible = true;
@@ -368,10 +393,21 @@ class GameScene extends Phaser.Scene {
 		this.game_over = false;
 	}
 
-	spawn_bloons() {
-		tick += level_data[this.level].tick;
+	toggle_fast_forward() {
+		if (this.fast_forward == 1) {
+			this.fast_forward_button.setTint(0xffa500);
+			this.fast_forward = 3;
+		}
+		else if (this.fast_forward == 3) {
+			this.fast_forward_button.clearTint();
+			this.fast_forward = 1;
+		}
+	}
 
-		if (tick >= 100 && !this.all_bloons_deployed) {
+	spawn_bloons() {
+		tick += (level_data[this.level].tick * scene.fast_forward);
+		console.log(tick, scene.fast_forward)
+		if (tick >= 40 && !this.all_bloons_deployed) {
 			tick = 0;
 
 			var idx = this.counter % this.bloons_deployed.length;
