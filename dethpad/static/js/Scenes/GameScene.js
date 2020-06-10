@@ -334,9 +334,9 @@ class GameScene extends Phaser.Scene {
 		fetch('/score', {
 			method: 'POST',
 			headers: {
-          'Content-Type': 'application/json'
-	        },
-			body: JSON.stringify({score: this.score, map: this.map})
+		  'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({score: this.score, map: this.map, id: id})
 		});
 	}
 
@@ -359,9 +359,9 @@ class GameScene extends Phaser.Scene {
 			headers: {
 		  'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({score: this.score, map: this.map})
+			body: JSON.stringify({score: this.score, map: this.map, id: id})
 		});
-		
+
 		this.popup.visible = true;
 		this.popup.graphics.setAlpha(1);
 		this.infinite.visible = true;

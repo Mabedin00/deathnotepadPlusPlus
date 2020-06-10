@@ -49,3 +49,33 @@ class Map2(db.Model):
     def __init__(self, score, user_id):
         self.score = score
         self.user_id = user_id
+
+class Map3(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(db.ForeignKey('user.id'))
+
+    def __init__(self, score, user_id):
+        self.score = score
+        self.user_id = user_id
+
+class Map4(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(db.ForeignKey('user.id'))
+
+    def __init__(self, score, user_id):
+        self.score = score
+        self.user_id = user_id
+
+class Map5(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    score = db.Column(db.Integer, nullable=False)
+
+    user_id = db.Column(db.ForeignKey('user.id'))
+
+    def __init__(self, score, user_id):
+        self.score = score
+        self.user_id = user_id

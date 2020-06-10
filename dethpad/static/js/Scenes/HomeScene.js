@@ -75,8 +75,7 @@ class HomeScene extends Phaser.Scene {
         button.on('pointerdown', button_function, scene);
 	}
 	log_in_function(){
-		console.log("log in");
-
+		window.location = '/login'
 	}
 	settings_function(){
 		console.log("settings");
@@ -85,7 +84,7 @@ class HomeScene extends Phaser.Scene {
 		this.scene.start('selection');
 	}
 	achievements_function(){
-		console.log("achievements");
+		window.location = '/leaderboard'
 	}
 	instructions_function(){
 		console.log("here instructions");
