@@ -2,6 +2,15 @@
     margin-top: 10vh;
 }
 
+.alert {
+    margin-bottom: 0px;
+}
+
+#load_message {
+    color: white;
+    margin-top: 20vh;
+}
+
 #game_canvas {
     margin-top: 10vh;
 }
