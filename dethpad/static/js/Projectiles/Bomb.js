@@ -13,6 +13,7 @@ class Bomb extends Projectile {
 
     // deals full damage to the direct hit and half damage to immediate surroundings
     inflict_damage(bomb, bloon) {
+        scene.explosion.play();
         bloon.is_the_target = true;
         let circle = new Phaser.Geom.Circle(bomb.x, bomb.y, this.explosion_radius);
         let collateral_damage = [];

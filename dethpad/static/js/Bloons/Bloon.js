@@ -29,6 +29,7 @@ class Bloon extends Phaser.GameObjects.Sprite {
         this.path = path;
         this.xlist = xlist;
         this.ylist = ylist;
+        this.setScale(.9)
         // if (this.path == 0) {
         //     this.xlist = scene.coords.xlist;
         //     this.ylist = scene.coords.ylist;

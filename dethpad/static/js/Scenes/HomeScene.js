@@ -58,6 +58,20 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('lightning_scar', 'static/images/maps/lightning_scar.png');
 		this.load.image('cubism', 'static/images/maps/cubism.png');
 		this.load.image('scorched_earth', 'static/images/maps/scorched_earth.png');
+
+		this.load.audio('bloon_pop', 'static/audio/bloon_pop.mp3');
+		this.load.audio('explosion', 'static/audio/explosion.mp3');
+
+
+
+		// this.load.audio('ocean_road_audio', 'static/audio/ocean_road.mp3');
+		// this.load.audio('cubism_audio', 'static/audio/cubism.mp3');
+		// this.load.audio('castlemania_audio', 'static/audio/castlemania.mp3');
+		// this.load.audio('lightning_scar_audio', 'static/audio/lightning_scar.mp3');
+		// this.load.audio('floating_island_audio', 'static/audio/floating_island.mp3');
+		// this.load.audio('scorched_earth_audio', 'static/audio/scorched_earth.mp3');
+
+
 	}
 
 	create () {

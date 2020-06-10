@@ -14,6 +14,8 @@ class GameScene extends Phaser.Scene {
 
 	preload () {
 		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
+		this.load.audio(this.map + '_audio', 'static/audio/' + this.map + '.mp3');
+
 		//
 		// this.load.image('border', 'static/images/maps/border.png');
 		//
@@ -70,6 +72,12 @@ class GameScene extends Phaser.Scene {
 
 	set_vars() {
 		scene = this;
+		this.soundtrack = this.sound.add(this.map + '_audio');
+		this.soundtrack.volume = .1
+		this.bloon_pop = this.sound.add('bloon_pop');
+		this.explosion = this.sound.add('explosion');
+		this.soundtrack.loop = true;
+		this.soundtrack.play()
 		this.grace_period = true;
 		this.is_dragging = false;
 		this.game_over = false;
@@ -79,8 +87,8 @@ class GameScene extends Phaser.Scene {
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
-		this.lives = 999;
-		this.money = 69420;
+		this.lives = 150;
+		this.money = 500;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
 		this.all_bloons_deployed = false;
 		this.tower_selected = false;
@@ -313,6 +321,7 @@ class GameScene extends Phaser.Scene {
 	}
 
 	return_to_menu() {
+		this.soundtrack.stop();
 		this.scene.start('home');
 	}
 
@@ -380,7 +389,7 @@ class GameScene extends Phaser.Scene {
 	spawn_bloons() {
 		tick += level_data[this.level].tick;
 
-		if (tick >= 100 && !this.all_bloons_deployed) {
+		if (tick >= 40 && !this.all_bloons_deployed) {
 			tick = 0;
 
 			var idx = this.counter % this.bloons_deployed.length;
