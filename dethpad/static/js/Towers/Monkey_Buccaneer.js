@@ -4,6 +4,8 @@ class Monkey_Buccaneer extends Tower {
 
         super('monkey_buccaneer', 750, 175);
 
+        this.display_name = 'Monkey Buccaneer';
+        this.description = 'Monkey Buccaneer fires powerful bombs with AOE damage. However, they can only be placed on water.';
         this.cost = 400;
         this.max_charge = 100;
         this.charge = this.max_charge;

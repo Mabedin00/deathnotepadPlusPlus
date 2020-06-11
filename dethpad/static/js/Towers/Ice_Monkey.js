@@ -4,6 +4,8 @@ class Ice_Monkey extends Tower {
 
         super('ice_monkey', 875, 175);
 
+        this.display_name = 'Ice Monkey';
+        this.description = 'Freezes nearby bloons with every pulse. Frozen bloons are immune to anything sharp.';
         this.cost = 400;
         this.max_charge = 60;
         this.charge = this.max_charge;

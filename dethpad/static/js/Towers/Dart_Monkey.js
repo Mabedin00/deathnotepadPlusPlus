@@ -4,6 +4,8 @@ class Dart_Monkey extends Tower {
 
         super('dart_monkey', 750, 50);
 
+        this.display_name = 'Dart Monkey';
+        this.description = 'Shoot a single dart that pops a single bloon. A good, cheap tower suitable for the early rounds.';
         this.cost = 200;
         this.max_charge = 60;
         this.charge = this.max_charge;

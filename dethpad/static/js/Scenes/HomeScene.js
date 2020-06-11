@@ -5,11 +5,11 @@ class HomeScene extends Phaser.Scene {
 
 	preload () {
 		this.load.image('home_screen', 'static/images/home/home_page.png');
-		this.load.image('instructions', 'static/images/home/instruction_button.png');
-		this.load.image('log_in', 'static/images/home/log_in_button.png');
-		this.load.image('play', 'static/images/home/play_button.png');
-		this.load.image('achievements', 'static/images/home/achievements_button.png');
-		this.load.image('settings', 'static/images/home/settings_button.png');
+		this.load.image('Instructions', 'static/images/home/instruction_button.png');
+		this.load.image('Login', 'static/images/home/log_in_button.png');
+		this.load.image('Play', 'static/images/home/play_button.png');
+		this.load.image('Leaderboard', 'static/images/home/achievements_button.png');
+		this.load.image('Settings', 'static/images/home/settings_button.png');
 
 		this.load.image('border', 'static/images/maps/border.png');
 
@@ -76,33 +76,52 @@ class HomeScene extends Phaser.Scene {
 	}
 
 	create () {
+		scene = this;
 		this.add.image(500, 300, 'home_screen').setDisplaySize(1000,600);
-		this.place_buttons('instructions', 300, 500, .7, this.instructions_function, this);
-		this.place_buttons('settings', 400, 525, .7, this.settings_function, this);
-		this.place_buttons('play', 500, 540 , .9, this.play_function, this);
-		this.place_buttons('log_in', 600, 525, .7, this.log_in_function, this);
-		this.place_buttons('achievements', 700, 500, .7, this.achievements_function, this);
+		this.place_buttons('Instructions', 300, 500, .7, this.instructions_function, this);
+		this.place_buttons('Settings', 400, 525, .7, this.settings_function, this);
+		this.place_buttons('Play', 500, 540 , .9, this.play_function, this);
+		this.place_buttons('Login', 600, 525, .7, this.login_function, this);
+		this.place_buttons('Leaderboard', 700, 500, .7, this.achievements_function, this);
 		this.instructions = [
-			"Your goal is to stop the bloons (balloons) from reaching the end of the course.",
-			"You can place towers by clicking on the tower you want and clicking them again on a placeable area.",
-			"But you must make sure you have enough money for the tower.",
-			"Money is gained 3 different ways: popping bloons, completing levels, and collecting bananas from banana farms placed down. ",
-			"Some other things you can do are upgrading your towers, selling your towers, and going to the next level right away with the start button.",
+			"To place a tower: click once on a tower, then click the desired location \n",
+			"To start the next. level, click the green button with a single arrow \n",
+			"To fast forward, click the button with the triple arrow \n",
+			"Money is gained by popping bloons, completing levels, and collecting bananas from banana farms. \n",
 			"Hotkeys:",
 			"X to deselect a tower",
 			"ESC to pause",
 			"S to sell selected tower",
-			"Once your lifepoints hit zero it's game over.",
-			"Good Luck!"
 		]
 	}
 
 	place_buttons(button_name, x, y, scale, button_function, scene){
 		let button = this.add.image(x, y, button_name).setScale(scale);
 		button.setInteractive();
+		button.text = button_name;
         button.on('pointerdown', button_function, scene);
+		button.on('pointerover', this.display_info, button);
+		button.on('pointerout', this.hide_info, button);
 	}
-	log_in_function(){
+
+
+	display_info() {
+		this.display_text = scene.add.text(this.x, this.y - 50, this.text, {
+			backgroundColor: 'black',
+			color: 'white',
+			font: 'bold 18px Arial',
+			wordWrap: { width: 125 }
+		});
+		this.display_text.setDepth(5).setPadding(3, 3);
+		this.setTint(0xbecafe)
+	}
+
+	hide_info() {
+		this.display_text.destroy();
+		this.clearTint();
+	}
+
+	login_function(){
 		window.location = '/login'
 	}
 	settings_function(){
@@ -115,14 +134,11 @@ class HomeScene extends Phaser.Scene {
 		window.location = '/leaderboard'
 	}
 	instructions_function(){
-		let some = this.add.image(500, 300, 'popup').setScale(.4);
-		// console.log(some.x - (some.width/2 * .4), some.y-(some.height/2 * .4))
-		// let graphics = this.add.graphics({ fillStyle: { color: 0x000000 , alpha: .5} }).setDepth(2);
-		// let rectangle = new Phaser.Geom.Rectangle(325, 150, 400, 300);
-		// graphics.fillRectShape(rectangle);
-		let down_btn = this.add.image(750, 450, 'play').setScale(.5).setInteractive();
-		let up_btn = this.add.image(750, 150, 'play').setScale(.5).setInteractive();
-		let back_btn = this.add.image(230, 142, 'back').setScale(.3).setInteractive();
+		let some = this.add.image(500, 300, 'popup').setScale(.4).setDepth(2);
+		this.create_border(some, 'black', .8, 10, 1)
+		let down_btn = this.add.image(750, 430, 'Play').setScale(.5).setInteractive().setDepth(2);
+		let up_btn = this.add.image(750, 170, 'Play').setScale(.5).setInteractive().setDepth(2);
+		let back_btn = this.add.image(230, 142, 'back').setScale(.3).setInteractive().setDepth(2);
 
 		down_btn.rotation += Math.PI/2;
 		up_btn.rotation -= Math.PI/2;
@@ -131,31 +147,43 @@ class HomeScene extends Phaser.Scene {
 	    graphics.fillStyle(0xffffff, 0);
 		graphics.fillRect(325, 150, 400, 300);
 		var mask = new Phaser.Display.Masks.GeometryMask(this, graphics);
-		var text = this.add.text(375, 150, this.instructions, { fontFamily: 'Arial', color: 'brown', wordWrap: { width: 310 } }).setFontSize(25);
+		var text = this.add.text(375, 150, this.instructions, { fontFamily: 'Arial', color: 'black', wordWrap: { width: 310 } }).setFontSize(25).setDepth(2);
 		text.setMask(mask);
-		var zone = this.add.zone(325, 150, 400, 300).setInteractive();
 		down_btn.on('pointerdown', function () {
-	        text.y -= 10;
-	        text.y = Phaser.Math.Clamp(text.y, -400, 300);
+	        text.y -= 200;
+	        text.y = Phaser.Math.Clamp(text.y, -200, 350);
 		});
+		down_btn.on('pointerover', function() {this.setTint(0xbecafe)})
+		down_btn.on('pointerout', function() {this.clearTint()})
+
 		up_btn.on('pointerdown', function () {
-	        text.y += 10;
-	        text.y = Phaser.Math.Clamp(text.y, -400, 300);
+	        text.y += 200;
+	        text.y = Phaser.Math.Clamp(text.y, -200, 150)
 		});
+		up_btn.on('pointerover', function() {this.setTint(0xbecafe)})
+		up_btn.on('pointerout', function() {this.clearTint()})
+
 		back_btn.on('pointerdown', function () {
 			some.destroy();
 			down_btn.destroy();
 			up_btn.destroy();
+			some.graphics.destroy();
 			mask.destroy();
 			text.destroy();
 			graphics.destroy();
-			zone.destroy();
 			back_btn.destroy();
-
-
 		});
+		back_btn.on('pointerover', function() {this.setTint(0xbecafe)})
+		back_btn.on('pointerout', function() {this.clearTint()})
 	}
-    update() {
 
-    }
+	create_border(element, color, alpha, border, depth) {
+		element.graphics = this.add.graphics({ fillStyle: { color: color , alpha: alpha} });
+		let rectangle = new Phaser.Geom.Rectangle(
+			element.x - element.displayWidth/2  - border/2,
+			element.y - element.displayHeight/2 - border/2,
+			element.displayWidth  + border,
+			element.displayHeight + border);
+		element.graphics.fillRectShape(rectangle).setDepth(depth);
+	}
 }

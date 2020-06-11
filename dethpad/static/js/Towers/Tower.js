@@ -13,6 +13,8 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.being_dragged = false;
         this.setInteractive();
         this.on('pointerdown', this.toggle_drag, this);
+        this.on('pointerover', this.display_info, this);
+        this.on('pointerout', this.hide_info, this);
     }
 
     toggle_drag() {
@@ -48,6 +50,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         }
         this.being_dragged = !this.being_dragged
         if (this.being_dragged) {
+            this.hide_info();
             this.graphics = scene.add.graphics({ fillStyle: { color: 0xffffff , alpha: .2} });
             this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
             this.graphics.fillCircleShape(this.circle);
@@ -56,16 +59,37 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     place_tower(x, y) {
-        // console.log(this)
         this.graphics.visible = false;
         scene.prevent_tower_stacking(x, y, this.width / 2, this.height / 2);
         scene.is_dragging = false;
         scene.money -= this.cost;
         this.create_tower();
+        this.hide_info();
         this.on('pointerdown', this.show_details, this);
 
 
         this.placed = true;
+    }
+
+    display_info() {
+        if (this.placed || this.being_dragged) return;
+        this.text_box = scene.add.graphics({ fillStyle: { color: 0x000000 , alpha: .7} }).setDepth(5);
+		let rectangle = new Phaser.Geom.Rectangle(this.x-30, this.y, 135, 175);
+		this.text_box.fillRectShape(rectangle);
+        this.display_name_text = scene.add.text(this.x-20, this.y, this.display_name, { font: 'bold 18px Arial', wordWrap: { width: 125 } }).setDepth(5);
+        this.price_text = scene.add.text(this.x-20, this.y+50, 'Cost: '+this.cost, { font: 'bold 14px Arial' }).setDepth(5);
+        this.range_text = scene.add.text(this.x-20, this.y+70, 'Range: '+this.range, { font: 'bold 14px Arial' }).setDepth(5);
+        this.description_text = scene.add.text(this.x-20, this.y+90, this.description, { font: '12px Arial', wordWrap: { width: 125 } }).setDepth(5);
+    }
+
+    hide_info() {
+        if (this.placed) return;
+        this.text_box.destroy();
+        this.display_name_text.destroy();
+        this.price_text.destroy();
+        this.range_text.destroy();
+        this.description_text.destroy();
+
 
     }
 
