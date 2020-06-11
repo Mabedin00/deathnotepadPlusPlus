@@ -14,3 +14,7 @@
 .modal-header {
     border-bottom: 1px solid lightslategray;
 }
+
+#map_img {
+    width: 30vw;
+}

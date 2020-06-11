@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, session, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, jsonify
 from flask_login import LoginManager, current_user
 
 from dethpad.models import db, User, Map0, Map1, Map2, Map3, Map4, Map5
@@ -91,6 +91,40 @@ def leaderboard():
     scores['Scorched Earth'].append(get_score(Map5.query.order_by(Map5.score.desc()).first()))
 
     return render_template('leaderboard.html', scores=scores)
+
+
+@app.route('/map-stats/<map>')
+def map_stats(map):
+    stats = {}
+    if map == 'Ocean Road':
+        table = Map0
+    elif map == 'Cubism':
+        table = Map1
+    elif map == 'Floating Island':
+        table = Map2
+    elif map == 'Lightning Scar':
+        table = Map3
+    elif map == 'Castlemania':
+        table = Map4
+    elif map == 'Scorched Earth':
+        table = Map5
+
+    stats['gp'] = table.query.count()
+    if stats['gp'] == 0:
+        stats['ghs'] = 0
+    else:
+        stats['ghs'] = table.query.order_by(table.score.desc()).first().score
+    if current_user.is_authenticated:
+        stats['up'] = table.query.filter_by(user_id=current_user.id).count()
+        if stats['up'] == 0:
+            stats['uhs'] = 0
+        else:
+            stats['uhs'] = table.query.filter_by(user_id=current_user.id).order_by(table.score.desc()).first().score
+    else:
+        stats['uhs'] = 0
+        stats['up'] = 0
+
+    return jsonify(stats)
 
 
 def get_score(score):
