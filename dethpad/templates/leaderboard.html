@@ -18,8 +18,8 @@
         {% for map in scores %}
             <tr class="map_row" id="{{ map }}">
                 <td>{{ map }}</td>
-                <td>{{ scores[map][0] }}</td>
-                <td>{{ scores[map][1] }}</td>
+                <td>{{ format(scores[map][0], ',d') }}</td>
+                <td>{{ format(scores[map][1], ',d') }}</td>
             </tr>
         {% endfor %}
         </tbody>

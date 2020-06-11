@@ -90,7 +90,7 @@ def leaderboard():
     scores['Castlemania'].append(get_score(Map4.query.order_by(Map4.score.desc()).first()))
     scores['Scorched Earth'].append(get_score(Map5.query.order_by(Map5.score.desc()).first()))
 
-    return render_template('leaderboard.html', scores=scores)
+    return render_template('leaderboard.html', scores=scores, format=format)
 
 
 @app.route('/map-stats/<map>')
