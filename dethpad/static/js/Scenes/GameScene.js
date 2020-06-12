@@ -15,45 +15,6 @@ class GameScene extends Phaser.Scene {
 	preload () {
 		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
 		this.load.audio(this.map + '_audio', 'static/audio/' + this.map + '.mp3');
-
-		//
-		// this.load.image('border', 'static/images/maps/border.png');
-		//
-		// this.load.image('popup', 'static/images/menus/popup.jpg')
-		// this.load.image('resume', 'static/images/menus/resume_button.jpg')
-		// this.load.image('retry', 'static/images/menus/retry_button.jpg')
-		// this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
-		// this.load.image('next_level', 'static/images/menus/next_level.jpg')
-		//
-		// this.load.image('sidebar', 'static/images/maps/map_selection_sidebar.png')
-		//
-		// this.load.image('lives', 'static/images/menus/lives.png' );
-		// this.load.image('money', 'static/images/menus/money.png' );
-		//
-		// this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
-		// this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
-		// this.load.image('green_bloon', 'static/images/bloons/green_bloon.png');
-		// this.load.image('yellow_bloon', 'static/images/bloons/yellow_bloon.png');
-		// this.load.image('pink_bloon', 'static/images/bloons/pink_bloon.png');
-		// this.load.image('white_bloon', 'static/images/bloons/white_bloon.png');
-		// this.load.image('black_bloon', 'static/images/bloons/black_bloon.png');
-		// this.load.image('zebra_bloon', 'static/images/bloons/zebra_bloon.png');
-		// this.load.image('rainbow_bloon', 'static/images/bloons/rainbow_bloon.png');
-		// this.load.image('ceramic_bloon', 'static/images/bloons/ceramic_bloon.png');
-		// this.load.image('MOAB', 'static/images/bloons/MOAB.png');
-		//
-		// this.load.image('dart_monkey', 'static/images/towers/dart_monkey.png');
-		// this.load.image('monkey_buccaneer', 'static/images/towers/buccaneer.png');
-		// this.load.image('tack_shooter', 'static/images/towers/tack_shooter.png');
-		// this.load.image('ice_monkey', 'static/images/towers/ice_monkey.png');
-		// this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
-		// this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
-		//
-		// this.load.image('dart', 'static/images/projectiles/dart.png');
-		// this.load.image('bomb', 'static/images/projectiles/bomb.png');
-		// this.load.image('blizzard', 'static/images/projectiles/blizzard.png');
-		// this.load.image('banana', 'static/images/projectiles/banana.png');
-
 	}
 
 	create () {
@@ -87,7 +48,7 @@ class GameScene extends Phaser.Scene {
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
-		this.lives = 150;
+		this.lives = 1;
 		this.money = 500;
 		this.fast_forward = 1;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
@@ -122,25 +83,37 @@ class GameScene extends Phaser.Scene {
 		this.popup.graphics.setAlpha(0);
 		this.popup.visible = false;
 
+		this.pause_text = this.add.text(286, 127, 'Paused', {font: '36px Arial'})
+		this.pause_text.visible = false;
+		this.pause_text.setDepth(5);
+
 		// needs new event listener
 		this.resume = this.add.image(343, 203, 'resume').setDepth(4);
 		this.resume.setInteractive();
 		this.resume.on('pointerdown', this.resume_game, this);
+		this.resume.on('pointerover', function() {this.setTint(0xbecafe)})
+		this.resume.on('pointerout', function() {this.clearTint()})
 		this.resume.visible = false;
 
 		this.infinite = this.add.image(343, 203, 'resume').setDepth(4);
 		this.infinite.setInteractive();
 		this.infinite.on('pointerdown', this.infinite_mode, this);
+		this.infinite.on('pointerover', function() {this.setTint(0xbecafe)})
+		this.infinite.on('pointerout', function() {this.clearTint()})
 		this.infinite.visible = false;
 
 		this.retry = this.add.image(343, 253, 'retry').setDepth(4);
 		this.retry.setInteractive();
 		this.retry.on('pointerdown', this.restart_game, this);
+		this.retry.on('pointerover', function() {this.setTint(0xbecafe)})
+		this.retry.on('pointerout', function() {this.clearTint()})
 		this.retry.visible = false;
 
 		this.main_menu = this.add.image(343, 303, 'main_menu').setDepth(4);
 		this.main_menu.setInteractive();
 		this.main_menu.on('pointerdown', this.return_to_menu, this);
+		this.main_menu.on('pointerover', function() {this.setTint(0xbecafe)})
+		this.main_menu.on('pointerout', function() {this.clearTint()})
 		this.main_menu.visible = false;
 
 		this.next_level = this.add.image(770, 479, 'next_level').setDepth(4).setScale(.6, 1);
@@ -239,7 +212,7 @@ class GameScene extends Phaser.Scene {
 		});
 		for (let sold_tower of sold_towers) {
 
-			if (sold_tower != undefined){
+			if (sold_tower != undefined) {
 				sold_tower.graphics.destroy();
  				sold_tower.destroy();
 		 	}
@@ -306,6 +279,7 @@ class GameScene extends Phaser.Scene {
 
 	pause_game() {
 		this.popup.visible = true;
+		this.pause_text.visible = true;
 		this.popup.graphics.setAlpha(1);
 		this.resume.visible = true;
 		this.retry.visible = true;
@@ -317,6 +291,7 @@ class GameScene extends Phaser.Scene {
 		this.resume.visible = false;
 		this.retry.visible = false;
 		this.popup.visible = false;
+		this.pause_text.visible = false;
 		this.popup.graphics.setAlpha(0);
 		this.main_menu.visible = false;
 		this.paused = false;
@@ -341,7 +316,7 @@ class GameScene extends Phaser.Scene {
 
 	lose_game() {
 		this.game_over = true;
-		this.add.text(200, 150, 'You Lose!', { font: '64px Arial' }).setDepth(2);
+		this.add.text(200, 150, 'You Lose!', { font: '64px Arial' }).setDepth(5);
 		this.popup.visible = true;
 		this.popup.graphics.setAlpha(1);
 		this.retry.visible = true;
@@ -406,7 +381,6 @@ class GameScene extends Phaser.Scene {
 
 	spawn_bloons() {
 		tick += (level_data[this.level].tick * scene.fast_forward);
-		console.log(tick, scene.fast_forward)
 		if (tick >= 40 && !this.all_bloons_deployed) {
 			tick = 0;
 

@@ -4,6 +4,8 @@ class Tack_Shooter extends Tower {
 
         super('tack_shooter', 875, 50);
 
+        this.display_name = 'Tack Shooter';
+        this.description = 'Shoots a short range volley of sharp tacks in 8 directions.';
         this.cost = 550;
         this.max_charge = 85;
         this.charge = this.max_charge;

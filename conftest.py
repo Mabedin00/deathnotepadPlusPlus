@@ -4,13 +4,13 @@ import shutil
 
 import pytest
 
-from app import app, db
+from dethpad import app, db
 
 
 @pytest.fixture
 def application():
     db_fd, temp_path = tempfile.mkstemp('.db')
-    shutil.copy2('./app/static/data/database.db', temp_path)
+    shutil.copy2('./dethpad/static/data/database.db', temp_path)
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{temp_path}'
     app.config['TESTING'] = True
     app.config['WTF_CSRF_ENABLED'] = False
