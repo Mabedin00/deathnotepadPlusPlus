@@ -15,8 +15,7 @@ class Yellow_Bloon extends Bloon {
     }
 
     transform() {
-        scene.bloon_pop.play();
-        
+        this.pop_sound();
         new Green_Bloon(this.progress, this.health, this.path);
         this.destroy();
     }

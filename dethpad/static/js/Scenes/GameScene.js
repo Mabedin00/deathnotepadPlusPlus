@@ -34,7 +34,7 @@ class GameScene extends Phaser.Scene {
 	set_vars() {
 		scene = this;
 		this.soundtrack = this.sound.add(this.map + '_audio');
-		this.soundtrack.volume = .1
+		this.soundtrack.volume = bgm
 		this.bloon_pop = this.sound.add('bloon_pop');
 		this.explosion = this.sound.add('explosion');
 		this.soundtrack.loop = true;

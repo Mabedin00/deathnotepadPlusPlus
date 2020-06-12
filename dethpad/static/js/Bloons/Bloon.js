@@ -70,4 +70,10 @@ class Bloon extends Phaser.GameObjects.Sprite {
         scene.lives -= bloon.damage;
         bloon.destroy();
     }
+
+    pop_sound() {
+        scene.bloon_pop.volume = sfx;
+        scene.bloon_pop.play();
+
+    }
 }

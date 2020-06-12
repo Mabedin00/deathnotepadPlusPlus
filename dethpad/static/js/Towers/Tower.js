@@ -25,12 +25,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         let mouseX = Math.floor(scene.input.activePointer.x);
         let mouseY = Math.floor(scene.input.activePointer.y);
         let tile;
-        if (scene.tiles[mouseY] == undefined) {
-            tile = undefined
-        }
-        else {
-            tile = scene.tiles[mouseY][mouseX];
-        }
+        scene.tiles[mouseY] == undefined ? tile = undefined : tile = scene.tiles[mouseY][mouseX]
 
         // if user attempts to place on an invalid tile, don't do anything
         if (this.being_dragged && tile != this.domain && tile != undefined) {
@@ -119,19 +114,14 @@ class Tower extends Phaser.GameObjects.Sprite {
         let mouseX = Math.floor(scene.input.activePointer.x);
         let mouseY = Math.floor(scene.input.activePointer.y);
         let tile;
-        if (scene.tiles[mouseY] == undefined) {
-            tile = undefined
-        }
-        else {
-            tile = scene.tiles[mouseY][mouseX];
-        }
+        scene.tiles[mouseY] == undefined ? tile = undefined : tile = scene.tiles[mouseY][mouseX]
+
         this.x = mouseX;
         this.y = mouseY;
         this.graphics.destroy();
 
         let fillcolor;
-        if (tile != this.domain) fillcolor = '0xff0000';
-        else                     fillcolor = '0xffffff';
+        tile != this.domain ? fillcolor = '0xff0000' : fillcolor = '0xffffff'
 
         this.graphics = scene.add.graphics({ fillStyle: { color: fillcolor , alpha: .2} });
         this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
