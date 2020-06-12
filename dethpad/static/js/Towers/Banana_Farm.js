@@ -4,6 +4,8 @@ class Banana_Farm extends Tower {
 
         super('banana_farm', 750, 325);
 
+        this.display_name = 'Banana Farm';
+        this.description = 'Banana Farms grow bananas that you can collect for cash by clicking on them';
         this.cost = 800;
         this.max_charge = 300;
         this.charge = this.max_charge;
