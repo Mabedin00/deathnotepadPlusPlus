@@ -22,10 +22,7 @@ class MOAB extends Bloon {
     }
 
     transform() {
-        scene.bloon_pop.volume = 2;
-        scene.bloon_pop.play();
-        scene.bloon_pop.volume = 1;
-
+        this.pop_sound();
 
         new Ceramic_Bloon(this.progress, this.health, this.path);
         new Ceramic_Bloon(this.progress+.001, this.health, this.path);

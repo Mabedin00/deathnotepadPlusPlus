@@ -19,7 +19,8 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('main_menu', 'static/images/menus/main_menu_button.jpg')
 		this.load.image('next_level', 'static/images/menus/next_level.jpg')
 		this.load.image('fast_forward', 'static/images/menus/fast_forward.jpg')
-
+		this.load.image('volume_bar', 'static/images/menus/volume_bar.png')
+		this.load.image('slider', 'static/images/menus/slider.png')
 
 		this.load.image('sidebar', 'static/images/maps/map_selection_sidebar.png')
 
@@ -114,7 +115,52 @@ class HomeScene extends Phaser.Scene {
 		window.location = '/login'
 	}
 	settings_function(){
-		console.log("settings");
+		const LOWER_BOUND = 380;
+		const UPPER_BOUND = 620;
+
+		let some = this.add.image(500, 300, 'popup').setScale(.4).setDepth(2);
+		this.create_border(some, 'black', .8, 10, 1);
+		let bgm_bar = this.add.image(615, 275, 'volume_bar').setScale(2).setDepth(2);
+		let sfx_bar = this.add.image(615, 400, 'volume_bar').setScale(2).setDepth(2);
+		let bgm_text = this.add.text(300, 230, 'BGM: ', {color: 'black', font: '24px Arial'}).setDepth(2)
+		let sfx_text = this.add.text(300, 355, 'SFX: ', {color: 'black', font: '24px Arial'}).setDepth(2)
+		let bgm_slider = this.add.image(bgm_x_coor, 245, 'slider').setDepth(2).setInteractive();
+		let sfx_slider = this.add.image(sfx_x_coor, 370, 'slider').setDepth(2).setInteractive();
+		this.input.setDraggable(bgm_slider);
+		this.input.setDraggable(sfx_slider);
+
+		bgm_slider.on('drag', function() {
+			let mouseX = Math.floor(scene.input.activePointer.x);
+	        this.x = mouseX;
+			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
+			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+		});
+		sfx_slider.on('drag', function() {
+			let mouseX = Math.floor(scene.input.activePointer.x);
+	        this.x = mouseX;
+			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
+			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+		});
+
+		let back_btn = this.add.image(230, 142, 'back').setScale(.3).setInteractive().setDepth(2);
+		back_btn.on('pointerdown', function () {
+			some.graphics.destroy();
+			some.destroy();
+			back_btn.destroy();
+			sfx = (sfx_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+			bgm = (bgm_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+			sfx_x_coor = sfx_slider.x;
+			bgm_x_coor = bgm_slider.x
+			bgm_bar.destroy();
+			sfx_bar.destroy();
+			bgm_text.destroy();
+			sfx_text.destroy();
+			bgm_slider.destroy();
+			sfx_slider.destroy();
+		});
+		back_btn.on('pointerover', function() {this.setTint(0xbecafe)})
+		back_btn.on('pointerout', function() {this.clearTint()})
+
 	}
 	play_function(){
 		this.scene.start('selection');
