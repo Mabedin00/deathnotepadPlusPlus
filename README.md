@@ -53,7 +53,7 @@ Run the following:
     ```
 6. Run make
     ```bash
-    $ python3 -m app.__init__ 
+    $ python3 -m dethpad.__init__ 
     ```
 7. Visit ```http://127.0.0.1:5000/``` in your browser to start using!
 
