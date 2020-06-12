@@ -62,17 +62,6 @@ class HomeScene extends Phaser.Scene {
 
 		this.load.audio('bloon_pop', 'static/audio/bloon_pop.mp3');
 		this.load.audio('explosion', 'static/audio/explosion.mp3');
-
-
-
-		// this.load.audio('ocean_road_audio', 'static/audio/ocean_road.mp3');
-		// this.load.audio('cubism_audio', 'static/audio/cubism.mp3');
-		// this.load.audio('castlemania_audio', 'static/audio/castlemania.mp3');
-		// this.load.audio('lightning_scar_audio', 'static/audio/lightning_scar.mp3');
-		// this.load.audio('floating_island_audio', 'static/audio/floating_island.mp3');
-		// this.load.audio('scorched_earth_audio', 'static/audio/scorched_earth.mp3');
-
-
 	}
 
 	create () {
@@ -85,9 +74,9 @@ class HomeScene extends Phaser.Scene {
 		this.place_buttons('Leaderboard', 700, 500, .7, this.achievements_function, this);
 		this.instructions = [
 			"To place a tower: click once on a tower, then click the desired location \n",
-			"To start the next. level, click the green button with a single arrow \n",
+			"To select a tower, click on it\n",
+			"To start the next level, click the green button with a single arrow \n",
 			"To fast forward, click the button with the triple arrow \n",
-			"Money is gained by popping bloons, completing levels, and collecting bananas from banana farms. \n",
 			"Hotkeys:",
 			"X to deselect a tower",
 			"ESC to pause",
@@ -151,7 +140,7 @@ class HomeScene extends Phaser.Scene {
 		text.setMask(mask);
 		down_btn.on('pointerdown', function () {
 	        text.y -= 200;
-	        text.y = Phaser.Math.Clamp(text.y, -200, 350);
+	        text.y = Phaser.Math.Clamp(text.y, -50, 350);
 		});
 		down_btn.on('pointerover', function() {this.setTint(0xbecafe)})
 		down_btn.on('pointerout', function() {this.clearTint()})

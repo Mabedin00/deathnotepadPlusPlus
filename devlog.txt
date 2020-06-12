@@ -35,3 +35,6 @@ Mohidul Abedin, Brian Moses -- 2020-06-07 22:00
 
 Mohidul Abedin, Brian Moses -- 2020-06-11 20:00
     - added button tint
+
+Brian Moses -- 2020-06-11 12:00
+    - added indicator for invalid tower placement

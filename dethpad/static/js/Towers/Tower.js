@@ -25,16 +25,16 @@ class Tower extends Phaser.GameObjects.Sprite {
         let mouseX = Math.floor(scene.input.activePointer.x);
         let mouseY = Math.floor(scene.input.activePointer.y);
         let tile;
-        if (scene.tiles[mouseY] == undefined){
+        if (scene.tiles[mouseY] == undefined) {
             tile = undefined
         }
-        else{
+        else {
             tile = scene.tiles[mouseY][mouseX];
         }
 
         // if user attempts to place on an invalid tile, don't do anything
         if (this.being_dragged && tile != this.domain && tile != undefined) {
-          return;
+            return;
         }
         // if user does not have enough money, destroy currently selected monkey
         // and recreate in sidebar
@@ -116,10 +116,24 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     drag() {
-        this.x = scene.input.activePointer.x;
-        this.y = scene.input.activePointer.y;
+        let mouseX = Math.floor(scene.input.activePointer.x);
+        let mouseY = Math.floor(scene.input.activePointer.y);
+        let tile;
+        if (scene.tiles[mouseY] == undefined) {
+            tile = undefined
+        }
+        else {
+            tile = scene.tiles[mouseY][mouseX];
+        }
+        this.x = mouseX;
+        this.y = mouseY;
         this.graphics.destroy();
-        this.graphics = scene.add.graphics({ fillStyle: { color: 0xffffff , alpha: .2} });
+
+        let fillcolor;
+        if (tile != this.domain) fillcolor = '0xff0000';
+        else                     fillcolor = '0xffffff';
+
+        this.graphics = scene.add.graphics({ fillStyle: { color: fillcolor , alpha: .2} });
         this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
         this.graphics.fillCircleShape(this.circle);
     }
