@@ -4,6 +4,8 @@ class MapSelectionScene extends Phaser.Scene {
     }
 
     create () {
+        esc_key = this.input.keyboard.addKey('ESC');
+
         this.add.image(500, 253, 'background');
         this.add.text(320, 20, 'Select a Map!', { font: '60px Arial'});
         this.back = this.add.image(930, 550, 'back').setScale(.7).setTint(0xb5651d);
@@ -40,5 +42,12 @@ class MapSelectionScene extends Phaser.Scene {
 
     select_map() {
         this.scene.scene.start('game', {map: this.map});
+    }
+
+    update() {
+        if (esc_key.isDown) {
+            esc_key.isDown = false;
+            this.return_to_menu();
+        }
     }
 }

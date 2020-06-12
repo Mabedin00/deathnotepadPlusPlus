@@ -67,6 +67,9 @@ class HomeScene extends Phaser.Scene {
 
 	create () {
 		scene = this;
+
+	 	esc_key = this.input.keyboard.addKey('ESC');
+
 		this.add.image(500, 300, 'home_screen').setDisplaySize(1000,600);
 		this.place_buttons('Instructions', 300, 500, .7, this.instructions_function, this);
 		this.place_buttons('Settings', 400, 525, .7, this.settings_function, this);
@@ -132,6 +135,8 @@ class HomeScene extends Phaser.Scene {
 		bgm_slider.on('drag', function() {
 			let mouseX = Math.floor(scene.input.activePointer.x);
 	        this.x = mouseX;
+			bgm = (bgm_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+			bgm_x_coor = bgm_slider.x;
 			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
 			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
 		});
@@ -140,23 +145,22 @@ class HomeScene extends Phaser.Scene {
 	        this.x = mouseX;
 			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
 			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+			sfx = (sfx_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+			sfx_x_coor = sfx_slider.x
 		});
 
 		let back_btn = this.add.image(230, 142, 'back').setScale(.3).setInteractive().setDepth(2);
 		back_btn.on('pointerdown', function () {
-			some.graphics.destroy();
-			some.destroy();
-			back_btn.destroy();
-			sfx = (sfx_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
-			bgm = (bgm_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
-			sfx_x_coor = sfx_slider.x;
-			bgm_x_coor = bgm_slider.x
-			bgm_bar.destroy();
-			sfx_bar.destroy();
-			bgm_text.destroy();
-			sfx_text.destroy();
-			bgm_slider.destroy();
-			sfx_slider.destroy();
+			scene.scene.restart();
+			// some.graphics.destroy();
+			// some.destroy();
+			// back_btn.destroy();
+			// bgm_bar.destroy();
+			// sfx_bar.destroy();
+			// bgm_text.destroy();
+			// sfx_text.destroy();
+			// bgm_slider.destroy();
+			// sfx_slider.destroy();
 		});
 		back_btn.on('pointerover', function() {this.setTint(0xbecafe)})
 		back_btn.on('pointerout', function() {this.clearTint()})
@@ -199,14 +203,15 @@ class HomeScene extends Phaser.Scene {
 		up_btn.on('pointerout', function() {this.clearTint()})
 
 		back_btn.on('pointerdown', function () {
-			some.destroy();
-			down_btn.destroy();
-			up_btn.destroy();
-			some.graphics.destroy();
-			mask.destroy();
-			text.destroy();
-			graphics.destroy();
-			back_btn.destroy();
+			scene.scene.restart();
+			// some.destroy();
+			// down_btn.destroy();
+			// up_btn.destroy();
+			// some.graphics.destroy();
+			// mask.destroy();
+			// text.destroy();
+			// graphics.destroy();
+			// back_btn.destroy();
 		});
 		back_btn.on('pointerover', function() {this.setTint(0xbecafe)})
 		back_btn.on('pointerout', function() {this.clearTint()})
@@ -220,5 +225,9 @@ class HomeScene extends Phaser.Scene {
 			element.displayWidth  + border,
 			element.displayHeight + border);
 		element.graphics.fillRectShape(rectangle).setDepth(depth);
+	}
+
+	update() {
+		if (esc_key.isDown) this.scene.restart();
 	}
 }
