@@ -16,9 +16,10 @@ class Rainbow_Bloon extends Bloon {
 
     transform() {
         this.pop_sound();
-        new Zebra_Bloon(this.progress, this.health, this.path);
-        new Zebra_Bloon(this.progress+.001, this.health, this.path);
         this.destroy();
+        let child1 = new Zebra_Bloon(this.progress, this.health, this.path);
+        let child2 = new Zebra_Bloon(this.progress+.001, this.health, this.path);
+        return [child1, child2];
     }
 
 }

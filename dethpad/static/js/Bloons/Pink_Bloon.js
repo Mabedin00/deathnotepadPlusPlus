@@ -15,8 +15,9 @@ class Pink_Bloon extends Bloon {
 
     transform() {
         this.pop_sound();
-        new Yellow_Bloon(this.progress, this.health, this.path);
         this.destroy();
+        let child = new Yellow_Bloon(this.progress, this.health, this.path);
+        return [child];
     }
 
 }

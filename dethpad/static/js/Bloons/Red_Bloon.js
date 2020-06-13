@@ -16,6 +16,7 @@ class Red_Bloon extends Bloon {
     transform(){
         this.pop_sound();
         this.destroy();
+        return [];
     }
 
 }
