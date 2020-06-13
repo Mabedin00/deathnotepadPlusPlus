@@ -9,7 +9,7 @@ class Super_Dart extends Projectile {
         this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
         scene.physics.moveTo(this, this.target.x, this.target.y, this.speed);
 
-        this.setScale(.35);
+        this.setScale(.3);
     }
 
     inflict_damage(dart, bloon) {

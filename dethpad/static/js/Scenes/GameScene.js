@@ -21,6 +21,7 @@ class GameScene extends Phaser.Scene {
 		bloons = this.physics.add.group();
 		towers = this.physics.add.group();
 		projectiles = this.physics.add.group();
+		dartlings = this.physics.add.group();
 
 		this.set_vars();
 		this.create_key_bindings();
@@ -178,6 +179,7 @@ class GameScene extends Phaser.Scene {
 		new Monkey_Buccaneer();
 		new Tack_Shooter();
 		new Ice_Monkey();
+		new Dartling_Gun();
 		new Banana_Farm();
 		new Super_Monkey();
 	}
@@ -190,7 +192,6 @@ class GameScene extends Phaser.Scene {
 		let destroyed_projs = [];
 		projectiles.children.iterate(function (projectile){
 			destroyed_projs.push(projectile.check_range());
-
 		});
 		for (let destroyed_proj of destroyed_projs) {
 			if (destroyed_proj != undefined) destroyed_proj.destroy();
@@ -213,12 +214,16 @@ class GameScene extends Phaser.Scene {
 			}
 		});
 		for (let sold_tower of sold_towers) {
-
 			if (sold_tower != undefined) {
 				sold_tower.graphics.destroy();
  				sold_tower.destroy();
 		 	}
 		}
+
+		dartlings.children.iterate(function (dartling) {
+			if (dartling.placed) dartling.target();
+		});
+
 		if (this.paused) return;
 		if (this.grace_period) return;
 		if (this.game_over) return;
@@ -243,7 +248,6 @@ class GameScene extends Phaser.Scene {
 		bloons.children.iterate(function (bloon) {
 			bloon.move();
 		});
-
 
 		// create new bloons
 		this.spawn_bloons();
