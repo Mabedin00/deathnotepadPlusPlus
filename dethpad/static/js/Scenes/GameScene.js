@@ -221,6 +221,15 @@ class GameScene extends Phaser.Scene {
  				sold_tower.destroy();
 		 	}
 		}
+
+		bloons.children.iterate(function (bloon) {
+			if (scene.paused || scene.game_over ||scene.grace_period) return;
+			if (bloon.is_regen) {
+				bloon.regen_charge();
+				bloon.regen();
+			}
+
+		});
 		if (this.paused) return;
 		if (this.grace_period) return;
 		if (this.game_over) return;
