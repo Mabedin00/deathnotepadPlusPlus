@@ -115,11 +115,12 @@ def map_stats(map):
     else:
         stats['ghs'] = table.query.order_by(table.score.desc()).first().score
     if current_user.is_authenticated:
-        stats['up'] = table.query.filter_by(user_id=current_user.id).count()
+        user_scores = table.query.filter_by(user_id=current_user.id)
+        stats['up'] = user_scores.count()
         if stats['up'] == 0:
             stats['uhs'] = 0
         else:
-            stats['uhs'] = table.query.filter_by(user_id=current_user.id).order_by(table.score.desc()).first().score
+            stats['uhs'] = user_scores.order_by(table.score.desc()).first().score
     else:
         stats['uhs'] = 0
         stats['up'] = 0

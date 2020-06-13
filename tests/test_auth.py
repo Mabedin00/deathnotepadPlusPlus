@@ -1,6 +1,3 @@
-from flask import session
-
-
 def test_registration(client):
     assert client.get('/register').status_code == 200
 
@@ -27,13 +24,15 @@ def test_registration_validation(client):
     assert b'Account creation failed!' in response.data
 
 
-def test_login(client):
+def test_login_logout(client):
     assert client.get('/login').status_code == 200
 
     response = client.post('/login',
                            data={'username': 'bro', 'password': 'brbrbrbr'},
                            follow_redirects=True)
     assert b'Logged in successfully!' in response.data
+
+    assert b'Logged out successfully' in client.get('/logout', follow_redirects=True).data
 
 
 def test_login_validation(client):
@@ -51,10 +50,3 @@ def test_login_validation(client):
                            data={'username': 'testing', 'password': 'pass'},
                            follow_redirects=True)
     assert b'Authentication failed!' in response.data
-
-
-def test_logout(client):
-    client.post('/login', data={'username': 'bro', 'brbrbrbr': 'brbrbrbr'})
-    with client:
-        client.get('/logout')
-        assert 'user_id' not in session
