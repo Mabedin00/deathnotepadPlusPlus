@@ -1,5 +1,4 @@
 class Tower extends Phaser.GameObjects.Sprite {
-
     constructor(tower_type, x, y) {
 
         super(scene, x, y, tower_type);
@@ -9,6 +8,8 @@ class Tower extends Phaser.GameObjects.Sprite {
         scene.physics.world.enableBody(this, 0);
         towers.add(this);
 
+        this.path1 = 0;
+        this.path2 = 0;
         this.placed = false;
         this.being_dragged = false;
         this.setInteractive();
@@ -90,14 +91,16 @@ class Tower extends Phaser.GameObjects.Sprite {
         scene.selected_tower = this;
         scene.tower_selected = true;
         this.graphics.visible = true;
-        this.upgrade_bar.visible = true;
+        this.path1_bar.visible = true;
+        this.path2_bar.visible = true;
 
     }
 
     unshow_details(){
         scene.tower_selected = false;
         this.graphics.visible = false;
-        this.upgrade_bar.visible = false;
+        this.path1_bar.visible = false;
+        this.path2_bar.visible = false;
     }
 
     sell(){
@@ -158,19 +161,51 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     create_upgrades() {
-        this.upgrade_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: .2} }).setDepth(5);
-        this.upgrade_bar.visible = false;
+        this.path1_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: 1} }).setDepth(5);
+        this.path1_bar.visible = false;
+        this.path2_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: 1} }).setDepth(5);
+        this.path2_bar.visible = false;
 
         this.bought1 = new Phaser.Geom.Polygon([250, 510, 345, 510, 325, 550, 345, 590, 250, 590]);
         this.bought2 = new Phaser.Geom.Polygon([490, 510, 585, 510, 565, 550, 585, 590, 490, 590]);
-        this.upgrade_bar.fillStyle(0xff0000);
-        this.upgrade_bar.fillPoints(this.bought1.points, true);
-        this.upgrade_bar.fillPoints(this.bought2.points, true);
+        this.path1_bar.fillStyle(0x808080);
+        this.path2_bar.fillStyle(0x808080);
+        this.path1_bar.fillPoints(this.bought1.points, true);
+        this.path2_bar.fillPoints(this.bought2.points, true);
 
         this.new1 = new Phaser.Geom.Polygon([350, 510, 430, 510, 430, 590, 350, 590, 330, 550]);
         this.new2 = new Phaser.Geom.Polygon([590, 510, 670, 510, 670, 590, 590, 590, 570, 550]);
-        this.upgrade_bar.fillStyle(0x00ff00);
-        this.upgrade_bar.fillPoints(this.new1.points, true);
-        this.upgrade_bar.fillPoints(this.new2.points, true);
+        this.path1_bar.fillStyle(0x00ff00);
+        this.path2_bar.fillStyle(0x00ff00);
+        this.path1_bar.fillPoints(this.new1.points, true);
+        this.path2_bar.fillPoints(this.new2.points, true);
+
+        this.path1_bar.setInteractive(this.new1, Phaser.Geom.Polygon.Contains);
+        this.path1_bar.on('pointerdown', this.buy_path_1);
+		this.path1_bar.on('pointerover', () => {this.setTint(this.path1_bar, this.new1, 0x808080)});
+		this.path1_bar.on('pointerout', () => {this.clearTint(this.path1_bar, this.new1)});
+
+        this.path2_bar.setInteractive(this.new2, Phaser.Geom.Polygon.Contains);
+        this.path2_bar.on('pointerdown', this.buy_path_2);
+		this.path2_bar.on('pointerover', () => {this.setTint(this.path2_bar, this.new2, 0x808080)});
+		this.path2_bar.on('pointerout', () => {this.clearTint(this.path2_bar, this.new2)});
+    }
+
+    buy_path_1() {
+        console.log('1');
+    }
+
+    buy_path_2(){
+        console.log('2');
+    }
+
+    setTint(graphic, area, tint) {
+        graphic.fillStyle(tint, 0.1);
+        graphic.fillPoints(area.points, true);
+    }
+
+    clearTint(graphic, area) {
+        graphic.fillStyle(0x00ff00);
+        graphic.fillPoints(area.points, true);
     }
 }
