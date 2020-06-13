@@ -181,22 +181,46 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.path2_bar.fillPoints(this.new2.points, true);
 
         this.path1_bar.setInteractive(this.new1, Phaser.Geom.Polygon.Contains);
-        this.path1_bar.on('pointerdown', this.buy_path_1);
+        this.path1_bar.on('pointerdown', () => {this.buy_path_1(this)});
 		this.path1_bar.on('pointerover', () => {this.setTint(this.path1_bar, this.new1, 0x808080)});
 		this.path1_bar.on('pointerout', () => {this.clearTint(this.path1_bar, this.new1)});
 
         this.path2_bar.setInteractive(this.new2, Phaser.Geom.Polygon.Contains);
-        this.path2_bar.on('pointerdown', this.buy_path_2);
+        this.path2_bar.on('pointerdown', () => {this.buy_path_2(this)});
 		this.path2_bar.on('pointerover', () => {this.setTint(this.path2_bar, this.new2, 0x808080)});
 		this.path2_bar.on('pointerout', () => {this.clearTint(this.path2_bar, this.new2)});
     }
 
-    buy_path_1() {
-        console.log('1');
+    buy_path_1(tower) {
+        if (++tower.path1 == 3 && tower.path2 == 2) {
+            tower.path2_bar.fillStyle(0x808080);
+            tower.path2_bar.fillPoints(tower.new2.points, true);
+            tower.path2_bar.removeInteractive();
+        } else if (tower.path1 == 4) {
+            tower.path1_bar.fillStyle(0x808080);
+            tower.path1_bar.fillPoints(tower.new1.points, true);
+            tower.path1_bar.removeInteractive();
+        } else if (tower.path2 > 2 && tower.path1 == 2) {
+            tower.path1_bar.fillStyle(0x808080);
+            tower.path1_bar.fillPoints(tower.new1.points, true);
+            tower.path1_bar.removeInteractive();
+        }
     }
 
-    buy_path_2(){
-        console.log('2');
+    buy_path_2(tower){
+        if (++tower.path2 == 3 && tower.path1 == 2) {
+            tower.path1_bar.fillStyle(0x808080);
+            tower.path1_bar.fillPoints(tower.new1.points, true);
+            tower.path1_bar.removeInteractive();
+        } else if (tower.path2 == 4) {
+            tower.path2_bar.fillStyle(0x808080);
+            tower.path2_bar.fillPoints(tower.new2.points, true);
+            tower.path2_bar.removeInteractive();
+        } else if (tower.path1 > 2 && tower.path2 == 2) {
+            tower.path2_bar.fillStyle(0x808080);
+            tower.path2_bar.fillPoints(tower.new2.points, true);
+            tower.path2_bar.removeInteractive();
+        }
     }
 
     setTint(graphic, area, tint) {
