@@ -12,17 +12,17 @@ def test_registration(client):
 
 def test_registration_validation(client):
     response = client.post('/register',
-                           data={'username': 'test', 'password': 'password', 'repeat': 'password'},
+                           data={'username': 'bro', 'password': 'brbrbrbr', 'repeat': 'brbrbrbr'},
                            follow_redirects=True)
     assert b'Username taken!' in response.data
 
     response = client.post('/register',
-                           data={'username': 'testing', 'password': 'a', 'repeat': 'a'},
+                           data={'username': 'test', 'password': 'a', 'repeat': 'a'},
                            follow_redirects=True)
     assert b'Account creation failed!' in response.data
 
     response = client.post('/register',
-                           data={'username': 'testing', 'password': 'password', 'repeat': 'a'},
+                           data={'username': 'test', 'password': 'password', 'repeat': 'a'},
                            follow_redirects=True)
     assert b'Account creation failed!' in response.data
 
@@ -31,7 +31,7 @@ def test_login(client):
     assert client.get('/login').status_code == 200
 
     response = client.post('/login',
-                           data={'username': 'test', 'password': 'password'},
+                           data={'username': 'bro', 'password': 'brbrbrbr'},
                            follow_redirects=True)
     assert b'Logged in successfully!' in response.data
 
@@ -43,18 +43,18 @@ def test_login_validation(client):
     assert b'Username does not exist!' in response.data
 
     response = client.post('/login',
-                           data={'username': 'test', 'password': 'passwords'},
+                           data={'username': 'bro', 'password': 'brobrobr'},
                            follow_redirects=True)
     assert b'Incorrect password!' in response.data
 
     response = client.post('/login',
-                           data={'username': 'test', 'password': 'pass'},
+                           data={'username': 'testing', 'password': 'pass'},
                            follow_redirects=True)
     assert b'Authentication failed!' in response.data
 
 
 def test_logout(client):
-    client.post('/login', data={'username': 'test', 'password': 'password'})
+    client.post('/login', data={'username': 'bro', 'brbrbrbr': 'brbrbrbr'})
     with client:
         client.get('/logout')
         assert 'user_id' not in session
