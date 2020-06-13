@@ -152,11 +152,9 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     return_valid_targets() {
-        let valid_targets = []
-        // need to redefine circle because this will not be defined inside of iterate
-        let circle = this.circle
-        bloons.children.iterate(function (bloon) {
-            if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y)) {
+        let valid_targets = [];
+        bloons.children.iterate((bloon) => {
+            if (Phaser.Geom.Circle.Contains(this.circle, bloon.x, bloon.y)) {
                 valid_targets.push(bloon);
             }
         });
@@ -266,5 +264,12 @@ class Tower extends Phaser.GameObjects.Sprite {
     clearTint(graphic, area) {
         graphic.fillStyle(0x00ff00);
         graphic.fillPoints(area.points, true);
+    }
+
+    updateGraphics() {
+        this.graphics.destroy();
+        this.graphics = scene.add.graphics({ fillStyle: { color: '0xffffff' , alpha: .2} });
+        this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
+        this.graphics.fillCircleShape(this.circle);
     }
 }
