@@ -19,8 +19,8 @@ class Ceramic_Bloon extends Bloon {
 
     transform() {
         this.pop_sound();
-        new Rainbow_Bloon(this.progress, this.health, this.path);
-        new Rainbow_Bloon(this.progress+.001, this.health, this.path);
+        new Rainbow_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen);
+        new Rainbow_Bloon(this.progress+.001, this.health, this.path, this.is_camo, this.is_regen);
         this.destroy();
     }
 

@@ -20,8 +20,8 @@ class White_Bloon extends Bloon {
 
     transform() {
         this.pop_sound();
-        new Pink_Bloon(this.progress, this.health, this.path);
-        new Pink_Bloon(this.progress+.001, this.health, this.path);
+        new Pink_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen);
+        new Pink_Bloon(this.progress+.001, this.health, this.path, this.is_camo, this.is_regen);
         this.destroy();
     }
 

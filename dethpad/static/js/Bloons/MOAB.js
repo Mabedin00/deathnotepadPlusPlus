@@ -9,6 +9,7 @@ class MOAB extends Bloon {
         this.damage = 616;
         this.value = 1;
         this.setScale(.7);
+        this.freeze_immunity = true;
 
         this.current_node = Math.floor(this.progress / this.increment)
         this.rotation = Phaser.Math.Angle.Between(this.xlist[this.current_node],

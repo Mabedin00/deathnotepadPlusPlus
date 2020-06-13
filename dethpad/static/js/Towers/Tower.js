@@ -138,7 +138,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         // need to redefine circle because this will not be defined inside of iterate
         let circle = this.circle
         bloons.children.iterate(function (bloon) {
-            console.log(bloon.is_camo);
+            // console.log(bloon.is_camo);
             if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y) && !bloon.is_camo) {
                 valid_targets.push(bloon);
             }

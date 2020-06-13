@@ -31,7 +31,7 @@ class Ice_Monkey extends Tower {
             this.anim.visible = true
             let circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
             bloons.children.iterate(function (bloon) {
-                if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y)) {
+                if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y) && bloon.freeze_immunity != true) {
                     bloon.freeze_frames = 20;
                 }
             });
