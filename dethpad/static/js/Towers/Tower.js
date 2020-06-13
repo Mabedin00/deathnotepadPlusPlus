@@ -55,14 +55,13 @@ class Tower extends Phaser.GameObjects.Sprite {
 
     place_tower(x, y) {
         this.graphics.visible = false;
+        this.create_upgrades();
         scene.prevent_tower_stacking(x, y, this.width / 2, this.height / 2);
         scene.is_dragging = false;
         scene.money -= this.cost;
         this.create_tower();
         this.hide_info();
         this.on('pointerdown', this.show_details, this);
-
-
         this.placed = true;
     }
 
@@ -84,8 +83,6 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.price_text.destroy();
         this.range_text.destroy();
         this.description_text.destroy();
-
-
     }
 
     show_details(){
@@ -121,7 +118,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.graphics.destroy();
 
         let fillcolor;
-        tile != this.domain ? fillcolor = '0xff0000' : fillcolor = '0xffffff'
+        fillcolor = tile != this.domain ? '0xff0000':'0xffffff'
 
         this.graphics = scene.add.graphics({ fillStyle: { color: fillcolor , alpha: .2} });
         this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
@@ -159,5 +156,11 @@ class Tower extends Phaser.GameObjects.Sprite {
         return max;
     }
 
-
+    create_upgrades() {
+        if (this.getCenter().x <= 338) {
+            console.log('left');
+        } else {
+            console.log('right');
+        }
+    }
 }
