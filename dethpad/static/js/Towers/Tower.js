@@ -93,7 +93,18 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.graphics.visible = true;
         this.path1_bar.visible = true;
         this.path2_bar.visible = true;
-
+        if (this.path1 == 4) {
+            this.path1_max.visible = true;
+        }
+        if (this.path2 == 4) {
+            this.path2_max.visible = true;
+        }
+        if (this.path1 > 2 && this.path2 == 2) {
+            this.path2_lock.visible = true;
+        }
+        if (this.path2 > 2 && this.path1 == 2) {
+            this.path1_lock.visible = true;
+        }
     }
 
     unshow_details(){
@@ -101,6 +112,10 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.graphics.visible = false;
         this.path1_bar.visible = false;
         this.path2_bar.visible = false;
+        this.path1_max.visible = false;
+        this.path2_max.visible = false;
+        this.path1_lock.visible = false;
+        this.path2_lock.visible = false;
     }
 
     sell(){
@@ -189,6 +204,20 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.path2_bar.on('pointerdown', () => {this.buy_path_2(this)});
 		this.path2_bar.on('pointerover', () => {this.setTint(this.path2_bar, this.new2, 0x808080)});
 		this.path2_bar.on('pointerout', () => {this.clearTint(this.path2_bar, this.new2)});
+
+		this.path1_max = scene.add.text(345, 530, 'MAX', {font: '36px Arial'})
+        this.path1_max.visible = false;
+		this.path1_max.setDepth(6);
+		this.path1_lock = scene.add.text(345, 535, 'Locked', {font: '25px Arial'})
+        this.path1_lock.visible = false;
+		this.path1_lock.setDepth(6);
+
+		this.path2_max = scene.add.text(585, 530, 'MAX', {font: '36px Arial'})
+        this.path2_max.visible = false;
+		this.path2_max.setDepth(6);
+		this.path2_lock = scene.add.text(585, 535, 'Locked', {font: '25px Arial'})
+        this.path2_lock.visible = false;
+		this.path2_lock.setDepth(6);
     }
 
     buy_path_1(tower) {
@@ -196,14 +225,17 @@ class Tower extends Phaser.GameObjects.Sprite {
             tower.path2_bar.fillStyle(0x808080);
             tower.path2_bar.fillPoints(tower.new2.points, true);
             tower.path2_bar.removeInteractive();
+            this.path2_lock.visible = true;
         } else if (tower.path1 == 4) {
             tower.path1_bar.fillStyle(0x808080);
             tower.path1_bar.fillPoints(tower.new1.points, true);
             tower.path1_bar.removeInteractive();
+            tower.path1_max.visible = true;
         } else if (tower.path2 > 2 && tower.path1 == 2) {
             tower.path1_bar.fillStyle(0x808080);
             tower.path1_bar.fillPoints(tower.new1.points, true);
             tower.path1_bar.removeInteractive();
+            tower.path1_lock.visible = true;
         }
     }
 
@@ -212,14 +244,17 @@ class Tower extends Phaser.GameObjects.Sprite {
             tower.path1_bar.fillStyle(0x808080);
             tower.path1_bar.fillPoints(tower.new1.points, true);
             tower.path1_bar.removeInteractive();
+            tower.path1_max.visible = true;
         } else if (tower.path2 == 4) {
             tower.path2_bar.fillStyle(0x808080);
             tower.path2_bar.fillPoints(tower.new2.points, true);
             tower.path2_bar.removeInteractive();
+            tower.path2_max.visible = true;
         } else if (tower.path1 > 2 && tower.path2 == 2) {
             tower.path2_bar.fillStyle(0x808080);
             tower.path2_bar.fillPoints(tower.new2.points, true);
             tower.path2_bar.removeInteractive();
+            tower.path2_lock.visible = true;
         }
     }
 

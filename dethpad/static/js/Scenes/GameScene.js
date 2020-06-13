@@ -218,6 +218,10 @@ class GameScene extends Phaser.Scene {
 				sold_tower.graphics.destroy();
 				sold_tower.path1_bar.destroy();
 				sold_tower.path2_bar.destroy();
+				sold_tower.path1_max.destroy();
+				sold_tower.path2_max.destroy();
+				sold_tower.path1_lock.destroy();
+				sold_tower.path2_lock.destroy();
  				sold_tower.destroy();
 		 	}
 		}
