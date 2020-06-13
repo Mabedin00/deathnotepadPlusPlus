@@ -54,8 +54,8 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     place_tower(x, y) {
-        this.graphics.visible = false;
         this.create_upgrades();
+        this.graphics.visible = false;
         scene.prevent_tower_stacking(x, y, this.width / 2, this.height / 2);
         scene.is_dragging = false;
         scene.money -= this.cost;
@@ -90,13 +90,14 @@ class Tower extends Phaser.GameObjects.Sprite {
         scene.selected_tower = this;
         scene.tower_selected = true;
         this.graphics.visible = true;
+        this.upgrade_bar.visible = true;
 
     }
 
     unshow_details(){
         scene.tower_selected = false;
         this.graphics.visible = false;
-
+        this.upgrade_bar.visible = false;
     }
 
     sell(){
@@ -157,10 +158,19 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     create_upgrades() {
-        if (this.getCenter().x <= 338) {
-            console.log('left');
-        } else {
-            console.log('right');
-        }
+        this.upgrade_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: .2} }).setDepth(5);
+        this.upgrade_bar.visible = false;
+
+        this.bought1 = new Phaser.Geom.Polygon([225, 510, 310, 510, 290, 550, 310, 590, 225, 590]);
+        this.bought2 = new Phaser.Geom.Polygon([435, 510, 520, 510, 500, 550, 520, 590, 435, 590]);
+        this.upgrade_bar.fillStyle(0xff0000);
+        this.upgrade_bar.fillPoints(this.bought1.points, true);
+        this.upgrade_bar.fillPoints(this.bought2.points, true);
+
+        this.new1 = new Phaser.Geom.Polygon([315, 510, 385, 510, 385, 590, 315, 590, 295, 550]);
+        this.new2 = new Phaser.Geom.Polygon([525, 510, 595, 510, 595, 590, 525, 590, 505, 550]);
+        this.upgrade_bar.fillStyle(0x00ff00);
+        this.upgrade_bar.fillPoints(this.new1.points, true);
+        this.upgrade_bar.fillPoints(this.new2.points, true);
     }
 }

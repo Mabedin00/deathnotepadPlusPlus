@@ -262,8 +262,6 @@ class GameScene extends Phaser.Scene {
 	}
 
 	hotkeys() {
-
-
 		if (esc_key.isDown) {
 			this.esc_key_pressed = true;
 		}
