@@ -3,7 +3,6 @@ class Tower extends Phaser.GameObjects.Sprite {
     constructor(tower_type, x, y) {
 
         super(scene, x, y, tower_type);
-
         this.setDepth(2);
         scene.add.existing(this);
         scene.physics.world.enableBody(this, 0);
