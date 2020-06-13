@@ -161,14 +161,14 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.upgrade_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: .2} }).setDepth(5);
         this.upgrade_bar.visible = false;
 
-        this.bought1 = new Phaser.Geom.Polygon([225, 510, 310, 510, 290, 550, 310, 590, 225, 590]);
-        this.bought2 = new Phaser.Geom.Polygon([435, 510, 520, 510, 500, 550, 520, 590, 435, 590]);
+        this.bought1 = new Phaser.Geom.Polygon([250, 510, 345, 510, 325, 550, 345, 590, 250, 590]);
+        this.bought2 = new Phaser.Geom.Polygon([490, 510, 585, 510, 565, 550, 585, 590, 490, 590]);
         this.upgrade_bar.fillStyle(0xff0000);
         this.upgrade_bar.fillPoints(this.bought1.points, true);
         this.upgrade_bar.fillPoints(this.bought2.points, true);
 
-        this.new1 = new Phaser.Geom.Polygon([315, 510, 385, 510, 385, 590, 315, 590, 295, 550]);
-        this.new2 = new Phaser.Geom.Polygon([525, 510, 595, 510, 595, 590, 525, 590, 505, 550]);
+        this.new1 = new Phaser.Geom.Polygon([350, 510, 430, 510, 430, 590, 350, 590, 330, 550]);
+        this.new2 = new Phaser.Geom.Polygon([590, 510, 670, 510, 670, 590, 590, 590, 570, 550]);
         this.upgrade_bar.fillStyle(0x00ff00);
         this.upgrade_bar.fillPoints(this.new1.points, true);
         this.upgrade_bar.fillPoints(this.new2.points, true);
