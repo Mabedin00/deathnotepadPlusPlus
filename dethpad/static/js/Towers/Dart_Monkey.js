@@ -48,18 +48,20 @@ class Dart_Monkey extends Tower {
         if (this.path1 == 1) {
             this.range += 38;
             this.updateGraphics();
-            scene.money -= 75;
+            scene.money -= 90;
         }
         if (this.path1 == 2) {
             this.range += 37;
             this.updateGraphics();
-            scene.money -= 100;
+            scene.money -= 120;
         }
         if (this.path1 == 3) {
-            scene.money -= 425;
+            //become spike-o-pult
+            scene.money -= 500;
         }
         if (this.path1 == 4) {
-            scene.money -= 1275;
+            //become juggernaut
+            scene.money -= 1500;
         }
     }
 
@@ -67,17 +69,18 @@ class Dart_Monkey extends Tower {
         super.buy_path_2(tower);
         if (this.path2 == 1) {
             this.pierce++;
-            scene.money -= 120;
+            scene.money -= 140;
         }
         if (this.path2 == 2) {
             this.pierce += 2;
-            scene.money -= 145;
+            scene.money -= 170;
+            //camo detection
         }
         if (this.path2 == 3) {
-            scene.money -= 280;
+            scene.money -= 330;
         }
         if (this.path2 == 4) {
-            scene.money -= 6800;
+            scene.money -= 8000;
             //super monkey fan club: turns into super monkey for 15 seconds every minute or so?
         }
     }
