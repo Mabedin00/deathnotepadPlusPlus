@@ -1,8 +1,10 @@
 class Yellow_Bloon extends Bloon {
 
-    constructor(progress, health, path) {
-
-        super("yellow_bloon", progress, path);
+    constructor(progress, health, path, is_camo, is_regen) {
+        if (is_camo && is_regen) super("yellow_bloon_camo", progress, path, is_camo, is_regen);
+        else if (is_camo)        super("yellow_bloon_camo", progress, path, is_camo, is_regen);
+        else if (is_regen)       super("yellow_bloon_regen", progress, path, is_camo, is_regen);
+        else                     super("yellow_bloon",progress, path, is_camo, is_regen);
 
         this.speed = .4;
         this.health = 1 + health;

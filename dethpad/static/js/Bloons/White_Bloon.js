@@ -1,8 +1,11 @@
 class White_Bloon extends Bloon {
 
-    constructor(progress, health, path) {
+    constructor(progress, health, path, is_camo, is_regen) {
 
-        super("white_bloon", progress, path);
+        if (is_camo && is_regen) super("white_bloon_camo", progress, path, is_camo, is_regen);
+        else if (is_camo)        super("white_bloon_camo", progress, path, is_camo, is_regen);
+        else if (is_regen)       super("white_bloon_regen", progress, path, is_camo, is_regen);
+        else                     super("white_bloon",progress, path, is_camo, is_regen);
 
         this.speed = .3;
         this.health = 2 + health;

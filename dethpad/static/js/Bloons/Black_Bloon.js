@@ -1,8 +1,11 @@
 class Black_Bloon extends Bloon {
 
-    constructor(progress, health, path) {
+    constructor(progress, health, path, is_camo, is_regen) {
 
-        super("black_bloon", progress, path);
+        if (is_camo && is_regen) super("black_bloon_camo", progress, path, is_camo, is_regen);
+        else if (is_camo)        super("black_bloon_camo", progress, path, is_camo, is_regen);
+        else if (is_regen)       super("black_bloon_regen", progress, path, is_camo, is_regen);
+        else                     super("black_bloon",progress, path, is_camo, is_regen);
 
         this.speed = .3;
         this.health = 2 + health;

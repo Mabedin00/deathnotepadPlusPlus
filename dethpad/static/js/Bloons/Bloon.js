@@ -1,6 +1,6 @@
 class Bloon extends Phaser.GameObjects.Sprite {
 
-    constructor(bloon_type, progress, path) {
+    constructor(bloon_type, progress, path, is_camo, is_regen) {
         // bloon will be teleported to correct location by its progress number
         let xlist, ylist;
         // if it is a new bloon whose path must be randomly determined
@@ -23,6 +23,8 @@ class Bloon extends Phaser.GameObjects.Sprite {
         let y = Phaser.Math.Interpolation.Linear(ylist, progress);
         super(scene, x, y, bloon_type);
         scene.add.existing(this);
+        this.is_camo = is_camo;
+        this.is_regen = is_regen;
         scene.physics.world.enableBody(this, 0);
         bloons.add(this);
         this.progress = progress;
