@@ -11,6 +11,8 @@ class Monkey_Buccaneer extends Tower {
         this.charge = this.max_charge;
         this.range = 250;
         this.pierce = 3;
+        this.next_path1_price = 400;
+        this.next_path2_price = 500;
         this.domain = WATER;
         this.toggle = false;
         this.dart_type = 'bomb'
@@ -42,44 +44,54 @@ class Monkey_Buccaneer extends Tower {
     }
 
     buy_path_1(tower) {
-        super.buy_path_1(tower);
-        switch (this.path1) {
-            case 1:
-                this.max_charge -= 34;
-                scene.money -= 400;
-                break;
-            case 2:
-                this.range += 100;
-                this.updateGraphics();
-                scene.money -= 180;
-                break;
-            case 3:
-                this.max_charge -= 33;
-                scene.money -= 2200;
-                break;
-            case 4:
-                //aircraft carrier
-                scene.money -= 15000;
+        if (scene.money >= tower.next_path1_price) {
+            super.buy_path_1(tower);
+            switch (this.path1) {
+                case 1:
+                    this.max_charge -= 34;
+                    scene.money -= 400;
+                    this.next_path1_price = 180;
+                    break;
+                case 2:
+                    this.range += 100;
+                    this.updateGraphics();
+                    scene.money -= 180;
+                    this.next_path1_price = 2200;
+                    break;
+                case 3:
+                    this.max_charge -= 33;
+                    scene.money -= 2200;
+                    this.next_path1_price = 15000;
+                    break;
+                case 4:
+                    //aircraft carrier
+                    scene.money -= 15000;
+            }
         }
     }
 
     buy_path_2(tower) {
-        super.buy_path_2(tower);
-        switch (this.path2) {
-            case 1:
-                //grape shot
-                scene.money -= 500;
-                break;
-            case 2:
-                //detect camo
-                scene.money -= 250;
-                break;
-            case 3:
-                scene.money -= 1200;
-                break;
-            case 4:
-                //monkey pirates
-                scene.money -= 4500;
+        if (scene.money >= tower.next_path2_price) {
+            super.buy_path_2(tower);
+            switch (this.path2) {
+                case 1:
+                    //grape shot
+                    scene.money -= 500;
+                    this.next_path2_price = 250;
+                    break;
+                case 2:
+                    //detect camo
+                    scene.money -= 250;
+                    this.next_path2_price = 1200;
+                    break;
+                case 3:
+                    scene.money -= 1200;
+                    this.next_path2_price = 4500;
+                    break;
+                case 4:
+                    //monkey pirates
+                    scene.money -= 4500;
+            }
         }
     }
 }

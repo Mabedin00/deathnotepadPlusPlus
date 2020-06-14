@@ -10,6 +10,8 @@ class Banana_Farm extends Tower {
         this.max_charge = 300;
         this.charge = this.max_charge;
         this.range = 0;
+        this.next_path1_price = 300;
+        this.next_path2_price = 500;
         this.domain = LAND;
         this.setScale(.8)
     }
@@ -37,43 +39,53 @@ class Banana_Farm extends Tower {
     }
 
     buy_path_1(tower) {
-        super.buy_path_1(tower);
-        switch (this.path1) {
-            case 1:
-                this.max_charge -= 100;
-                scene.money -= 300;
-                break;
-            case 2:
-                this.max_charge -= 50;
-                scene.money -= 1400;
-                break;
-            case 3:
-                this.max_charge -= 50;
-                scene.money -= 3200;
-                break;
-            case 4:
-                //boxes of bananas
-                this.max_charge += 100;
-                scene.money -= 14000;
+        if (scene.money >= tower.next_path1_price) {
+            super.buy_path_1(tower);
+            switch (this.path1) {
+                case 1:
+                    this.max_charge -= 100;
+                    scene.money -= 300;
+                    this.next_path1_price = 1400;
+                    break;
+                case 2:
+                    this.max_charge -= 50;
+                    scene.money -= 1400;
+                    this.next_path1_price = 3200;
+                    break;
+                case 3:
+                    this.max_charge -= 50;
+                    scene.money -= 3200;
+                    this.next_path1_price = 14000;
+                    break;
+                case 4:
+                    //boxes of bananas
+                    this.max_charge += 100;
+                    scene.money -= 14000;
+            }
         }
     }
 
     buy_path_2(tower) {
-        super.buy_path_2(tower);
-        switch (this.path2) {
-            case 1:
-                scene.money -= 500;
-                break;
-            case 2:
-                scene.money -= 4000;
-                break;
-            case 3:
-                //monkey bank
-                scene.money -= 42000;
-                break;
-            case 4:
-                //bannna investments advisory
-                scene.money -= 5500;
+        if (scene.money >= tower.next_path1_price) {
+            super.buy_path_2(tower);
+            switch (this.path2) {
+                case 1:
+                    scene.money -= 500;
+                    this.next_path2_price = 4000;
+                    break;
+                case 2:
+                    scene.money -= 4000;
+                    this.next_path2_price = 4200;
+                    break;
+                case 3:
+                    //monkey bank
+                    scene.money -= 4200;
+                    this.next_path2_price = 5500;
+                    break;
+                case 4:
+                    //bannna investments advisory
+                    scene.money -= 5500;
+            }
         }
     }
 }

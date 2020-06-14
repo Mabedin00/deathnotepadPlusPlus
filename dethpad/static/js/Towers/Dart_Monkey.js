@@ -11,6 +11,8 @@ class Dart_Monkey extends Tower {
         this.charge = this.max_charge;
         this.range = 150;
         this.pierce = 1;
+        this.next_path1_price = 90;
+        this.next_path2_price = 140;
         this.domain = LAND;
         this.dart_type = 'dart'
     }
@@ -44,46 +46,56 @@ class Dart_Monkey extends Tower {
     }
 
     buy_path_1(tower) {
-        super.buy_path_1(tower);
-        switch (this.path1) {
-            case 1:
-                this.range += 38;
-                this.updateGraphics();
-                scene.money -= 90;
-                break;
-            case 2:
-                this.range += 37;
-                this.updateGraphics();
-                scene.money -= 120;
-                break;
-            case 3:
-                //become spike-o-pult
-                scene.money -= 500;
-                break;
-            case 4:
-                //become juggernaut
-                scene.money -= 1500;
+        if (scene.money >= tower.next_path1_price) {
+            super.buy_path_1(tower);
+            switch (this.path1) {
+                case 1:
+                    this.range += 38;
+                    this.updateGraphics();
+                    scene.money -= 90;
+                    this.next_path1_price = 120;
+                    break;
+                case 2:
+                    this.range += 37;
+                    this.updateGraphics();
+                    scene.money -= 120;
+                    this.next_path1_price = 500;
+                    break;
+                case 3:
+                    //become spike-o-pult
+                    scene.money -= 500;
+                    this.next_path1_price = 1500;
+                    break;
+                case 4:
+                    //become juggernaut
+                    scene.money -= 1500;
+            }
         }
     }
 
     buy_path_2(tower) {
-        super.buy_path_2(tower);
-        switch (this.path2) {
-            case 1:
-                this.pierce++;
-                scene.money -= 140;
-                break;
-            case 2:
-                this.pierce += 2;
-                //camo detection
-                scene.money -= 170;
-                break;
-            case 3:
-                scene.money -= 330;
-                break;
-            case 4:
-                //super monkey fan club: turns into super monkey for 15 seconds
-                scene.money -= 8000;
+        if (scene.money >= tower.next_path2_price) {
+            super.buy_path_2(tower);
+            switch (this.path2) {
+                case 1:
+                    this.pierce++;
+                    scene.money -= 140;
+                    this.next_path2_price = 170;
+                    break;
+                case 2:
+                    this.pierce += 2;
+                    //camo detection
+                    scene.money -= 170;
+                    this.next_path2_price = 330;
+                    break;
+                case 3:
+                    scene.money -= 330;
+                    this.next_path2_price = 8000;
+                    break;
+                case 4:
+                    //super monkey fan club: turns into super monkey for 15 seconds
+                    scene.money -= 8000;
+            }
         }
     }
 }
