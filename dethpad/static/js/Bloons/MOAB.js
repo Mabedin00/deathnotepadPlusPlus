@@ -24,12 +24,12 @@ class MOAB extends Bloon {
     transform() {
         this.pop_sound();
 
-        new Ceramic_Bloon(this.progress, this.health, this.path);
-        new Ceramic_Bloon(this.progress+.001, this.health, this.path);
-        new Ceramic_Bloon(this.progress+.002, this.health, this.path);
-        new Ceramic_Bloon(this.progress+.003, this.health, this.path);
-
         this.destroy();
+        let child1 = new Ceramic_Bloon(this.progress, this.health, this.path);
+        let child2 = new Ceramic_Bloon(this.progress+.001, this.health, this.path);
+        let child3 = new Ceramic_Bloon(this.progress+.002, this.health, this.path);
+        let child4 = new Ceramic_Bloon(this.progress+.003, this.health, this.path);
+        return [child1, child2, child3, child4];
     }
     move() {
         if (this.progress >= 1) return;
