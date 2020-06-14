@@ -52,8 +52,10 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('banana', 'static/images/projectiles/banana.png');
 		this.load.image('spike_ball', 'static/images/projectiles/spike_ball.png');
 		this.load.image('juggernaut', 'static/images/projectiles/juggernaut.png');
-		//this.load.image('fire', 'static/images/projectiles/fire.png');
+		this.load.image('fire', 'static/images/projectiles/fire.png');
 		this.load.image('blade', 'static/images/projectiles/blade.png');
+		//this.load.image('grape', 'static/images/projectiles/grape.png');
+		//this.load.image('hook', 'static/images/projectiles/hook.png');
 
 		this.load.image('background', 'static/images/maps/map_selection.jpg');
 		this.load.image('back', 'static/images/home/back_button.png')

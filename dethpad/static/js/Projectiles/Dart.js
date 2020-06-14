@@ -5,7 +5,7 @@ class Dart extends Projectile {
 
         this.damage = 1;
         this.speed = 750;
-        this.pierce = pierce
+        this.pierce = pierce;
         this.target = target;
         this.targets = [];
         this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
