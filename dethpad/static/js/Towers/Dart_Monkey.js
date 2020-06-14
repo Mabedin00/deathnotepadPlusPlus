@@ -62,27 +62,33 @@ class Dart_Monkey extends Tower {
                 case 1:
                     this.range += 38;
                     this.updateGraphics();
+                    if (this.path2 < 2) {
+                        this.setTexture('dm_1_1');
+                    }
                     scene.money -= 90;
                     this.next_path1_price = 120;
                     break;
                 case 2:
                     this.range += 37;
                     this.updateGraphics();
+                    if (this.path2 < 3) {
+                        this.setTexture('dm_1_2');
+                    }
                     scene.money -= 120;
                     this.next_path1_price = 500;
                     break;
                 case 3:
-                    //become spike-o-pult
                     this.range += 25;
                     this.updateGraphics();
+                    this.setTexture('dm_1_3');
                     scene.money -= 500;
                     this.next_path1_price = 1500;
                     break;
                 case 4:
-                    //become juggernaut
                     //can pop lead
                     this.range += 100;
                     this.updateGraphics();
+                    this.setTexture('dm_1_4');
                     scene.money -= 1500;
             }
         }
@@ -94,21 +100,29 @@ class Dart_Monkey extends Tower {
             switch (this.path2) {
                 case 1:
                     this.pierce++;
+                    if (this.path1 < 2) {
+                        this.setTexture('dm_1_1');
+                    }
                     scene.money -= 140;
                     this.next_path2_price = 170;
                     break;
                 case 2:
                     this.pierce += 2;
                     //camo detection
+                    if (this.path1 < 3) {
+                        this.setTexture('dm_1_2');
+                    }
                     scene.money -= 170;
                     this.next_path2_price = 330;
                     break;
                 case 3:
+                    this.setTexture('dm_2_3');
                     scene.money -= 330;
                     this.next_path2_price = 8000;
                     break;
                 case 4:
                     //super monkey fan club: turns into super monkey for 15 seconds
+                    this.setTexture('dm_2_4');
                     scene.money -= 8000;
             }
         }

@@ -65,6 +65,13 @@ class HomeScene extends Phaser.Scene {
 
 		this.load.audio('bloon_pop', 'static/audio/bloon_pop.mp3');
 		this.load.audio('explosion', 'static/audio/explosion.mp3');
+
+		this.load.image('dm_1_1', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_1.png');
+		this.load.image('dm_1_2', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_2.png');
+		this.load.image('dm_1_3', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_3.png');
+		this.load.image('dm_1_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_4.png');
+		this.load.image('dm_2_3', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_3.png');
+		this.load.image('dm_2_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_4.png');
 	}
 
 	create () {
