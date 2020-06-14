@@ -194,15 +194,15 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.path2_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: 1} }).setDepth(5);
         this.path2_bar.visible = false;
 
-        this.bought1 = new Phaser.Geom.Polygon([250, 510, 345, 510, 325, 550, 345, 590, 250, 590]);
-        this.bought2 = new Phaser.Geom.Polygon([490, 510, 585, 510, 565, 550, 585, 590, 490, 590]);
+        this.bought1 = new Phaser.Geom.Polygon([240, 510, 335, 510, 315, 550, 335, 590, 240, 590]);
+        this.bought2 = new Phaser.Geom.Polygon([480, 510, 575, 510, 555, 550, 575, 590, 480, 590]);
         this.path1_bar.fillStyle(0x808080);
         this.path2_bar.fillStyle(0x808080);
         this.path1_bar.fillPoints(this.bought1.points, true);
         this.path2_bar.fillPoints(this.bought2.points, true);
 
-        this.new1 = new Phaser.Geom.Polygon([350, 510, 430, 510, 430, 590, 350, 590, 330, 550]);
-        this.new2 = new Phaser.Geom.Polygon([590, 510, 670, 510, 670, 590, 590, 590, 570, 550]);
+        this.new1 = new Phaser.Geom.Polygon([340, 510, 420, 510, 420, 590, 340, 590, 320, 550]);
+        this.new2 = new Phaser.Geom.Polygon([580, 510, 660, 510, 660, 590, 580, 590, 560, 550]);
         this.path1_bar.fillStyle(0x00ff00);
         this.path2_bar.fillStyle(0x00ff00);
         this.path1_bar.fillPoints(this.new1.points, true);
@@ -218,19 +218,39 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.path2_bar.on('pointerover', () => {this.setTint(this.path2_bar, this.new2, 0x808080)});
 		this.path2_bar.on('pointerout', () => {this.clearTint(this.path2_bar, this.new2)});
 
-		this.path1_max = scene.add.text(345, 530, 'MAX', {font: '36px Arial'})
+		this.path1_max = scene.add.text(335, 530, 'MAX', {font: '36px Arial'})
         this.path1_max.visible = false;
 		this.path1_max.setDepth(6);
-		this.path1_lock = scene.add.text(345, 535, 'Locked', {font: '25px Arial'})
+		this.path1_lock = scene.add.text(335, 535, 'Locked', {font: '25px Arial'})
         this.path1_lock.visible = false;
 		this.path1_lock.setDepth(6);
 
-		this.path2_max = scene.add.text(585, 530, 'MAX', {font: '36px Arial'})
+		this.path2_max = scene.add.text(575, 530, 'MAX', {font: '36px Arial'})
         this.path2_max.visible = false;
 		this.path2_max.setDepth(6);
-		this.path2_lock = scene.add.text(585, 535, 'Locked', {font: '25px Arial'})
+		this.path2_lock = scene.add.text(575, 535, 'Locked', {font: '25px Arial'})
         this.path2_lock.visible = false;
 		this.path2_lock.setDepth(6);
+
+		this.path1_rect1 = new Phaser.Geom.Rectangle(426, 510, 10, 16);
+		this.path1_rect2 = new Phaser.Geom.Rectangle(426, 531, 10, 16);
+		this.path1_rect3 = new Phaser.Geom.Rectangle(426, 552, 10, 16);
+		this.path1_rect4 = new Phaser.Geom.Rectangle(426, 573, 10, 17);
+		this.path1_bar.fillStyle(0x808080);
+		this.path1_bar.fillRectShape(this.path1_rect1);
+		this.path1_bar.fillRectShape(this.path1_rect2);
+		this.path1_bar.fillRectShape(this.path1_rect3);
+		this.path1_bar.fillRectShape(this.path1_rect4);
+
+		this.path2_rect1 = new Phaser.Geom.Rectangle(666, 510, 10, 16);
+		this.path2_rect2 = new Phaser.Geom.Rectangle(666, 531, 10, 16);
+		this.path2_rect3 = new Phaser.Geom.Rectangle(666, 552, 10, 16);
+		this.path2_rect4 = new Phaser.Geom.Rectangle(666, 573, 10, 17);
+		this.path2_bar.fillStyle(0x808080);
+		this.path2_bar.fillRectShape(this.path2_rect1);
+		this.path2_bar.fillRectShape(this.path2_rect2);
+		this.path2_bar.fillRectShape(this.path2_rect3);
+		this.path2_bar.fillRectShape(this.path2_rect4);
     }
 
     buy_path_1(tower) {
@@ -250,6 +270,23 @@ class Tower extends Phaser.GameObjects.Sprite {
             tower.path1_bar.removeInteractive();
             tower.path1_lock.visible = true;
         }
+        switch (tower.path1) {
+            case 1:
+                tower.path1_bar.fillStyle(0x00ff00);
+                tower.path1_bar.fillRectShape(tower.path1_rect1);
+                break;
+            case 2:
+                tower.path1_bar.fillStyle(0x00ff00);
+                tower.path1_bar.fillRectShape(tower.path1_rect2);
+                break;
+            case 3:
+                tower.path1_bar.fillStyle(0x00ff00);
+                tower.path1_bar.fillRectShape(tower.path1_rect3);
+                break;
+            case 4:
+                tower.path1_bar.fillStyle(0x00ff00);
+                tower.path1_bar.fillRectShape(tower.path1_rect4);
+        }
     }
 
     buy_path_2(tower){
@@ -268,6 +305,23 @@ class Tower extends Phaser.GameObjects.Sprite {
             tower.path2_bar.fillPoints(tower.new2.points, true);
             tower.path2_bar.removeInteractive();
             tower.path2_lock.visible = true;
+        }
+        switch (tower.path2) {
+            case 1:
+                tower.path2_bar.fillStyle(0x00ff00);
+                tower.path2_bar.fillRectShape(tower.path2_rect1);
+                break;
+            case 2:
+                tower.path2_bar.fillStyle(0x00ff00);
+                tower.path2_bar.fillRectShape(tower.path2_rect2);
+                break;
+            case 3:
+                tower.path2_bar.fillStyle(0x00ff00);
+                tower.path2_bar.fillRectShape(tower.path2_rect3);
+                break;
+            case 4:
+                tower.path2_bar.fillStyle(0x00ff00);
+                tower.path2_bar.fillRectShape(tower.path2_rect4);
         }
     }
 
