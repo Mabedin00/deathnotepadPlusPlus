@@ -25,7 +25,7 @@ class Tack_Shooter extends Tower {
     }
 
     fire() {
-        if (this.ability_duration == 800) {
+        if (this.ability_duration == 400) {
             this.targets = this.return_valid_targets();
             // if there are no valid targets, stop fire function
             if (!this.targets.length) return;
