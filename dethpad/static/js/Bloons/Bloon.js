@@ -69,6 +69,7 @@ class Bloon extends Phaser.GameObjects.Sprite {
             this.freeze_frames -= scene.fast_forward;
         }
         else {
+            this.viral_frost = false;
             this.progress += this.speed * map_data[scene.map].speed_multiplier * scene.fast_forward/ distance;
         }
 
@@ -95,5 +96,12 @@ class Bloon extends Phaser.GameObjects.Sprite {
         scene.bloon_pop.volume = sfx;
         scene.bloon_pop.play();
 
+    }
+
+    spread_frost(bloon1, bloon2) {
+        if (bloon1.viral_frost) {
+            bloon2.viral_frost = true;
+            bloon2.freeze_frames = bloon1.freeze_frames;
+        }
     }
 }

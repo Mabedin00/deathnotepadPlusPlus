@@ -51,6 +51,10 @@ class Ice_Monkey extends Tower {
                             if (p2 >= 2) {
                                 child.deep_freeze = true;
                             }
+                            if (p1 == 4) {
+                                child.viral_frost = true;
+                                colliders.push(scene.physics.add.overlap(child, bloons, child.spread_frost));
+                            }
                         }
                     } else {
                         bloon.freeze_frames = p1 >= 1? 28:20;
@@ -92,7 +96,6 @@ class Ice_Monkey extends Tower {
                     this.next_path1_price = 6000;
                     break;
                 case 4:
-                    //viral frost: bloons that touch frozen bloons are frozen, affects white and zebra
                     scene.money -= 6000;
             }
         }
