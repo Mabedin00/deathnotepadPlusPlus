@@ -55,10 +55,10 @@ class Dart_Monkey extends Tower {
             if (this.ability_duration == 800) {
                 switch (this.path1) {
                     case 4:
-                        new Juggernaut(this.x, this.y, this.target, this.range);
+                        new Juggernaut(this.x, this.y, this.target, 1000);
                         break;
                     case 3:
-                        new SpikeBall(this.x, this.y, this.target, this.range);
+                        new SpikeBall(this.x, this.y, this.target, 1000);
                         break;
                     default:
                         new Dart(this.x, this.y, this.target, this.range, this.pierce);

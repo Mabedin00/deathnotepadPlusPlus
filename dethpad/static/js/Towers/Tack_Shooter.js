@@ -52,7 +52,7 @@ class Tack_Shooter extends Tower {
                     new Fire(this.x, this.y, angle, this.range);
                 } else*/ if (this.path2 >= 3) {
                     if (this.ability_status == 2) {
-                        new Blade(this.x, this.y, angle, 500, Infinity);
+                        new Blade(this.x, this.y, angle, 1000, Infinity);
                     } else {
                         new Blade(this.x, this.y, angle, this.range, 2);
                     }
