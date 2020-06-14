@@ -10,7 +10,7 @@ class SpikeBall extends Projectile {
         this.targets = [];
         this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
         scene.physics.moveTo(this, this.target.x, this.target.y, this.speed)
-        this.setScale(.5);
+        this.setScale(1.5);
     }
 
     inflict_damage(dart, bloon) {
