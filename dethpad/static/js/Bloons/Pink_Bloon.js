@@ -15,8 +15,10 @@ class Pink_Bloon extends Bloon {
 
     transform() {
         this.pop_sound();
-        new Yellow_Bloon(this.progress, this.health, this.path);
         this.destroy();
+        let child = new Yellow_Bloon(this.progress, this.health, this.path);
+        if (this.deep_freeze) child.freeze_frames = this.freeze_frames;
+        return [child];
     }
 
 }

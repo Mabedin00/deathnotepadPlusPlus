@@ -15,6 +15,12 @@ class GameScene extends Phaser.Scene {
 	preload () {
 		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
 		this.load.audio(this.map + '_audio', 'static/audio/' + this.map + '.mp3');
+		this.load.image('dart_splash', 'static/images/towers/dart_monkey_splashart.png');
+		this.load.image('tack_splash', 'static/images/towers/tack_shooter_splashart.png');
+		this.load.image('buccaneer_splash', 'static/images/towers/buccaneer_splashart.png');
+		this.load.image('ice_splash', 'static/images/towers/ice_monkey_splashart.png');
+		this.load.image('banana_splash', 'static/images/towers/banana_farm_splashart.png');
+		this.load.image('super_splash', 'static/images/towers/super_monkey_splashart.png');
 	}
 
 	create () {
@@ -74,7 +80,9 @@ class GameScene extends Phaser.Scene {
 
 		this.map_image = this.add.image(338, 240, this.map);
 		this.map_image.setInteractive();
-		this.map_image.on('pointerdown', () => scene.selected_tower.unshow_details());
+		this.map_image.on('pointerdown', () => {
+			if (scene.selected_tower != undefined) scene.selected_tower.unshow_details()
+		});
 
 		this.add.image(492, 477, 'sidebar').setTint(0x654321).setDepth(2);
 	}
@@ -216,6 +224,13 @@ class GameScene extends Phaser.Scene {
 
 			if (sold_tower != undefined) {
 				sold_tower.graphics.destroy();
+				sold_tower.path1_bar.destroy();
+				sold_tower.path2_bar.destroy();
+				sold_tower.path1_max.destroy();
+				sold_tower.path2_max.destroy();
+				sold_tower.path1_lock.destroy();
+				sold_tower.path2_lock.destroy();
+				sold_tower.splashart.destroy();
  				sold_tower.destroy();
 		 	}
 		}
@@ -336,6 +351,11 @@ class GameScene extends Phaser.Scene {
 		this.score += 20 + this.level*5;
 		this.next_level.clearTint();
 		this.grace_period = true;
+		towers.children.iterate((tower) => {
+			if (tower.anim != undefined) {
+				tower.anim.visible = false;
+			}
+		})
 	}
 
 	win_game() {
