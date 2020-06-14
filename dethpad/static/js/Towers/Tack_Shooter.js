@@ -21,7 +21,7 @@ class Tack_Shooter extends Tower {
 
         if (this.charge >= this.max_charge) {
             this.charge = 0;
-            for (let angle = 0; angle < 2*Math.PI; angle += Math.PI/4) {
+            for (let angle = 0; angle < 2*Math.PI; angle += this.path1 >= 3? Math.PI/8:Math.PI/4) {
                 new Tack(this.x, this.y, angle, this.range);
             }
         }
@@ -29,5 +29,46 @@ class Tack_Shooter extends Tower {
 
     create_tower() {
         new Tack_Shooter();
+    }
+
+     buy_path_1(tower) {
+        super.buy_path_1(tower);
+        if (this.path1 == 1) {
+            this.max_charge -= 15;
+            scene.money -= 210;
+        }
+        if (this.path1 == 2) {
+            this.max_charge -= 20;
+            scene.money -= 300;
+        }
+        if (this.path1 == 3) {
+            scene.money -= 500;
+        }
+        if (this.path1 == 4) {
+            //become ring of fire
+            scene.money -= 2500;
+        }
+    }
+
+    buy_path_2(tower) {
+        super.buy_path_2(tower);
+        if (this.path2 == 1) {
+            this.range += 11;
+            this.updateGraphics();
+            scene.money -= 100;
+        }
+        if (this.path2 == 2) {
+            this.range += 13;
+            this.updateGraphics();
+            scene.money -= 225;
+        }
+        if (this.path2 == 3) {
+            //razor blades
+            scene.money -= 680;
+        }
+        if (this.path2 == 4) {
+            //blade maelstrom ability
+            scene.money -= 2700;
+        }
     }
 }
