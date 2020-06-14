@@ -22,8 +22,8 @@ class Ice_Monkey extends Tower {
         // if there are no valid targets, stop fire function
         if (!this.targets.length) return;
         else if (this.path1 >= 3) {
-            for (let bloon in this.targets) {
-                if (bloon != undefined && !bloon.arctic_wind && !bloon.isMOAB) {
+            for (let bloon of this.targets) {
+                if (bloon instanceof Bloon && !bloon.arctic_wind && !bloon.isMOAB) {
                     bloon.arctic_wind = true;
                     bloon.speed *= 0.33;
                 }
@@ -86,7 +86,7 @@ class Ice_Monkey extends Tower {
                     this.next_path1_price = 6500;
                     break;
                 case 3:
-                    this.range += 644;
+                    this.range += 64;
                     this.updateGraphics();
                     scene.money -= 6500;
                     this.next_path1_price = 6000;

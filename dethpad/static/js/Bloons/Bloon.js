@@ -52,6 +52,19 @@ class Bloon extends Phaser.GameObjects.Sprite {
                                                   this.ylist[this.current_node+1]);
 
 
+        if (this.arctic_wind){
+            let in_range = false;
+            let bloon = this;
+            towers.children.iterate((tower) => {
+                if (tower instanceof Ice_Monkey && tower.path1 >= 3 && tower.return_valid_targets().includes(bloon)){
+                    in_range = true;
+                }
+            });
+            if (!in_range) {
+                this.arctic_wind = false;
+                this.speed *= 3;
+            }
+        }
         if (this.freeze_frames >= 0) {
             this.freeze_frames -= scene.fast_forward;
         }
