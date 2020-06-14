@@ -146,6 +146,9 @@ class Tower extends Phaser.GameObjects.Sprite {
 
     charge_tower() {
         this.charge += (1 * scene.fast_forward);
+        if(this.anim != undefined && this.charge > this.max_charge / 3) {
+            this.anim.visible = false;
+        }
     }
 
     fire() {

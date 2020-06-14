@@ -20,20 +20,16 @@ class Ice_Monkey extends Tower {
         if (!this.targets.length) return;
         this.target = this.return_best_target();
 
-        if (this.charge > this.max_charge / 3) {
-            this.anim.visible = false;
-        }
         if (this.charge >= this.max_charge) {
             this.charge = 0;
             this.anim.x = this.x;
             this.anim.y = this.y;
-            this.anim.visible = true
+            this.anim.visible = true;
             let circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
             let p1 = this.path1;
             let p2 = this.path2;
             bloons.children.iterate((bloon) => {
-                console.log(bloon);
-                if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y)) {
+                if (bloon != undefined && Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y)) {
                     if (p1 >= 2) {
                         for (let child of bloon.transform()) {
                             child.freeze_frames = 28;

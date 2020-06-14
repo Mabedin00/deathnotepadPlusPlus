@@ -342,6 +342,11 @@ class GameScene extends Phaser.Scene {
 		this.score += 20 + this.level*5;
 		this.next_level.clearTint();
 		this.grace_period = true;
+		towers.children.iterate((tower) => {
+			if (tower.anim != undefined) {
+				tower.anim.visible = false;
+			}
+		})
 	}
 
 	win_game() {
