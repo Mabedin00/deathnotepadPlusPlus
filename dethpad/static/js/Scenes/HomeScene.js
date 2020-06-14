@@ -44,7 +44,7 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('tack_shooter', 'static/images/towers/tack_shooter.png');
 		this.load.image('ice_monkey', 'static/images/towers/ice_monkey.png');
 		this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
-		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
+		this.load.image('super_monkey', 'static/images/towers/super_0_edited_v1.png');
 		this.load.image('dartling_gun', 'static/images/towers/dartling_gun.png');
 
 
@@ -153,7 +153,7 @@ class HomeScene extends Phaser.Scene {
 
 		let back_btn = this.add.image(230, 142, 'back').setScale(.3).setInteractive().setDepth(2);
 		back_btn.on('pointerdown', function () {
-			sc.scene.restart();
+			scene.scene.restart();
 			// some.graphics.destroy();
 			// some.destroy();
 			// back_btn.destroy();
