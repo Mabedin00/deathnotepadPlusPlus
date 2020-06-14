@@ -55,10 +55,10 @@ class Dart_Monkey extends Tower {
             if (this.ability_duration == 800) {
                 switch (this.path1) {
                     case 4:
-                        new Juggernaut(this.x, this.y, this.target, this.range);
+                        new Juggernaut(this.x, this.y, this.target, 1000);
                         break;
                     case 3:
-                        new SpikeBall(this.x, this.y, this.target, this.range);
+                        new SpikeBall(this.x, this.y, this.target, 1000);
                         break;
                     default:
                         new Dart(this.x, this.y, this.target, this.range, this.pierce);
@@ -66,11 +66,8 @@ class Dart_Monkey extends Tower {
                 if (this.path2 >= 3) {
                     let x = this.target.x - this.x;
                     let y = this.target.y - this.y;
-                    let rotate = (theta) => {
-                        return [x*Math.cos(theta)-y*Math.sin(theta)+this.x, x*Math.sin(theta)+y*Math.cos(theta)+this.y]
-                    }
-                    let split1 = rotate(Math.PI/12);
-                    let split2 = rotate(-Math.PI/12);
+                    let split1 = this.rotate(x, y, Math.PI/12);
+                    let split2 = this.rotate(x, y, -Math.PI/12);
                     new Dart(this.x, this.y, {x:split1[0], y:split1[1]}, this.range, this.pierce);
                     new Dart(this.x, this.y, {x:split2[0], y:split2[1]}, this.range, this.pierce);
                 }

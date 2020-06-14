@@ -1,16 +1,15 @@
-class Juggernaut extends Projectile {
+class Blade extends Projectile {
 
-    constructor(x, y, target, range) {
-        super(x, y,"juggernaut", range);
-
-        this.damage = 100;
-        this.speed = 750;
-        this.pierce = 100;
-        this.target = target;
+    constructor(x, y, angle, range, pierce) {
+        super(x, y, "blade", range);
+        this.damage = 5;
+        this.speed = 650;
+        this.pierce = pierce;
         this.targets = [];
-        this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
-        scene.physics.moveTo(this, this.target.x, this.target.y, this.speed)
-        this.setScale(1.5);
+        this.setVelocity(this.speed * Math.cos(angle), this.speed *Math.sin(angle))
+        this.rotation = angle;
+
+        this.setScale(0.75);
     }
 
     inflict_damage(dart, bloon) {

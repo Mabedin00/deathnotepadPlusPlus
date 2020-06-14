@@ -194,6 +194,18 @@ class Tower extends Phaser.GameObjects.Sprite {
         return min;
     }
 
+    return_strongest_target() {
+        // returns the target that is strongest
+        let max = this.targets[0];
+
+        for (let target of this.targets) {
+            if (target.health > max.health) {
+                max = target;
+            }
+        }
+        return max;
+    }
+
     create_upgrades() {
         this.path1_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: 1} }).setDepth(5);
         this.path1_bar.visible = false;
@@ -351,5 +363,9 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.graphics = scene.add.graphics({ fillStyle: { color: '0xffffff' , alpha: .2} });
         this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
         this.graphics.fillCircleShape(this.circle);
+    }
+
+    rotate(x, y, theta) {
+        return [x*Math.cos(theta)-y*Math.sin(theta)+this.x, x*Math.sin(theta)+y*Math.cos(theta)+this.y]
     }
 }

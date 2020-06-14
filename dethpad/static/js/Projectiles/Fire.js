@@ -1,15 +1,13 @@
-class Juggernaut extends Projectile {
+class Fire extends Projectile {
 
-    constructor(x, y, target, range) {
-        super(x, y,"juggernaut", range);
-
-        this.damage = 100;
-        this.speed = 750;
-        this.pierce = 100;
-        this.target = target;
+    constructor(x, y, angle, range) {
+        super(x, y, "fire", range);
+        this.damage = 1;
+        this.speed = 650;
+        this.pierce = 5;
         this.targets = [];
-        this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
-        scene.physics.moveTo(this, this.target.x, this.target.y, this.speed)
+        this.setVelocity(this.speed * Math.cos(angle), this.speed *Math.sin(angle))
+
         this.setScale(1.5);
     }
 
