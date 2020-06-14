@@ -10,6 +10,7 @@ class Super_Monkey extends Tower {
         this.max_charge = 3;
         this.charge = this.max_charge;
         this.range = 300;
+        this.pierce = 1;
         this.domain = LAND;
         this.dart_type = 'dart'
     }
@@ -24,6 +25,9 @@ class Super_Monkey extends Tower {
             this.charge = 0;
             this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y) + Math.PI / 2;
             new Super_Dart(this.x, this.y, this.target, this.range);
+            if (this.path2 >= 3) {
+                new Super_Dart(this.x, this.y, this.return_worst_target(), this.range);
+            }
         }
     }
 
@@ -31,20 +35,27 @@ class Super_Monkey extends Tower {
         new Super_Monkey();
     }
 
-    /*buy_path_1(tower) {
+    buy_path_1(tower) {
         super.buy_path_1(tower);
         switch (this.path1) {
             case 1:
-                scene.money -= ;
+                //lasers can pop frozen, double damage to MOABs
+                this.pierce++;
+                scene.money -= 3500;
                 break;
             case 2:
-                scene.money -= ;
+                //plasma can pop lead
+                this.pierce += 2;
+                this.max_charge--;
+                scene.money -= 5000;
                 break;
             case 3:
-                scene.money -= ;
+                //sun god
+                scene.money -= 16500;
                 break;
             case 4:
-                scene.money -= ;
+                //temple
+                scene.money -= 100000;
         }
     }
 
@@ -52,16 +63,19 @@ class Super_Monkey extends Tower {
         super.buy_path_2(tower);
         switch (this.path2) {
             case 1:
-                scene.money -= ;
+                scene.money -= 1000;
                 break;
             case 2:
-                scene.money -= ;
+                scene.money -= 1500;
                 break;
             case 3:
-                scene.money -= ;
+                //robo monkey can pop frozen and lead
+                scene.money -= 9000;
                 break;
             case 4:
-                scene.money -= ;
+                //tech terror ability: destroys all bloons in short radius, does 1000 damage to MOABS, hits camo
+                this.max_charge--;
+                scene.money -= 25000;
         }
-    }*/
+    }
 }

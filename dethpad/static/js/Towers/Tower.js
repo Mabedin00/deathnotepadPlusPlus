@@ -176,6 +176,18 @@ class Tower extends Phaser.GameObjects.Sprite {
         return max;
     }
 
+    return_worst_target() {
+        // returns the target that is last along the track
+        let min = this.targets[0];
+
+        for (let target of this.targets) {
+            if (target.progress < min.progress) {
+                min = target;
+            }
+        }
+        return min;
+    }
+
     create_upgrades() {
         this.path1_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: 1} }).setDepth(5);
         this.path1_bar.visible = false;
