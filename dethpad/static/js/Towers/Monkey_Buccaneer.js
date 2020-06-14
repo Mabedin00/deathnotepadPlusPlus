@@ -10,7 +10,9 @@ class Monkey_Buccaneer extends Tower {
         this.max_charge = 100;
         this.charge = this.max_charge;
         this.range = 250;
+        this.pierce = 3;
         this.domain = WATER;
+        this.toggle = false;
         this.dart_type = 'bomb'
     }
 
@@ -23,29 +25,41 @@ class Monkey_Buccaneer extends Tower {
         if (this.charge >= this.max_charge) {
             this.charge = 0;
             this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y);
-
-            new Bomb(this.x, this.y, this.target, this.range);
+            new Dart(this.x, this.y, this.target, this.range, this.pierce);
+            if (this.path2 >= 3) {
+                this.toggle = !this.toggle;
+                if (this.toggle) {
+                    this.charge = 0;
+                    new Bomb(this.x, this.y, this.target, this.range);
+                }
+            }
         }
+
     }
 
     create_tower() {
         new Monkey_Buccaneer();
     }
 
-    /*buy_path_1(tower) {
+    buy_path_1(tower) {
         super.buy_path_1(tower);
         switch (this.path1) {
             case 1:
-                scene.money -= ;
+                this.max_charge -= 34;
+                scene.money -= 400;
                 break;
             case 2:
-                scene.money -= ;
+                this.range += 100;
+                this.updateGraphics();
+                scene.money -= 180;
                 break;
             case 3:
-                scene.money -= ;
+                this.max_charge -= 33;
+                scene.money -= 2200;
                 break;
             case 4:
-                scene.money -= ;
+                //aircraft carrier
+                scene.money -= 15000;
         }
     }
 
@@ -53,16 +67,19 @@ class Monkey_Buccaneer extends Tower {
         super.buy_path_2(tower);
         switch (this.path2) {
             case 1:
-                scene.money -= ;
+                //grape shot
+                scene.money -= 500;
                 break;
             case 2:
-                scene.money -= ;
+                //detect camo
+                scene.money -= 250;
                 break;
             case 3:
-                scene.money -= ;
+                scene.money -= 1200;
                 break;
             case 4:
-                scene.money -= ;
+                //monkey pirates
+                scene.money -= 4500;
         }
-    }*/
+    }
 }
