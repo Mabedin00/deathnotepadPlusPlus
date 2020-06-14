@@ -66,42 +66,44 @@ class Ice_Monkey extends Tower {
 
     buy_path_1(tower) {
         super.buy_path_1(tower);
-        if (this.path1 == 1) {
-            this.range += 11;
-            this.updateGraphics();
-            scene.money -= 190;
-        }
-        if (this.path1 == 2) {
-            scene.money -= 400;
-        }
-        if (this.path1 == 3) {
-            this.range += 644;
-            this.updateGraphics();
-            //slow normal bloons (non MOAB) by 33% while in radius including camo
-            scene.money -= 6500;
-        }
-        if (this.path1 == 4) {
-            //viral frost: bloons that touch frozen bloons are frozen, affects white and zebra
-            scene.money -= 6000;
+        switch (this.path1) {
+            case 1:
+                this.range += 11;
+                this.updateGraphics();
+                scene.money -= 190;
+                break;
+            case 2:
+                scene.money -= 400;
+                break;
+            case 3:
+                this.range += 644;
+                this.updateGraphics();
+                //slow normal bloons (non MOAB) by 33% while in radius including camo
+                scene.money -= 6500;
+                break;
+            case 4:
+                //viral frost: bloons that touch frozen bloons are frozen, affects white and zebra
+                scene.money -= 6000;
         }
     }
 
     buy_path_2(tower) {
         super.buy_path_2(tower);
-        if (this.path2 == 1) {
-            scene.money -= 100;
-        }
-        if (this.path2 == 2) {
-            //freeze two layers of bloons
-            scene.money -= 350;
-        }
-        if (this.path2 == 3) {
-            //ice shards
-            scene.money -= 2000;
-        }
-        if (this.path2 == 4) {
-            //absolute zero ability
-            scene.money -= 2000;
+        switch (this.path2) {
+            case 1:
+                scene.money -= 100;
+                break;
+            case 2:
+                //freeze two layers of bloons
+                scene.money -= 350;
+                break;
+            case 3:
+                //ice shards
+                scene.money -= 2000;
+                break;
+            case 4:
+                //absolute zero ability
+                scene.money -= 2000;
         }
     }
 }

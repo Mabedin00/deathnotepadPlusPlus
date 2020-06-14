@@ -31,4 +31,38 @@ class Monkey_Buccaneer extends Tower {
     create_tower() {
         new Monkey_Buccaneer();
     }
+
+    /*buy_path_1(tower) {
+        super.buy_path_1(tower);
+        switch (this.path1) {
+            case 1:
+                scene.money -= ;
+                break;
+            case 2:
+                scene.money -= ;
+                break;
+            case 3:
+                scene.money -= ;
+                break;
+            case 4:
+                scene.money -= ;
+        }
+    }
+
+    buy_path_2(tower) {
+        super.buy_path_2(tower);
+        switch (this.path2) {
+            case 1:
+                scene.money -= ;
+                break;
+            case 2:
+                scene.money -= ;
+                break;
+            case 3:
+                scene.money -= ;
+                break;
+            case 4:
+                scene.money -= ;
+        }
+    }*/
 }

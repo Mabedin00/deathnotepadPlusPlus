@@ -45,43 +45,45 @@ class Dart_Monkey extends Tower {
 
     buy_path_1(tower) {
         super.buy_path_1(tower);
-        if (this.path1 == 1) {
-            this.range += 38;
-            this.updateGraphics();
-            scene.money -= 90;
-        }
-        if (this.path1 == 2) {
-            this.range += 37;
-            this.updateGraphics();
-            scene.money -= 120;
-        }
-        if (this.path1 == 3) {
-            //become spike-o-pult
-            scene.money -= 500;
-        }
-        if (this.path1 == 4) {
-            //become juggernaut
-            scene.money -= 1500;
+        switch (this.path1) {
+            case 1:
+                this.range += 38;
+                this.updateGraphics();
+                scene.money -= 90;
+                break;
+            case 2:
+                this.range += 37;
+                this.updateGraphics();
+                scene.money -= 120;
+                break;
+            case 3:
+                //become spike-o-pult
+                scene.money -= 500;
+                break;
+            case 4:
+                //become juggernaut
+                scene.money -= 1500;
         }
     }
 
     buy_path_2(tower) {
         super.buy_path_2(tower);
-        if (this.path2 == 1) {
-            this.pierce++;
-            scene.money -= 140;
-        }
-        if (this.path2 == 2) {
-            this.pierce += 2;
-            scene.money -= 170;
-            //camo detection
-        }
-        if (this.path2 == 3) {
-            scene.money -= 330;
-        }
-        if (this.path2 == 4) {
-            scene.money -= 8000;
-            //super monkey fan club: turns into super monkey for 15 seconds every minute or so?
+        switch (this.path2) {
+            case 1:
+                this.pierce++;
+                scene.money -= 140;
+                break;
+            case 2:
+                this.pierce += 2;
+                //camo detection
+                scene.money -= 170;
+                break;
+            case 3:
+                scene.money -= 330;
+                break;
+            case 4:
+                //super monkey fan club: turns into super monkey for 15 seconds
+                scene.money -= 8000;
         }
     }
 }
