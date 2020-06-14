@@ -15,6 +15,8 @@ class Monkey_Buccaneer extends Tower {
         this.next_path2_price = 500;
         this.domain = WATER;
         this.toggle = false;
+        this.aircraft_carrier = false;
+        this.max_monkeys_deployed = 3;
         this.splash = 'buccaneer_splash'
         this.dart_type = 'bomb'
 
@@ -27,33 +29,43 @@ class Monkey_Buccaneer extends Tower {
         this.targets = this.return_valid_targets();
         // if there are no valid targets, stop fire function
         if (!this.targets.length) return;
-        this.target = this.return_best_target();
-
-        if (this.ability_charge >= this.ability_max_charge) {
-            this.ability_charge = 0;
-            new Hook(this.x, this.y, this.return_strongest_target(), 1000);
-        }
-        if (this.charge >= this.max_charge) {
-            this.charge = 0;
-            this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y);
-            new Dart(this.x, this.y, this.target, this.range, this.pierce);
-            if (this.path2 >= 1) {
-                let x = this.target.x - this.x;
-                let y = this.target.y - this.y;
-                let grape1 = this.rotate(x, y, Math.PI/6);
-                let grape2 = this.rotate(x, y, Math.PI/18);
-                let grape3 = this.rotate(x, y, -Math.PI/18);
-                let grape4 = this.rotate(x, y, -Math.PI/6);
-                new Grape(this.x, this.y, {x:grape1[0], y:grape1[1]}, this.range);
-                new Grape(this.x, this.y, {x:grape2[0], y:grape2[1]}, this.range);
-                new Grape(this.x, this.y, {x:grape3[0], y:grape3[1]}, this.range);
-                new Grape(this.x, this.y, {x:grape4[0], y:grape4[1]}, this.range);
+        if (this.aircraft_carrier) {
+            console.log(this.charge)
+            if (this.charge >= this.max_charge * 10 && this.monkeys_deployed < this.max_monkeys_deployed) {
+                this.charge = 0
+                this.monkeys_deployed++;
+                new Monkey_Ace(this.x, this.y, this);
             }
-            if (this.path2 >= 3) {
-                this.toggle = !this.toggle;
-                if (this.toggle) {
-                    this.charge = 0;
-                    new Bomb(this.x, this.y, this.target, this.range);
+        }
+        else {
+            this.target = this.return_best_target();
+
+            if (this.ability_charge >= this.ability_max_charge) {
+                this.ability_charge = 0;
+                new Hook(this.x, this.y, this.return_strongest_target(), 1000);
+            }
+            if (this.charge >= this.max_charge) {
+                this.charge = 0;
+                this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y);
+                new Dart(this.x, this.y, this.target, this.range, this.pierce);
+                if (this.path2 >= 1) {
+                    let x = this.target.x - this.x;
+                    let y = this.target.y - this.y;
+                    let grape1 = this.rotate(x, y, Math.PI/6);
+                    let grape2 = this.rotate(x, y, Math.PI/18);
+                    let grape3 = this.rotate(x, y, -Math.PI/18);
+                    let grape4 = this.rotate(x, y, -Math.PI/6);
+                    new Grape(this.x, this.y, {x:grape1[0], y:grape1[1]}, this.range);
+                    new Grape(this.x, this.y, {x:grape2[0], y:grape2[1]}, this.range);
+                    new Grape(this.x, this.y, {x:grape3[0], y:grape3[1]}, this.range);
+                    new Grape(this.x, this.y, {x:grape4[0], y:grape4[1]}, this.range);
+                }
+                if (this.path2 >= 3) {
+                    this.toggle = !this.toggle;
+                    if (this.toggle) {
+                        this.charge = 0;
+                        new Bomb(this.x, this.y, this.target, this.range);
+                    }
                 }
             }
         }
@@ -85,7 +97,8 @@ class Monkey_Buccaneer extends Tower {
                     this.next_path1_price = 15000;
                     break;
                 case 4:
-                    //aircraft carrier
+                    this.aircraft_carrier = true;
+                    this.monkeys_deployed = 0;
                     scene.money -= 15000;
             }
         }

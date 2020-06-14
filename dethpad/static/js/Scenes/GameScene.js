@@ -28,6 +28,7 @@ class GameScene extends Phaser.Scene {
 		towers = this.physics.add.group();
 		projectiles = this.physics.add.group();
 		dartlings = this.physics.add.group();
+		monkey_aces = this.physics.add.group();
 
 		this.set_vars();
 		this.create_key_bindings();
@@ -240,8 +241,22 @@ class GameScene extends Phaser.Scene {
 		});
 
 		if (this.paused) return;
-		if (this.grace_period) return;
+		let returning_to_base = []
+		if (this.grace_period) {
+			monkey_aces.children.iterate(function (monkey_ace) {
+				returning_to_base.push(monkey_ace);
+			});
+			for (let monkey_ace of returning_to_base) {
+				if (monkey_ace != undefined) monkey_ace.return_to_base();
+			}
+			return;
+		}
 		if (this.game_over) return;
+
+		monkey_aces.children.iterate(function (monkey_ace) {
+			monkey_ace.charge();
+			monkey_ace.fire();
+		});
 
 		if (scene.lives <= 0) {
 			this.lose_game();
