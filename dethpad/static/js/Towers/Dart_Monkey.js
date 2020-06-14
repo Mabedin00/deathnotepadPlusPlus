@@ -27,7 +27,16 @@ class Dart_Monkey extends Tower {
         if (this.charge >= this.max_charge) {
             this.charge = 0;
             this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y) + Math.PI / 2;
-            new Dart(this.x, this.y, this.target, this.range, this.pierce);
+            switch (this.path1) {
+                case 4:
+                    new Juggernaut(this.x, this.y, this.target, this.range);
+                    break;
+                case 3:
+                    new SpikeBall(this.x, this.y, this.target, this.range);
+                    break;
+                default:
+                    new Dart(this.x, this.y, this.target, this.range, this.pierce);
+            }
             if (this.path2 >= 3) {
                 let x = this.target.x - this.x;
                 let y = this.target.y - this.y;
@@ -64,11 +73,16 @@ class Dart_Monkey extends Tower {
                     break;
                 case 3:
                     //become spike-o-pult
+                    this.range += 25;
+                    this.updateGraphics();
                     scene.money -= 500;
                     this.next_path1_price = 1500;
                     break;
                 case 4:
                     //become juggernaut
+                    //can pop lead
+                    this.range += 100;
+                    this.updateGraphics();
                     scene.money -= 1500;
             }
         }
