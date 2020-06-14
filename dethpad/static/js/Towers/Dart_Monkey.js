@@ -16,6 +16,11 @@ class Dart_Monkey extends Tower {
         this.domain = LAND;
         this.splash = 'dart_splash'
         this.dart_type = 'dart'
+
+        this.ability_status = 0; //0 for no ability, 1 for charging, 2 for in use
+        this.ability_charge = 0;
+        this.ability_max_charge = 8000;
+        this.ability_duration = 800;
     }
 
     fire() {
@@ -24,29 +29,53 @@ class Dart_Monkey extends Tower {
         if (!this.targets.length) return;
         this.target = this.return_best_target();
 
+        if (this.ability_charge >= this.ability_max_charge) {
+            this.ability_charge = 0;
+            this.ability_status = 2;
+            this.setTexture('super_monkey');
+            this.max_charge = 3;
+            this.pierce = 1;
+            this.og_range = this.range;
+            this.range = 300;
+            this.updateGraphics();
+        }
+        if (this.ability_duration <= 0) {
+            this.ability_duration = 800;
+            this.ability_status = 1;
+            this.setTexture('dm_2_4');
+            this.max_charge = 80;
+            this.pierce = 4;
+            this.range = this.og_range;
+            this.updateGraphics();
+        }
+
         if (this.charge >= this.max_charge) {
             this.charge = 0;
             this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y) + Math.PI / 2;
-            switch (this.path1) {
-                case 4:
-                    new Juggernaut(this.x, this.y, this.target, this.range);
-                    break;
-                case 3:
-                    new SpikeBall(this.x, this.y, this.target, this.range);
-                    break;
-                default:
-                    new Dart(this.x, this.y, this.target, this.range, this.pierce);
-            }
-            if (this.path2 >= 3) {
-                let x = this.target.x - this.x;
-                let y = this.target.y - this.y;
-                let rotate = (theta) => {
-                    return [x*Math.cos(theta)-y*Math.sin(theta)+this.x, x*Math.sin(theta)+y*Math.cos(theta)+this.y]
+            if (this.ability_duration == 800) {
+                switch (this.path1) {
+                    case 4:
+                        new Juggernaut(this.x, this.y, this.target, this.range);
+                        break;
+                    case 3:
+                        new SpikeBall(this.x, this.y, this.target, this.range);
+                        break;
+                    default:
+                        new Dart(this.x, this.y, this.target, this.range, this.pierce);
                 }
-                let split1 = rotate(Math.PI/12);
-                let split2 = rotate(-Math.PI/12);
-                new Dart(this.x, this.y, {x:split1[0], y:split1[1]}, this.range, this.pierce);
-                new Dart(this.x, this.y, {x:split2[0], y:split2[1]}, this.range, this.pierce);
+                if (this.path2 >= 3) {
+                    let x = this.target.x - this.x;
+                    let y = this.target.y - this.y;
+                    let rotate = (theta) => {
+                        return [x*Math.cos(theta)-y*Math.sin(theta)+this.x, x*Math.sin(theta)+y*Math.cos(theta)+this.y]
+                    }
+                    let split1 = rotate(Math.PI/12);
+                    let split2 = rotate(-Math.PI/12);
+                    new Dart(this.x, this.y, {x:split1[0], y:split1[1]}, this.range, this.pierce);
+                    new Dart(this.x, this.y, {x:split2[0], y:split2[1]}, this.range, this.pierce);
+                }
+            } else {
+                new Super_Dart(this.x, this.y, this.target, this.range);
             }
         }
     }
@@ -121,7 +150,7 @@ class Dart_Monkey extends Tower {
                     this.next_path2_price = 8000;
                     break;
                 case 4:
-                    //super monkey fan club: turns into super monkey for 15 seconds
+                    this.ability_status = 1;
                     this.setTexture('dm_2_4');
                     scene.money -= 8000;
             }

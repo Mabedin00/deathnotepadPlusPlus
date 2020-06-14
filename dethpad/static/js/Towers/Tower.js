@@ -151,6 +151,11 @@ class Tower extends Phaser.GameObjects.Sprite {
         if(this.anim != undefined && this.charge > this.max_charge / 3) {
             this.anim.visible = false;
         }
+        if (this.ability_status == 1) {
+            this.ability_charge += (1 * scene.fast_forward);
+        } else if (this.ability_status == 2) {
+            this.ability_duration -= (1 * scene.fast_forward);
+        }
     }
 
     fire() {

@@ -80,7 +80,9 @@ class GameScene extends Phaser.Scene {
 
 		this.map_image = this.add.image(338, 240, this.map);
 		this.map_image.setInteractive();
-		this.map_image.on('pointerdown', () => scene.selected_tower.unshow_details());
+		this.map_image.on('pointerdown', () => {
+			if (scene.selected_tower != undefined) scene.selected_tower.unshow_details()
+		});
 
 		this.add.image(492, 477, 'sidebar').setTint(0x654321).setDepth(2);
 	}
