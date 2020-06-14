@@ -17,7 +17,9 @@ class Blue_Bloon extends Bloon {
     transform() {
         this.pop_sound();
         this.destroy();
-        return [new Red_Bloon(this.progress, this.health, this.path)];
+        let child = new Red_Bloon(this.progress, this.health, this.path);
+        if (this.deep_freeze) child.freeze_frames = this.freeze_frames;
+        return [child];
     }
 
 }

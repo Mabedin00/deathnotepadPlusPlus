@@ -1,5 +1,4 @@
 class Ice_Monkey extends Tower {
-
     constructor() {
 
         super('ice_monkey', 875, 175);
@@ -30,16 +29,31 @@ class Ice_Monkey extends Tower {
             this.anim.y = this.y;
             this.anim.visible = true
             let circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
-            bloons.children.iterate(function (bloon) {
+            let p1 = this.path1;
+            let p2 = this.path2;
+            bloons.children.iterate((bloon) => {
+                console.log(bloon);
                 if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y)) {
-                    if (this.path1 >= 2) {
+                    if (p1 >= 2) {
                         for (let child of bloon.transform()) {
-                            child.freeze_frames = this.path1 >= 1? 28:20;
-                            if (this.path2 >= 1) child.speed *= 0.5;
+                            child.freeze_frames = 28;
+                            if (p2 >= 1 && !child.permafrost) {
+                                child.permafrost = true;
+                                child.speed *= 0.5;
+                            }
+                            if (p2 >= 2) {
+                                child.deep_freeze = true;
+                            }
                         }
                     } else {
-                        bloon.freeze_frames = this.path1 >= 1? 28:20;
-                        if (this.path2 >= 1) bloon.speed *= 0.5;
+                        bloon.freeze_frames = p1 >= 1? 28:20;
+                        if (p2 >= 1 && !bloon.permafrost) {
+                            bloon.permafrost = true;
+                            bloon.speed *= 0.5;
+                        }
+                        if (p2 >= 2) {
+                            bloon.deep_freeze = true;
+                        }
                     }
                 }
             });
