@@ -53,6 +53,9 @@ class Ice_Monkey extends Tower {
             let p2 = this.path2;
             bloons.children.iterate((bloon) => {
                 if (bloon != undefined && Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y)) {
+                    if (p2 >= 3) {
+                        bloon.ice_shards = true;
+                    }
                     if (p1 >= 2) {
                         for (let child of bloon.transform()) {
                             child.freeze_frames = 28;
@@ -126,7 +129,6 @@ class Ice_Monkey extends Tower {
                     this.next_path2_price = 2000;
                     break;
                 case 3:
-                    //ice shards
                     scene.money -= 2000;
                     this.next_path2_price = 2000;
                     break;

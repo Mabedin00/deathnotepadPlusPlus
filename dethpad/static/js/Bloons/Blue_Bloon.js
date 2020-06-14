@@ -15,6 +15,7 @@ class Blue_Bloon extends Bloon {
     }
 
     transform() {
+        super.transform();
         this.pop_sound();
         this.destroy();
         let child = new Red_Bloon(this.progress, this.health, this.path);

@@ -84,7 +84,13 @@ class Bloon extends Phaser.GameObjects.Sprite {
     }
 
     transform() {
-
+        if (this.ice_shards) {
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+        }
     }
 
     static bloon_end(goal, bloon) {
