@@ -15,9 +15,21 @@ class Ice_Monkey extends Tower {
         this.splash = 'ice_splash'
         this.anim = scene.add.image(this.x, this.y, 'blizzard').setScale(.125);
         this.anim.visible = false
+
+        this.ability_status = 0; //0 for no ability, 1 for charging
+        this.ability_charge = 0;
+        this.ability_max_charge = 1000;
     }
 
     fire() {
+        if (this.ability_charge >= this.ability_max_charge) {
+            this.ability_charge = 0;
+            console.log('yes');
+            bloons.children.iterate((bloon) => {
+                if (!bloon.isMOAB) bloon.freeze_frames = 320;
+            });
+        }
+
         this.targets = this.return_valid_targets();
         // if there are no valid targets, stop fire function
         if (!this.targets.length) return;
@@ -119,7 +131,7 @@ class Ice_Monkey extends Tower {
                     this.next_path2_price = 2000;
                     break;
                 case 4:
-                    //absolute zero ability
+                    this.ability_status = 1;
                     scene.money -= 2000;
             }
         }
