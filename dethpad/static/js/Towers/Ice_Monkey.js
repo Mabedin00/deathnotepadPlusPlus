@@ -21,6 +21,14 @@ class Ice_Monkey extends Tower {
         this.targets = this.return_valid_targets();
         // if there are no valid targets, stop fire function
         if (!this.targets.length) return;
+        else if (this.path1 >= 3) {
+            for (let bloon in this.targets) {
+                if (bloon != undefined && !bloon.arctic_wind && !bloon.isMOAB) {
+                    bloon.arctic_wind = true;
+                    bloon.speed *= 0.33;
+                }
+            }
+        }
         this.target = this.return_best_target();
 
         if (this.charge >= this.max_charge) {
@@ -80,7 +88,6 @@ class Ice_Monkey extends Tower {
                 case 3:
                     this.range += 644;
                     this.updateGraphics();
-                    //slow normal bloons (non MOAB) by 33% while in radius including camo
                     scene.money -= 6500;
                     this.next_path1_price = 6000;
                     break;
@@ -100,7 +107,6 @@ class Ice_Monkey extends Tower {
                     this.next_path2_price = 350;
                     break;
                 case 2:
-                    //freeze two layers of bloons
                     scene.money -= 350;
                     this.next_path2_price = 2000;
                     break;

@@ -35,6 +35,10 @@ class Bloon extends Phaser.GameObjects.Sprite {
 
         this.permafrost = false;
         this.deep_freeze = false;
+        this.arctic_wind = false;
+        this.viral_frost = false;
+        this.ice_shards = false;
+        this.isMOAB = false;
     }
 
     move() {

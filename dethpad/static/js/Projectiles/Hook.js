@@ -10,7 +10,9 @@ class Hook extends Projectile {
     }
 
     inflict_damage(dart, bloon) {
-        bloon.destroy();
-        dart.destroy();
+        if (bloon === this.target) {
+            bloon.destroy();
+            dart.destroy();
+        }
     }
 }
