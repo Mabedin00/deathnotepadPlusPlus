@@ -15,10 +15,15 @@ class Zebra_Bloon extends Bloon {
     }
 
     transform() {
-
-        new White_Bloon(this.progress, this.health, this.path);
-        new Black_Bloon(this.progress+.001, this.health, this.path);
+        this.pop_sound();
         this.destroy();
+        let child1 = new White_Bloon(this.progress, this.health, this.path);
+        let child2 = new Black_Bloon(this.progress+.001, this.health, this.path);
+        if (this.deep_freeze) {
+            child1.freeze_frames = this.freeze_frames;
+            child2.freeze_frames = this.freeze_frames;
+        }
+        return [child1, child2];
     }
 
 }

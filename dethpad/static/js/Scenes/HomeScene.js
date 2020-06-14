@@ -52,6 +52,8 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
 		this.load.image('blizzard', 'static/images/projectiles/blizzard.png');
 		this.load.image('banana', 'static/images/projectiles/banana.png');
+		this.load.image('spike_ball', 'static/images/projectiles/spike_ball.png');
+		this.load.image('juggernaut', 'static/images/projectiles/juggernaut.png');
 
 		this.load.image('background', 'static/images/maps/map_selection.jpg');
 		this.load.image('back', 'static/images/home/back_button.png')
@@ -65,6 +67,13 @@ class HomeScene extends Phaser.Scene {
 
 		this.load.audio('bloon_pop', 'static/audio/bloon_pop.mp3');
 		this.load.audio('explosion', 'static/audio/explosion.mp3');
+
+		this.load.image('dm_1_1', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_1.png');
+		this.load.image('dm_1_2', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_2.png');
+		this.load.image('dm_1_3', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_3.png');
+		this.load.image('dm_1_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_4.png');
+		this.load.image('dm_2_3', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_3.png');
+		this.load.image('dm_2_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_4.png');
 	}
 
 	create () {
