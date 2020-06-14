@@ -2,7 +2,7 @@ class Blade extends Projectile {
 
     constructor(x, y, angle, range, pierce) {
         super(x, y, "blade", range);
-        this.damage = 50;
+        this.damage = 5;
         this.speed = 650;
         this.pierce = pierce;
         this.targets = [];
