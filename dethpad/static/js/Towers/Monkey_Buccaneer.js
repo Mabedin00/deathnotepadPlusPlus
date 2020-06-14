@@ -15,6 +15,7 @@ class Monkey_Buccaneer extends Tower {
         this.next_path2_price = 500;
         this.domain = WATER;
         this.toggle = false;
+        this.splash = 'buccaneer_splash'
         this.dart_type = 'bomb'
     }
 

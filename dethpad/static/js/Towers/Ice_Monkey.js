@@ -12,6 +12,7 @@ class Ice_Monkey extends Tower {
         this.next_path1_price = 190;
         this.next_path2_price = 100;
         this.domain = LAND;
+        this.splash = 'ice_splash'
         this.anim = scene.add.image(this.x, this.y, 'blizzard').setScale(.125);
         this.anim.visible = false
     }

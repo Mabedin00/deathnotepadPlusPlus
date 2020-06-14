@@ -105,6 +105,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         if (this.path2 > 2 && this.path1 == 2) {
             this.path1_lock.visible = true;
         }
+        this.splashart.visible = true;
     }
 
     unshow_details(){
@@ -116,6 +117,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.path2_max.visible = false;
         this.path1_lock.visible = false;
         this.path2_lock.visible = false;
+        this.splashart.visible = false;
     }
 
     sell(){
@@ -251,6 +253,11 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.path2_bar.fillRectShape(this.path2_rect2);
 		this.path2_bar.fillRectShape(this.path2_rect3);
 		this.path2_bar.fillRectShape(this.path2_rect4);
+
+		this.splashart = scene.add.image(75, 550, this.splash);
+		this.splashart.setScale(0.25);
+		this.splashart.setDepth(5);
+		this.splashart.visible = false;
     }
 
     buy_path_1(tower) {

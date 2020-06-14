@@ -13,6 +13,7 @@ class Banana_Farm extends Tower {
         this.next_path1_price = 300;
         this.next_path2_price = 500;
         this.domain = LAND;
+        this.splash = 'banana_splash'
         this.setScale(.8)
     }
 

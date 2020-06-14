@@ -13,6 +13,7 @@ class Tack_Shooter extends Tower {
         this.next_path1_price = 210;
         this.next_path2_price = 100;
         this.domain = LAND;
+        this.splash = 'tack_splash'
         this.dart_type = 'dart'
     }
 

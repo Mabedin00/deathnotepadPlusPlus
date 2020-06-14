@@ -14,6 +14,7 @@ class Dart_Monkey extends Tower {
         this.next_path1_price = 90;
         this.next_path2_price = 140;
         this.domain = LAND;
+        this.splash = 'dart_splash'
         this.dart_type = 'dart'
     }
 

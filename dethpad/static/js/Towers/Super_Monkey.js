@@ -14,6 +14,7 @@ class Super_Monkey extends Tower {
         this.next_path1_price = 3500;
         this.next_path2_price = 1000;
         this.domain = LAND;
+        this.splash = 'super_splash'
         this.dart_type = 'dart'
     }
 
