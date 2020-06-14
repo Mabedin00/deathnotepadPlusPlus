@@ -18,7 +18,7 @@ class Ice_Monkey extends Tower {
 
         this.ability_status = 0; //0 for no ability, 1 for charging
         this.ability_charge = 0;
-        this.ability_max_charge = 1000;
+        this.ability_max_charge = 4000;
     }
 
     fire() {
