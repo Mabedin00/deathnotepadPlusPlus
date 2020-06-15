@@ -34,8 +34,8 @@ var score_text;
 
 var bgm = 1;
 var sfx = 1;
-var bgm_x_coor = 620
-var sfx_x_coor = 620
+// var bgm_x_coor = 620
+// var sfx_x_coor = 620
 
 var colliders = [];
 
