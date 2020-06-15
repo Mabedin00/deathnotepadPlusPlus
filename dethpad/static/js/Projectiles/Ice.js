@@ -6,7 +6,7 @@ class Ice extends Projectile {
         this.damage = 1;
         this.speed = 750;
         this.setVelocity(this.speed * Math.cos(angle), this.speed*Math.sin(angle));
-        this.rotation = angle;
+        this.rotation = Math.PI-angle;
 
         this.setScale(1);
     }

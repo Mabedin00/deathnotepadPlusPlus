@@ -7,9 +7,9 @@ class Super_Monkey extends Tower {
         this.display_name = 'Super Monkey';
         this.description = '	Super Monkeys shoots a continuous stream of darts, and can mow down even the fastest and most stubborn bloons.';
         this.cost = 3500;
-        this.max_charge = 300;
+        this.max_charge = 3;
         this.charge = this.max_charge;
-        this.range = 3;
+        this.range = 300;
         this.pierce = 1;
         this.next_path1_price = 3500;
         this.next_path2_price = 1000;
