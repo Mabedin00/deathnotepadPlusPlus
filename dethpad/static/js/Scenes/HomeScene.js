@@ -44,7 +44,7 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('tack_shooter', 'static/images/towers/tack_shooter.png');
 		this.load.image('ice_monkey', 'static/images/towers/ice_monkey.png');
 		this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
-		this.load.image('super_monkey', 'static/images/towers/super_0_edited_v1.png');
+		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
 		this.load.image('dartling_gun', 'static/images/towers/dartling_gun.png');
 
 
@@ -58,6 +58,13 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('blade', 'static/images/projectiles/blade.png');
 		this.load.image('grape', 'static/images/projectiles/grape.png');
 		this.load.image('hook', 'static/images/projectiles/hook.png');
+		this.load.image('ice', 'static/images/projectiles/ice_spike.png');
+		this.load.image('sm_laser', 'static/images/projectiles/sm_lasers.png');
+		this.load.image('plasma', 'static/images/projectiles/plasma.png');
+		this.load.image('sg_blast', 'static/images/projectiles/sun_god_blast.png');
+		this.load.image('temple_blast', 'static/images/projectiles/temple_blast.png');
+		this.load.image('tech_blast', 'static/images/projectiles/tech_blast.png');
+		this.load.image('box', 'static/images/projectiles/banana_box.png');
 
 		this.load.image('background', 'static/images/maps/map_selection.jpg');
 		this.load.image('back', 'static/images/home/back_button.png')

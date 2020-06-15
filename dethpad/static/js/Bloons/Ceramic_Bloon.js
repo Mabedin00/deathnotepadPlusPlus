@@ -15,6 +15,7 @@ class Ceramic_Bloon extends Bloon {
     }
 
     transform() {
+        super.transform();
         this.pop_sound();
         this.destroy();
         let child1 = new Rainbow_Bloon(this.progress, this.health, this.path);

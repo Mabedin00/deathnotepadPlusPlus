@@ -8,6 +8,7 @@ class MOAB extends Bloon {
         this.health = 140 + health;
         this.damage = 616;
         this.value = 1;
+        this.isMOAB = true;
         this.setScale(.7);
 
         this.current_node = Math.floor(this.progress / this.increment)

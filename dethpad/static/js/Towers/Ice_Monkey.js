@@ -15,12 +15,32 @@ class Ice_Monkey extends Tower {
         this.splash = 'ice_splash'
         this.anim = scene.add.image(this.x, this.y, 'blizzard').setScale(.125);
         this.anim.visible = false
+
+        this.ability_status = 0; //0 for no ability, 1 for charging
+        this.ability_charge = 0;
+        this.ability_max_charge = 4000;
     }
 
     fire() {
+        if (this.ability_charge >= this.ability_max_charge) {
+            this.ability_charge = 0;
+            console.log('yes');
+            bloons.children.iterate((bloon) => {
+                if (!bloon.isMOAB) bloon.freeze_frames = 320;
+            });
+        }
+
         this.targets = this.return_valid_targets();
         // if there are no valid targets, stop fire function
         if (!this.targets.length) return;
+        else if (this.path1 >= 3) {
+            for (let bloon of this.targets) {
+                if (bloon instanceof Bloon && !bloon.arctic_wind && !bloon.isMOAB) {
+                    bloon.arctic_wind = true;
+                    bloon.speed *= 0.33;
+                }
+            }
+        }
         this.target = this.return_best_target();
 
         if (this.charge >= this.max_charge) {
@@ -33,6 +53,9 @@ class Ice_Monkey extends Tower {
             let p2 = this.path2;
             bloons.children.iterate((bloon) => {
                 if (bloon != undefined && Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y)) {
+                    if (p2 >= 3) {
+                        bloon.ice_shards = true;
+                    }
                     if (p1 >= 2) {
                         for (let child of bloon.transform()) {
                             child.freeze_frames = 28;
@@ -42,6 +65,10 @@ class Ice_Monkey extends Tower {
                             }
                             if (p2 >= 2) {
                                 child.deep_freeze = true;
+                            }
+                            if (p1 == 4) {
+                                child.viral_frost = true;
+                                colliders.push(scene.physics.add.overlap(child, bloons, child.spread_frost));
                             }
                         }
                     } else {
@@ -78,14 +105,12 @@ class Ice_Monkey extends Tower {
                     this.next_path1_price = 6500;
                     break;
                 case 3:
-                    this.range += 644;
+                    this.range += 64;
                     this.updateGraphics();
-                    //slow normal bloons (non MOAB) by 33% while in radius including camo
                     scene.money -= 6500;
                     this.next_path1_price = 6000;
                     break;
                 case 4:
-                    //viral frost: bloons that touch frozen bloons are frozen, affects white and zebra
                     scene.money -= 6000;
             }
         }
@@ -100,17 +125,15 @@ class Ice_Monkey extends Tower {
                     this.next_path2_price = 350;
                     break;
                 case 2:
-                    //freeze two layers of bloons
                     scene.money -= 350;
                     this.next_path2_price = 2000;
                     break;
                 case 3:
-                    //ice shards
                     scene.money -= 2000;
                     this.next_path2_price = 2000;
                     break;
                 case 4:
-                    //absolute zero ability
+                    this.ability_status = 1;
                     scene.money -= 2000;
             }
         }
