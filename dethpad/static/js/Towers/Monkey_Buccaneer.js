@@ -115,11 +115,8 @@ class Monkey_Buccaneer extends Tower {
                     }
                     break;
                 case 4:
-
                     this.aircraft_carrier = true;
                     this.monkeys_deployed = 0;
-
-                    //aircraft carrier
                     this.setTexture('b_1_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 15000;
