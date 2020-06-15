@@ -108,6 +108,15 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('dm_2_3', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_3.png');
 		this.load.image('dm_2_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_4.png');
 
+		this.load.image('dm_1_1_icon', 'static/images/upgrades/dm_1_1');
+		this.load.image('dm_1_2_icon', 'static/images/upgrades/dm_1_2');
+		this.load.image('dm_1_3_icon', 'static/images/upgrades/dm_1_3');
+		this.load.image('dm_1_4_icon', 'static/images/upgrades/dm_1_4');
+		this.load.image('dm_2_1_icon', 'static/images/upgrades/dm_2_1');
+		this.load.image('dm_2_2_icon', 'static/images/upgrades/dm_2_2');
+		this.load.image('dm_2_3_icon', 'static/images/upgrades/dm_2_3');
+		this.load.image('dm_2_4_icon', 'static/images/upgrades/dm_2_4');
+
 		this.load.image('ts_1_1', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_1.png');
 		this.load.image('ts_1_2', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_2.png');
 		this.load.image('ts_1_3', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_3.png');
