@@ -163,7 +163,7 @@ class Tower extends Phaser.GameObjects.Sprite {
     return_valid_targets() {
         let valid_targets = [];
         bloons.children.iterate((bloon) => {
-            if (Phaser.Geom.Circle.Contains(this.circle, bloon.x, bloon.y)) {
+            if (Phaser.Geom.Circle.Contains(this.circle, bloon.x, bloon.y) && !bloon.is_camo) {
                 valid_targets.push(bloon);
             }
         });

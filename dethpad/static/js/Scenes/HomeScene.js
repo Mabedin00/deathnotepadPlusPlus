@@ -27,6 +27,28 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('lives', 'static/images/menus/lives.png' );
 		this.load.image('money', 'static/images/menus/money.png' );
 
+		this.load.image('red_bloon_camo', 'static/images/bloons/red_bloon_camo.png');
+		this.load.image('blue_bloon_camo', 'static/images/bloons/blue_bloon_camo.png');
+		this.load.image('green_bloon_camo', 'static/images/bloons/green_bloon_camo.png');
+		this.load.image('yellow_bloon_camo', 'static/images/bloons/yellow_bloon_camo.png');
+		this.load.image('pink_bloon_camo', 'static/images/bloons/pink_bloon_camo.png');
+		this.load.image('white_bloon_camo', 'static/images/bloons/white_bloon_camo.png');
+		this.load.image('black_bloon_camo', 'static/images/bloons/black_bloon_camo.png');
+		this.load.image('zebra_bloon_camo', 'static/images/bloons/zebra_bloon_camo.png');
+		this.load.image('rainbow_bloon_camo', 'static/images/bloons/rainbow_bloon_camo.png');
+		this.load.image('ceramic_bloon_camo', 'static/images/bloons/ceramic_bloon_camo.png');
+
+		this.load.image('red_bloon_regen', 'static/images/bloons/red_bloon_regen.png');
+		this.load.image('blue_bloon_regen', 'static/images/bloons/blue_bloon_regen.png');
+		this.load.image('green_bloon_regen', 'static/images/bloons/green_bloon_regen.png');
+		this.load.image('yellow_bloon_regen', 'static/images/bloons/yellow_bloon_regen.png');
+		this.load.image('pink_bloon_regen', 'static/images/bloons/pink_bloon_regen.png');
+		this.load.image('white_bloon_regen', 'static/images/bloons/white_bloon_regen.png');
+		this.load.image('black_bloon_regen', 'static/images/bloons/black_bloon_regen.png');
+		this.load.image('zebra_bloon_regen', 'static/images/bloons/zebra_bloon_regen.png');
+		this.load.image('rainbow_bloon_regen', 'static/images/bloons/rainbow_bloon_regen.png');
+		this.load.image('ceramic_bloon_regen', 'static/images/bloons/ceramic_bloon_regen.png');
+
 		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
 		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
 		this.load.image('green_bloon', 'static/images/bloons/green_bloon.png');

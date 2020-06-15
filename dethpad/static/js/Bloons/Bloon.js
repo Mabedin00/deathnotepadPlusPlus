@@ -1,6 +1,6 @@
 class Bloon extends Phaser.GameObjects.Sprite {
 
-    constructor(bloon_type, progress, path) {
+    constructor(bloon_type, progress, path, is_camo, is_regen, og_type) {
         // bloon will be teleported to correct location by its progress number
         let xlist, ylist;
         // if it is a new bloon whose path must be randomly determined
@@ -23,8 +23,13 @@ class Bloon extends Phaser.GameObjects.Sprite {
         let y = Phaser.Math.Interpolation.Linear(ylist, progress);
         super(scene, x, y, bloon_type);
         scene.add.existing(this);
+        this.is_camo = is_camo;
+        this.is_regen = is_regen;
+        this.bt = bloon_type;
+        this.og_type = og_type;
         scene.physics.world.enableBody(this, 0);
         bloons.add(this);
+        this.charge = 0;
         this.progress = progress;
         this.path = path;
         this.xlist = xlist;
@@ -92,6 +97,28 @@ class Bloon extends Phaser.GameObjects.Sprite {
             new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
         }
     }
+
+    regenerate(){
+
+    }
+
+    regen() {
+        if (this.charge >= 180){
+            this.charge = 0;
+            // console.log(this.bt, this.og_type);
+            if (this.bt == this.og_type) return;
+
+            if (this.bt != this.og_type) {
+                this.regenerate();
+            }
+        }
+
+
+    }
+    regen_charge() {
+        this.charge += (1 * scene.fast_forward);
+    }
+
 
     static bloon_end(goal, bloon) {
         scene.lives -= bloon.damage;

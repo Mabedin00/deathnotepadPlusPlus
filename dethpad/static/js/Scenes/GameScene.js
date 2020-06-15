@@ -58,7 +58,9 @@ class GameScene extends Phaser.Scene {
 		this.lives = 1;
 		this.money = 500000;
 		this.fast_forward = 1;
-		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
+		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
+								0,0,0,0,0,0,0,0,0,0,
+								0,0,0,0,0,0,0,0,0,0  ]
 		this.all_bloons_deployed = false;
 		this.tower_selected = false;
 		this.selected_tower;
@@ -235,9 +237,19 @@ class GameScene extends Phaser.Scene {
 		 	}
 		}
 
+
+		bloons.children.iterate(function (bloon) {
+			if (scene.paused || scene.game_over ||scene.grace_period) return;
+			if (bloon.is_regen) {
+				bloon.regen_charge();
+				bloon.regen();
+			}
+		});
+
 		dartlings.children.iterate(function (dartling) {
 			if (dartling.placed) dartling.target();
 		});
+
 
 		if (this.paused) return;
 		if (this.grace_period) return;
@@ -273,7 +285,9 @@ class GameScene extends Phaser.Scene {
 			tick = 80;
 			this.counter = 0
 			this.level++;
-			this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0]
+			this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
+									0,0,0,0,0,0,0,0,0,0,
+									0,0,0,0,0,0,0,0,0,0  ]
 			this.all_bloons_deployed = false;
 			this.grace_period = false;
 			this.next_level.setTint(0xa9a9a9);
@@ -440,17 +454,38 @@ class GameScene extends Phaser.Scene {
 	}
 
 	create_bloon(id) {
-		if 		(id == 0) new Red_Bloon (0, 0, -1);
-		else if (id == 1) new Blue_Bloon(0, 0, -1);
-		else if (id == 2) new Green_Bloon(0, 0, -1);
-		else if (id == 3) new Yellow_Bloon(0, 0, -1);
-		else if (id == 4) new Pink_Bloon(0, 0, -1);
-		else if (id == 5) new White_Bloon(0, 0, -1);
-		else if (id == 6) new Black_Bloon(0, 0, -1);
-		else if (id == 7) new Zebra_Bloon(0, 0, -1);
-		else if (id == 8) new Rainbow_Bloon(0, 0, -1);
-		else if (id == 9) new Ceramic_Bloon(0, 0, -1);
+		if 		(id == 0) new Red_Bloon (0, 0, -1, false, false);
+		else if (id == 1) new Blue_Bloon(0, 0, -1, false, false);
+		else if (id == 2) new Green_Bloon(0, 0, -1, false, false);
+		else if (id == 3) new Yellow_Bloon(0, 0, -1, false, false);
+		else if (id == 4) new Pink_Bloon(0, 0, -1, false, false);
+		else if (id == 5) new White_Bloon(0, 0, -1, false, false);
+		else if (id == 6) new Black_Bloon(0, 0, -1, false, false);
+		else if (id == 7) new Zebra_Bloon(0, 0, -1, false, false);
+		else if (id == 8) new Rainbow_Bloon(0, 0, -1, false, false);
+		else if (id == 9) new Ceramic_Bloon(0, 0, -1, false, false);
 		else if (id == 10) new MOAB(0, 0, -1);
+		else if (id == 11) new Red_Bloon (0, 0, -1, true, false);
+		else if (id == 12) new Blue_Bloon(0, 0, -1, true, false);
+		else if (id == 13) new Green_Bloon(0, 0, -1, true, false);
+		else if (id == 14) new Yellow_Bloon(0, 0, -1, true, false);
+		else if (id == 15) new Pink_Bloon(0, 0, -1, true, false);
+		else if (id == 16) new White_Bloon(0, 0, -1, true, false);
+		else if (id == 17) new Black_Bloon(0, 0, -1, true, false);
+		else if (id == 18) new Zebra_Bloon(0, 0, -1, true, false);
+		else if (id == 19) new Rainbow_Bloon(0, 0, -1, true, false);
+		else if (id == 20) new Ceramic_Bloon(0, 0, -1, true, false);
+		else if (id == 21) new Red_Bloon (0, 0, -1, false, true);
+		else if (id == 22) new Blue_Bloon(0, 0, -1, false, true);
+		else if (id == 23) new Green_Bloon(0, 0, -1,  false, true);
+		else if (id == 24) new Yellow_Bloon(0, 0, -1,  false, true);
+		else if (id == 25) new Pink_Bloon(0, 0, -1,  false, true);
+		else if (id == 26) new White_Bloon(0, 0, -1,  false, true);
+		else if (id == 27) new Black_Bloon(0, 0, -1,  false, true);
+		else if (id == 28) new Zebra_Bloon(0, 0, -1,  false, true);
+		else if (id == 29) new Rainbow_Bloon(0, 0, -1,  false, true);
+		else if (id == 30) new Ceramic_Bloon(0, 0, -1,  false, true);
+
 	}
 
 	prevent_tower_stacking(xcor, ycor, width, height) {
