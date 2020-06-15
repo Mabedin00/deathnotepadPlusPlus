@@ -24,7 +24,6 @@ class Ice_Monkey extends Tower {
     fire() {
         if (this.ability_charge >= this.ability_max_charge) {
             this.ability_charge = 0;
-            console.log('yes');
             bloons.children.iterate((bloon) => {
                 if (!bloon.isMOAB) bloon.freeze_frames = 320;
             });
@@ -35,9 +34,6 @@ class Ice_Monkey extends Tower {
         if (!this.targets.length) return;
         else if (this.path1 >= 3) {
             for (let bloon of this.targets) {
-                if (bloon instanceof Red_Bloon) {
-                    console.log(bloon.speed);
-                }
                 if (bloon instanceof Bloon && !bloon.arctic_wind && !bloon.isMOAB) {
                     bloon.arctic_wind = true;
                     bloon.speed *= 0.33;
@@ -112,6 +108,7 @@ class Ice_Monkey extends Tower {
                     }
                     scene.money -= 190;
                     this.next_path1_price = 400;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 2:
                     if (this.path2 < 3) {
@@ -121,6 +118,7 @@ class Ice_Monkey extends Tower {
                     }
                     scene.money -= 400;
                     this.next_path1_price = 6500;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.range += 64;
@@ -130,6 +128,7 @@ class Ice_Monkey extends Tower {
 
                     scene.money -= 6500;
                     this.next_path1_price = 6000;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 4:
                     this.setTexture('im_1_4');
@@ -150,6 +149,7 @@ class Ice_Monkey extends Tower {
                     }
                     scene.money -= 100;
                     this.next_path2_price = 350;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 2:
                     if (this.path1 < 3) {
@@ -158,12 +158,14 @@ class Ice_Monkey extends Tower {
                     }
                     scene.money -= 350;
                     this.next_path2_price = 2000;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.setTexture('im_2_3');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 2000;
                     this.next_path2_price = 2000;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 4:
                     this.ability_status = 1;

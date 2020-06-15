@@ -82,6 +82,7 @@ class Tack_Shooter extends Tower {
                     }
                     scene.money -= 210;
                     this.next_path1_price = 300;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 2:
                     this.max_charge -= 20;
@@ -91,6 +92,7 @@ class Tack_Shooter extends Tower {
                     }
                     scene.money -= 300;
                     this.next_path1_price = 500;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.angle_step /= 2;
@@ -98,6 +100,7 @@ class Tack_Shooter extends Tower {
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 500;
                     this.next_path1_price = 2500;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 4:
                     this.max_charge -= 25;
@@ -123,6 +126,7 @@ class Tack_Shooter extends Tower {
                     }
                     scene.money -= 100;
                     this.next_path2_price = 225;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 2:
                     this.range += 13;
@@ -133,17 +137,20 @@ class Tack_Shooter extends Tower {
                     }
                     scene.money -= 225;
                     this.next_path2_price = 680;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.setTexture('ts_2_3');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 680;
                     this.next_path2_price = 2700;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 4:
                     this.ability_status = 1;
                     this.setTexture('ts_2_4');
                     this.input.hitArea.setSize(this.width, this.height);
+                    this.path1_price.setText("$" + this.next_path1_price);
                     scene.money -= 2700;
             }
         }

@@ -1,19 +1,17 @@
-class Bomb extends Projectile {
+class Rocket extends Projectile {
 
-    constructor(x, y, target, range) {
-        super(x, y,"bomb",range);
+    constructor(x, y, target_x, target_y, speed) {
+        super(x, y,"rocket", 999);
 
-        this.damage = 2;
-        this.speed = 200;
-        this.target = target;
-        this.explosion_radius = 150;
-        this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target.x, target.y);
-        scene.physics.moveTo(this, this.target.x, this.target.y, this.speed)
+        this.damage = 50;
+        this.speed = speed;
+        this.explosion_radius = 100;
+        this.rotation = Math.PI/2+Phaser.Math.Angle.Between(this.x, this.y, target_x, target_y);
+        scene.physics.moveTo(this, target_x, target_y, this.speed)
 
-        this.setScale(.5);
+        this.setScale(.4);
     }
 
-    // deals full damage to the direct hit and half damage to immediate surroundings
     inflict_damage(bomb, bloon) {
         scene.explosion.play();
         bloon.is_the_target = true;
@@ -21,7 +19,7 @@ class Bomb extends Projectile {
         let collateral_damage = [];
         // we need to gather list of bloons targeted, and then deal damage to them
         bloons.children.iterate(function (bloon) {
-            if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y) && !bloon.is_the_target && bloon.explosion_immunity != true ) {
+            if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y) && !bloon.is_the_target) {
                 collateral_damage.push(bloon);
             }
         });
@@ -30,6 +28,7 @@ class Bomb extends Projectile {
         }
         bloon.is_the_target = false;
         this.take_life(bloon, this.damage);
+        this.destroy();
     }
 
     take_life(bloon, damage) {
@@ -39,6 +38,5 @@ class Bomb extends Projectile {
             scene.score += bloon.value;
             bloon.transform();
         }
-        this.destroy();
     }
 }
