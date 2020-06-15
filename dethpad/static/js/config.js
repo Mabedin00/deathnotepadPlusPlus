@@ -23,6 +23,7 @@ var towers;
 var bloons;
 var projectiles;
 var dartlings;
+var monkey_aces
 
 var scene;
 var lives_text;
