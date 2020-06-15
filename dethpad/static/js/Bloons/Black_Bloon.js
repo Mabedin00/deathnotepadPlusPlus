@@ -18,6 +18,7 @@ class Black_Bloon extends Bloon {
     }
 
     transform() {
+        super.transform();
         this.pop_sound();
         this.destroy();
         let child1 = new Pink_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen, this.og_type);

@@ -40,6 +40,10 @@ class Bloon extends Phaser.GameObjects.Sprite {
 
         this.permafrost = false;
         this.deep_freeze = false;
+        this.arctic_wind = false;
+        this.viral_frost = false;
+        this.ice_shards = false;
+        this.isMOAB = false;
     }
 
     move() {
@@ -53,10 +57,24 @@ class Bloon extends Phaser.GameObjects.Sprite {
                                                   this.ylist[this.current_node+1]);
 
 
+        if (this.arctic_wind){
+            let in_range = false;
+            let bloon = this;
+            towers.children.iterate((tower) => {
+                if (tower instanceof Ice_Monkey && tower.path1 >= 3 && tower.return_valid_targets().includes(bloon)){
+                    in_range = true;
+                }
+            });
+            if (!in_range) {
+                this.arctic_wind = false;
+                this.speed *= 3;
+            }
+        }
         if (this.freeze_frames >= 0) {
             this.freeze_frames -= scene.fast_forward;
         }
         else {
+            this.viral_frost = false;
             this.progress += this.speed * map_data[scene.map].speed_multiplier * scene.fast_forward/ distance;
         }
 
@@ -71,7 +89,13 @@ class Bloon extends Phaser.GameObjects.Sprite {
     }
 
     transform() {
-
+        if (this.ice_shards) {
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+            new Ice(this.x, this.y, Math.random()*Math.PI*2, 100);
+        }
     }
 
     regenerate(){
@@ -105,5 +129,12 @@ class Bloon extends Phaser.GameObjects.Sprite {
         scene.bloon_pop.volume = sfx;
         scene.bloon_pop.play();
 
+    }
+
+    spread_frost(bloon1, bloon2) {
+        if (bloon1.viral_frost) {
+            bloon2.viral_frost = true;
+            bloon2.freeze_frames = bloon1.freeze_frames;
+        }
     }
 }

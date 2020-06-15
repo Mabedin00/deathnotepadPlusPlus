@@ -56,7 +56,7 @@ class GameScene extends Phaser.Scene {
 		this.level = 0;
 		this.score = 0;
 		this.lives = 1;
-		this.money = 50000;
+		this.money = 500000;
 		this.fast_forward = 1;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
 								0,0,0,0,0,0,0,0,0,0,
@@ -372,6 +372,21 @@ class GameScene extends Phaser.Scene {
 		towers.children.iterate((tower) => {
 			if (tower.anim != undefined) {
 				tower.anim.visible = false;
+			}
+			if (tower instanceof Banana_Farm && tower.path2 > 2) {
+				tower.add_income();
+				tower.withdraw_btn.fillStyle(0x00ff00);
+				tower.withdraw_btn.fillRectShape(tower.rect);
+				tower.withdraw_btn.setInteractive(tower.rect, Phaser.Geom.Rectangle.Contains);
+				tower.withdraw_btn.on('pointerdown', () => {tower.withdraw(tower)});
+				tower.withdraw_btn.on('pointerover', () => {
+					tower.withdraw_btn.fillStyle(0x808080, 0.1);
+					tower.withdraw_btn.fillRectShape(tower.rect);
+				});
+				tower.withdraw_btn.on('pointerout', () => {
+					tower.withdraw_btn.fillStyle(0x00ff00);
+					tower.withdraw_btn.fillRectShape(tower.rect);
+				});
 			}
 		})
 	}

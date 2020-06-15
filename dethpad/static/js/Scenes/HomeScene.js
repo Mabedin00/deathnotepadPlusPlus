@@ -80,6 +80,13 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('blade', 'static/images/projectiles/blade.png');
 		this.load.image('grape', 'static/images/projectiles/grape.png');
 		this.load.image('hook', 'static/images/projectiles/hook.png');
+		this.load.image('ice', 'static/images/projectiles/ice_spike.png');
+		this.load.image('sm_laser', 'static/images/projectiles/sm_lasers.png');
+		this.load.image('plasma', 'static/images/projectiles/plasma.png');
+		this.load.image('sg_blast', 'static/images/projectiles/sun_god_blast.png');
+		this.load.image('temple_blast', 'static/images/projectiles/temple_blast.png');
+		this.load.image('tech_blast', 'static/images/projectiles/tech_blast.png');
+		this.load.image('box', 'static/images/projectiles/banana_box.png');
 
 		this.load.image('background', 'static/images/maps/map_selection.jpg');
 		this.load.image('back', 'static/images/home/back_button.png')
