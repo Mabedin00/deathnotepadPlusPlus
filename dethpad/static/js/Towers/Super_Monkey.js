@@ -102,6 +102,7 @@ class Super_Monkey extends Tower {
                     }
                     scene.money -= 3500;
                     this.next_path1_price = 5000;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 2:
                     this.max_charge--;
@@ -112,12 +113,14 @@ class Super_Monkey extends Tower {
                     }
                     scene.money -= 5000;
                     this.next_path1_price = 16500;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.max_charge++;
                     this.setTexture('sm_1_3').setScale(0.5);
                     scene.money -= 16500;
                     this.next_path1_price = 100000;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 4:
                     this.max_charge--;
@@ -136,6 +139,7 @@ class Super_Monkey extends Tower {
                     this.updateGraphics();
                     scene.money -= 1000;
                     this.next_path2_price = 1500;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 2:
                     this.pierce++;
@@ -147,11 +151,13 @@ class Super_Monkey extends Tower {
                     }
                     scene.money -= 1500;
                     this.next_path2_price = 9000;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.setTexture('sm_2_3').setScale(0.5);
                     scene.money -= 9000;
                     this.next_path2_price = 25000;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 4:
                     switch (this.path1) {
@@ -167,6 +173,7 @@ class Super_Monkey extends Tower {
                     this.max_charge--;
                     this.ability_status = 1;
                     this.setTexture('sm_2_4');
+                    this.path1_price.setText("$" + this.next_path1_price);
                     scene.money -= 25000;
             }
         }
