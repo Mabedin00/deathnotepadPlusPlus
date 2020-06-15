@@ -56,6 +56,7 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     place_tower() {
+
         this.graphics.visible = false;
         scene.is_dragging = false;
         this.placed = true;
@@ -191,6 +192,7 @@ class Tower extends Phaser.GameObjects.Sprite {
 
     show_details(){
         if (scene.selected_tower != undefined) scene.selected_tower.unshow_details();
+        // console.log(scene.input.activePointer.x, scene.input.activePointer.y);
         scene.selected_tower = this;
         scene.tower_selected = true;
         this.graphics.visible = true;
