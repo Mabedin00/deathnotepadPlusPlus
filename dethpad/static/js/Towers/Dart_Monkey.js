@@ -95,7 +95,6 @@ class Dart_Monkey extends Tower {
                         console.log(this);
                         this.setTexture('dm_1_1').setScale(.5);
                         this.input.hitArea.setSize(this.width, this.height);
-
                     }
                     scene.money -= 90;
                     this.next_path1_price = 120;
@@ -105,33 +104,35 @@ class Dart_Monkey extends Tower {
                     this.range += 37;
                     this.updateGraphics();
                     this.camo_detection = true;
+                    scene.money -= 120;
+                    this.next_path1_price = 500;
                     if (this.path2 < 3) {
                         this.setTexture('dm_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
-
+                        this.path1_price.setText("$" + this.next_path1_price);
+                    } else {
+                        this.path1_price.destroy();
                     }
-                    scene.money -= 120;
-                    this.next_path1_price = 500;
-                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.range += 25;
                     this.updateGraphics();
                     this.setTexture('dm_1_3');
                     this.input.hitArea.setSize(this.width, this.height);
-
                     scene.money -= 500;
                     this.next_path1_price = 1500;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    if (this.path2 == 2) {
+                        this.path2_price.destroy();
+                    }
                     break;
                 case 4:
-                    this.path1_price.setText("$" + this.next_path1_price);
                     this.range += 100;
                     this.updateGraphics();
                     this.setTexture('dm_1_4');
                     this.input.hitArea.setSize(this.width, this.height);
-
                     scene.money -= 1500;
+                    this.path1_price.destroy();
             }
         }
     }
@@ -145,7 +146,6 @@ class Dart_Monkey extends Tower {
                     if (this.path1 < 2) {
                         this.setTexture('dm_1_1').setScale(0.5);
                         this.input.hitArea.setSize(this.width, this.height);
-
                     }
                     scene.money -= 140;
                     this.next_path2_price = 170;
@@ -153,14 +153,14 @@ class Dart_Monkey extends Tower {
                     break;
                 case 2:
                     this.pierce += 2;
-                    if (this.path1 < 3) {
-                        this.setTexture('dm_1_2');
-                        this.input.hitArea.setSize(this.width, this.height);
-
-                    }
                     scene.money -= 170;
                     this.next_path2_price = 330;
-                    this.path2_price.setText("$" + this.next_path2_price);
+                    if (this.path1 < 3) {
+                        this.setTexture('dm_1_2');
+                        this.path2_price.setText("$" + this.next_path2_price);
+                    } else {
+                        this.path2_price.destroy();
+                    }
                     break;
                 case 3:
                     this.setTexture('dm_2_3');
@@ -168,12 +168,16 @@ class Dart_Monkey extends Tower {
                     scene.money -= 330;
                     this.next_path2_price = 8000;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    if (this.path1 == 2) {
+                        this.path1_price.destroy();
+                    }
                     break;
                 case 4:
                     this.ability_status = 1;
                     this.setTexture('dm_2_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 8000;
+                    this.path2_price.destroy();
             }
         }
     }

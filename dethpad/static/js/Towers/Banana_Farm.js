@@ -50,29 +50,31 @@ class Banana_Farm extends Tower {
                     if (this.path2 < 3) {
                         this.max_charge -= 100;
                         scene.money -= 300;
-                        this.next_path1_price = 1400;
                     } else {
                         this.income += 40;
                     }
+                    this.next_path1_price = 1400;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     if (this.path2 < 2) {
                         this.setTexture('bf_1_1').setScale(0.5);
                         this.input.hitArea.setSize(this.width, this.height);
                     }
-                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 2:
                     if (this.path2 < 3) {
                         this.max_charge -= 50;
                         scene.money -= 1400;
-                        this.next_path1_price = 3200;
                     } else {
                         this.income += 160;
                     }
+                    this.next_path1_price = 3200;
                     if (this.path2 < 3) {
                         this.setTexture('bf_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
+                        this.path1_price.setText("$" + this.next_path1_price);
+                    } else {
+                        this.path1_price.destroy();
                     }
-                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.max_charge -= 50;
@@ -81,12 +83,16 @@ class Banana_Farm extends Tower {
                     scene.money -= 3200;
                     this.next_path1_price = 14000;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    if (this.path2 == 2) {
+                        this.path2_price.destroy();
+                    }
                     break;
                 case 4:
                     this.max_charge += 100;
                     this.setTexture('bf_1_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 14000;
+                    this.path1_price.destroy();
             }
         }
     }
@@ -105,13 +111,15 @@ class Banana_Farm extends Tower {
                     this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 2:
+                    scene.money -= 4000;
+                    this.next_path2_price = 4200;
                     if (this.path1 < 3) {
                         this.setTexture('bf_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
+                        this.path2_price.setText("$" + this.next_path2_price);
+                    } else {
+                        this.path2_price.destroy();
                     }
-                    scene.money -= 4000;
-                    this.next_path2_price = 4200;
-                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.bank_maximum = 5000;
@@ -129,6 +137,9 @@ class Banana_Farm extends Tower {
                     scene.money -= 4200;
                     this.next_path2_price = 5500;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    if (this.path1 == 2) {
+                        this.path1_price.destroy();
+                    }
                     break;
                 case 4:
                     this.bank_maximum = 20000;
@@ -137,6 +148,7 @@ class Banana_Farm extends Tower {
                     this.setTexture('bf_2_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 5500;
+                    this.path2_price.destroy();
             }
         }
     }

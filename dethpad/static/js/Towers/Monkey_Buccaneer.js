@@ -81,13 +81,15 @@ class Monkey_Buccaneer extends Tower {
                 case 2:
                     this.range += 100;
                     this.updateGraphics();
+                    scene.money -= 180;
+                    this.next_path1_price = 2200;
                     if (this.path2 < 3) {
                         this.setTexture('b_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
+                        this.path1_price.setText("$" + this.next_path1_price);
+                    } else {
+                        this.path1_price.destroy();
                     }
-                    scene.money -= 180;
-                    this.next_path1_price = 2200;
-                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.max_charge -= 33;
@@ -96,12 +98,16 @@ class Monkey_Buccaneer extends Tower {
                     scene.money -= 2200;
                     this.next_path1_price = 15000;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    if (this.path2 == 2) {
+                        this.path2_price.destroy();
+                    }
                     break;
                 case 4:
                     //aircraft carrier
                     this.setTexture('b_1_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 15000;
+                    this.path1_price.destroy();
             }
         }
     }
@@ -121,13 +127,15 @@ class Monkey_Buccaneer extends Tower {
                     break;
                 case 2:
                     this.camo_detection = true;
+                    scene.money -= 250;
+                    this.next_path2_price = 1200;
                     if (this.path1 < 3) {
                         this.setTexture('b_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
+                        this.path2_price.setText("$" + this.next_path2_price);
+                    } else {
+                        this.path2_price.destroy();
                     }
-                    scene.money -= 250;
-                    this.next_path2_price = 1200;
-                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.setTexture('b_2_3');
@@ -135,12 +143,16 @@ class Monkey_Buccaneer extends Tower {
                     scene.money -= 1200;
                     this.next_path2_price = 4500;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    if (this.path1 == 2) {
+                        this.path1_price.destroy();
+                    }
                     break;
                 case 4:
                     this.ability_status = 1;
                     this.setTexture('b_2_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 4500;
+                    this.path2_price.destroy();
             }
         }
     }

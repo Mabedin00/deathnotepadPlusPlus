@@ -111,29 +111,33 @@ class Ice_Monkey extends Tower {
                     this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 2:
+                    scene.money -= 400;
+                    this.next_path1_price = 6500;
                     if (this.path2 < 3) {
                         this.setTexture('im_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
-
+                        this.path1_price.setText("$" + this.next_path1_price);
+                    } else {
+                        this.path1_price.destroy();
                     }
-                    scene.money -= 400;
-                    this.next_path1_price = 6500;
-                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.range += 64;
                     this.updateGraphics();
                     this.setTexture('im_1_3');
                     this.input.hitArea.setSize(this.width, this.height);
-
                     scene.money -= 6500;
                     this.next_path1_price = 6000;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    if (this.path2 == 2) {
+                        this.path2_price.destroy();
+                    }
                     break;
                 case 4:
                     this.setTexture('im_1_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 6000;
+                    this.path1_price.destroy();
             }
         }
     }
@@ -152,13 +156,15 @@ class Ice_Monkey extends Tower {
                     this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 2:
+                    scene.money -= 350;
+                    this.next_path2_price = 2000;
                     if (this.path1 < 3) {
                         this.setTexture('im_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
+                        this.path2_price.setText("$" + this.next_path2_price);
+                    } else {
+                        this.path2_price.destroy();
                     }
-                    scene.money -= 350;
-                    this.next_path2_price = 2000;
-                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.setTexture('im_2_3');
@@ -166,12 +172,16 @@ class Ice_Monkey extends Tower {
                     scene.money -= 2000;
                     this.next_path2_price = 2000;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    if (this.path1 == 2) {
+                        this.path1_price.destroy();
+                    }
                     break;
                 case 4:
                     this.ability_status = 1;
                     this.setTexture('im_2_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 2000;
+                    this.path2_price.destroy();
             }
         }
     }
