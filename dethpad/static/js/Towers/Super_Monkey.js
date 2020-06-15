@@ -96,7 +96,6 @@ class Super_Monkey extends Tower {
             super.buy_path_1(tower);
             switch (this.path1) {
                 case 1:
-                    //lasers can pop frozen, double damage to MOABs
                     this.pierce++;
                     if (this.path2 < 3) {
                         this.setTexture('sm_1_1');
@@ -105,7 +104,6 @@ class Super_Monkey extends Tower {
                     this.next_path1_price = 5000;
                     break;
                 case 2:
-                    //plasma can pop lead
                     this.max_charge--;
                     this.pierce += 2;
                     this.max_charge--;
@@ -150,7 +148,6 @@ class Super_Monkey extends Tower {
                     this.next_path2_price = 9000;
                     break;
                 case 3:
-                    //robo monkey can pop frozen and lead
                     this.setTexture('sm_2_3').setScale(0.5);
                     scene.money -= 9000;
                     this.next_path2_price = 25000;

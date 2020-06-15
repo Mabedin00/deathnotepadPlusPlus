@@ -97,7 +97,6 @@ class Tack_Shooter extends Tower {
                     this.next_path1_price = 2500;
                     break;
                 case 4:
-                    //pop lead and frozen
                     this.max_charge -= 25;
                     this.range += 50;
                     this.updateGraphics();

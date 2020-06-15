@@ -111,7 +111,7 @@ class Monkey_Buccaneer extends Tower {
                     this.next_path2_price = 250;
                     break;
                 case 2:
-                    //detect camo
+                    this.camo_detection = true;
                     if (this.path1 < 3) {
                         this.setTexture('b_1_2');
                     }

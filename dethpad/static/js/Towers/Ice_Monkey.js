@@ -30,17 +30,22 @@ class Ice_Monkey extends Tower {
             });
         }
 
-        this.targets = this.return_valid_targets();
+        this.targets = this.targets_ignore_camo();
         // if there are no valid targets, stop fire function
         if (!this.targets.length) return;
         else if (this.path1 >= 3) {
             for (let bloon of this.targets) {
+                if (bloon instanceof Red_Bloon) {
+                    console.log(bloon.speed);
+                }
                 if (bloon instanceof Bloon && !bloon.arctic_wind && !bloon.isMOAB) {
                     bloon.arctic_wind = true;
                     bloon.speed *= 0.33;
                 }
             }
         }
+        this.targets = this.return_valid_targets();
+        if (!this.targets.length) return;
         this.target = this.return_best_target();
 
         if (this.charge >= this.max_charge) {
@@ -53,7 +58,9 @@ class Ice_Monkey extends Tower {
             let p1 = this.path1;
             let p2 = this.path2;
             bloons.children.iterate((bloon) => {
-                if (bloon != undefined && Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y) && bloon.freeze_immunity != true) {
+                if (bloon != undefined &&
+                    Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y) &&
+                    !bloon.freeze_immunity && !bloon.is_camo) {
                     if (p2 >= 3) {
                         bloon.ice_shards = true;
                     }
