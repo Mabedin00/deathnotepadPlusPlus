@@ -6,12 +6,13 @@ class Tower extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);
         scene.physics.world.enableBody(this, 0);
         towers.add(this);
-
+        // tower has no upgrades
         this.path1 = 0;
         this.path2 = 0;
         this.placed = false;
         this.being_dragged = false;
         this.setInteractive();
+        // click to start or stop dragging, hover over to display info about it
         this.on('pointerdown', this.toggle_drag, this);
         this.on('pointerover', this.display_info, this);
         this.on('pointerout', this.hide_info, this);
@@ -41,7 +42,7 @@ class Tower extends Phaser.GameObjects.Sprite {
             return;
         }
         if (this.being_dragged) {
-            this.place_tower(mouseX, mouseY);
+            this.place_tower();
         }
         this.being_dragged = !this.being_dragged
         if (this.being_dragged) {
@@ -53,157 +54,16 @@ class Tower extends Phaser.GameObjects.Sprite {
         }
     }
 
-    place_tower(x, y) {
-        this.create_upgrades();
+    place_tower() {
         this.graphics.visible = false;
-        scene.prevent_tower_stacking(x, y, this.width / 2, this.height / 2);
         scene.is_dragging = false;
+        this.placed = true;
         scene.money -= this.cost;
+        this.create_upgrades();
         this.create_tower();
         this.hide_info();
+        this.prevent_tower_stacking();
         this.on('pointerdown', this.show_details, this);
-        this.placed = true;
-    }
-
-    display_info() {
-        if (this.placed || this.being_dragged) return;
-        this.text_box = scene.add.graphics({ fillStyle: { color: 0x000000 , alpha: .7} }).setDepth(5);
-		let rectangle = new Phaser.Geom.Rectangle(this.x-30, this.y, 135, 175);
-		this.text_box.fillRectShape(rectangle);
-        this.display_name_text = scene.add.text(this.x-20, this.y, this.display_name, { font: 'bold 18px Arial', wordWrap: { width: 125 } }).setDepth(5);
-        this.price_text = scene.add.text(this.x-20, this.y+50, 'Cost: '+this.cost, { font: 'bold 14px Arial' }).setDepth(5);
-        this.range_text = scene.add.text(this.x-20, this.y+70, 'Range: '+this.range, { font: 'bold 14px Arial' }).setDepth(5);
-        this.description_text = scene.add.text(this.x-20, this.y+90, this.description, { font: '12px Arial', wordWrap: { width: 125 } }).setDepth(5);
-    }
-
-    hide_info() {
-        if (this.placed) return;
-        this.text_box.destroy();
-        this.display_name_text.destroy();
-        this.price_text.destroy();
-        this.range_text.destroy();
-        this.description_text.destroy();
-    }
-
-    show_details(){
-        if (scene.selected_tower != undefined) scene.selected_tower.unshow_details();
-        scene.selected_tower = this;
-        scene.tower_selected = true;
-        this.graphics.visible = true;
-        this.path1_bar.visible = true;
-        this.path2_bar.visible = true;
-        if (this.path1 == 4) {
-            this.path1_max.visible = true;
-        }
-        if (this.path2 == 4) {
-            this.path2_max.visible = true;
-        }
-        if (this.path1 > 2 && this.path2 == 2) {
-            this.path2_lock.visible = true;
-        }
-        if (this.path2 > 2 && this.path1 == 2) {
-            this.path1_lock.visible = true;
-        }
-        this.splashart.visible = true;
-    }
-
-    unshow_details(){
-        scene.tower_selected = false;
-        this.graphics.visible = false;
-        this.path1_bar.visible = false;
-        this.path2_bar.visible = false;
-        this.path1_max.visible = false;
-        this.path2_max.visible = false;
-        this.path1_lock.visible = false;
-        this.path2_lock.visible = false;
-        this.splashart.visible = false;
-    }
-
-    sell(){
-        if (s_key.isDown){
-            scene.tower_selected = false;
-            scene.money += Math.floor(this.cost / 2);
-            return this;
-        }
-    }
-
-    drag() {
-        let mouseX = Math.floor(scene.input.activePointer.x);
-        let mouseY = Math.floor(scene.input.activePointer.y);
-        let tile;
-        scene.tiles[mouseY] == undefined ? tile = undefined : tile = scene.tiles[mouseY][mouseX]
-
-        this.x = mouseX;
-        this.y = mouseY;
-        this.graphics.destroy();
-
-        let fillcolor;
-        fillcolor = tile != this.domain ? '0xff0000':'0xffffff'
-
-        this.graphics = scene.add.graphics({ fillStyle: { color: fillcolor , alpha: .2} });
-        this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
-        this.graphics.fillCircleShape(this.circle);
-    }
-
-    charge_tower() {
-        this.charge += (1 * scene.fast_forward);
-        if(this.anim != undefined && this.charge > this.max_charge / 3) {
-            this.anim.visible = false;
-        }
-        if (this.ability_status == 1) {
-            this.ability_charge += (1 * scene.fast_forward);
-        } else if (this.ability_status == 2) {
-            this.ability_duration -= (1 * scene.fast_forward);
-        }
-    }
-
-    fire() {
-    }
-
-    return_valid_targets() {
-        let valid_targets = [];
-        bloons.children.iterate((bloon) => {
-            if (Phaser.Geom.Circle.Contains(this.circle, bloon.x, bloon.y)) {
-                valid_targets.push(bloon);
-            }
-        });
-        return valid_targets
-    }
-
-    return_best_target() {
-        // returns the target that is farthest along the track
-        let max = this.targets[0];
-
-        for (let target of this.targets) {
-            if (target.progress > max.progress) {
-                max = target;
-            }
-        }
-        return max;
-    }
-
-    return_worst_target() {
-        // returns the target that is last along the track
-        let min = this.targets[0];
-
-        for (let target of this.targets) {
-            if (target.progress < min.progress) {
-                min = target;
-            }
-        }
-        return min;
-    }
-
-    return_strongest_target() {
-        // returns the target that is strongest
-        let max = this.targets[0];
-
-        for (let target of this.targets) {
-            if (target.health > max.health) {
-                max = target;
-            }
-        }
-        return max;
     }
 
     create_upgrades() {
@@ -276,6 +136,166 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.splashart.visible = false;
     }
 
+    display_info() {
+        if (this.placed || this.being_dragged) return;
+        this.text_box = scene.add.graphics({ fillStyle: { color: 0x000000 , alpha: .7} }).setDepth(5);
+		let rectangle = new Phaser.Geom.Rectangle(this.x-30, this.y, 135, 175);
+		this.text_box.fillRectShape(rectangle);
+        this.display_name_text = scene.add.text(this.x-20, this.y, this.display_name, { font: 'bold 18px Arial', wordWrap: { width: 125 } }).setDepth(5);
+        this.price_text = scene.add.text(this.x-20, this.y+50, 'Cost: '+this.cost, { font: 'bold 14px Arial' }).setDepth(5);
+        this.range_text = scene.add.text(this.x-20, this.y+70, 'Range: '+this.range, { font: 'bold 14px Arial' }).setDepth(5);
+        this.description_text = scene.add.text(this.x-20, this.y+90, this.description, { font: '12px Arial', wordWrap: { width: 125 } }).setDepth(5);
+    }
+    hide_info() {
+        if (this.placed) return;
+        this.text_box.destroy();
+        this.display_name_text.destroy();
+        this.price_text.destroy();
+        this.range_text.destroy();
+        this.description_text.destroy();
+    }
+
+    // makes the tiles around the tower invalid to place on, unless those tiles are off of the map
+    prevent_tower_stacking() {
+        let y_offset = Math.floor(this.height/2)
+        let x_offset = Math.floor(this.width/2)
+        for (let y = this.y - y_offset; y < this.y + y_offset && y < scene.tiles.length; y++) {
+            if (y <= 0) y = 0;
+            for (let x = this.x - x_offset; x < this.x + x_offset && x < scene.tiles[y].length; x++) {
+                if (x <= 0) x = 0;
+                scene.tiles[y][x] = PATH;
+            }
+        }
+    }
+    clear_tile_blockage() {
+        let y_offset = Math.floor(this.height/2)
+        let x_offset = Math.floor(this.width/2)
+        for (let y = this.y - y_offset; y < this.y + y_offset && y < scene.tiles.length; y++) {
+            if (y <= 0) y = 0;
+            for (let x = this.x - x_offset; x < this.x + x_offset && x < scene.tiles[y].length; x++) {
+                if (x <= 0) x = 0;
+                scene.tiles[y][x] = map_data[scene.map].tiles[y][x];
+            }
+        }
+    }
+
+    sell() {
+        if (s_key.isDown){
+            scene.tower_selected = false;
+            scene.money += Math.floor(this.cost / 2);
+            this.clear_tile_blockage()
+            return this;
+        }
+    }
+
+    show_details(){
+        if (scene.selected_tower != undefined) scene.selected_tower.unshow_details();
+        scene.selected_tower = this;
+        scene.tower_selected = true;
+        this.graphics.visible = true;
+        this.path1_bar.visible = true;
+        this.path2_bar.visible = true;
+        if (this.path1 == 4) {
+            this.path1_max.visible = true;
+        }
+        if (this.path2 == 4) {
+            this.path2_max.visible = true;
+        }
+        if (this.path1 > 2 && this.path2 == 2) {
+            this.path2_lock.visible = true;
+        }
+        if (this.path2 > 2 && this.path1 == 2) {
+            this.path1_lock.visible = true;
+        }
+        this.splashart.visible = true;
+    }
+    unshow_details(){
+        scene.tower_selected = false;
+        this.graphics.visible = false;
+        this.path1_bar.visible = false;
+        this.path2_bar.visible = false;
+        this.path1_max.visible = false;
+        this.path2_max.visible = false;
+        this.path1_lock.visible = false;
+        this.path2_lock.visible = false;
+        this.splashart.visible = false;
+    }
+
+    drag() {
+        let mouseX = Math.floor(scene.input.activePointer.x);
+        let mouseY = Math.floor(scene.input.activePointer.y);
+        let tile;
+        scene.tiles[mouseY] == undefined ? tile = undefined : tile = scene.tiles[mouseY][mouseX]
+
+        this.x = mouseX;
+        this.y = mouseY;
+        this.graphics.destroy();
+
+        let fillcolor;
+        fillcolor = tile != this.domain ? '0xff0000':'0xffffff'
+
+        this.graphics = scene.add.graphics({ fillStyle: { color: fillcolor , alpha: .2} });
+        this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
+        this.graphics.fillCircleShape(this.circle);
+    }
+
+    charge_tower() {
+        this.charge += (1 * scene.fast_forward);
+        if(this.anim != undefined && this.charge > this.max_charge / 3) {
+            this.anim.visible = false;
+        }
+        if (this.ability_status == 1) {
+            this.ability_charge += (1 * scene.fast_forward);
+        } else if (this.ability_status == 2) {
+            this.ability_duration -= (1 * scene.fast_forward);
+        }
+    }
+    fire() {
+    }
+
+    return_valid_targets() {
+        let valid_targets = [];
+        bloons.children.iterate((bloon) => {
+            if (Phaser.Geom.Circle.Contains(this.circle, bloon.x, bloon.y)) {
+                valid_targets.push(bloon);
+            }
+        });
+        return valid_targets
+    }
+    return_best_target() {
+        // returns the target that is farthest along the track
+        let max = this.targets[0];
+
+        for (let target of this.targets) {
+            if (target.progress > max.progress) {
+                max = target;
+            }
+        }
+        return max;
+    }
+    return_worst_target() {
+        // returns the target that is last along the track
+        let min = this.targets[0];
+
+        for (let target of this.targets) {
+            if (target.progress < min.progress) {
+                min = target;
+            }
+        }
+        return min;
+    }
+    return_strongest_target() {
+        // returns the target that is strongest
+        let max = this.targets[0];
+
+        for (let target of this.targets) {
+            if (target.health > max.health) {
+                max = target;
+            }
+        }
+        return max;
+    }
+
     buy_path_1(tower) {
         if (++tower.path1 == 3 && tower.path2 == 2) {
             tower.path2_bar.fillStyle(0x808080);
@@ -311,7 +331,6 @@ class Tower extends Phaser.GameObjects.Sprite {
                 tower.path1_bar.fillRectShape(tower.path1_rect4);
         }
     }
-
     buy_path_2(tower){
         if (++tower.path2 == 3 && tower.path1 == 2) {
             tower.path1_bar.fillStyle(0x808080);
@@ -352,19 +371,16 @@ class Tower extends Phaser.GameObjects.Sprite {
         graphic.fillStyle(tint, 0.1);
         graphic.fillPoints(area.points, true);
     }
-
     clearTint(graphic, area) {
         graphic.fillStyle(0x00ff00);
         graphic.fillPoints(area.points, true);
     }
-
     updateGraphics() {
         this.graphics.destroy();
         this.graphics = scene.add.graphics({ fillStyle: { color: '0xffffff' , alpha: .2} });
         this.circle = new Phaser.Geom.Circle(this.x, this.y, this.range);
         this.graphics.fillCircleShape(this.circle);
     }
-
     rotate(x, y, theta) {
         return [x*Math.cos(theta)-y*Math.sin(theta)+this.x, x*Math.sin(theta)+y*Math.cos(theta)+this.y]
     }
