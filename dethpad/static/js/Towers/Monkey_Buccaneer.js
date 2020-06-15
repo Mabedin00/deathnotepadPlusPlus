@@ -75,6 +75,7 @@ class Monkey_Buccaneer extends Tower {
                     }
                     scene.money -= 400;
                     this.next_path1_price = 180;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 2:
                     this.range += 100;
@@ -84,12 +85,14 @@ class Monkey_Buccaneer extends Tower {
                     }
                     scene.money -= 180;
                     this.next_path1_price = 2200;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.max_charge -= 33;
                     this.setTexture('b_1_3');
                     scene.money -= 2200;
                     this.next_path1_price = 15000;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 4:
                     //aircraft carrier
@@ -109,6 +112,7 @@ class Monkey_Buccaneer extends Tower {
                     }
                     scene.money -= 500;
                     this.next_path2_price = 250;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 2:
                     this.camo_detection = true;
@@ -117,11 +121,13 @@ class Monkey_Buccaneer extends Tower {
                     }
                     scene.money -= 250;
                     this.next_path2_price = 1200;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.setTexture('b_2_3');
                     scene.money -= 1200;
                     this.next_path2_price = 4500;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 4:
                     this.ability_status = 1;

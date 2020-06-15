@@ -93,6 +93,7 @@ class Dart_Monkey extends Tower {
                     }
                     scene.money -= 90;
                     this.next_path1_price = 120;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 2:
                     this.range += 37;
@@ -103,6 +104,7 @@ class Dart_Monkey extends Tower {
                     }
                     scene.money -= 120;
                     this.next_path1_price = 500;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.range += 25;
@@ -110,8 +112,10 @@ class Dart_Monkey extends Tower {
                     this.setTexture('dm_1_3');
                     scene.money -= 500;
                     this.next_path1_price = 1500;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 4:
+                    this.path1_price.setText("$" + this.next_path1_price);
                     this.range += 100;
                     this.updateGraphics();
                     this.setTexture('dm_1_4');
@@ -131,6 +135,7 @@ class Dart_Monkey extends Tower {
                     }
                     scene.money -= 140;
                     this.next_path2_price = 170;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 2:
                     this.pierce += 2;
@@ -139,11 +144,13 @@ class Dart_Monkey extends Tower {
                     }
                     scene.money -= 170;
                     this.next_path2_price = 330;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.setTexture('dm_2_3');
                     scene.money -= 330;
                     this.next_path2_price = 8000;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 4:
                     this.ability_status = 1;
