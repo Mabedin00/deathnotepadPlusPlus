@@ -18,6 +18,7 @@ class Dartling_Gun extends Tower {
         this.dart_type = 'dart'
         dartlings.add(this);
         this.setScale(0.5);
+        this.splash = 'dartling_splash'
 
         this.ability_status = 0; //0 for no ability, 1 for charging, 2 for in use
         this.ability_charge = 0;
@@ -42,19 +43,23 @@ class Dartling_Gun extends Tower {
             let mouseX = scene.input.activePointer.x;
             let mouseY = scene.input.activePointer.y;
             let variance = Phaser.Math.Distance.Between(this.x, this.y, mouseX, mouseY);
-            let variance_2 = variance * (Math.random() - .5) / (this.path1 >= 1? 10:3)
+            let variance_2 = variance * (Math.random() - .5) / (this.path1 >= 1 ? 10 : 3)
             if (this.path1 == 3) {
                 new DGLaser(this.x, this.y, mouseX + variance_2, mouseY + variance_2, this.pierce, this.proj_speed);
+            } else if (this.path1 == 4) {
+                if (this.rod != undefined) this.rod.destroy();
+                this.rod = new RayOfDoom(this.x - 400 * Math.cos(this.rotation + Math.PI/2),
+                    this.y - 400 * Math.sin(this.rotation + Math.PI/2), mouseX, mouseY, this.rotation);
             } else if (this.path2 == 3 || this.ability_status == 2) {
                 new Rocket(this.x, this.y, mouseX + variance_2, mouseY + variance_2, this.proj_speed)
             } else if (this.path2 == 4) {
-                    let x = mouseX - this.x;
-                    let y = mouseY - this.y;
-                    let split1 = this.rotate(x, y, Math.PI/18);
-                    let split2 = this.rotate(x, y, -Math.PI/18);
-                    new Rocket(this.x, this.y, mouseX, mouseY, this.proj_speed);
-                    new Rocket(this.x, this.y, split1[0], split1[1], this.proj_speed);
-                    new Rocket(this.x, this.y, split2[0], split2[1], this.proj_speed);
+                let x = mouseX - this.x;
+                let y = mouseY - this.y;
+                let split1 = this.rotate(x, y, Math.PI / 18);
+                let split2 = this.rotate(x, y, -Math.PI / 18);
+                new Rocket(this.x, this.y, mouseX, mouseY, this.proj_speed);
+                new Rocket(this.x, this.y, split1[0], split1[1], this.proj_speed);
+                new Rocket(this.x, this.y, split2[0], split2[1], this.proj_speed);
             } else {
                 new Gatling_Dart(this.x, this.y, mouseX + variance_2, mouseY + variance_2, this.pierce, this.proj_speed);
             }
@@ -96,8 +101,6 @@ class Dartling_Gun extends Tower {
                     this.next_path1_price = 55000;
                     break;
                 case 4:
-                    this.range += 100;
-                    this.updateGraphics();
                     this.setTexture('dg_1_4');
                     scene.money -= 55000;
             }

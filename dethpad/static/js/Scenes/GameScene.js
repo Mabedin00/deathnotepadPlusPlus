@@ -21,6 +21,7 @@ class GameScene extends Phaser.Scene {
 		this.load.image('ice_splash', 'static/images/towers/ice_monkey_splashart.png');
 		this.load.image('banana_splash', 'static/images/towers/banana_farm_splashart.png');
 		this.load.image('super_splash', 'static/images/towers/super_monkey_splashart.png');
+		this.load.image('dartling_splash', 'static/images/towers/dartling_splash.png');
 	}
 
 	create () {
