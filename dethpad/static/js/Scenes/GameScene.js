@@ -35,6 +35,7 @@ class GameScene extends Phaser.Scene {
 		this.create_buttons();
 		this.add_text();
 		this.create_goal();
+		this.create_start_indicator();
 		this.create_towers();
 	}
 
@@ -194,11 +195,86 @@ class GameScene extends Phaser.Scene {
 		new Super_Monkey();
 	}
 
+	create_start_indicator() {
+		this.starting_indicator_0 = this.add.text(this.coords.xlist[0] - 50, this.coords.ylist[0], 'Bloons start from here', {font: '24px Arial'})
+		if (map_data[this.map].num_paths > 1)
+			this.starting_indicator_1 = this.add.text(this.coords.xlist1[0] - 50, this.coords.ylist1[0], 'Bloons start from here', {font: '24px Arial'})
+		if (map_data[this.map].num_paths > 2)
+			this.starting_indicator_2 = this.add.text(this.coords.xlist2[0] - 50, this.coords.ylist2[0], 'Bloons start from here', {font: '24px Arial'})
+	}
+
 	update () {
-		// console.log(colliders)
-		this.hotkeys();
+		this.check_if_user_paused();
 		// if game paused or between levels
 		this.update_text();
+		// checks if projectiles have travelled outside of their range
+		this.destroy_projectiles();
+
+		let sold_towers = [];
+		towers.children.iterate(function (tower) {
+			if (tower.being_dragged) tower.drag();
+			if (tower.placed && tower.graphics.visible) {
+				if (x_key.isDown) tower.unshow_details();
+				sold_towers.push(tower.check_if_sold());
+			}
+		});
+		for (let sold_tower of sold_towers) {
+			if (sold_tower != undefined) {
+				sold_tower.destroy_self();
+		 	}
+		}
+
+		// after this point, game must be unpaused
+		if (this.paused || this.grace_period || this.game_over) return;
+		if (scene.lives <= 0) {
+			this.lose_game();
+			return;
+		}
+
+		dartlings.children.iterate(function (dartling) {
+			if (dartling.placed) dartling.target();
+		});
+		towers.children.iterate(function (tower) {
+			if (tower.placed) {
+				tower.charge_tower();
+				tower.fire();
+			}
+		});
+		// checks if all bloons have been deployed
+		this.level_end_check();
+		bloons.children.iterate(function (bloon) {
+			bloon.move();
+			bloon.regen_charge();
+			bloon.regen();
+		});
+		// create new bloons
+		this.spawn_bloons();
+	}
+
+	check_if_user_paused() {
+		if (esc_key.isDown) {
+			this.esc_key_pressed = true;
+		}
+		if (this.esc_key_pressed && esc_key.isUp){
+			this.paused = !this.paused;
+			if(this.paused){
+				this.pause_game();
+			}
+			else if (!this.paused){
+				this.resume_game();
+			}
+			this.esc_key_pressed = false;
+		}
+	}
+
+	update_text() {
+		level_text.setText('Level: ' + scene.level);
+		lives_text.setText(scene.lives);
+		score_text.setText('Score: ' + scene.score)
+		money_text.setText(scene.money);
+	}
+
+	destroy_projectiles() {
 		let destroyed_projs = [];
 		projectiles.children.iterate(function (projectile){
 			destroyed_projs.push(projectile.check_range());
@@ -206,60 +282,9 @@ class GameScene extends Phaser.Scene {
 		for (let destroyed_proj of destroyed_projs) {
 			if (destroyed_proj != undefined) destroyed_proj.destroy();
         }
-		let sold_towers = [];
-		towers.children.iterate(function (tower) {
-			if (tower.being_dragged) {
-				tower.drag();
-			}
-			if (tower.placed && tower.graphics.visible) {
-				if(x_key.isDown) tower.unshow_details();
-				sold_towers.push(tower.sell());
+	}
 
-			}
-			// if game paused don't let towers fire
-			if (scene.paused || scene.game_over ||scene.grace_period) return;
-			if (tower.placed) {
-				tower.charge_tower();
-				tower.fire();
-			}
-		});
-		for (let sold_tower of sold_towers) {
-			if (sold_tower != undefined) {
-				sold_tower.graphics.destroy();
-				sold_tower.path1_bar.destroy();
-				sold_tower.path2_bar.destroy();
-				sold_tower.path1_max.destroy();
-				sold_tower.path2_max.destroy();
-				sold_tower.path1_lock.destroy();
-				sold_tower.path2_lock.destroy();
-				sold_tower.splashart.destroy();
- 				sold_tower.destroy();
-		 	}
-		}
-
-
-		bloons.children.iterate(function (bloon) {
-			if (scene.paused || scene.game_over ||scene.grace_period) return;
-			if (bloon.is_regen) {
-				bloon.regen_charge();
-				bloon.regen();
-			}
-		});
-
-		dartlings.children.iterate(function (dartling) {
-			if (dartling.placed) dartling.target();
-		});
-
-
-		if (this.paused) return;
-		if (this.grace_period) return;
-		if (this.game_over) return;
-
-		if (scene.lives <= 0) {
-			this.lose_game();
-			return;
-		}
-		// checks if all bloons have been deployed
+	level_end_check() {
 		if (JSON.stringify(this.bloons_deployed) == JSON.stringify(level_data[this.level].bloons)) {
 			this.all_bloons_deployed = true;
 			if (!bloons.getLength()) {
@@ -271,13 +296,6 @@ class GameScene extends Phaser.Scene {
 				}
 			}
 		}
-
-		bloons.children.iterate(function (bloon) {
-			bloon.move();
-		});
-
-		// create new bloons
-		this.spawn_bloons();
 	}
 
 	start_next_level() {
@@ -291,23 +309,14 @@ class GameScene extends Phaser.Scene {
 			this.all_bloons_deployed = false;
 			this.grace_period = false;
 			this.next_level.setTint(0xa9a9a9);
+
+			if (this.level == 1) this.remove_starting_indicator();
 		}
 	}
-
-	hotkeys() {
-		if (esc_key.isDown) {
-			this.esc_key_pressed = true;
-		}
-		if (this.esc_key_pressed && esc_key.isUp){
-   			this.paused = !this.paused;
-			if(this.paused){
-				this.pause_game();
-			}
-			else if (!this.paused){
-				this.resume_game();
-			}
-			this.esc_key_pressed = false;
-		}
+	remove_starting_indicator() {
+		this.starting_indicator_0.destroy();
+		this.starting_indicator_1.destroy();
+		this.starting_indicator_2.destroy();
 	}
 
 	pause_game() {
@@ -340,13 +349,6 @@ class GameScene extends Phaser.Scene {
 		this.scene.start('home');
 	}
 
-	update_text() {
-		level_text.setText('Level: ' + scene.level);
-		lives_text.setText(scene.lives);
-		score_text.setText('Score: ' + scene.score)
-		money_text.setText(scene.money);
-	}
-
 	lose_game() {
 		this.game_over = true;
 		this.add.text(200, 150, 'You Lose!', { font: '64px Arial' }).setDepth(5);
@@ -362,6 +364,36 @@ class GameScene extends Phaser.Scene {
 			},
 			body: JSON.stringify({score: this.score, map: this.map, id: id})
 		});
+	}
+
+	win_game() {
+		this.game_over = true;
+		win_text = this.add.text(220, 120, 'You Win!', { font: '64px Arial' }).setDepth(4);
+		let win_msg = "\t\tThis map will be added to your list of completed maps.\n\
+		"
+		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(4);
+
+		fetch('/score', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({score: this.score, map: this.map, id: id})
+		});
+
+		this.popup.visible = true;
+		this.popup.graphics.setAlpha(1);
+		this.infinite.visible = true;
+		this.retry.visible = true;
+		this.main_menu.visible = true;
+	}
+
+	infinite_mode() {
+		this.resume_game();
+		this.infinite.visible = false;
+		win_text.destroy();
+		win_desc.destroy();
+		this.game_over = false;
 	}
 
 	inbetween_levels() {
@@ -389,36 +421,6 @@ class GameScene extends Phaser.Scene {
 				});
 			}
 		})
-	}
-
-	win_game() {
-		this.game_over = true;
-		win_text = this.add.text(220, 120, 'You Win!', { font: '64px Arial' }).setDepth(4);
-		let win_msg = "\t\tThis map will be added to your list of completed maps.\n\
-					   "
-		win_desc = this.add.text(130, 340, win_msg, { font: '17px Arial' }).setDepth(4);
-
-		fetch('/score', {
-			method: 'POST',
-			headers: {
-		  'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({score: this.score, map: this.map, id: id})
-		});
-
-		this.popup.visible = true;
-		this.popup.graphics.setAlpha(1);
-		this.infinite.visible = true;
-		this.retry.visible = true;
-		this.main_menu.visible = true;
-	}
-
-	infinite_mode() {
-		this.resume_game();
-		this.infinite.visible = false;
-		win_text.destroy();
-		win_desc.destroy();
-		this.game_over = false;
 	}
 
 	toggle_fast_forward() {

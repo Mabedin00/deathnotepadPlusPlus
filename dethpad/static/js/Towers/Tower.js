@@ -20,10 +20,9 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     toggle_drag() {
-        // prevents moving towers once its placed and dragging multiple towers
+        // prevents moving towers once placed and dragging multiple towers
         if (this.placed || (!this.being_dragged && scene.is_dragging) ) return;
-        // ocean_road contains 2d array of valid tiles for placement
-        // 0: not valid, 1: valid for ocean, 2: valid for land
+
         let mouseX = Math.floor(scene.input.activePointer.x);
         let mouseY = Math.floor(scene.input.activePointer.y);
         let tile;
@@ -180,13 +179,25 @@ class Tower extends Phaser.GameObjects.Sprite {
         }
     }
 
-    sell() {
+    check_if_sold() {
         if (s_key.isDown){
             scene.tower_selected = false;
             scene.money += Math.floor(this.cost / 2);
             this.clear_tile_blockage()
             return this;
         }
+    }
+
+    destroy_self() {
+        this.graphics.destroy();
+        this.path1_bar.destroy();
+        this.path2_bar.destroy();
+        this.path1_max.destroy();
+        this.path2_max.destroy();
+        this.path1_lock.destroy();
+        this.path2_lock.destroy();
+        this.splashart.destroy();
+        this.destroy();
     }
 
     show_details(){
