@@ -107,6 +107,51 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('dm_1_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_4.png');
 		this.load.image('dm_2_3', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_3.png');
 		this.load.image('dm_2_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_4.png');
+
+		this.load.image('ts_1_1', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_1.png');
+		this.load.image('ts_1_2', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_2.png');
+		this.load.image('ts_1_3', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_3.png');
+		this.load.image('ts_1_4', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_4.png');
+		this.load.image('ts_2_3', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path2_3.png');
+		this.load.image('ts_2_4', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path2_4.png');
+
+		this.load.image('b_1_1', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1_1.png');
+		this.load.image('b_1_2', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1&2_2.png');
+		this.load.image('b_1_3', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1_3.png');
+		this.load.image('b_1_4', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1_4.png');
+		this.load.image('b_2_1', 'static/images/towers/Buccaneer Upgrades/buccaneer_path2_1.png');
+		this.load.image('b_2_3', 'static/images/towers/Buccaneer Upgrades/buccaneer_path2_3.png');
+		this.load.image('b_2_4', 'static/images/towers/Buccaneer Upgrades/buccaneer_path2_4.png');
+
+		this.load.image('im_1_1', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_1.png');
+		this.load.image('im_1_2', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_2.png');
+		this.load.image('im_1_3', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_3.png');
+		this.load.image('im_1_4', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_4.png');
+		this.load.image('im_2_3', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path2_3.png');
+		this.load.image('im_2_4', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path2_4.png');
+
+		this.load.image('bf_1_1', 'static/images/towers/Banana Farm/banana_farm_path1_1.png');
+		this.load.image('bf_1_2', 'static/images/towers/Banana Farm/banana_farm_path1_2.png');
+		this.load.image('bf_1_3', 'static/images/towers/Banana Farm/banana_farm_path1_3.png');
+		this.load.image('bf_1_4', 'static/images/towers/Banana Farm/banana_farm_path1_4.png');
+		this.load.image('bf_2_3', 'static/images/towers/Banana Farm/banana_farm_path2_3.png');
+		this.load.image('bf_2_4', 'static/images/towers/Banana Farm/banana_farm_path2_4.png');
+
+		this.load.image('sm_1_1', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_1.png');
+		this.load.image('sm_1_2', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_2.png');
+		this.load.image('sm_1_3', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_3.png');
+		this.load.image('sm_1_4', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_4.png');
+		this.load.image('sm_2_2', 'static/images/towers/Super Monkey Upgrades/super_monkey_path2_2.png');
+		this.load.image('sm_2_3', 'static/images/towers/Super Monkey Upgrades/super_monkey_path2_3.png');
+		this.load.image('sm_2_4', 'static/images/towers/Super Monkey Upgrades/super_monkey_path2_4.png');
+
+		this.load.image('dg_1_1', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_1.png');
+		this.load.image('dg_1_2', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_2.png');
+		this.load.image('dg_1_3', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_3.png');
+		this.load.image('dg_1_4', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_4.png');
+		this.load.image('dg_2_2', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_2.png');
+		this.load.image('dg_2_3', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_3.png');
+		this.load.image('dg_2_4', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_4.png');
 	}
 
 	create () {
