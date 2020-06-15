@@ -11,6 +11,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.path2 = 0;
         this.placed = false;
         this.being_dragged = false;
+        this.camo_detection = false;
         this.setInteractive();
         this.on('pointerdown', this.toggle_drag, this);
         this.on('pointerover', this.display_info, this);
@@ -163,7 +164,19 @@ class Tower extends Phaser.GameObjects.Sprite {
     return_valid_targets() {
         let valid_targets = [];
         bloons.children.iterate((bloon) => {
-            if (Phaser.Geom.Circle.Contains(this.circle, bloon.x, bloon.y) && !bloon.is_camo) {
+            if (Phaser.Geom.Circle.Contains(this.circle, bloon.x, bloon.y)) {
+                if (!bloon.is_camo || this.camo_detection) {
+                    valid_targets.push(bloon);
+                }
+            }
+        });
+        return valid_targets
+    }
+
+    targets_ignore_camo() {
+        let valid_targets = [];
+        bloons.children.iterate((bloon) => {
+            if (Phaser.Geom.Circle.Contains(this.circle, bloon.x, bloon.y)) {
                 valid_targets.push(bloon);
             }
         });

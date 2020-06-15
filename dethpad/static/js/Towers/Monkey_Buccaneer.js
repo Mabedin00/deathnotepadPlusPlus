@@ -70,22 +70,30 @@ class Monkey_Buccaneer extends Tower {
             switch (this.path1) {
                 case 1:
                     this.max_charge -= 34;
+                    if (this.path2 < 2) {
+                        this.setTexture('b_1_1').setScale(0.5);
+                    }
                     scene.money -= 400;
                     this.next_path1_price = 180;
                     break;
                 case 2:
                     this.range += 100;
                     this.updateGraphics();
+                    if (this.path2 < 3) {
+                        this.setTexture('b_1_2');
+                    }
                     scene.money -= 180;
                     this.next_path1_price = 2200;
                     break;
                 case 3:
                     this.max_charge -= 33;
+                    this.setTexture('b_1_3');
                     scene.money -= 2200;
                     this.next_path1_price = 15000;
                     break;
                 case 4:
                     //aircraft carrier
+                    this.setTexture('b_1_4');
                     scene.money -= 15000;
             }
         }
@@ -96,20 +104,28 @@ class Monkey_Buccaneer extends Tower {
             super.buy_path_2(tower);
             switch (this.path2) {
                 case 1:
+                    if (this.path1 < 2) {
+                        this.setTexture('b_2_1').setScale(0.5);
+                    }
                     scene.money -= 500;
                     this.next_path2_price = 250;
                     break;
                 case 2:
-                    //detect camo
+                    this.camo_detection = true;
+                    if (this.path1 < 3) {
+                        this.setTexture('b_1_2');
+                    }
                     scene.money -= 250;
                     this.next_path2_price = 1200;
                     break;
                 case 3:
+                    this.setTexture('b_2_3');
                     scene.money -= 1200;
                     this.next_path2_price = 4500;
                     break;
                 case 4:
                     this.ability_status = 1;
+                    this.setTexture('b_2_4');
                     scene.money -= 4500;
             }
         }

@@ -54,6 +54,9 @@ class Banana_Farm extends Tower {
                     } else {
                         this.income += 40;
                     }
+                    if (this.path2 < 2) {
+                        this.setTexture('bf_1_1').setScale(0.5);
+                    }
                     break;
                 case 2:
                     if (this.path2 < 3) {
@@ -63,14 +66,19 @@ class Banana_Farm extends Tower {
                     } else {
                         this.income += 160;
                     }
+                    if (this.path2 < 3) {
+                        this.setTexture('bf_1_2');
+                    }
                     break;
                 case 3:
                     this.max_charge -= 50;
+                    this.setTexture('bf_1_3');
                     scene.money -= 3200;
                     this.next_path1_price = 14000;
                     break;
                 case 4:
                     this.max_charge += 100;
+                    this.setTexture('bf_1_4');
                     scene.money -= 14000;
             }
         }
@@ -81,10 +89,16 @@ class Banana_Farm extends Tower {
             super.buy_path_2(tower);
             switch (this.path2) {
                 case 1:
+                    if (this.path1 < 2) {
+                        this.setTexture('bf_1_1').setScale(0.5);
+                    }
                     scene.money -= 500;
                     this.next_path2_price = 4000;
                     break;
                 case 2:
+                    if (this.path1 < 3) {
+                        this.setTexture('bf_1_2');
+                    }
                     scene.money -= 4000;
                     this.next_path2_price = 4200;
                     break;
@@ -99,6 +113,7 @@ class Banana_Farm extends Tower {
                     this.rect = new Phaser.Geom.Rectangle(130, 530, 70, 25);
                     this.withdraw_btn.fillStyle(0x808080);
                     this.withdraw_btn.fillRectShape(this.rect);
+                    this.setTexture('bf_2_3');
                     scene.money -= 4200;
                     this.next_path2_price = 5500;
                     break;
@@ -106,6 +121,7 @@ class Banana_Farm extends Tower {
                     this.bank_maximum = 20000;
                     this.interest = 1.2;
                     this.income = 1000;
+                    this.setTexture('bf_2_4');
                     scene.money -= 5500;
             }
         }

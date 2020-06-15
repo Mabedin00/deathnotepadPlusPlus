@@ -89,7 +89,7 @@ class Dart_Monkey extends Tower {
                     this.range += 38;
                     this.updateGraphics();
                     if (this.path2 < 2) {
-                        this.setTexture('dm_1_1');
+                        this.setTexture('dm_1_1').setScale(0.5);
                     }
                     scene.money -= 90;
                     this.next_path1_price = 120;
@@ -97,6 +97,7 @@ class Dart_Monkey extends Tower {
                 case 2:
                     this.range += 37;
                     this.updateGraphics();
+                    this.camo_detection = true;
                     if (this.path2 < 3) {
                         this.setTexture('dm_1_2');
                     }
@@ -111,7 +112,6 @@ class Dart_Monkey extends Tower {
                     this.next_path1_price = 1500;
                     break;
                 case 4:
-                    //can pop lead
                     this.range += 100;
                     this.updateGraphics();
                     this.setTexture('dm_1_4');
@@ -127,14 +127,13 @@ class Dart_Monkey extends Tower {
                 case 1:
                     this.pierce++;
                     if (this.path1 < 2) {
-                        this.setTexture('dm_1_1');
+                        this.setTexture('dm_1_1').setScale(0.5);
                     }
                     scene.money -= 140;
                     this.next_path2_price = 170;
                     break;
                 case 2:
                     this.pierce += 2;
-                    //camo detection
                     if (this.path1 < 3) {
                         this.setTexture('dm_1_2');
                     }

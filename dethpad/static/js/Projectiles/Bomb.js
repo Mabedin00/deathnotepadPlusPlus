@@ -22,7 +22,6 @@ class Bomb extends Projectile {
         // we need to gather list of bloons targeted, and then deal damage to them
         bloons.children.iterate(function (bloon) {
             if (Phaser.Geom.Circle.Contains(circle, bloon.x, bloon.y) && !bloon.is_the_target && bloon.explosion_immunity != true ) {
-                console.log(bloon.explosion_immunity);
                 collateral_damage.push(bloon);
             }
         });

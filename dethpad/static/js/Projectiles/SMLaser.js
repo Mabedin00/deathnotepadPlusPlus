@@ -16,7 +16,11 @@ class SMLaser extends Projectile {
 
     inflict_damage(dart, bloon) {
         if (!this.targets.includes(bloon)) {
-            bloon.health -= dart.damage;
+            if (bloon.isMOAB) {
+                bloon.health -= 2*dart.damage;
+            } else {
+                bloon.health -= dart.damage;
+            }
             if (bloon.health <= 0) {
                 scene.money += bloon.value;
                 scene.score += bloon.value;
