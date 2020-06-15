@@ -55,7 +55,7 @@ class GameScene extends Phaser.Scene {
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
-		this.lives = 1;
+		this.lives = 1000;
 		this.money = 500000;
 		this.fast_forward = 1;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
@@ -433,6 +433,7 @@ class GameScene extends Phaser.Scene {
 	}
 
 	spawn_bloons() {
+
 		tick += (level_data[this.level].tick * scene.fast_forward);
 		if (tick >= 40 && !this.all_bloons_deployed) {
 			tick = 0;

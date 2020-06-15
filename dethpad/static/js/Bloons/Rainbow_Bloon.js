@@ -1,6 +1,6 @@
 class Rainbow_Bloon extends Bloon {
 
-    constructor(progress, health, path, is_camo, is_regen) {
+    constructor(progress, health, path, is_camo, is_regen, og_type) {
         if (og_type == undefined) og_type = "rainbow_bloon_regen";
         if (is_camo && is_regen) super("rainbow_bloon_camo", progress, path, is_camo, is_regen);
         else if (is_camo)        super("rainbow_bloon_camo", progress, path, is_camo, is_regen);
