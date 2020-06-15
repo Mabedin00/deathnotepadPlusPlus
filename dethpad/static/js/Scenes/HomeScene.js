@@ -64,6 +64,7 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('sg_blast', 'static/images/projectiles/sun_god_blast.png');
 		this.load.image('temple_blast', 'static/images/projectiles/temple_blast.png');
 		this.load.image('tech_blast', 'static/images/projectiles/tech_blast.png');
+		this.load.image('box', 'static/images/projectiles/banana_box.png');
 
 		this.load.image('background', 'static/images/maps/map_selection.jpg');
 		this.load.image('back', 'static/images/home/back_button.png')

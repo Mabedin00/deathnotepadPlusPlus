@@ -20,7 +20,6 @@ class Banana_Farm extends Tower {
     fire() {
         if (this.charge >= this.max_charge && this.path2 < 3) {
             this.charge = 0;
-            //change to boxes later
             let value;
             if (this.path1 == 4) {
                 value = 200;
@@ -31,7 +30,11 @@ class Banana_Farm extends Tower {
                 if (this.path2 >= 1) value += 7;
                 if (this.path2 == 2) value += 6;
             }
-            new Banana(this.x, this.y, value);
+            if (this.path1 == 4) {
+                new Box(this.x, this.y, value);
+            } else {
+                new Banana(this.x, this.y, value);
+            }
         }
     }
 
@@ -67,7 +70,6 @@ class Banana_Farm extends Tower {
                     this.next_path1_price = 14000;
                     break;
                 case 4:
-                    //boxes of bananas
                     this.max_charge += 100;
                     scene.money -= 14000;
             }
