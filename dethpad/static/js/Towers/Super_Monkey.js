@@ -98,6 +98,9 @@ class Super_Monkey extends Tower {
                 case 1:
                     //lasers can pop frozen, double damage to MOABs
                     this.pierce++;
+                    if (this.path2 < 3) {
+                        this.setTexture('sm_1_1');
+                    }
                     scene.money -= 3500;
                     this.next_path1_price = 5000;
                     break;
@@ -106,17 +109,21 @@ class Super_Monkey extends Tower {
                     this.max_charge--;
                     this.pierce += 2;
                     this.max_charge--;
+                    if (this.path2 < 3) {
+                        this.setTexture('sm_1_2');
+                    }
                     scene.money -= 5000;
                     this.next_path1_price = 16500;
                     break;
                 case 3:
                     this.max_charge++;
+                    this.setTexture('sm_1_3').setScale(0.5);
                     scene.money -= 16500;
                     this.next_path1_price = 100000;
                     break;
                 case 4:
-                    //temple
                     this.max_charge--;
+                    this.setTexture('sm_1_4');
                     scene.money -= 100000;
             }
         }
@@ -136,11 +143,15 @@ class Super_Monkey extends Tower {
                     this.pierce++;
                     this.range += 100;
                     this.updateGraphics();
+                    if (this.path1 < 2) {
+                        this.setTexture('sm_2_2');
+                    }
                     scene.money -= 1500;
                     this.next_path2_price = 9000;
                     break;
                 case 3:
                     //robo monkey can pop frozen and lead
+                    this.setTexture('sm_2_3').setScale(0.5);
                     scene.money -= 9000;
                     this.next_path2_price = 25000;
                     break;
@@ -157,6 +168,7 @@ class Super_Monkey extends Tower {
                     }
                     this.max_charge--;
                     this.ability_status = 1;
+                    this.setTexture('sm_2_4');
                     scene.money -= 25000;
             }
         }
