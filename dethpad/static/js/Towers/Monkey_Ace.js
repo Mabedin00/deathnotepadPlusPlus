@@ -2,7 +2,7 @@ class Monkey_Ace extends Phaser.Physics.Arcade.Sprite {
 
     constructor(x, y, dad) {
 
-        super(scene, x, y, 'dart_monkey');
+        super(scene, x, y, 'monkey_ace');
         scene.add.existing(this);
         monkey_aces.add(this)
 
@@ -37,14 +37,15 @@ class Monkey_Ace extends Phaser.Physics.Arcade.Sprite {
 
         if (this.tack_charge >= this.max_tack_charge && this.target != undefined) {
             this.tack_charge = 0;
-            for (let angle = 0; angle < 2*Math.PI; angle += Math.PI/4) {
-                new Tack(this.x, this.y, angle, this.range);
+            for (let angle = 0; angle < 2*Math.PI; angle += Math.PI/8) {
+                new Tack(this.x, this.y, angle, 1000);
             }
         }
 
         if (this.strafe_charge >= this.max_strafe_charge && this.target != undefined) {
             this.strafe_charge = 0;
-            new Dart(this.x, this.y, this.target, this.range, this.pierce);
+            new Dart(this.x, this.y, this.target, 300, this.pierce);
+            new Dart(this.x, this.y, this.target, 300, this.pierce);
         }
     }
 
@@ -84,32 +85,4 @@ class Monkey_Ace extends Phaser.Physics.Arcade.Sprite {
         this.tack_charge   += (scene.fast_forward);
         this.strafe_charge += (scene.fast_forward);
     }
-
-    // create_tower() {
-    //     new Dart_Monkey();
-    // }
-
-    // buy_path_1(tower) {
-    //     if (scene.money >= tower.next_path1_price) {
-    //         super.buy_path_1(tower);
-    //         switch (this.path1) {
-    //             case 1:
-    //             case 2:
-    //             case 3:
-    //             case 4:
-    //         }
-    //     }
-    // }
-    //
-    // buy_path_2(tower) {
-    //     if (scene.money >= tower.next_path2_price) {
-    //         super.buy_path_2(tower);
-    //         switch (this.path2) {
-    //             case 1:
-    //             case 2:
-    //             case 3:
-    //             case 4:
-    //         }
-    //     }
-    // }
 }

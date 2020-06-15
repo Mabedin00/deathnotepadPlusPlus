@@ -30,11 +30,10 @@ class Monkey_Buccaneer extends Tower {
         // if there are no valid targets, stop fire function
         if (!this.targets.length) return;
         if (this.aircraft_carrier) {
-            console.log(this.charge)
             if (this.charge >= this.max_charge * 10 && this.monkeys_deployed < this.max_monkeys_deployed) {
                 this.charge = 0
                 this.monkeys_deployed++;
-                new Monkey_Ace(this.x, this.y, this);
+                new Monkey_Ace(this.x, this.y, this).setScale(0.25);
             }
         }
         else {
