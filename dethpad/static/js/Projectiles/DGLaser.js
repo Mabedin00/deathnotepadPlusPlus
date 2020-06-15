@@ -1,13 +1,13 @@
-class Gatling_Dart extends Projectile {
+class DGLaser extends Projectile {
 
     constructor(x, y, target_x, target_y, pierce, speed) {
-        super(x, y,"dart", 999);
+        super(x, y,"dg_laser", 999);
 
-        this.damage = 1;
+        this.damage = 5;
         this.speed = speed;
         this.pierce = pierce;
         this.targets = [];
-        this.rotation = Phaser.Math.Angle.Between(this.x, this.y, target_x, target_y);
+        this.rotation = Math.PI/2+Phaser.Math.Angle.Between(this.x, this.y, target_x, target_y);
         scene.physics.moveTo(this, target_x, target_y, this.speed)
 
         this.setScale(.4);

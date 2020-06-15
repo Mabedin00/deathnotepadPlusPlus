@@ -21,6 +21,7 @@ class GameScene extends Phaser.Scene {
 		this.load.image('ice_splash', 'static/images/towers/ice_monkey_splashart.png');
 		this.load.image('banana_splash', 'static/images/towers/banana_farm_splashart.png');
 		this.load.image('super_splash', 'static/images/towers/super_monkey_splashart.png');
+		this.load.image('dartling_splash', 'static/images/towers/dartling_splash.png');
 	}
 
 	create () {
@@ -235,6 +236,12 @@ class GameScene extends Phaser.Scene {
 				sold_tower.path2_lock.destroy();
 				sold_tower.splashart.destroy();
  				sold_tower.destroy();
+ 				if (sold_tower.anim != undefined) {
+ 					sold_tower.anim.destroy();
+				}
+ 				if (sold_tower.rod != undefined) {
+ 					sold_tower.rod.destroy();
+				}
 		 	}
 		}
 
@@ -387,6 +394,9 @@ class GameScene extends Phaser.Scene {
 		towers.children.iterate((tower) => {
 			if (tower.anim != undefined) {
 				tower.anim.visible = false;
+			}
+			if (tower.rod != undefined) {
+				tower.rod.destroy();
 			}
 			if (tower instanceof Banana_Farm && tower.path2 > 2) {
 				tower.add_income();

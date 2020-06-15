@@ -56,11 +56,14 @@ class Tower extends Phaser.GameObjects.Sprite {
     }
 
     place_tower() {
+
         this.graphics.visible = false;
         scene.is_dragging = false;
         this.placed = true;
         scene.money -= this.cost;
         this.create_upgrades();
+        this.path1_price.visible = false;
+        this.path2_price.visible = false;
         this.create_tower();
         this.hide_info();
         this.prevent_tower_stacking();
@@ -70,6 +73,7 @@ class Tower extends Phaser.GameObjects.Sprite {
     create_upgrades() {
         this.path1_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: 1} }).setDepth(5);
         this.path1_bar.visible = false;
+
         this.path2_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: 1} }).setDepth(5);
         this.path2_bar.visible = false;
 
@@ -103,6 +107,11 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.path1_lock = scene.add.text(335, 535, 'Locked', {font: '25px Arial'})
         this.path1_lock.visible = false;
 		this.path1_lock.setDepth(6);
+        this.path1_price = scene.add.text(345, 565, "$" + this.next_path1_price, {color: "black" , font: '18px Arial'})
+        this.path1_price.setDepth(6);
+        this.path1_price.visible = false;
+
+
 
 		this.path2_max = scene.add.text(575, 530, 'MAX', {font: '36px Arial'})
         this.path2_max.visible = false;
@@ -110,7 +119,9 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.path2_lock = scene.add.text(575, 535, 'Locked', {font: '25px Arial'})
         this.path2_lock.visible = false;
 		this.path2_lock.setDepth(6);
-
+        this.path2_price = scene.add.text(585, 565, "$" + this.next_path2_price, {color: "black" , font: '18px Arial'})
+        this.path2_price.setDepth(6);
+        this.path2_price.visible = false;
 		this.path1_rect1 = new Phaser.Geom.Rectangle(426, 510, 10, 16);
 		this.path1_rect2 = new Phaser.Geom.Rectangle(426, 531, 10, 16);
 		this.path1_rect3 = new Phaser.Geom.Rectangle(426, 552, 10, 16);
@@ -191,10 +202,14 @@ class Tower extends Phaser.GameObjects.Sprite {
 
     show_details(){
         if (scene.selected_tower != undefined) scene.selected_tower.unshow_details();
+        // console.log(scene.input.activePointer.x, scene.input.activePointer.y);
         scene.selected_tower = this;
         scene.tower_selected = true;
         this.graphics.visible = true;
         this.path1_bar.visible = true;
+        this.path1_price.visible = true;
+        this.path2_price.visible = true;
+
         this.path2_bar.visible = true;
         if (this.path1 == 4) {
             this.path1_max.visible = true;
@@ -214,6 +229,8 @@ class Tower extends Phaser.GameObjects.Sprite {
         scene.tower_selected = false;
         this.graphics.visible = false;
         this.path1_bar.visible = false;
+        this.path1_price.visible = false;
+        this.path2_price.visible = false;
         this.path2_bar.visible = false;
         this.path1_max.visible = false;
         this.path2_max.visible = false;
@@ -327,21 +344,27 @@ class Tower extends Phaser.GameObjects.Sprite {
             tower.path1_lock.visible = true;
         }
         switch (tower.path1) {
+
             case 1:
                 tower.path1_bar.fillStyle(0x00ff00);
                 tower.path1_bar.fillRectShape(tower.path1_rect1);
+                this.path1_price.setText("$" + this.next_path1_price);
                 break;
             case 2:
                 tower.path1_bar.fillStyle(0x00ff00);
                 tower.path1_bar.fillRectShape(tower.path1_rect2);
+                this.path1_price.setText("$" + this.next_path1_price);
                 break;
             case 3:
                 tower.path1_bar.fillStyle(0x00ff00);
                 tower.path1_bar.fillRectShape(tower.path1_rect3);
+                this.path1_price.setText("$" + this.next_path1_price);
                 break;
             case 4:
                 tower.path1_bar.fillStyle(0x00ff00);
                 tower.path1_bar.fillRectShape(tower.path1_rect4);
+                this.path1_price.visible = false;
+
         }
     }
     buy_path_2(tower){
@@ -349,7 +372,7 @@ class Tower extends Phaser.GameObjects.Sprite {
             tower.path1_bar.fillStyle(0x808080);
             tower.path1_bar.fillPoints(tower.new1.points, true);
             tower.path1_bar.removeInteractive();
-            tower.path1_max.visible = true;
+            this.path1_lock.visible = true;
         } else if (tower.path2 == 4) {
             tower.path2_bar.fillStyle(0x808080);
             tower.path2_bar.fillPoints(tower.new2.points, true);
@@ -377,6 +400,7 @@ class Tower extends Phaser.GameObjects.Sprite {
             case 4:
                 tower.path2_bar.fillStyle(0x00ff00);
                 tower.path2_bar.fillRectShape(tower.path2_rect4);
+                this.path2_price.visible = false;
         }
     }
 

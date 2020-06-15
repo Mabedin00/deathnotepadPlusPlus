@@ -68,7 +68,10 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
 		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
 		this.load.image('dartling_gun', 'static/images/towers/dartling_gun.png');
-
+<<<<<<< HEAD
+		this.load.image('monkey_ace', 'static/images/towers/monkey_ace.png');
+=======
+>>>>>>> f21357f2276c448ed0ed92c8fdc1e7bb12ef1a55
 
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
@@ -87,6 +90,9 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('temple_blast', 'static/images/projectiles/temple_blast.png');
 		this.load.image('tech_blast', 'static/images/projectiles/tech_blast.png');
 		this.load.image('box', 'static/images/projectiles/banana_box.png');
+		this.load.image('dg_laser', 'static/images/projectiles/dg_laser.png');
+		this.load.image('rocket', 'static/images/projectiles/dg_rocket.png');
+		this.load.image('rod', 'static/images/projectiles/dg_beam.png');
 
 		this.load.image('background', 'static/images/maps/map_selection.jpg');
 		this.load.image('back', 'static/images/home/back_button.png')
