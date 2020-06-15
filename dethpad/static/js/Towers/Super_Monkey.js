@@ -141,6 +141,7 @@ class Super_Monkey extends Tower {
                     this.pierce++;
                     this.range += 100;
                     this.updateGraphics();
+                    this.camo_detection = true;
                     if (this.path1 < 2) {
                         this.setTexture('sm_2_2');
                     }
