@@ -78,6 +78,7 @@ class Tack_Shooter extends Tower {
                     this.max_charge -= 15;
                     if (this.path2 < 2) {
                         this.setTexture('ts_1_1').setScale(0.5);
+                        this.input.hitArea.setSize(this.width, this.height);
                     }
                     scene.money -= 210;
                     this.next_path1_price = 300;
@@ -87,6 +88,7 @@ class Tack_Shooter extends Tower {
                     this.max_charge -= 20;
                     if (this.path2 < 3) {
                         this.setTexture('ts_1_2');
+                        this.input.hitArea.setSize(this.width, this.height);
                     }
                     scene.money -= 300;
                     this.next_path1_price = 500;
@@ -95,6 +97,7 @@ class Tack_Shooter extends Tower {
                 case 3:
                     this.angle_step /= 2;
                     this.setTexture('ts_1_3');
+                    this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 500;
                     this.next_path1_price = 2500;
                     this.path1_price.setText("$" + this.next_path1_price);
@@ -104,6 +107,7 @@ class Tack_Shooter extends Tower {
                     this.range += 50;
                     this.updateGraphics();
                     this.setTexture('ts_1_4');
+                    this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 2500;
             }
         }
@@ -118,6 +122,7 @@ class Tack_Shooter extends Tower {
                     this.updateGraphics();
                     if (this.path1 < 2) {
                         this.setTexture('ts_1_1').setScale(0.5);
+                        this.input.hitArea.setSize(this.width, this.height);
                     }
                     scene.money -= 100;
                     this.next_path2_price = 225;
@@ -128,6 +133,7 @@ class Tack_Shooter extends Tower {
                     this.updateGraphics();
                     if (this.path1 < 3) {
                         this.setTexture('ts_1_2');
+                        this.input.hitArea.setSize(this.width, this.height);
                     }
                     scene.money -= 225;
                     this.next_path2_price = 680;
@@ -135,6 +141,7 @@ class Tack_Shooter extends Tower {
                     break;
                 case 3:
                     this.setTexture('ts_2_3');
+                    this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 680;
                     this.next_path2_price = 2700;
                     this.path2_price.setText("$" + this.next_path2_price);
@@ -142,6 +149,7 @@ class Tack_Shooter extends Tower {
                 case 4:
                     this.ability_status = 1;
                     this.setTexture('ts_2_4');
+                    this.input.hitArea.setSize(this.width, this.height);
                     this.path1_price.setText("$" + this.next_path1_price);
                     scene.money -= 2700;
             }

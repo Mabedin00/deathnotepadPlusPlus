@@ -16,7 +16,6 @@ class Dart_Monkey extends Tower {
         this.domain = LAND;
         this.splash = 'dart_splash'
         this.dart_type = 'dart'
-
         this.ability_status = 0; //0 for no ability, 1 for charging, 2 for in use
         this.ability_charge = 0;
         this.ability_max_charge = 8000;
@@ -82,6 +81,10 @@ class Dart_Monkey extends Tower {
     }
 
     buy_path_1(tower) {
+        let w = this.width;
+        let h = this.height;
+        let x = this.x;
+        let y = this.y;
         if (scene.money >= tower.next_path1_price) {
             super.buy_path_1(tower);
             switch (this.path1) {
@@ -89,7 +92,10 @@ class Dart_Monkey extends Tower {
                     this.range += 38;
                     this.updateGraphics();
                     if (this.path2 < 2) {
-                        this.setTexture('dm_1_1').setScale(0.5);
+                        console.log(this);
+                        this.setTexture('dm_1_1').setScale(.5);
+                        this.input.hitArea.setSize(this.width, this.height);
+
                     }
                     scene.money -= 90;
                     this.next_path1_price = 120;
@@ -101,6 +107,8 @@ class Dart_Monkey extends Tower {
                     this.camo_detection = true;
                     if (this.path2 < 3) {
                         this.setTexture('dm_1_2');
+                        this.input.hitArea.setSize(this.width, this.height);
+
                     }
                     scene.money -= 120;
                     this.next_path1_price = 500;
@@ -110,6 +118,8 @@ class Dart_Monkey extends Tower {
                     this.range += 25;
                     this.updateGraphics();
                     this.setTexture('dm_1_3');
+                    this.input.hitArea.setSize(this.width, this.height);
+
                     scene.money -= 500;
                     this.next_path1_price = 1500;
                     this.path1_price.setText("$" + this.next_path1_price);
@@ -119,6 +129,8 @@ class Dart_Monkey extends Tower {
                     this.range += 100;
                     this.updateGraphics();
                     this.setTexture('dm_1_4');
+                    this.input.hitArea.setSize(this.width, this.height);
+
                     scene.money -= 1500;
             }
         }
@@ -132,6 +144,8 @@ class Dart_Monkey extends Tower {
                     this.pierce++;
                     if (this.path1 < 2) {
                         this.setTexture('dm_1_1').setScale(0.5);
+                        this.input.hitArea.setSize(this.width, this.height);
+
                     }
                     scene.money -= 140;
                     this.next_path2_price = 170;
@@ -141,6 +155,8 @@ class Dart_Monkey extends Tower {
                     this.pierce += 2;
                     if (this.path1 < 3) {
                         this.setTexture('dm_1_2');
+                        this.input.hitArea.setSize(this.width, this.height);
+
                     }
                     scene.money -= 170;
                     this.next_path2_price = 330;
@@ -148,6 +164,7 @@ class Dart_Monkey extends Tower {
                     break;
                 case 3:
                     this.setTexture('dm_2_3');
+                    this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 330;
                     this.next_path2_price = 8000;
                     this.path2_price.setText("$" + this.next_path2_price);
@@ -155,6 +172,7 @@ class Dart_Monkey extends Tower {
                 case 4:
                     this.ability_status = 1;
                     this.setTexture('dm_2_4');
+                    this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 8000;
             }
         }
