@@ -68,7 +68,7 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
 		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
 		this.load.image('dartling_gun', 'static/images/towers/dartling_gun.png');
-
+		this.load.image('monkey_ace', 'static/images/towers/monkey_ace.png');
 
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
