@@ -19,11 +19,13 @@ class Ceramic_Bloon extends Bloon {
 
     transform() {
         this.pop_sound();
-        new Rainbow_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
-        new Rainbow_Bloon(this.progress+.001, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
         this.destroy();
+        let child1 = new Rainbow_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
+        let child2 = new Rainbow_Bloon(this.progress+.001, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
+        if (this.deep_freeze) {
+            child1.freeze_frames = this.freeze_frames;
+            child2.freeze_frames = this.freeze_frames;
+        }
+        return [child1, child2];
     }
-
-
-
 }

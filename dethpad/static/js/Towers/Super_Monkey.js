@@ -10,7 +10,11 @@ class Super_Monkey extends Tower {
         this.max_charge = 3;
         this.charge = this.max_charge;
         this.range = 300;
+        this.pierce = 1;
+        this.next_path1_price = 3500;
+        this.next_path2_price = 1000;
         this.domain = LAND;
+        this.splash = 'super_splash'
         this.dart_type = 'dart'
     }
 
@@ -24,10 +28,67 @@ class Super_Monkey extends Tower {
             this.charge = 0;
             this.rotation = Phaser.Math.Angle.Between(this.x, this.y, this.target.x, this.target.y) + Math.PI / 2;
             new Super_Dart(this.x, this.y, this.target, this.range);
+            if (this.path2 >= 3) {
+                new Super_Dart(this.x, this.y, this.return_worst_target(), this.range);
+            }
         }
     }
 
     create_tower() {
         new Super_Monkey();
+    }
+
+    buy_path_1(tower) {
+        if (scene.money >= tower.next_path1_price) {
+            super.buy_path_1(tower);
+            switch (this.path1) {
+                case 1:
+                    //lasers can pop frozen, double damage to MOABs
+                    this.pierce++;
+                    scene.money -= 3500;
+                    this.next_path1_price = 5000;
+                    break;
+                case 2:
+                    //plasma can pop lead
+                    this.pierce += 2;
+                    this.max_charge--;
+                    scene.money -= 5000;
+                    this.next_path1_price = 16500;
+                    break;
+                case 3:
+                    //sun god
+                    scene.money -= 16500;
+                    this.next_path1_price = 100000;
+                    break;
+                case 4:
+                    //temple
+                    scene.money -= 100000;
+            }
+        }
+    }
+
+    buy_path_2(tower) {
+        if (scene.money >= tower.next_path2_price) {
+            super.buy_path_2(tower);
+            switch (this.path2) {
+                case 1:
+                    scene.money -= 1000;
+                    this.next_path2_price = 1500;
+                    break;
+                case 2:
+                    scene.money -= 1500;
+                    this.next_path2_price = 9000;
+                    break;
+                case 3:
+                    //robo monkey can pop frozen and lead
+                    scene.money -= 9000;
+                    this.next_path2_price = 25000;
+                    break;
+                case 4:
+                    //tech terror ability: destroys all bloons in short radius, does 1000 damage to MOABS, hits camo
+                    this.max_charge--;
+                    scene.money -= 25000;
+            }
+        }
     }
 }

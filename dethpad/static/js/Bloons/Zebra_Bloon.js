@@ -21,15 +21,20 @@ class Zebra_Bloon extends Bloon {
     }
 
     transform() {
-
-        new White_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
-        new Black_Bloon(this.progress+.001, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
+        this.pop_sound();
         this.destroy();
+        let child1 = new White_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
+        let child2 = new Black_Bloon(this.progress+.001, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
+        if (this.deep_freeze) {
+            child1.freeze_frames = this.freeze_frames;
+            child2.freeze_frames = this.freeze_frames;
+        }
+        return [child1, child2];
     }
 
     regenerate(){
         new Rainbow_Bloon(this.progress, 0, this.path, this.is_camo, this.is_regen, this.og_type);
-        this.destroy();console.log("d");
+        this.destroy();
     }
 
 }

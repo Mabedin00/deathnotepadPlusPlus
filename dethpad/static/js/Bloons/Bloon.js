@@ -37,6 +37,9 @@ class Bloon extends Phaser.GameObjects.Sprite {
         this.setScale(.9)
 
         this.increment = 1 / (this.xlist.length - 1)
+
+        this.permafrost = false;
+        this.deep_freeze = false;
     }
 
     move() {

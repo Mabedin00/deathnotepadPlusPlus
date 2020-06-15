@@ -15,12 +15,15 @@ var config = {
 };
 
 var tick = 0;
-var bloons;
 var goal;
 var goal1;
 var goal2;
+
 var towers;
+var bloons;
 var projectiles;
+var dartlings;
+
 var scene;
 var lives_text;
 var lives_icon;

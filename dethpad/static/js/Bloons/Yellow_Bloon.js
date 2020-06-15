@@ -19,8 +19,10 @@ class Yellow_Bloon extends Bloon {
 
     transform() {
         this.pop_sound();
-        new Green_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
         this.destroy();
+        let child = new Green_Bloon(this.progress, this.health, this.path, this.is_camo, this.is_regen, this.og_type);
+        if (this.deep_freeze) child.freeze_frames = this.freeze_frames;
+        return [child];
     }
 
     regenerate(){
