@@ -1,13 +1,10 @@
-class Ice extends Projectile {
+class RayOfDoom extends Projectile {
 
-    constructor(x, y, angle, range) {
-        super(x, y,"ice", range);
+    constructor(x, y, target_x, target_y, angle) {
+        super(x, y,"rod", 999);
 
         this.damage = 1;
-        this.speed = 750;
-        this.setVelocity(this.speed * Math.cos(angle), this.speed * Math.sin(angle));
         this.rotation = angle;
-
         this.setScale(1);
     }
 
@@ -18,6 +15,5 @@ class Ice extends Projectile {
             scene.score += bloon.value;
             bloon.transform();
         }
-        dart.destroy()
     }
 }

@@ -21,6 +21,7 @@ class GameScene extends Phaser.Scene {
 		this.load.image('ice_splash', 'static/images/towers/ice_monkey_splashart.png');
 		this.load.image('banana_splash', 'static/images/towers/banana_farm_splashart.png');
 		this.load.image('super_splash', 'static/images/towers/super_monkey_splashart.png');
+		this.load.image('dartling_splash', 'static/images/towers/dartling_splash.png');
 	}
 
 	create () {
@@ -28,6 +29,7 @@ class GameScene extends Phaser.Scene {
 		towers = this.physics.add.group();
 		projectiles = this.physics.add.group();
 		dartlings = this.physics.add.group();
+		monkey_aces = this.physics.add.group();
 
 		this.set_vars();
 		this.create_key_bindings();
@@ -234,6 +236,12 @@ class GameScene extends Phaser.Scene {
 				sold_tower.path2_lock.destroy();
 				sold_tower.splashart.destroy();
  				sold_tower.destroy();
+ 				if (sold_tower.anim != undefined) {
+ 					sold_tower.anim.destroy();
+				}
+ 				if (sold_tower.rod != undefined) {
+ 					sold_tower.rod.destroy();
+				}
 		 	}
 		}
 
@@ -252,8 +260,22 @@ class GameScene extends Phaser.Scene {
 
 
 		if (this.paused) return;
-		if (this.grace_period) return;
+		let returning_to_base = []
+		if (this.grace_period) {
+			monkey_aces.children.iterate(function (monkey_ace) {
+				returning_to_base.push(monkey_ace);
+			});
+			for (let monkey_ace of returning_to_base) {
+				if (monkey_ace != undefined) monkey_ace.return_to_base();
+			}
+			return;
+		}
 		if (this.game_over) return;
+
+		monkey_aces.children.iterate(function (monkey_ace) {
+			monkey_ace.charge();
+			monkey_ace.fire();
+		});
 
 		if (scene.lives <= 0) {
 			this.lose_game();
@@ -372,6 +394,9 @@ class GameScene extends Phaser.Scene {
 		towers.children.iterate((tower) => {
 			if (tower.anim != undefined) {
 				tower.anim.visible = false;
+			}
+			if (tower.rod != undefined) {
+				tower.rod.destroy();
 			}
 			if (tower instanceof Banana_Farm && tower.path2 > 2) {
 				tower.add_income();
