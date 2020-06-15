@@ -115,7 +115,7 @@ class Tack_Shooter extends Tower {
                     this.range += 12;
                     this.updateGraphics();
                     if (this.path1 < 2) {
-                        this.setTexture('ts_1_1');
+                        this.setTexture('ts_1_1').setScale(0.5);
                     }
                     scene.money -= 100;
                     this.next_path2_price = 225;
