@@ -27,6 +27,28 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('lives', 'static/images/menus/lives.png' );
 		this.load.image('money', 'static/images/menus/money.png' );
 
+		this.load.image('red_bloon_camo', 'static/images/bloons/red_bloon_camo.png');
+		this.load.image('blue_bloon_camo', 'static/images/bloons/blue_bloon_camo.png');
+		this.load.image('green_bloon_camo', 'static/images/bloons/green_bloon_camo.png');
+		this.load.image('yellow_bloon_camo', 'static/images/bloons/yellow_bloon_camo.png');
+		this.load.image('pink_bloon_camo', 'static/images/bloons/pink_bloon_camo.png');
+		this.load.image('white_bloon_camo', 'static/images/bloons/white_bloon_camo.png');
+		this.load.image('black_bloon_camo', 'static/images/bloons/black_bloon_camo.png');
+		this.load.image('zebra_bloon_camo', 'static/images/bloons/zebra_bloon_camo.png');
+		this.load.image('rainbow_bloon_camo', 'static/images/bloons/rainbow_bloon_camo.png');
+		this.load.image('ceramic_bloon_camo', 'static/images/bloons/ceramic_bloon_camo.png');
+
+		this.load.image('red_bloon_regen', 'static/images/bloons/red_bloon_regen.png');
+		this.load.image('blue_bloon_regen', 'static/images/bloons/blue_bloon_regen.png');
+		this.load.image('green_bloon_regen', 'static/images/bloons/green_bloon_regen.png');
+		this.load.image('yellow_bloon_regen', 'static/images/bloons/yellow_bloon_regen.png');
+		this.load.image('pink_bloon_regen', 'static/images/bloons/pink_bloon_regen.png');
+		this.load.image('white_bloon_regen', 'static/images/bloons/white_bloon_regen.png');
+		this.load.image('black_bloon_regen', 'static/images/bloons/black_bloon_regen.png');
+		this.load.image('zebra_bloon_regen', 'static/images/bloons/zebra_bloon_regen.png');
+		this.load.image('rainbow_bloon_regen', 'static/images/bloons/rainbow_bloon_regen.png');
+		this.load.image('ceramic_bloon_regen', 'static/images/bloons/ceramic_bloon_regen.png');
+
 		this.load.image('red_bloon', 'static/images/bloons/red_bloon.png');
 		this.load.image('blue_bloon', 'static/images/bloons/blue_bloon.png');
 		this.load.image('green_bloon', 'static/images/bloons/green_bloon.png');
@@ -58,6 +80,13 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('blade', 'static/images/projectiles/blade.png');
 		this.load.image('grape', 'static/images/projectiles/grape.png');
 		this.load.image('hook', 'static/images/projectiles/hook.png');
+		this.load.image('ice', 'static/images/projectiles/ice_spike.png');
+		this.load.image('sm_laser', 'static/images/projectiles/sm_lasers.png');
+		this.load.image('plasma', 'static/images/projectiles/plasma.png');
+		this.load.image('sg_blast', 'static/images/projectiles/sun_god_blast.png');
+		this.load.image('temple_blast', 'static/images/projectiles/temple_blast.png');
+		this.load.image('tech_blast', 'static/images/projectiles/tech_blast.png');
+		this.load.image('box', 'static/images/projectiles/banana_box.png');
 
 		this.load.image('background', 'static/images/maps/map_selection.jpg');
 		this.load.image('back', 'static/images/home/back_button.png')
@@ -78,6 +107,51 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('dm_1_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path1_4.png');
 		this.load.image('dm_2_3', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_3.png');
 		this.load.image('dm_2_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_4.png');
+
+		this.load.image('ts_1_1', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_1.png');
+		this.load.image('ts_1_2', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_2.png');
+		this.load.image('ts_1_3', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_3.png');
+		this.load.image('ts_1_4', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_4.png');
+		this.load.image('ts_2_3', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path2_3.png');
+		this.load.image('ts_2_4', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path2_4.png');
+
+		this.load.image('b_1_1', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1_1.png');
+		this.load.image('b_1_2', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1&2_2.png');
+		this.load.image('b_1_3', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1_3.png');
+		this.load.image('b_1_4', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1_4.png');
+		this.load.image('b_2_1', 'static/images/towers/Buccaneer Upgrades/buccaneer_path2_1.png');
+		this.load.image('b_2_3', 'static/images/towers/Buccaneer Upgrades/buccaneer_path2_3.png');
+		this.load.image('b_2_4', 'static/images/towers/Buccaneer Upgrades/buccaneer_path2_4.png');
+
+		this.load.image('im_1_1', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_1.png');
+		this.load.image('im_1_2', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_2.png');
+		this.load.image('im_1_3', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_3.png');
+		this.load.image('im_1_4', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_4.png');
+		this.load.image('im_2_3', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path2_3.png');
+		this.load.image('im_2_4', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path2_4.png');
+
+		this.load.image('bf_1_1', 'static/images/towers/Banana Farm/banana_farm_path1_1.png');
+		this.load.image('bf_1_2', 'static/images/towers/Banana Farm/banana_farm_path1_2.png');
+		this.load.image('bf_1_3', 'static/images/towers/Banana Farm/banana_farm_path1_3.png');
+		this.load.image('bf_1_4', 'static/images/towers/Banana Farm/banana_farm_path1_4.png');
+		this.load.image('bf_2_3', 'static/images/towers/Banana Farm/banana_farm_path2_3.png');
+		this.load.image('bf_2_4', 'static/images/towers/Banana Farm/banana_farm_path2_4.png');
+
+		this.load.image('sm_1_1', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_1.png');
+		this.load.image('sm_1_2', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_2.png');
+		this.load.image('sm_1_3', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_3.png');
+		this.load.image('sm_1_4', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_4.png');
+		this.load.image('sm_2_2', 'static/images/towers/Super Monkey Upgrades/super_monkey_path2_2.png');
+		this.load.image('sm_2_3', 'static/images/towers/Super Monkey Upgrades/super_monkey_path2_3.png');
+		this.load.image('sm_2_4', 'static/images/towers/Super Monkey Upgrades/super_monkey_path2_4.png');
+
+		this.load.image('dg_1_1', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_1.png');
+		this.load.image('dg_1_2', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_2.png');
+		this.load.image('dg_1_3', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_3.png');
+		this.load.image('dg_1_4', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_4.png');
+		this.load.image('dg_2_2', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_2.png');
+		this.load.image('dg_2_3', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_3.png');
+		this.load.image('dg_2_4', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_4.png');
 	}
 
 	create () {
