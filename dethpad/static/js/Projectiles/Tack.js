@@ -6,7 +6,7 @@ class Tack extends Projectile {
         this.speed = 650;
         this.setVelocity(this.speed * Math.cos(angle), this.speed *Math.sin(angle))
         this.rotation = angle;
-
+        console.log(this)
         this.setScale(.5);
     }
 
