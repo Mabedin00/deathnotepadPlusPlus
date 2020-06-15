@@ -99,9 +99,11 @@ class Super_Monkey extends Tower {
                     this.pierce++;
                     if (this.path2 < 3) {
                         this.setTexture('sm_1_1');
+                        this.input.hitArea.setSize(this.width, this.height);
                     }
                     scene.money -= 3500;
                     this.next_path1_price = 5000;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 2:
                     this.max_charge--;
@@ -109,19 +111,24 @@ class Super_Monkey extends Tower {
                     this.max_charge--;
                     if (this.path2 < 3) {
                         this.setTexture('sm_1_2');
+                        this.input.hitArea.setSize(this.width, this.height);
                     }
                     scene.money -= 5000;
                     this.next_path1_price = 16500;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 3:
                     this.max_charge++;
                     this.setTexture('sm_1_3').setScale(0.5);
+                    this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 16500;
                     this.next_path1_price = 100000;
+                    this.path1_price.setText("$" + this.next_path1_price);
                     break;
                 case 4:
                     this.max_charge--;
                     this.setTexture('sm_1_4');
+                    this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 100000;
             }
         }
@@ -136,6 +143,7 @@ class Super_Monkey extends Tower {
                     this.updateGraphics();
                     scene.money -= 1000;
                     this.next_path2_price = 1500;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 2:
                     this.pierce++;
@@ -144,14 +152,18 @@ class Super_Monkey extends Tower {
                     this.camo_detection = true;
                     if (this.path1 < 2) {
                         this.setTexture('sm_2_2');
+                        this.input.hitArea.setSize(this.width, this.height);
                     }
                     scene.money -= 1500;
                     this.next_path2_price = 9000;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 3:
                     this.setTexture('sm_2_3').setScale(0.5);
+                    this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 9000;
                     this.next_path2_price = 25000;
+                    this.path2_price.setText("$" + this.next_path2_price);
                     break;
                 case 4:
                     switch (this.path1) {
@@ -167,6 +179,8 @@ class Super_Monkey extends Tower {
                     this.max_charge--;
                     this.ability_status = 1;
                     this.setTexture('sm_2_4');
+                    this.input.hitArea.setSize(this.width, this.height);
+                    this.path1_price.setText("$" + this.next_path1_price);
                     scene.money -= 25000;
             }
         }
