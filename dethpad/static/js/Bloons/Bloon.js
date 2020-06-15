@@ -1,6 +1,7 @@
 class Bloon extends Phaser.GameObjects.Sprite {
 
     constructor(bloon_type, progress, path, is_camo, is_regen, og_type) {
+        console.log(bloon_type);
         // bloon will be teleported to correct location by its progress number
         let xlist, ylist;
         // if it is a new bloon whose path must be randomly determined
