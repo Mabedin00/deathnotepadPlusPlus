@@ -488,17 +488,4 @@ class GameScene extends Phaser.Scene {
 		else if (id == 30) new Ceramic_Bloon(0, 0, -1,  false, true);
 
 	}
-
-	prevent_tower_stacking(xcor, ycor, width, height) {
-		width  = Math.floor(width);
-		height = Math.floor(height);
-
-		for (let y = ycor - height; y < ycor + height && y < scene.tiles.length; y++) {
-			if (y <= 0) y = 0;
-			for (let x = xcor - width; x < xcor + width && x < scene.tiles[y].length; x++) {
-				if (x <= 0) x = 0;
-				scene.tiles[y][x] = PATH;
-			}
-		}
-	}
 }
