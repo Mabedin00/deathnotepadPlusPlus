@@ -15,6 +15,9 @@ class Banana_Farm extends Tower {
         this.domain = LAND;
         this.splash = 'banana_splash'
         this.setScale(.8);
+
+        this.path1_def_icon = "bf_1_1_icon";
+        this.path2_def_icon = "bf_2_1_icon";
     }
 
     fire() {

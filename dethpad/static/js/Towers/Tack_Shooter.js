@@ -22,6 +22,10 @@ class Tack_Shooter extends Tower {
         this.ability_duration = 400;
         this.angle_step = Math.PI/4;
         this.angle_increment = 0;
+
+
+        this.path1_def_icon = "ts_1_1_icon";
+        this.path2_def_icon = "ts_2_1_icon";
     }
 
     fire() {

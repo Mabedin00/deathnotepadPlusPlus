@@ -24,6 +24,9 @@ class Dartling_Gun extends Tower {
         this.ability_charge = 0;
         this.ability_max_charge = 4000;
         this.ability_duration = 40;
+
+        this.path1_def_icon = "dg_1_1_icon";
+        this.path2_def_icon = "dg_2_1_icon";
     }
 
     fire() {

@@ -20,6 +20,9 @@ class Super_Monkey extends Tower {
         this.ability_status = 0; //0 for no ability, 1 for charging
         this.ability_charge = 0;
         this.ability_max_charge = 8000;
+
+        this.path1_def_icon = "sm_1_1_icon";
+        this.path2_def_icon = "sm_2_1_icon";
     }
 
     fire() {

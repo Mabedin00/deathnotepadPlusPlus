@@ -168,8 +168,8 @@ class Dart_Monkey extends Tower {
                     this.next_path2_price = 170;
                     this.path2_price.setText("$" + this.next_path2_price);
                     this.path2_next_icon.destroy();
-                    this.path2_last_icon = scene.add.image(520,540, "dm_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
-                    this.path2_next_icon = scene.add.image(620,540, "dm_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
+                    this.path2_last_icon = scene.add.image(520,550, "dm_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon = scene.add.image(620,550, "dm_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
                     break;
                 case 2:
                     this.pierce += 2;
@@ -179,12 +179,12 @@ class Dart_Monkey extends Tower {
                         this.setTexture('dm_1_2');
                         this.path2_price.setText("$" + this.next_path2_price);
                         this.path2_next_icon.destroy();
-                        this.path2_next_icon = scene.add.image(620,540, "dm_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
+                        this.path2_next_icon = scene.add.image(620,550, "dm_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
                     } else {
                         this.path2_price.destroy();
                     }
                     this.path2_last_icon.destroy();
-                    this.path2_last_icon = scene.add.image(520,540, "dm_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "dm_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.setTexture('dm_2_3');
@@ -196,9 +196,9 @@ class Dart_Monkey extends Tower {
                         this.path1_price.destroy();
                     }
                     this.path2_last_icon.destroy();
-                    this.path2_last_icon = scene.add.image(520,540, "dm_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "dm_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     this.path2_next_icon.destroy();
-                    this.path2_next_icon = scene.add.image(620,540, "dm_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
+                    this.path2_next_icon = scene.add.image(620,550, "dm_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
                     break;
                 case 4:
                     this.ability_status = 1;
@@ -208,7 +208,7 @@ class Dart_Monkey extends Tower {
                     this.path2_price.destroy();
                     this.path2_next_icon.destroy();
                     this.path2_last_icon.destroy();
-                    this.path2_last_icon = scene.add.image(520,540, "dm_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "dm_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
 
 
             }
