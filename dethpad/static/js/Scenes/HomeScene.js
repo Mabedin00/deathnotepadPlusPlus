@@ -68,10 +68,7 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('banana_farm', 'static/images/towers/banana_farm.png');
 		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
 		this.load.image('dartling_gun', 'static/images/towers/dartling_gun.png');
-// <<<<<<< HEAD
 		this.load.image('monkey_ace', 'static/images/towers/monkey_ace.png');
-// =======
-// >>>>>>> f21357f2276c448ed0ed92c8fdc1e7bb12ef1a55
 
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
@@ -114,12 +111,30 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('dm_2_3', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_3.png');
 		this.load.image('dm_2_4', 'static/images/towers/Dart Monkey Upgrades/dart_monkey_path2_4.png');
 
+		this.load.image('dm_1_1_icon', 'static/images/upgrades/dm_1_1.png');
+		this.load.image('dm_1_2_icon', 'static/images/upgrades/dm_1_2.png');
+		this.load.image('dm_1_3_icon', 'static/images/upgrades/dm_1_3.png');
+		this.load.image('dm_1_4_icon', 'static/images/upgrades/dm_1_4.png');
+		this.load.image('dm_2_1_icon', 'static/images/upgrades/dm_2_1.png');
+		this.load.image('dm_2_2_icon', 'static/images/upgrades/dm_2_2.png');
+		this.load.image('dm_2_3_icon', 'static/images/upgrades/dm_2_3.png');
+		this.load.image('dm_2_4_icon', 'static/images/upgrades/dm_2_4.png');
+
 		this.load.image('ts_1_1', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_1.png');
 		this.load.image('ts_1_2', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_2.png');
 		this.load.image('ts_1_3', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_3.png');
 		this.load.image('ts_1_4', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path1_4.png');
 		this.load.image('ts_2_3', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path2_3.png');
 		this.load.image('ts_2_4', 'static/images/towers/Tack Shooter Upgrades/tack_shooter_path2_4.png');
+
+		this.load.image('ts_1_1_icon', 'static/images/upgrades/ts_1_1.png');
+		this.load.image('ts_1_2_icon', 'static/images/upgrades/ts_1_2.png');
+		this.load.image('ts_1_3_icon', 'static/images/upgrades/ts_1_3.png');
+		this.load.image('ts_1_4_icon', 'static/images/upgrades/ts_1_4.png');
+		this.load.image('ts_2_1_icon', 'static/images/upgrades/ts_2_1.png');
+		this.load.image('ts_2_2_icon', 'static/images/upgrades/ts_2_2.png');
+		this.load.image('ts_2_3_icon', 'static/images/upgrades/ts_2_3.png');
+		this.load.image('ts_2_4_icon', 'static/images/upgrades/ts_2_4.png');
 
 		this.load.image('b_1_1', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1_1.png');
 		this.load.image('b_1_2', 'static/images/towers/Buccaneer Upgrades/buccaneer_path1&2_2.png');
@@ -129,6 +144,16 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('b_2_3', 'static/images/towers/Buccaneer Upgrades/buccaneer_path2_3.png');
 		this.load.image('b_2_4', 'static/images/towers/Buccaneer Upgrades/buccaneer_path2_4.png');
 
+		this.load.image('b_1_1_icon', 'static/images/upgrades/b_1_1.png');
+		this.load.image('b_1_2_icon', 'static/images/upgrades/b_1_2.png');
+		this.load.image('b_1_3_icon', 'static/images/upgrades/b_1_3.png');
+		this.load.image('b_1_4_icon', 'static/images/upgrades/b_1_4.png');
+		this.load.image('b_2_1_icon', 'static/images/upgrades/b_2_1.png');
+		this.load.image('b_2_2_icon', 'static/images/upgrades/b_2_2.png');
+		this.load.image('b_2_3_icon', 'static/images/upgrades/b_2_3.png');
+		this.load.image('b_2_4_icon', 'static/images/upgrades/b_2_4.png');
+
+
 		this.load.image('im_1_1', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_1.png');
 		this.load.image('im_1_2', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_2.png');
 		this.load.image('im_1_3', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path1_3.png');
@@ -136,12 +161,30 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('im_2_3', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path2_3.png');
 		this.load.image('im_2_4', 'static/images/towers/Ice Monkey Upgrades/ice_monkey_path2_4.png');
 
+		this.load.image('im_1_1_icon', 'static/images/upgrades/im_1_1.png');
+		this.load.image('im_1_2_icon', 'static/images/upgrades/im_1_2.png');
+		this.load.image('im_1_3_icon', 'static/images/upgrades/im_1_3.png');
+		this.load.image('im_1_4_icon', 'static/images/upgrades/im_1_4.png');
+		this.load.image('im_2_1_icon', 'static/images/upgrades/im_2_1.png');
+		this.load.image('im_2_2_icon', 'static/images/upgrades/im_2_2.png');
+		this.load.image('im_2_3_icon', 'static/images/upgrades/im_2_3.png');
+		this.load.image('im_2_4_icon', 'static/images/upgrades/im_2_4.png');
+
 		this.load.image('bf_1_1', 'static/images/towers/Banana Farm/banana_farm_path1_1.png');
 		this.load.image('bf_1_2', 'static/images/towers/Banana Farm/banana_farm_path1_2.png');
 		this.load.image('bf_1_3', 'static/images/towers/Banana Farm/banana_farm_path1_3.png');
 		this.load.image('bf_1_4', 'static/images/towers/Banana Farm/banana_farm_path1_4.png');
 		this.load.image('bf_2_3', 'static/images/towers/Banana Farm/banana_farm_path2_3.png');
 		this.load.image('bf_2_4', 'static/images/towers/Banana Farm/banana_farm_path2_4.png');
+
+		this.load.image('bf_1_1_icon', 'static/images/upgrades/bf_1_1.png');
+		this.load.image('bf_1_2_icon', 'static/images/upgrades/bf_1_2.png');
+		this.load.image('bf_1_3_icon', 'static/images/upgrades/bf_1_3.png');
+		this.load.image('bf_1_4_icon', 'static/images/upgrades/bf_1_4.png');
+		this.load.image('bf_2_1_icon', 'static/images/upgrades/bf_2_1.png');
+		this.load.image('bf_2_2_icon', 'static/images/upgrades/bf_2_2.png');
+		this.load.image('bf_2_3_icon', 'static/images/upgrades/bf_2_3.png');
+		this.load.image('bf_2_4_icon', 'static/images/upgrades/bf_2_4.png');
 
 		this.load.image('sm_1_1', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_1.png');
 		this.load.image('sm_1_2', 'static/images/towers/Super Monkey Upgrades/super_monkey_path1_2.png');
@@ -151,6 +194,15 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('sm_2_3', 'static/images/towers/Super Monkey Upgrades/super_monkey_path2_3.png');
 		this.load.image('sm_2_4', 'static/images/towers/Super Monkey Upgrades/super_monkey_path2_4.png');
 
+		this.load.image('sm_1_1_icon', 'static/images/upgrades/sm_1_1.png');
+		this.load.image('sm_1_2_icon', 'static/images/upgrades/sm_1_2.png');
+		this.load.image('sm_1_3_icon', 'static/images/upgrades/sm_1_3.png');
+		this.load.image('sm_1_4_icon', 'static/images/upgrades/sm_1_4.png');
+		this.load.image('sm_2_1_icon', 'static/images/upgrades/sm_2_1.png');
+		this.load.image('sm_2_2_icon', 'static/images/upgrades/sm_2_2.png');
+		this.load.image('sm_2_3_icon', 'static/images/upgrades/sm_2_3.png');
+		this.load.image('sm_2_4_icon', 'static/images/upgrades/sm_2_4.png');
+
 		this.load.image('dg_1_1', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_1.png');
 		this.load.image('dg_1_2', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_2.png');
 		this.load.image('dg_1_3', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path1_3.png');
@@ -158,6 +210,69 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('dg_2_2', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_2.png');
 		this.load.image('dg_2_3', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_3.png');
 		this.load.image('dg_2_4', 'static/images/towers/Dartling Gun Upgrades/dartling_gun_path2_4.png');
+
+		this.load.image('dg_1_1_icon', 'static/images/upgrades/dg_1_1.png');
+		this.load.image('dg_1_2_icon', 'static/images/upgrades/dg_1_2.png');
+		this.load.image('dg_1_3_icon', 'static/images/upgrades/dg_1_3.png');
+		this.load.image('dg_1_4_icon', 'static/images/upgrades/dg_1_4.png');
+		this.load.image('dg_2_1_icon', 'static/images/upgrades/dg_2_1.png');
+		this.load.image('dg_2_2_icon', 'static/images/upgrades/dg_2_2.png');
+		this.load.image('dg_2_3_icon', 'static/images/upgrades/dg_2_3.png');
+		this.load.image('dg_2_4_icon', 'static/images/upgrades/dg_2_4.png');
+
+
+		// LOADING BAR
+		var progressBar = this.add.graphics();
+		var progressBox = this.add.graphics();
+		progressBox.fillStyle(0x222222, 0.8);
+		progressBox.fillRect(281, 300, 420, 50);
+		var width = this.cameras.main.width;
+		var height = this.cameras.main.height;
+		var loadingText = this.make.text({
+		    x: width / 2,
+		    y: height / 2 - 50,
+		    text: 'Loading...',
+		    style: {
+		        font: '20px monospace',
+		        fill: '#ffffff'
+		    }
+		});
+		loadingText.setOrigin(0.5, 0.5);
+		var percentText = this.make.text({
+		    x: width / 2,
+		    y: height / 2 + 25,
+		    text: '0%',
+		    style: {
+		        font: '18px monospace',
+		        fill: '#ffffff'
+		    }
+		});
+		percentText.setOrigin(0.5, 0.5);
+		var assetText = this.make.text({
+		    x: width / 2,
+		    y: height / 2 + 100,
+		    text: '',
+		    style: {
+		        font: '18px monospace',
+		        fill: '#ffffff'
+		    }
+		});
+		assetText.setOrigin(0.5, 0.5);
+		let useful_tip = useful_tips[Math.floor(Math.random() * useful_tips.length)];
+		this.load.on('progress', function (value) {
+			progressBar.clear();
+		    progressBar.fillStyle(0xffffff, 1);
+		    progressBar.fillRect(281, 300, 420 * value, 50);
+			percentText.setText(parseInt(value * 100) + '%');
+			assetText.setText('Tip: ' + useful_tip);
+		});
+
+		this.load.on('complete', function () {
+			progressBar.destroy();
+			progressBox.destroy();
+			loadingText.destroy();
+			percentText.destroy();
+		});
 	}
 
 	create () {

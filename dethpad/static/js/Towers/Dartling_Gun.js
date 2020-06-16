@@ -2,10 +2,11 @@ class Dartling_Gun extends Tower {
 
     constructor() {
 
-        super('dartling_gun', 950, 60);
+        super('dartling_gun', 815, 400);
 
+        this.rotation = Math.PI/2;
         this.display_name = 'Dartling Gun';
-        this.description = 'Shoots darts like a machine gun, super fast but not very accurate. The Dartling Gun will shoot towards wherever your mouse is, so you control how effective it is!';
+        this.description = 'Shoots darts super fast but not very accurate. The Dartling Gun will shoot towards wherever your mouse is, so you control how effective it is!';
         this.cost = 850;
         this.max_charge = 10;
         this.charge = this.max_charge;
@@ -24,6 +25,9 @@ class Dartling_Gun extends Tower {
         this.ability_charge = 0;
         this.ability_max_charge = 4000;
         this.ability_duration = 40;
+
+        this.path1_def_icon = "dg_1_1_icon";
+        this.path2_def_icon = "dg_2_1_icon";
     }
 
     fire() {
@@ -84,14 +88,25 @@ class Dartling_Gun extends Tower {
                     }
                     scene.money -= 250;
                     this.next_path1_price = 1200;
+                    this.path1_price.setText("$" + this.next_path1_price);
+                    this.path1_next_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "dg_1_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon = scene.add.image(380,550, "dg_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.max_charge -= 3;
-                    if (this.path2 < 3) {
-                        this.setTexture('dg_1_2');
-                    }
                     scene.money -= 1200;
                     this.next_path1_price = 6000;
+                    if (this.path2 < 3) {
+                        this.setTexture('dg_1_2');
+                        this.path1_price.setText("$" + this.next_path1_price);
+                        this.path1_last_icon.destroy();
+                        this.path1_last_icon = scene.add.image(280,550, "dg_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    } else {
+                        this.path1_price.destroy();
+                    }
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "dg_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.pierce += 12;
@@ -99,10 +114,22 @@ class Dartling_Gun extends Tower {
                     this.setTexture('dg_1_3');
                     scene.money -= 6000;
                     this.next_path1_price = 55000;
+                    this.path1_price.setText("$" + this.next_path1_price);
+                    if (this.path2 == 2) {
+                        this.path2_price.destroy();
+                    }
+                    this.path1_last_icon.destroy();
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "dg_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_last_icon = scene.add.image(280,550, "dg_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.setTexture('dg_1_4');
                     scene.money -= 55000;
+                    this.path1_price.destroy();
+                    this.path1_last_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "dg_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon.destroy();
             }
         }
     }
@@ -118,25 +145,48 @@ class Dartling_Gun extends Tower {
                     }
                     scene.money -= 600;
                     this.next_path2_price = 1000;
+                    this.path2_price.setText("$" + this.next_path2_price);
+                    this.path2_next_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "dg_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon = scene.add.image(620,550, "dg_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.pierce += 2;
                     this.proj_speed += 200;
-                    if (this.path1 < 3) {
-                        this.setTexture('dg_2_2');
-                    }
                     scene.money -= 1000;
                     this.next_path2_price = 7000;
+                    if (this.path1 < 3) {
+                        this.setTexture('dg_2_2');
+                        this.path2_price.setText("$" + this.next_path2_price);
+                        this.path2_last_icon.destroy();
+                        this.path2_last_icon = scene.add.image(520,550, "dg_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    } else {
+                        this.path2_price.destroy();
+                    }
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "dg_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.setTexture('dg_2_3');
                     scene.money -= 7000;
                     this.next_path2_price = 20000;
+                    this.path2_price.setText("$" + this.next_path2_price);
+                    if (this.path1 == 2) {
+                        this.path1_price.destroy();
+                    }
+                    this.path2_last_icon.destroy();
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "dg_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "dg_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.ability_status = 1;
                     this.setTexture('dg_2_4');
                     scene.money -= 20000;
+                    this.path2_price.destroy();
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "dg_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon.destroy();
             }
         }
     }

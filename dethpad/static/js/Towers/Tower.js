@@ -63,6 +63,10 @@ class Tower extends Phaser.GameObjects.Sprite {
         scene.money -= this.cost;
         this.create_upgrades();
         this.path1_price.visible = false;
+        this.path1_next_icon.visible = false;
+        this.path1_last_icon.visible = false;
+        this.path2_next_icon.visible = false;
+        this.path2_last_icon.visible = false;
         this.path2_price.visible = false;
         this.create_tower();
         this.hide_info();
@@ -76,15 +80,26 @@ class Tower extends Phaser.GameObjects.Sprite {
 
         this.path2_bar = scene.add.graphics({ fillStyle: { color: '0x000000' , alpha: 1} }).setDepth(5);
         this.path2_bar.visible = false;
-
+        //width 75  240->335     height 80 510->590
         this.bought1 = new Phaser.Geom.Polygon([240, 510, 335, 510, 315, 550, 335, 590, 240, 590]);
+        console.log(this.bought1);
+        //width 75  480->555     height 80 510->590
         this.bought2 = new Phaser.Geom.Polygon([480, 510, 575, 510, 555, 550, 575, 590, 480, 590]);
         this.path1_bar.fillStyle(0x808080);
         this.path2_bar.fillStyle(0x808080);
         this.path1_bar.fillPoints(this.bought1.points, true);
         this.path2_bar.fillPoints(this.bought2.points, true);
+        this.path1_next_icon = scene.add.image(370,550, this.path1_def_icon).setDepth(5).setDisplaySize(80,60);
+        this.path1_next_icon.alpha = .7;
+        this.path1_last_icon = scene.add.image();
 
+
+        this.path2_next_icon = scene.add.image(610,550,this.path2_def_icon).setDepth(5).setDisplaySize(80,60);
+        this.path2_next_icon.alpha = .7;
+        this.path2_last_icon = scene.add.image();
+        //width 100  320->420     height 80 510->590
         this.new1 = new Phaser.Geom.Polygon([340, 510, 420, 510, 420, 590, 340, 590, 320, 550]);
+        //width 100  560->660     height 80 510->590
         this.new2 = new Phaser.Geom.Polygon([580, 510, 660, 510, 660, 590, 580, 590, 560, 550]);
         this.path1_bar.fillStyle(0x00ff00);
         this.path2_bar.fillStyle(0x00ff00);
@@ -109,9 +124,10 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.path1_lock.setDepth(6);
         this.path1_price = scene.add.text(345, 565, "$" + this.next_path1_price, {color: "black" , font: '18px Arial'})
         this.path1_price.setDepth(6);
+        this.path1_price.style.stroke = '#d3d3d3';
+        this.path1_price.style.strokeThickness = 4;
+        this.path1_price.style.update();
         this.path1_price.visible = false;
-
-
 
 		this.path2_max = scene.add.text(575, 530, 'MAX', {font: '36px Arial'})
         this.path2_max.visible = false;
@@ -121,8 +137,12 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.path2_lock.setDepth(6);
         this.path2_price = scene.add.text(585, 565, "$" + this.next_path2_price, {color: "black" , font: '18px Arial'})
         this.path2_price.setDepth(6);
+        this.path2_price.style.stroke = '#d3d3d3';
+        this.path2_price.style.strokeThickness = 4;
+        this.path2_price.style.update();
         this.path2_price.visible = false;
-		this.path1_rect1 = new Phaser.Geom.Rectangle(426, 510, 10, 16);
+
+        this.path1_rect1 = new Phaser.Geom.Rectangle(426, 510, 10, 16);
 		this.path1_rect2 = new Phaser.Geom.Rectangle(426, 531, 10, 16);
 		this.path1_rect3 = new Phaser.Geom.Rectangle(426, 552, 10, 16);
 		this.path1_rect4 = new Phaser.Geom.Rectangle(426, 573, 10, 17);
@@ -151,12 +171,12 @@ class Tower extends Phaser.GameObjects.Sprite {
     display_info() {
         if (this.placed || this.being_dragged) return;
         this.text_box = scene.add.graphics({ fillStyle: { color: 0x000000 , alpha: .7} }).setDepth(5);
-		let rectangle = new Phaser.Geom.Rectangle(this.x-30, this.y, 135, 175);
+		let rectangle = new Phaser.Geom.Rectangle(this.x-30, this.y-30, 135, 220);
 		this.text_box.fillRectShape(rectangle);
-        this.display_name_text = scene.add.text(this.x-20, this.y, this.display_name, { font: 'bold 18px Arial', wordWrap: { width: 125 } }).setDepth(5);
-        this.price_text = scene.add.text(this.x-20, this.y+50, 'Cost: '+this.cost, { font: 'bold 14px Arial' }).setDepth(5);
-        this.range_text = scene.add.text(this.x-20, this.y+70, 'Range: '+this.range, { font: 'bold 14px Arial' }).setDepth(5);
-        this.description_text = scene.add.text(this.x-20, this.y+90, this.description, { font: '12px Arial', wordWrap: { width: 125 } }).setDepth(5);
+        this.display_name_text = scene.add.text(this.x-20, this.y-15, this.display_name, { font: 'bold 18px Arial', wordWrap: { width: 125 } }).setDepth(5);
+        this.price_text = scene.add.text(this.x-20, this.y+35, 'Cost: '+this.cost, { font: 'bold 14px Arial' }).setDepth(5);
+        this.range_text = scene.add.text(this.x-20, this.y+55, 'Range: '+this.range, { font: 'bold 14px Arial' }).setDepth(5);
+        this.description_text = scene.add.text(this.x-20, this.y+75, this.description, { font: '12px Arial', wordWrap: { width: 125 } }).setDepth(5);
     }
     hide_info() {
         if (this.placed) return;
@@ -208,6 +228,10 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.graphics.visible = true;
         this.path1_bar.visible = true;
         this.path1_price.visible = true;
+        this.path1_next_icon.visible = true;
+        this.path1_last_icon.visible = true;
+        this.path2_next_icon.visible = true;
+        this.path2_last_icon.visible = true;
         this.path2_price.visible = true;
 
         this.path2_bar.visible = true;
@@ -230,6 +254,10 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.graphics.visible = false;
         this.path1_bar.visible = false;
         this.path1_price.visible = false;
+        this.path1_next_icon.visible = false;
+        this.path1_last_icon.visible = false;
+        this.path2_next_icon.visible = false;
+        this.path2_last_icon.visible = false;
         this.path2_price.visible = false;
         this.path2_bar.visible = false;
         this.path1_max.visible = false;

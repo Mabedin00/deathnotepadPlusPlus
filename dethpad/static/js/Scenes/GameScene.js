@@ -13,8 +13,8 @@ class GameScene extends Phaser.Scene {
 	}
 
 	preload () {
-		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
 		this.load.audio(this.map + '_audio', 'static/audio/' + this.map + '.mp3');
+		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
 		this.load.image('dart_splash', 'static/images/towers/dart_monkey_splashart.png');
 		this.load.image('tack_splash', 'static/images/towers/tack_shooter_splashart.png');
 		this.load.image('buccaneer_splash', 'static/images/towers/buccaneer_splashart.png');
@@ -22,6 +22,59 @@ class GameScene extends Phaser.Scene {
 		this.load.image('banana_splash', 'static/images/towers/banana_farm_splashart.png');
 		this.load.image('super_splash', 'static/images/towers/super_monkey_splashart.png');
 		this.load.image('dartling_splash', 'static/images/towers/dartling_splash.png');
+
+		// LOADING BAR
+		var progressBar = this.add.graphics();
+		var progressBox = this.add.graphics();
+		progressBox.fillStyle(0x222222, 0.8);
+		progressBox.fillRect(281, 300, 420, 50);
+		var width = this.cameras.main.width;
+		var height = this.cameras.main.height;
+		var loadingText = this.make.text({
+			x: width / 2,
+			y: height / 2 - 50,
+			text: 'Loading...',
+			style: {
+				font: '20px monospace',
+				fill: '#ffffff'
+			}
+		});
+		loadingText.setOrigin(0.5, 0.5);
+		var percentText = this.make.text({
+			x: width / 2,
+			y: height / 2 + 25,
+			text: '0%',
+			style: {
+				font: '18px monospace',
+				fill: '#ffffff'
+			}
+		});
+		percentText.setOrigin(0.5, 0.5);
+		var assetText = this.make.text({
+			x: width / 2,
+			y: height / 2 + 100,
+			text: '',
+			style: {
+				font: '18px monospace',
+				fill: '#ffffff'
+			}
+		});
+		assetText.setOrigin(0.5, 0.5);
+		let useful_tip = useful_tips[Math.floor(Math.random() * useful_tips.length)];
+		this.load.on('progress', function (value) {
+			progressBar.clear();
+			progressBar.fillStyle(0xffffff, 1);
+			progressBar.fillRect(281, 300, 420 * value, 50);
+			percentText.setText(parseInt(value * 100) + '%');
+			assetText.setText('Tip: ' + useful_tip);
+		});
+
+		this.load.on('complete', function () {
+			progressBar.destroy();
+			progressBox.destroy();
+			loadingText.destroy();
+			percentText.destroy();
+		});
 	}
 
 	create () {
@@ -29,14 +82,15 @@ class GameScene extends Phaser.Scene {
 		towers = this.physics.add.group();
 		projectiles = this.physics.add.group();
 		dartlings = this.physics.add.group();
+		monkey_aces = this.physics.add.group();
 
 		this.set_vars();
 		this.create_key_bindings();
 		this.add_map();
 		this.create_buttons();
-		this.add_text();
 		this.create_goal();
 		this.create_towers();
+		this.add_text();
 	}
 
 	set_vars() {
@@ -190,10 +244,10 @@ class GameScene extends Phaser.Scene {
 
 	add_text() {
 		level_text = this.add.text(710, 525, 'Level: ' + this.level, { font: '24px Arial' }).setDepth(2);
-		lives_icon = this.add.image(875, 540, "lives").setScale(.05).setDepth(2);
-		lives_text = this.add.text(905, 525, this.lives, { font: '24px Arial' }).setDepth(2);
-		money_icon = this.add.image(875, 578, "money").setScale(.05).setDepth(2);
-		money_text = this.add.text(905, 565,  this.money, { font: '24px Arial' }).setDepth(2);
+		lives_icon = this.add.image(865, 540, "lives").setScale(.05).setDepth(2);
+		lives_text = this.add.text(895, 525, this.lives, { font: '24px Arial' }).setDepth(2);
+		money_icon = this.add.image(865, 578, "money").setScale(.05).setDepth(2);
+		money_text = this.add.text(895, 565,  this.money, { font: '24px Arial' }).setDepth(2);
 		score_text = this.add.text(710, 565, 'Score: ' + this.score, { font: '24px Arial' }).setDepth(2);
 
 	}
@@ -295,8 +349,22 @@ class GameScene extends Phaser.Scene {
 
 
 		if (this.paused) return;
-		if (this.grace_period) return;
+		let returning_to_base = []
+		if (this.grace_period) {
+			monkey_aces.children.iterate(function (monkey_ace) {
+				returning_to_base.push(monkey_ace);
+			});
+			for (let monkey_ace of returning_to_base) {
+				if (monkey_ace != undefined) monkey_ace.return_to_base();
+			}
+			return;
+		}
 		if (this.game_over) return;
+
+		monkey_aces.children.iterate(function (monkey_ace) {
+			monkey_ace.charge();
+			monkey_ace.fire();
+		});
 
 		if (scene.lives <= 0) {
 			this.lose_game();

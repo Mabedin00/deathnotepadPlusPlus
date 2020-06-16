@@ -23,6 +23,7 @@ var towers;
 var bloons;
 var projectiles;
 var dartlings;
+var monkey_aces
 
 var scene;
 var lives_text;
@@ -37,10 +38,18 @@ var sfx = 1;
 // var bgm_x_coor = 620
 // var sfx_x_coor = 620
 
+var useful_tips = ['You die when your health reaches 0',
+                   'If you are having trouble, try getting better at the game',
+                   'Remember, licking doorknobs is illegal on other planets',
+                   'I got stuck with loading tips duty, since the PM can\'t code',
+                   'Short of money? Pop some Bloons',
+                   'Turn your volume to MAX for complete immersion'
+                  ];
 var colliders = [];
 
 var win_text;
 var win_desc;
+
 
 var esc_key;
 var s_key;

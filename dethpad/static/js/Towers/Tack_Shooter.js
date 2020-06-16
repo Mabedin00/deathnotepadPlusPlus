@@ -22,6 +22,10 @@ class Tack_Shooter extends Tower {
         this.ability_duration = 400;
         this.angle_step = Math.PI/4;
         this.angle_increment = 0;
+
+
+        this.path1_def_icon = "ts_1_1_icon";
+        this.path2_def_icon = "ts_2_1_icon";
     }
 
     fire() {
@@ -83,16 +87,25 @@ class Tack_Shooter extends Tower {
                     scene.money -= 210;
                     this.next_path1_price = 300;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    this.path1_next_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "ts_1_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon = scene.add.image(380,550, "ts_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.max_charge -= 20;
+                    scene.money -= 300;
+                    this.next_path1_price = 500;
                     if (this.path2 < 3) {
                         this.setTexture('ts_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
+                        this.path1_price.setText("$" + this.next_path1_price);
+                        this.path1_last_icon.destroy();
+                        this.path1_last_icon = scene.add.image(280,550, "ts_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    } else {
+                        this.path1_price.destroy();
                     }
-                    scene.money -= 300;
-                    this.next_path1_price = 500;
-                    this.path1_price.setText("$" + this.next_path1_price);
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "ts_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.angle_step /= 2;
@@ -101,6 +114,13 @@ class Tack_Shooter extends Tower {
                     scene.money -= 500;
                     this.next_path1_price = 2500;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    if (this.path2 == 2) {
+                        this.path2_price.destroy();
+                    }
+                    this.path1_last_icon.destroy();
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "ts_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_last_icon = scene.add.image(280,550, "ts_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.max_charge -= 25;
@@ -109,6 +129,10 @@ class Tack_Shooter extends Tower {
                     this.setTexture('ts_1_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 2500;
+                    this.path1_price.destroy();
+                    this.path1_last_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "ts_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon.destroy();
             }
         }
     }
@@ -127,17 +151,26 @@ class Tack_Shooter extends Tower {
                     scene.money -= 100;
                     this.next_path2_price = 225;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    this.path2_next_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "ts_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon = scene.add.image(620,550, "ts_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.range += 13;
                     this.updateGraphics();
+                    scene.money -= 225;
+                    this.next_path2_price = 680;
                     if (this.path1 < 3) {
                         this.setTexture('ts_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
+                        this.path2_price.setText("$" + this.next_path2_price);
+                        this.path2_last_icon.destroy();
+                        this.path2_last_icon = scene.add.image(520,550, "ts_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    } else {
+                        this.path2_price.destroy();
                     }
-                    scene.money -= 225;
-                    this.next_path2_price = 680;
-                    this.path2_price.setText("$" + this.next_path2_price);
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "ts_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.setTexture('ts_2_3');
@@ -145,6 +178,13 @@ class Tack_Shooter extends Tower {
                     scene.money -= 680;
                     this.next_path2_price = 2700;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    if (this.path1 == 2) {
+                        this.path1_price.destroy();
+                    }
+                    this.path2_last_icon.destroy();
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "ts_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "ts_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.ability_status = 1;
@@ -152,6 +192,10 @@ class Tack_Shooter extends Tower {
                     this.input.hitArea.setSize(this.width, this.height);
                     this.path1_price.setText("$" + this.next_path1_price);
                     scene.money -= 2700;
+                    this.path2_price.destroy();
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "ts_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon.destroy();
             }
         }
     }
