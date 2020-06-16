@@ -8,7 +8,7 @@ class Ceramic_Bloon extends Bloon {
         else                     super("ceramic_bloon",progress, path, is_camo, is_regen);
 
         this.speed = .4;
-        this.health = 10 + health;
+        this.health = 50 + health;
         this.damage = 104;
         this.value = 1;
 
