@@ -6,7 +6,7 @@ class Dartling_Gun extends Tower {
 
         this.rotation = Math.PI/2;
         this.display_name = 'Dartling Gun';
-        this.description = 'Shoots darts like a machine gun, super fast but not very accurate. The Dartling Gun will shoot towards wherever your mouse is, so you control how effective it is!';
+        this.description = 'Shoots darts super fast but not very accurate. The Dartling Gun will shoot towards wherever your mouse is, so you control how effective it is!';
         this.cost = 850;
         this.max_charge = 10;
         this.charge = this.max_charge;
