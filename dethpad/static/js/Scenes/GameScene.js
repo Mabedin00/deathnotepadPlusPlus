@@ -109,10 +109,10 @@ class GameScene extends Phaser.Scene {
 		this.paused = false;
 		this.esc_key_pressed = false;
 		this.counter = 0;
-		this.level = 30;
+		this.level = 0;
 		this.score = 0;
-		this.lives = 100;
-		this.money = 500000;
+		this.lives = 150;
+		this.money = 800;
 		this.fast_forward = 1;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
 								0,0,0,0,0,0,0,0,0,0,
@@ -414,7 +414,7 @@ class GameScene extends Phaser.Scene {
 			tick = 80;
 			this.counter = 0
 			this.level++;
-			if (this.level == 31) this.remove_starting_indicator();
+			if (this.level == 1) this.remove_starting_indicator();
 			this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
 									0,0,0,0,0,0,0,0,0,0,
 									0,0,0,0,0,0,0,0,0,0  ]
