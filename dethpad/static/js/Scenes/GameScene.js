@@ -111,8 +111,8 @@ class GameScene extends Phaser.Scene {
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
-		this.lives = 1000;
-		this.money = 500000;
+		this.lives = 100;
+		this.money = 500;
 		this.fast_forward = 1;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
 								0,0,0,0,0,0,0,0,0,0,
