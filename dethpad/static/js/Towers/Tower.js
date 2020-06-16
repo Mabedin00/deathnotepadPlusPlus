@@ -124,9 +124,10 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.path1_lock.setDepth(6);
         this.path1_price = scene.add.text(345, 565, "$" + this.next_path1_price, {color: "black" , font: '18px Arial'})
         this.path1_price.setDepth(6);
+        this.path1_price.style.stroke = '#d3d3d3';
+        this.path1_price.style.strokeThickness = 4;
+        this.path1_price.style.update();
         this.path1_price.visible = false;
-
-
 
 		this.path2_max = scene.add.text(575, 530, 'MAX', {font: '36px Arial'})
         this.path2_max.visible = false;
@@ -136,8 +137,12 @@ class Tower extends Phaser.GameObjects.Sprite {
 		this.path2_lock.setDepth(6);
         this.path2_price = scene.add.text(585, 565, "$" + this.next_path2_price, {color: "black" , font: '18px Arial'})
         this.path2_price.setDepth(6);
+        this.path2_price.style.stroke = '#d3d3d3';
+        this.path2_price.style.strokeThickness = 4;
+        this.path2_price.style.update();
         this.path2_price.visible = false;
-		this.path1_rect1 = new Phaser.Geom.Rectangle(426, 510, 10, 16);
+
+        this.path1_rect1 = new Phaser.Geom.Rectangle(426, 510, 10, 16);
 		this.path1_rect2 = new Phaser.Geom.Rectangle(426, 531, 10, 16);
 		this.path1_rect3 = new Phaser.Geom.Rectangle(426, 552, 10, 16);
 		this.path1_rect4 = new Phaser.Geom.Rectangle(426, 573, 10, 17);
