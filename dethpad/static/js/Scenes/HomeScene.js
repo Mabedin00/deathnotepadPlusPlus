@@ -220,6 +220,60 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('dg_2_2_icon', 'static/images/upgrades/dg_2_2.png');
 		this.load.image('dg_2_3_icon', 'static/images/upgrades/dg_2_3.png');
 		this.load.image('dg_2_4_icon', 'static/images/upgrades/dg_2_4.png');
+
+
+		// LOADING BAR
+		var progressBar = this.add.graphics();
+		var progressBox = this.add.graphics();
+		progressBox.fillStyle(0x222222, 0.8);
+		progressBox.fillRect(281, 300, 420, 50);
+		var width = this.cameras.main.width;
+		var height = this.cameras.main.height;
+		var loadingText = this.make.text({
+		    x: width / 2,
+		    y: height / 2 - 50,
+		    text: 'Loading...',
+		    style: {
+		        font: '20px monospace',
+		        fill: '#ffffff'
+		    }
+		});
+		loadingText.setOrigin(0.5, 0.5);
+		var percentText = this.make.text({
+		    x: width / 2,
+		    y: height / 2 + 25,
+		    text: '0%',
+		    style: {
+		        font: '18px monospace',
+		        fill: '#ffffff'
+		    }
+		});
+		percentText.setOrigin(0.5, 0.5);
+		var assetText = this.make.text({
+		    x: width / 2,
+		    y: height / 2 + 100,
+		    text: '',
+		    style: {
+		        font: '18px monospace',
+		        fill: '#ffffff'
+		    }
+		});
+		assetText.setOrigin(0.5, 0.5);
+		let useful_tip = useful_tips[Math.floor(Math.random() * useful_tips.length)];
+		this.load.on('progress', function (value) {
+			progressBar.clear();
+		    progressBar.fillStyle(0xffffff, 1);
+		    progressBar.fillRect(281, 300, 420 * value, 50);
+			percentText.setText(parseInt(value * 100) + '%');
+			assetText.setText('Tip: ' + useful_tip);
+		});
+
+		this.load.on('complete', function () {
+			progressBar.destroy();
+			progressBox.destroy();
+			loadingText.destroy();
+			percentText.destroy();
+		});
 	}
 
 	create () {
