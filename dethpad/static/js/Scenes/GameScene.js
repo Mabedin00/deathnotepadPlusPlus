@@ -414,7 +414,7 @@ class GameScene extends Phaser.Scene {
 			tick = 80;
 			this.counter = 0
 			this.level++;
-			if (this.level == 1) this.remove_starting_indicator();
+			if (this.level == 31) this.remove_starting_indicator();
 			this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
 									0,0,0,0,0,0,0,0,0,0,
 									0,0,0,0,0,0,0,0,0,0  ]
