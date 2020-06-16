@@ -426,8 +426,8 @@ class GameScene extends Phaser.Scene {
 
 	remove_starting_indicator() {
 		this.starting_indicator_0.destroy();
-		this.starting_indicator_1.destroy();
-		this.starting_indicator_2.destroy();
+		if (this.starting_indicator_1 != undefined) this.starting_indicator_1.destroy();
+		if (this.starting_indicator_2 != undefined) this.starting_indicator_2.destroy();
 	}
 
 	hotkeys() {
