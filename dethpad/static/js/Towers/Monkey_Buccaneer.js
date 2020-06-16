@@ -92,6 +92,9 @@ class Monkey_Buccaneer extends Tower {
                     scene.money -= 400;
                     this.next_path1_price = 180;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    this.path1_next_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "b_1_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon = scene.add.image(380,550, "b_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.range += 100;
@@ -102,9 +105,13 @@ class Monkey_Buccaneer extends Tower {
                         this.setTexture('b_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
                         this.path1_price.setText("$" + this.next_path1_price);
+                        this.path1_last_icon.destroy();
+                        this.path1_last_icon = scene.add.image(280,550, "b_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path1_price.destroy();
                     }
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "b_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.max_charge -= 33;
@@ -116,6 +123,10 @@ class Monkey_Buccaneer extends Tower {
                     if (this.path2 == 2) {
                         this.path2_price.destroy();
                     }
+                    this.path1_last_icon.destroy();
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "b_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_last_icon = scene.add.image(280,550, "b_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.aircraft_carrier = true;
@@ -124,6 +135,9 @@ class Monkey_Buccaneer extends Tower {
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 15000;
                     this.path1_price.destroy();
+                    this.path1_last_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "b_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon.destroy();
             }
         }
     }
@@ -140,6 +154,9 @@ class Monkey_Buccaneer extends Tower {
                     scene.money -= 500;
                     this.next_path2_price = 250;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    this.path2_next_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "b_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon = scene.add.image(620,550, "b_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.camo_detection = true;
@@ -149,9 +166,13 @@ class Monkey_Buccaneer extends Tower {
                         this.setTexture('b_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
                         this.path2_price.setText("$" + this.next_path2_price);
+                        this.path2_last_icon.destroy();
+                        this.path2_last_icon = scene.add.image(520,550, "b_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path2_price.destroy();
                     }
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "b_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.setTexture('b_2_3');
@@ -162,6 +183,10 @@ class Monkey_Buccaneer extends Tower {
                     if (this.path1 == 2) {
                         this.path1_price.destroy();
                     }
+                    this.path2_last_icon.destroy();
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "b_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "b_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.ability_status = 1;
@@ -169,6 +194,10 @@ class Monkey_Buccaneer extends Tower {
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 4500;
                     this.path2_price.destroy();
+                    this.path2_price.destroy();
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "b_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon.destroy();
             }
         }
     }

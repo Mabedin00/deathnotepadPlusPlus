@@ -107,6 +107,9 @@ class Super_Monkey extends Tower {
                     scene.money -= 3500;
                     this.next_path1_price = 5000;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    this.path1_next_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "sm_1_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon = scene.add.image(380,540, "sm_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.max_charge--;
@@ -118,9 +121,13 @@ class Super_Monkey extends Tower {
                         this.setTexture('sm_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
                         this.path1_price.setText("$" + this.next_path1_price);
+                        this.path1_last_icon.destroy();
+                        this.path1_last_icon = scene.add.image(280,540, "sm_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path1_price.destroy();
                     }
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "sm_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.max_charge++;
@@ -132,6 +139,10 @@ class Super_Monkey extends Tower {
                     if (this.path2 == 2) {
                         this.path2_price.destroy();
                     }
+                    this.path1_last_icon.destroy();
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "sm_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_last_icon = scene.add.image(280,550, "sm_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.max_charge--;
@@ -139,6 +150,9 @@ class Super_Monkey extends Tower {
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 100000;
                     this.path1_price.destroy();
+                    this.path1_last_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "sm_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon.destroy();
             }
         }
     }
@@ -153,6 +167,9 @@ class Super_Monkey extends Tower {
                     scene.money -= 1000;
                     this.next_path2_price = 1500;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    this.path2_next_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "sm_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon = scene.add.image(620,550, "sm_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.pierce++;
@@ -167,9 +184,13 @@ class Super_Monkey extends Tower {
                     }
                     if (this.path1 < 3) {
                         this.path2_price.setText("$" + this.next_path2_price);
+                        this.path2_last_icon.destroy();
+                        this.path2_last_icon = scene.add.image(520,550, "sm_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path2_price.destroy();
                     }
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "sm_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.setTexture('sm_2_3').setScale(0.5);
@@ -180,6 +201,10 @@ class Super_Monkey extends Tower {
                     if (this.path1 == 2) {
                         this.path1_price.destroy();
                     }
+                    this.path2_last_icon.destroy();
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "sm_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "sm_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     switch (this.path1) {
@@ -199,6 +224,9 @@ class Super_Monkey extends Tower {
                     this.path1_price.setText("$" + this.next_path1_price);
                     scene.money -= 25000;
                     this.path2_price.destroy();
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "sm_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon.destroy();
             }
         }
     }

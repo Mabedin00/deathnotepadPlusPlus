@@ -89,7 +89,7 @@ class Tower extends Phaser.GameObjects.Sprite {
         this.path2_bar.fillStyle(0x808080);
         this.path1_bar.fillPoints(this.bought1.points, true);
         this.path2_bar.fillPoints(this.bought2.points, true);
-        this.path1_next_icon = scene.add.image(370,540, this.path1_def_icon).setDepth(5).setDisplaySize(80,60);
+        this.path1_next_icon = scene.add.image(370,550, this.path1_def_icon).setDepth(5).setDisplaySize(80,60);
         this.path1_next_icon.alpha = .7;
         this.path1_last_icon = scene.add.image();
 
