@@ -19,6 +19,9 @@ class Ice_Monkey extends Tower {
         this.ability_status = 0; //0 for no ability, 1 for charging
         this.ability_charge = 0;
         this.ability_max_charge = 4000;
+
+        this.path1_def_icon = "im_1_1_icon";
+        this.path2_def_icon = "im_2_1_icon";
     }
 
     fire() {
@@ -109,6 +112,9 @@ class Ice_Monkey extends Tower {
                     scene.money -= 190;
                     this.next_path1_price = 400;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    this.path1_next_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "im_1_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon = scene.add.image(380,550, "im_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     scene.money -= 400;
@@ -117,9 +123,13 @@ class Ice_Monkey extends Tower {
                         this.setTexture('im_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
                         this.path1_price.setText("$" + this.next_path1_price);
+                        this.path1_last_icon.destroy();
+                        this.path1_last_icon = scene.add.image(280,550, "im_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path1_price.destroy();
                     }
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "im_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.range += 64;
@@ -132,12 +142,19 @@ class Ice_Monkey extends Tower {
                     if (this.path2 == 2) {
                         this.path2_price.destroy();
                     }
+                    this.path1_last_icon.destroy();
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "im_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_last_icon = scene.add.image(280,550, "im_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.setTexture('im_1_4');
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 6000;
                     this.path1_price.destroy();
+                    this.path1_last_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "im_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon.destroy();
             }
         }
     }
@@ -154,6 +171,9 @@ class Ice_Monkey extends Tower {
                     scene.money -= 100;
                     this.next_path2_price = 350;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    this.path2_next_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "im_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon = scene.add.image(620,550, "im_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     scene.money -= 350;
@@ -162,9 +182,14 @@ class Ice_Monkey extends Tower {
                         this.setTexture('im_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
                         this.path2_price.setText("$" + this.next_path2_price);
+                        this.path2_last_icon.destroy();
+                        this.path2_last_icon = scene.add.image(520,550, "im_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path2_price.destroy();
                     }
+
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "im_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.setTexture('im_2_3');
@@ -175,6 +200,10 @@ class Ice_Monkey extends Tower {
                     if (this.path1 == 2) {
                         this.path1_price.destroy();
                     }
+                    this.path2_last_icon.destroy();
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "im_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "im_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.ability_status = 1;
@@ -182,6 +211,9 @@ class Ice_Monkey extends Tower {
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 2000;
                     this.path2_price.destroy();
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "im_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon.destroy();
             }
         }
     }

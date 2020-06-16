@@ -20,6 +20,9 @@ class Dart_Monkey extends Tower {
         this.ability_charge = 0;
         this.ability_max_charge = 8000;
         this.ability_duration = 800;
+        this.path1_def_icon = "dm_1_1_icon";
+        this.path2_def_icon = "dm_2_1_icon";
+
     }
 
     fire() {
@@ -92,13 +95,16 @@ class Dart_Monkey extends Tower {
                     this.range += 38;
                     this.updateGraphics();
                     if (this.path2 < 2) {
-                        console.log(this);
                         this.setTexture('dm_1_1').setScale(.5);
                         this.input.hitArea.setSize(this.width, this.height);
                     }
                     scene.money -= 90;
                     this.next_path1_price = 120;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    this.path1_next_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "dm_1_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon = scene.add.image(380,550, "dm_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+
                     break;
                 case 2:
                     this.range += 37;
@@ -110,9 +116,13 @@ class Dart_Monkey extends Tower {
                         this.setTexture('dm_1_2');
                         this.input.hitArea.setSize(this.width, this.height);
                         this.path1_price.setText("$" + this.next_path1_price);
+                        this.path1_last_icon.destroy();
+                        this.path1_last_icon = scene.add.image(280,550, "dm_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path1_price.destroy();
                     }
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(370,550, "dm_1_3_icon").setDepth(5).setDisplaySize(80,80).setAlpha(.7);
                     break;
                 case 3:
                     this.range += 25;
@@ -125,6 +135,10 @@ class Dart_Monkey extends Tower {
                     if (this.path2 == 2) {
                         this.path2_price.destroy();
                     }
+                    this.path1_last_icon.destroy();
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(370,550, "dm_1_4_icon").setDepth(5).setDisplaySize(80,80).setAlpha(.7);
+                    this.path1_last_icon = scene.add.image(280,550, "dm_1_3_icon").setDepth(5).setDisplaySize(80,80).setAlpha(.7);
                     break;
                 case 4:
                     this.range += 100;
@@ -133,6 +147,9 @@ class Dart_Monkey extends Tower {
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 1500;
                     this.path1_price.destroy();
+                    this.path1_last_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "dm_1_4_icon").setDepth(5).setDisplaySize(80,80).setAlpha(.7);
+                    this.path1_next_icon.destroy();
             }
         }
     }
@@ -150,6 +167,9 @@ class Dart_Monkey extends Tower {
                     scene.money -= 140;
                     this.next_path2_price = 170;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    this.path2_next_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "dm_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon = scene.add.image(620,550, "dm_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
                     break;
                 case 2:
                     this.pierce += 2;
@@ -158,9 +178,13 @@ class Dart_Monkey extends Tower {
                     if (this.path1 < 3) {
                         this.setTexture('dm_1_2');
                         this.path2_price.setText("$" + this.next_path2_price);
+                        this.path2_next_icon.destroy();
+                        this.path2_next_icon = scene.add.image(620,550, "dm_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
                     } else {
                         this.path2_price.destroy();
                     }
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "dm_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.setTexture('dm_2_3');
@@ -171,6 +195,10 @@ class Dart_Monkey extends Tower {
                     if (this.path1 == 2) {
                         this.path1_price.destroy();
                     }
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "dm_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "dm_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.9);
                     break;
                 case 4:
                     this.ability_status = 1;
@@ -178,6 +206,11 @@ class Dart_Monkey extends Tower {
                     this.input.hitArea.setSize(this.width, this.height);
                     scene.money -= 8000;
                     this.path2_price.destroy();
+                    this.path2_next_icon.destroy();
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "dm_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+
+
             }
         }
     }
