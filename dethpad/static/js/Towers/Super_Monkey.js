@@ -2,7 +2,7 @@ class Super_Monkey extends Tower {
 
     constructor() {
 
-        super('super_monkey', 875, 325);
+        super('super_monkey', 875, 315);
 
         this.display_name = 'Super Monkey';
         this.description = '	Super Monkeys shoots a continuous stream of darts, and can mow down even the fastest and most stubborn bloons.';

@@ -2,7 +2,7 @@ class Banana_Farm extends Tower {
 
     constructor() {
 
-        super('banana_farm', 750, 325);
+        super('banana_farm', 750, 315);
 
         this.display_name = 'Banana Farm';
         this.description = 'Banana Farms grow bananas that you can collect for cash by clicking on them';
