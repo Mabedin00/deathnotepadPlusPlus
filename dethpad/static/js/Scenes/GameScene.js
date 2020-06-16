@@ -90,6 +90,7 @@ class GameScene extends Phaser.Scene {
 		this.create_buttons();
 		this.create_goal();
 		this.create_towers();
+		this.create_start_indicator();
 		this.add_text();
 	}
 
@@ -176,10 +177,11 @@ class GameScene extends Phaser.Scene {
 		this.bgm_slider.on('drag', function() {
 			let mouseX = Math.floor(scene.input.activePointer.x);
 			this.x = mouseX;
-			bgm = (this.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
-			scene.soundtrack.volume = bgm;
 			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
 			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+			bgm = (this.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+			console.log(bgm);
+			scene.soundtrack.volume = bgm;
 		});
 		this.sfx_slider.on('drag', function() {
 			let mouseX = Math.floor(scene.input.activePointer.x);
@@ -240,6 +242,22 @@ class GameScene extends Phaser.Scene {
 			element.displayWidth  + border,
 			element.displayHeight + border);
 		element.graphics.fillRectShape(rectangle).setDepth(depth);
+	}
+
+	create_start_indicator() {
+		this.starting_indicator_0 = this.add.image(this.coords.xlist[0], this.coords.ylist[0], 'arrow').setScale(.25).setAlpha(.5);
+		this.starting_indicator_0.rotation = Phaser.Math.Angle.Between(this.coords.xlist[0], this.coords.ylist[0],
+		                                                               this.coords.xlist[1], this.coords.ylist[1])
+		if (map_data[this.map].num_paths > 1) {
+			this.starting_indicator_1 = this.add.image(this.coords.xlist1[0], this.coords.ylist1[0], 'arrow').setScale(.25).setAlpha(.5);
+			this.starting_indicator_1.rotation = Phaser.Math.Angle.Between(this.coords.xlist1[0], this.coords.ylist1[0],
+																		   this.coords.xlist1[1], this.coords.ylist1[1])
+		}
+		if (map_data[this.map].num_paths > 2) {
+			this.starting_indicator_2 = this.add.image(this.coords.xlist2[0], this.coords.ylist2[0], 'arrow').setScale(.25).setAlpha(.5);
+			this.starting_indicator_2.rotation = Phaser.Math.Angle.Between(this.coords.xlist2[0], this.coords.ylist2[0],
+																		   this.coords.xlist2[1], this.coords.ylist2[1])
+		}
 	}
 
 	add_text() {
@@ -396,6 +414,7 @@ class GameScene extends Phaser.Scene {
 			tick = 80;
 			this.counter = 0
 			this.level++;
+			if (this.level == 1) this.remove_starting_indicator();
 			this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
 									0,0,0,0,0,0,0,0,0,0,
 									0,0,0,0,0,0,0,0,0,0  ]
@@ -403,6 +422,12 @@ class GameScene extends Phaser.Scene {
 			this.grace_period = false;
 			this.next_level.setTint(0xa9a9a9);
 		}
+	}
+
+	remove_starting_indicator() {
+		this.starting_indicator_0.destroy();
+		this.starting_indicator_1.destroy();
+		this.starting_indicator_2.destroy();
 	}
 
 	hotkeys() {

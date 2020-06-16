@@ -21,6 +21,7 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('fast_forward', 'static/images/menus/fast_forward.jpg')
 		this.load.image('volume_bar', 'static/images/menus/volume_bar.png')
 		this.load.image('slider', 'static/images/menus/slider.png')
+		this.load.image('arrow', 'static/images/menus/arrow.png')
 
 		this.load.image('sidebar', 'static/images/maps/map_selection_sidebar.png')
 
@@ -345,9 +346,9 @@ class HomeScene extends Phaser.Scene {
 		bgm_slider.on('drag', function() {
 			let mouseX = Math.floor(scene.input.activePointer.x);
 	        this.x = mouseX;
-			bgm = (bgm_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
 			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
 			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+			bgm = (bgm_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
 		});
 		sfx_slider.on('drag', function() {
 			let mouseX = Math.floor(scene.input.activePointer.x);
