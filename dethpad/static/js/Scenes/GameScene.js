@@ -13,8 +13,8 @@ class GameScene extends Phaser.Scene {
 	}
 
 	preload () {
-		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
 		this.load.audio(this.map + '_audio', 'static/audio/' + this.map + '.mp3');
+		this.load.image(this.map, 'static/images/maps/' + this.map + '.png');
 		this.load.image('dart_splash', 'static/images/towers/dart_monkey_splashart.png');
 		this.load.image('tack_splash', 'static/images/towers/tack_shooter_splashart.png');
 		this.load.image('buccaneer_splash', 'static/images/towers/buccaneer_splashart.png');
