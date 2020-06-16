@@ -88,6 +88,9 @@ class Dartling_Gun extends Tower {
                     scene.money -= 250;
                     this.next_path1_price = 1200;
                     this.path1_price.setText("$" + this.next_path1_price);
+                    this.path1_next_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "dg_1_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon = scene.add.image(380,550, "dg_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.max_charge -= 3;
@@ -96,9 +99,13 @@ class Dartling_Gun extends Tower {
                     if (this.path2 < 3) {
                         this.setTexture('dg_1_2');
                         this.path1_price.setText("$" + this.next_path1_price);
+                        this.path1_last_icon.destroy();
+                        this.path1_last_icon = scene.add.image(280,550, "dg_1_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path1_price.destroy();
                     }
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "dg_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.pierce += 12;
@@ -110,11 +117,18 @@ class Dartling_Gun extends Tower {
                     if (this.path2 == 2) {
                         this.path2_price.destroy();
                     }
+                    this.path1_last_icon.destroy();
+                    this.path1_next_icon.destroy();
+                    this.path1_next_icon = scene.add.image(380,550, "dg_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_last_icon = scene.add.image(280,550, "dg_1_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.setTexture('dg_1_4');
                     scene.money -= 55000;
                     this.path1_price.destroy();
+                    this.path1_last_icon.destroy();
+                    this.path1_last_icon = scene.add.image(280,550, "dg_1_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path1_next_icon.destroy();
             }
         }
     }
@@ -131,6 +145,9 @@ class Dartling_Gun extends Tower {
                     scene.money -= 600;
                     this.next_path2_price = 1000;
                     this.path2_price.setText("$" + this.next_path2_price);
+                    this.path2_next_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "dg_2_1_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon = scene.add.image(620,550, "dg_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 2:
                     this.pierce += 2;
@@ -140,9 +157,13 @@ class Dartling_Gun extends Tower {
                     if (this.path1 < 3) {
                         this.setTexture('dg_2_2');
                         this.path2_price.setText("$" + this.next_path2_price);
+                        this.path2_last_icon.destroy();
+                        this.path2_last_icon = scene.add.image(520,550, "dg_2_2_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     } else {
                         this.path2_price.destroy();
                     }
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "dg_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 3:
                     this.setTexture('dg_2_3');
@@ -152,12 +173,19 @@ class Dartling_Gun extends Tower {
                     if (this.path1 == 2) {
                         this.path1_price.destroy();
                     }
+                    this.path2_last_icon.destroy();
+                    this.path2_next_icon.destroy();
+                    this.path2_next_icon = scene.add.image(620,550, "dg_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_last_icon = scene.add.image(520,550, "dg_2_3_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
                     break;
                 case 4:
                     this.ability_status = 1;
                     this.setTexture('dg_2_4');
                     scene.money -= 20000;
                     this.path2_price.destroy();
+                    this.path2_last_icon.destroy();
+                    this.path2_last_icon = scene.add.image(520,550, "dg_2_4_icon").setDepth(5).setDisplaySize(80,60).setAlpha(.7);
+                    this.path2_next_icon.destroy();
             }
         }
     }
