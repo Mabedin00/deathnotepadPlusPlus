@@ -155,6 +155,40 @@ class GameScene extends Phaser.Scene {
 		this.pause_text.visible = false;
 		this.pause_text.setDepth(5);
 
+		const LOWER_BOUND = 220;
+		const UPPER_BOUND = 460;
+		this.bgm_bar = this.add.image(455, 360, 'volume_bar').setScale(2, 1).setDepth(4);
+		this.sfx_bar = this.add.image(455, 390, 'volume_bar').setScale(2, 1).setDepth(4);
+		this.bgm_text = this.add.text(155, 335, 'BGM: ', {color: 'black', font: '16px Arial'}).setDepth(4)
+		this.sfx_text = this.add.text(155, 365, 'SFX: ', {color: 'black', font: '16px Arial'}).setDepth(4)
+		this.bgm_slider = this.add.image(LOWER_BOUND + bgm * (UPPER_BOUND-LOWER_BOUND), 340, 'slider').setDepth(4).setScale(.5).setInteractive();
+		this.sfx_slider = this.add.image(LOWER_BOUND + sfx * (UPPER_BOUND-LOWER_BOUND), 370, 'slider').setDepth(4).setScale(.5).setInteractive();
+		this.input.setDraggable(this.bgm_slider);
+		this.input.setDraggable(this.sfx_slider);
+
+		this.bgm_bar.visible = false;
+		this.sfx_bar.visible = false;
+		this.bgm_text.visible = false;
+		this.sfx_text.visible = false;
+		this.bgm_slider.visible = false;
+		this.sfx_slider.visible = false;
+
+		this.bgm_slider.on('drag', function() {
+			let mouseX = Math.floor(scene.input.activePointer.x);
+			this.x = mouseX;
+			bgm = (this.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+			scene.soundtrack.volume = bgm;
+			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
+			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+		});
+		this.sfx_slider.on('drag', function() {
+			let mouseX = Math.floor(scene.input.activePointer.x);
+			this.x = mouseX;
+			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
+			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+			sfx = (this.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+		});
+
 		// needs new event listener
 		this.resume = this.add.image(343, 203, 'resume').setDepth(4);
 		this.resume.setInteractive();
@@ -176,6 +210,8 @@ class GameScene extends Phaser.Scene {
 		this.retry.on('pointerover', function() {this.setTint(0xbecafe)})
 		this.retry.on('pointerout', function() {this.clearTint()})
 		this.retry.visible = false;
+
+
 
 		this.main_menu = this.add.image(343, 303, 'main_menu').setDepth(4);
 		this.main_menu.setInteractive();
@@ -393,6 +429,12 @@ class GameScene extends Phaser.Scene {
 		this.retry.visible = true;
 		this.main_menu.visible = true;
 		this.paused = true;
+		this.bgm_bar.visible = true;
+		this.sfx_bar.visible = true;
+		this.bgm_text.visible = true;
+		this.sfx_text.visible = true;
+		this.bgm_slider.visible = true;
+		this.sfx_slider.visible = true;
 	}
 
 	resume_game() {
@@ -403,6 +445,12 @@ class GameScene extends Phaser.Scene {
 		this.popup.graphics.setAlpha(0);
 		this.main_menu.visible = false;
 		this.paused = false;
+		this.bgm_bar.visible = false;
+		this.sfx_bar.visible = false;
+		this.bgm_text.visible = false;
+		this.sfx_text.visible = false;
+		this.bgm_slider.visible = false;
+		this.sfx_slider.visible = false;
 	}
 
 	restart_game() {

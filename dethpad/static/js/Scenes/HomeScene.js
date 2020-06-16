@@ -70,7 +70,6 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('dartling_gun', 'static/images/towers/dartling_gun.png');
 		this.load.image('monkey_ace', 'static/images/towers/monkey_ace.png');
 
-
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
 		this.load.image('blizzard', 'static/images/projectiles/blizzard.png');
@@ -338,8 +337,8 @@ class HomeScene extends Phaser.Scene {
 		let sfx_bar = this.add.image(615, 400, 'volume_bar').setScale(2).setDepth(2);
 		let bgm_text = this.add.text(300, 230, 'BGM: ', {color: 'black', font: '24px Arial'}).setDepth(2)
 		let sfx_text = this.add.text(300, 355, 'SFX: ', {color: 'black', font: '24px Arial'}).setDepth(2)
-		let bgm_slider = this.add.image(bgm_x_coor, 245, 'slider').setDepth(2).setInteractive();
-		let sfx_slider = this.add.image(sfx_x_coor, 370, 'slider').setDepth(2).setInteractive();
+		let bgm_slider = this.add.image(LOWER_BOUND + bgm * (UPPER_BOUND-LOWER_BOUND), 245, 'slider').setDepth(2).setInteractive();
+		let sfx_slider = this.add.image(LOWER_BOUND + sfx * (UPPER_BOUND-LOWER_BOUND), 370, 'slider').setDepth(2).setInteractive();
 		this.input.setDraggable(bgm_slider);
 		this.input.setDraggable(sfx_slider);
 
@@ -347,7 +346,6 @@ class HomeScene extends Phaser.Scene {
 			let mouseX = Math.floor(scene.input.activePointer.x);
 	        this.x = mouseX;
 			bgm = (bgm_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
-			bgm_x_coor = bgm_slider.x;
 			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
 			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
 		});
@@ -357,7 +355,6 @@ class HomeScene extends Phaser.Scene {
 			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
 			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
 			sfx = (sfx_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
-			sfx_x_coor = sfx_slider.x
 		});
 
 		let back_btn = this.add.image(230, 142, 'back').setScale(.3).setInteractive().setDepth(2);

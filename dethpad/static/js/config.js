@@ -35,8 +35,8 @@ var score_text;
 
 var bgm = 1;
 var sfx = 1;
-var bgm_x_coor = 620
-var sfx_x_coor = 620
+// var bgm_x_coor = 620
+// var sfx_x_coor = 620
 
 var useful_tips = ['You die when your health reaches 0',
                    'If you are having trouble, try getting better at the game',
