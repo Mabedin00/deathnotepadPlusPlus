@@ -10,6 +10,8 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('Play', 'static/images/home/play_button.png');
 		this.load.image('Leaderboard', 'static/images/home/achievements_button.png');
 		this.load.image('Settings', 'static/images/home/settings_button.png');
+		this.load.image('Credits', 'static/images/home/credits.png');
+
 
 		this.load.image('border', 'static/images/maps/border.png');
 
@@ -297,6 +299,7 @@ class HomeScene extends Phaser.Scene {
 			"ESC to pause",
 			"S to sell selected tower",
 		]
+
 	}
 
 	place_buttons(button_name, x, y, scale, button_function, scene){
@@ -334,12 +337,12 @@ class HomeScene extends Phaser.Scene {
 
 		let some = this.add.image(500, 300, 'popup').setScale(.4).setDepth(2);
 		this.create_border(some, 'black', .8, 10, 1);
-		let bgm_bar = this.add.image(615, 275, 'volume_bar').setScale(2).setDepth(2);
-		let sfx_bar = this.add.image(615, 400, 'volume_bar').setScale(2).setDepth(2);
-		let bgm_text = this.add.text(300, 230, 'BGM: ', {color: 'black', font: '24px Arial'}).setDepth(2)
-		let sfx_text = this.add.text(300, 355, 'SFX: ', {color: 'black', font: '24px Arial'}).setDepth(2)
-		let bgm_slider = this.add.image(LOWER_BOUND + bgm * (UPPER_BOUND-LOWER_BOUND), 245, 'slider').setDepth(2).setInteractive();
-		let sfx_slider = this.add.image(LOWER_BOUND + sfx * (UPPER_BOUND-LOWER_BOUND), 370, 'slider').setDepth(2).setInteractive();
+		let bgm_bar = this.add.image(615, 225, 'volume_bar').setScale(2).setDepth(2);
+		let sfx_bar = this.add.image(615, 350, 'volume_bar').setScale(2).setDepth(2);
+		let bgm_text = this.add.text(300, 180, 'BGM: ', {color: 'black', font: '24px Arial'}).setDepth(2)
+		let sfx_text = this.add.text(300, 305, 'SFX: ', {color: 'black', font: '24px Arial'}).setDepth(2)
+		let bgm_slider = this.add.image(LOWER_BOUND + bgm * (UPPER_BOUND-LOWER_BOUND), 195, 'slider').setDepth(2).setInteractive();
+		let sfx_slider = this.add.image(LOWER_BOUND + sfx * (UPPER_BOUND-LOWER_BOUND), 320, 'slider').setDepth(2).setInteractive();
 		this.input.setDraggable(bgm_slider);
 		this.input.setDraggable(sfx_slider);
 
@@ -371,6 +374,15 @@ class HomeScene extends Phaser.Scene {
 			// bgm_slider.destroy();
 			// sfx_slider.destroy();
 		});
+
+		let credits_btn = this.add.image (500, 420, 'Credits').setScale(.7).setInteractive().setDepth(2);
+		let credits_text = this.add.text(430, 390, 'Credits', {color: 'black', font: '48px "Press Start 2P"'}).setDepth(2)
+		credits_btn.on('pointerover', function() {this.setTint(0xbecafe)})
+		credits_btn.on('pointerout', function() {this.clearTint()})
+		credits_btn.on('pointerdown', function() {
+			window.location = '/credits';
+		});
+
 		back_btn.on('pointerover', function() {this.setTint(0xbecafe)})
 		back_btn.on('pointerout', function() {this.clearTint()})
 
