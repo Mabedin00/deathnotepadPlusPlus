@@ -22,19 +22,108 @@ Mohidul Abedin, Brian Moses -- 2020-06-03 15:00
     - retry, resume, main menu buttons
     - modularize stuff
 
+Jason Zheng -- 2020-06-04 23:45
+    - fixed bug with insufficient funds
+
 Mohidul Abedin, Brian Moses -- 2020-06-06 21:00
     - added second map
     - added blue bloon, monkey buccaneer
     - various bugfixes
     - beautified
 
+Eric Lam -- 2020-06-07 12:00
+    - creatded skeleton for authentication
+    - placeholder tests for github actions
+
+Jason Zheng -- 2020-06-07 13:15
+    - added bloon images
+    - added levels
+
+Eric Lam -- 2020-06-07 13:40
+    - created database
+    - added form templates
+
+Eric Lam -- 2020-06-07 15:10
+    - refactored css
+    - added routes for session management
+    - implemented registration, logging in, loggin out
+
+Eric Lam -- 2020-06-07 23:45
+    - improved styling
+    - refactored for jinja
+    - refactored for unit testing
+    - added authentication tests
+
 Mohidul Abedin, Brian Moses -- 2020-06-07 22:00
     - added 6 new bloon types
     - added 4 new tower types
     - various bug "fixes"
+
+Eric Lam -- 2020-06-10 18:25
+    - refactored unit tests for apache
+    - fixed placement of flashed messages
+    - improved loading message
+    - added link to leaderboards
+
+Eric Lam -- 2020-06-11 17:00
+    - refactored leaderboards to use jinja
+    - added modals to leaderboards
+    - added formatting to leaderboard numbers
 
 Mohidul Abedin, Brian Moses -- 2020-06-11 20:00
     - added button tint
 
 Brian Moses -- 2020-06-11 12:00
     - added indicator for invalid tower placement
+
+Eric Lam -- 2020-06-13 11:00
+    - reconfigured tests to work with common database
+    - added leaderboard test
+    - clicking on map now deselects towers
+    - added framework for tower upgrades
+    - added upgrade interface
+
+Eric Lam -- 2020-06-13 12:45
+    - upgrade interface now gets destroyed on sell
+    - made upgrade buttons interactive
+    - implemented path restrictions
+
+Eric Lam -- 2020-06-13 15:10
+    - added text to restrictions
+
+Eric Lam -- 2020-06-13 17:20
+    - implemented projectile piercing
+
+Eric Lam -- 2020-06-13 20:20
+    - implemented basic dart monkey upgrades
+    - implemented basic tack shooter upgrades
+    - implemented basic ice monkey upgrades
+
+Eric Lam -- 2020-06-13 23:30
+    - implemented basic super monkey upgrades
+    - implemented basic buccaneer upgrades
+    - implemented basic banana farm upgrades
+    - added upgrade indication
+    - added balance checks to upgrades
+    - added splash arts
+    - bug fixes
+
+Eric Lam -- 2020-06-14 22:40
+    - finished upgrades
+    - added more sprites
+
+Eric Lam -- 2020-06-15 09:55
+     - implemented camo detection
+
+Eric Lam -- 2020-06-15 13:40
+    - implemented gatling gun upgrades
+
+Eric Lam -- 2020-06-15 18:30
+    - fixed behavior of price tags
+
+Eric Lam -- 2020-06-15 22:00
+    - adjusted sideboard positioning of towers
+    - adjusted description boxes
+
+Eric Lam -- 2020-06-16 21:45
+    - brought repo up to standard
