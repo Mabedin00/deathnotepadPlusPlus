@@ -8,7 +8,7 @@ class Rainbow_Bloon extends Bloon {
         else                     super("rainbow_bloon",progress, path, is_camo, is_regen);
 
         this.speed = .35;
-        this.health = 2 + health;
+        this.health = 25 + health;
         this.damage = 47;
         this.value = 1;
 

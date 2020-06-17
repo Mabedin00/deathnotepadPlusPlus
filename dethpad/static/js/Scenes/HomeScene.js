@@ -10,6 +10,8 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('Play', 'static/images/home/play_button.png');
 		this.load.image('Leaderboard', 'static/images/home/achievements_button.png');
 		this.load.image('Settings', 'static/images/home/settings_button.png');
+		this.load.image('Credits', 'static/images/home/credits.png');
+
 
 		this.load.image('border', 'static/images/maps/border.png');
 
@@ -21,6 +23,7 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('fast_forward', 'static/images/menus/fast_forward.jpg')
 		this.load.image('volume_bar', 'static/images/menus/volume_bar.png')
 		this.load.image('slider', 'static/images/menus/slider.png')
+		this.load.image('arrow', 'static/images/menus/arrow.png')
 
 		this.load.image('sidebar', 'static/images/maps/map_selection_sidebar.png')
 
@@ -69,7 +72,6 @@ class HomeScene extends Phaser.Scene {
 		this.load.image('super_monkey', 'static/images/towers/super_monkey.png');
 		this.load.image('dartling_gun', 'static/images/towers/dartling_gun.png');
 		this.load.image('monkey_ace', 'static/images/towers/monkey_ace.png');
-
 
 		this.load.image('dart', 'static/images/projectiles/dart.png');
 		this.load.image('bomb', 'static/images/projectiles/bomb.png');
@@ -297,6 +299,7 @@ class HomeScene extends Phaser.Scene {
 			"ESC to pause",
 			"S to sell selected tower",
 		]
+
 	}
 
 	place_buttons(button_name, x, y, scale, button_function, scene){
@@ -334,22 +337,21 @@ class HomeScene extends Phaser.Scene {
 
 		let some = this.add.image(500, 300, 'popup').setScale(.4).setDepth(2);
 		this.create_border(some, 'black', .8, 10, 1);
-		let bgm_bar = this.add.image(615, 275, 'volume_bar').setScale(2).setDepth(2);
-		let sfx_bar = this.add.image(615, 400, 'volume_bar').setScale(2).setDepth(2);
-		let bgm_text = this.add.text(300, 230, 'BGM: ', {color: 'black', font: '24px Arial'}).setDepth(2)
-		let sfx_text = this.add.text(300, 355, 'SFX: ', {color: 'black', font: '24px Arial'}).setDepth(2)
-		let bgm_slider = this.add.image(bgm_x_coor, 245, 'slider').setDepth(2).setInteractive();
-		let sfx_slider = this.add.image(sfx_x_coor, 370, 'slider').setDepth(2).setInteractive();
+		let bgm_bar = this.add.image(615, 225, 'volume_bar').setScale(2).setDepth(2);
+		let sfx_bar = this.add.image(615, 350, 'volume_bar').setScale(2).setDepth(2);
+		let bgm_text = this.add.text(300, 180, 'BGM: ', {color: 'black', font: '24px Arial'}).setDepth(2)
+		let sfx_text = this.add.text(300, 305, 'SFX: ', {color: 'black', font: '24px Arial'}).setDepth(2)
+		let bgm_slider = this.add.image(LOWER_BOUND + bgm * (UPPER_BOUND-LOWER_BOUND), 195, 'slider').setDepth(2).setInteractive();
+		let sfx_slider = this.add.image(LOWER_BOUND + sfx * (UPPER_BOUND-LOWER_BOUND), 320, 'slider').setDepth(2).setInteractive();
 		this.input.setDraggable(bgm_slider);
 		this.input.setDraggable(sfx_slider);
 
 		bgm_slider.on('drag', function() {
 			let mouseX = Math.floor(scene.input.activePointer.x);
 	        this.x = mouseX;
-			bgm = (bgm_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
-			bgm_x_coor = bgm_slider.x;
 			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
 			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+			bgm = (bgm_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
 		});
 		sfx_slider.on('drag', function() {
 			let mouseX = Math.floor(scene.input.activePointer.x);
@@ -357,7 +359,6 @@ class HomeScene extends Phaser.Scene {
 			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
 			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
 			sfx = (sfx_slider.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
-			sfx_x_coor = sfx_slider.x
 		});
 
 		let back_btn = this.add.image(230, 142, 'back').setScale(.3).setInteractive().setDepth(2);
@@ -373,6 +374,15 @@ class HomeScene extends Phaser.Scene {
 			// bgm_slider.destroy();
 			// sfx_slider.destroy();
 		});
+
+		let credits_btn = this.add.image (500, 420, 'Credits').setScale(.7).setInteractive().setDepth(2);
+		let credits_text = this.add.text(430, 390, 'Credits', {color: 'black', font: '48px "Press Start 2P"'}).setDepth(2)
+		credits_btn.on('pointerover', function() {this.setTint(0xbecafe)})
+		credits_btn.on('pointerout', function() {this.clearTint()})
+		credits_btn.on('pointerdown', function() {
+			window.location = '/credits';
+		});
+
 		back_btn.on('pointerover', function() {this.setTint(0xbecafe)})
 		back_btn.on('pointerout', function() {this.clearTint()})
 

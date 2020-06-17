@@ -43,6 +43,10 @@ def root():
 def test():
     return render_template('base.html')
 
+@app.route('/credits')
+def credits():
+    return render_template('credits.html')
+
 
 @app.route('/score', methods=['POST'])
 def score():

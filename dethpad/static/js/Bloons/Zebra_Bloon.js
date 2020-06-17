@@ -8,7 +8,7 @@ class Zebra_Bloon extends Bloon {
         else                     super("zebra_bloon",progress, path, is_camo, is_regen);
 
         this.speed = .3;
-        this.health = 2 + health;
+        this.health = 10 + health;
         this.damage = 23;
         this.value = 1;
         this.freeze_immunity = true;

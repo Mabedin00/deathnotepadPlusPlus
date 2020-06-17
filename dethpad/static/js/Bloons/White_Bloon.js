@@ -8,7 +8,7 @@ class White_Bloon extends Bloon {
         else                     super("white_bloon",progress, path, is_camo, is_regen);
 
         this.speed = .3;
-        this.health = 2 + health;
+        this.health = 5 + health;
         this.damage = 11;
         this.value = 1;
         this.freeze_immunity = true;

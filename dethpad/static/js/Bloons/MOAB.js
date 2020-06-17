@@ -5,7 +5,7 @@ class MOAB extends Bloon {
         super("MOAB", progress, path);
 
         this.speed = .1;
-        this.health = 140 + health;
+        this.health = 1000 + health;
         this.damage = 616;
         this.value = 1;
         this.isMOAB = true;

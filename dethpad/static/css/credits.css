@@ -1,0 +1,27 @@
+#credits_container {
+    margin-top: 10vh;
+    background-image: linear-gradient( #2a2a2a, #111111);
+    height: 3850px;
+}
+
+#title{
+    font-family: Goudy Old Style, Garamond, Big Caslon, Times New Roman, serif;
+}
+
+hr {
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 5px solid white;
+}
+
+#heading{
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    font-family: Goudy Old Style, Garamond, Big Caslon, Times New Roman, serif;
+}
+
+#picture{
+    width: 430px;
+    height: 300px;
+}

@@ -90,6 +90,7 @@ class GameScene extends Phaser.Scene {
 		this.create_buttons();
 		this.create_goal();
 		this.create_towers();
+		this.create_start_indicator();
 		this.add_text();
 	}
 
@@ -110,8 +111,8 @@ class GameScene extends Phaser.Scene {
 		this.counter = 0;
 		this.level = 0;
 		this.score = 0;
-		this.lives = 1000;
-		this.money = 500000;
+		this.lives = 150;
+		this.money = 800;
 		this.fast_forward = 1;
 		this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
 								0,0,0,0,0,0,0,0,0,0,
@@ -155,6 +156,41 @@ class GameScene extends Phaser.Scene {
 		this.pause_text.visible = false;
 		this.pause_text.setDepth(5);
 
+		const LOWER_BOUND = 220;
+		const UPPER_BOUND = 460;
+		this.bgm_bar = this.add.image(455, 360, 'volume_bar').setScale(2, 1).setDepth(4);
+		this.sfx_bar = this.add.image(455, 390, 'volume_bar').setScale(2, 1).setDepth(4);
+		this.bgm_text = this.add.text(155, 335, 'BGM: ', {color: 'black', font: '16px Arial'}).setDepth(4)
+		this.sfx_text = this.add.text(155, 365, 'SFX: ', {color: 'black', font: '16px Arial'}).setDepth(4)
+		this.bgm_slider = this.add.image(LOWER_BOUND + bgm * (UPPER_BOUND-LOWER_BOUND), 340, 'slider').setDepth(4).setScale(.5).setInteractive();
+		this.sfx_slider = this.add.image(LOWER_BOUND + sfx * (UPPER_BOUND-LOWER_BOUND), 370, 'slider').setDepth(4).setScale(.5).setInteractive();
+		this.input.setDraggable(this.bgm_slider);
+		this.input.setDraggable(this.sfx_slider);
+
+		this.bgm_bar.visible = false;
+		this.sfx_bar.visible = false;
+		this.bgm_text.visible = false;
+		this.sfx_text.visible = false;
+		this.bgm_slider.visible = false;
+		this.sfx_slider.visible = false;
+
+		this.bgm_slider.on('drag', function() {
+			let mouseX = Math.floor(scene.input.activePointer.x);
+			this.x = mouseX;
+			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
+			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+			bgm = (this.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+			console.log(bgm);
+			scene.soundtrack.volume = bgm;
+		});
+		this.sfx_slider.on('drag', function() {
+			let mouseX = Math.floor(scene.input.activePointer.x);
+			this.x = mouseX;
+			if (this.x >= UPPER_BOUND) this.x = UPPER_BOUND
+			if (this.x <= LOWER_BOUND) this.x = LOWER_BOUND
+			sfx = (this.x - LOWER_BOUND) / (UPPER_BOUND - LOWER_BOUND);
+		});
+
 		// needs new event listener
 		this.resume = this.add.image(343, 203, 'resume').setDepth(4);
 		this.resume.setInteractive();
@@ -176,6 +212,8 @@ class GameScene extends Phaser.Scene {
 		this.retry.on('pointerover', function() {this.setTint(0xbecafe)})
 		this.retry.on('pointerout', function() {this.clearTint()})
 		this.retry.visible = false;
+
+
 
 		this.main_menu = this.add.image(343, 303, 'main_menu').setDepth(4);
 		this.main_menu.setInteractive();
@@ -204,6 +242,22 @@ class GameScene extends Phaser.Scene {
 			element.displayWidth  + border,
 			element.displayHeight + border);
 		element.graphics.fillRectShape(rectangle).setDepth(depth);
+	}
+
+	create_start_indicator() {
+		this.starting_indicator_0 = this.add.image(this.coords.xlist[0], this.coords.ylist[0], 'arrow').setScale(.25).setAlpha(.5);
+		this.starting_indicator_0.rotation = Phaser.Math.Angle.Between(this.coords.xlist[0], this.coords.ylist[0],
+		                                                               this.coords.xlist[1], this.coords.ylist[1])
+		if (map_data[this.map].num_paths > 1) {
+			this.starting_indicator_1 = this.add.image(this.coords.xlist1[0], this.coords.ylist1[0], 'arrow').setScale(.25).setAlpha(.5);
+			this.starting_indicator_1.rotation = Phaser.Math.Angle.Between(this.coords.xlist1[0], this.coords.ylist1[0],
+																		   this.coords.xlist1[1], this.coords.ylist1[1])
+		}
+		if (map_data[this.map].num_paths > 2) {
+			this.starting_indicator_2 = this.add.image(this.coords.xlist2[0], this.coords.ylist2[0], 'arrow').setScale(.25).setAlpha(.5);
+			this.starting_indicator_2.rotation = Phaser.Math.Angle.Between(this.coords.xlist2[0], this.coords.ylist2[0],
+																		   this.coords.xlist2[1], this.coords.ylist2[1])
+		}
 	}
 
 	add_text() {
@@ -360,6 +414,7 @@ class GameScene extends Phaser.Scene {
 			tick = 80;
 			this.counter = 0
 			this.level++;
+			if (this.level == 1) this.remove_starting_indicator();
 			this.bloons_deployed = [0,0,0,0,0,0,0,0,0,0,0,
 									0,0,0,0,0,0,0,0,0,0,
 									0,0,0,0,0,0,0,0,0,0  ]
@@ -367,6 +422,12 @@ class GameScene extends Phaser.Scene {
 			this.grace_period = false;
 			this.next_level.setTint(0xa9a9a9);
 		}
+	}
+
+	remove_starting_indicator() {
+		this.starting_indicator_0.destroy();
+		if (this.starting_indicator_1 != undefined) this.starting_indicator_1.destroy();
+		if (this.starting_indicator_2 != undefined) this.starting_indicator_2.destroy();
 	}
 
 	hotkeys() {
@@ -393,6 +454,12 @@ class GameScene extends Phaser.Scene {
 		this.retry.visible = true;
 		this.main_menu.visible = true;
 		this.paused = true;
+		this.bgm_bar.visible = true;
+		this.sfx_bar.visible = true;
+		this.bgm_text.visible = true;
+		this.sfx_text.visible = true;
+		this.bgm_slider.visible = true;
+		this.sfx_slider.visible = true;
 	}
 
 	resume_game() {
@@ -403,6 +470,12 @@ class GameScene extends Phaser.Scene {
 		this.popup.graphics.setAlpha(0);
 		this.main_menu.visible = false;
 		this.paused = false;
+		this.bgm_bar.visible = false;
+		this.sfx_bar.visible = false;
+		this.bgm_text.visible = false;
+		this.sfx_text.visible = false;
+		this.bgm_slider.visible = false;
+		this.sfx_slider.visible = false;
 	}
 
 	restart_game() {
