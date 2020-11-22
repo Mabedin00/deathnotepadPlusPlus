@@ -32,9 +32,10 @@ def load_user(user_id):
 
 @app.route('/')
 def root():
-    current_id = -1
-    if current_user.is_authenticated:
+    if current_user and current_user.is_authenticated:
         current_id = current_user.id
+    else:
+        current_id = -1
 
     return render_template("game.html", id=current_id)
 

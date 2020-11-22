@@ -18,11 +18,10 @@ def register():
         sys.stdout = f
         print(session['csrf_token'], register_form.validate_on_submit(), register_form.errors, register_form.username.data, register_form.password.data, register_form.repeat.data)
 
-    if (request.method == "POST" and
-          register_form.username.data and len(register_form.username.data) > 0
-      and register_form.password.data and len(register_form.password.data) > 7
-      and register_form.repeat.data
-      and register_form.repeat.data == register_form.password.data):
+#    if (request.method == "POST" and
+#          register_form.username.data and len(register_form.username.data) > 0
+#      and register_form.password.data and len(register_form.password.data) > 7
+#      and register_form.repeat.data      and register_form.repeat.data == register_form.password.data):
 
 #    if register_form.validate_on_submit():
         if User.query.filter_by(username=register_form.username.data).first() is None:
@@ -43,12 +42,7 @@ def register():
 def login():
     login_form = LogInForm()
 
-    if (request.method == "POST" and
-          login_form.username.data and len(login_form.username.data) > 0
-      and login_form.password.data and len(login_form.password.data) > 7):
-
-#    if login_form.validate_on_submit():
-
+    if login_form.validate_on_submit():
         user = User.query.filter_by(username=login_form.username.data).first()
         if user is None:
             flash('Username does not exist!', 'warning')
