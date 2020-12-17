@@ -1,5 +1,5 @@
 # BTD7 by deathnotepadPlusPlus
-Stuyvesan High School
+Stuyvesant High School
 Soft Dev pd 9
 P05: Fin
 2020-06-11
